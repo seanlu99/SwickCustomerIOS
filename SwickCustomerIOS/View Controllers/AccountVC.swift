@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 class AccountVC: UIViewController {
 
@@ -15,24 +16,19 @@ class AccountVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Set user and email labels
-        nameLabel.text = User.currentUser.name
-        emailLabel.text = User.currentUser.email
     }
     
     // When logout button is clicked
     @IBAction func fbLogout(_ sender: Any) {
         // Revoke Django access token from server
         // Then logout with FB Login Manager
-        // Then reset user data
         // Then switch root view
-        APIManager.shared.logout(completionHandler: { (error) in
+        APIManager.shared.revokeToken{ (error) in
             if error == nil {
-                FBManager.shared.logOut()
-                User.currentUser.resetInfo()
+                LoginManager().logOut()
                 self.switchRootView()
             }
-        })
+        }
     }
     
     // Switch root view to login VC

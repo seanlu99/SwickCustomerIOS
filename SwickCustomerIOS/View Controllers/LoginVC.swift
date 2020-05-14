@@ -14,6 +14,11 @@ class LoginVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // If user is already logged in
+        // Switch root view
+        if (AccessToken.current != nil) {
+            switchRootView()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -26,39 +31,22 @@ class LoginVC: UIViewController {
     
     // When Facebook login button is clicked
     @IBAction func fbLogin(_ sender: Any) {
-        // If user already has Facebook access token
-        // Get Django access token from server
-        // Then switch root view
-        if (AccessToken.current != nil) {
-            APIManager.shared.login(completionHandler: { (error) in
-                if error == nil {
-                    self.switchRootView()
-                }
-            })
-            
-        }
-        // If user does not have Facebook access token
+        // If user is not logged in
         // Login with FB LoginManager
-        // Then get FB user data
         // Then get Django access token from server
         // Then switch root view
-        else {
-            print("doesnt have fb access token")
-            FBManager.shared.logIn(
-                permissions: ["public_profile", "email"],
-                from: self,
-                handler: { (result, error) in
-                    if (error == nil) {
-                        FBManager.getFBUserData(completionHandler: {
-                            APIManager.shared.login(completionHandler: { (error) in
-                                if error == nil {
-                                    self.switchRootView()
-                                }
-                            })
-                        })
-                    }
-            })
-        }
+        LoginManager().logIn(
+            permissions: ["public_profile", "email"],
+            from: self,
+            handler: { (result, error) in
+                if (error == nil) {
+                    APIManager.shared.getToken(completionHandler: { (error) in
+                        if error == nil {
+                            self.switchRootView()
+                        }
+                    })
+                }
+        })
     }
     
     // Switch root view to tab bar controller

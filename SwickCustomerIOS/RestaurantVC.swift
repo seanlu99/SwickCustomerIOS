@@ -10,8 +10,19 @@ import UIKit
 
 class RestaurantVC: UIViewController {
     
+    // Array of all restaurants
+    var restaurants = [Restaurant]()
+    // Array of searched restaurants
+    var searchedRestaurants = [Restaurant]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        APIManager.shared.getRestaurants { (json) in
+            print(json)
+        }
     }
 }
 
