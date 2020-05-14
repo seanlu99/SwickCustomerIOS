@@ -1,2 +1,6 @@
 .DS_Store
 Pods/
+*.xcuserstate
+xcuserdata/
+project.xcworkspace/
+SwickCustomerIOS.xcworkspace
