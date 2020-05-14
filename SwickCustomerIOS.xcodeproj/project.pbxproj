@@ -24,6 +24,10 @@
 		1495C761246CB2C200F30ECB /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C760246CB2C200F30ECB /* APIManager.swift */; };
 		1495C763246CB34C00F30ECB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C762246CB34C00F30ECB /* Constants.swift */; };
 		1495C765246DD3C600F30ECB /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C764246DD3C600F30ECB /* Restaurant.swift */; };
+		1495C76A246DEEA000F30ECB /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C769246DEEA000F30ECB /* RestaurantCell.swift */; };
+		1495C76C246DFBDE00F30ECB /* MenuVCTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C76B246DFBDE00F30ECB /* MenuVCTableViewController.swift */; };
+		1495C76E246DFCBD00F30ECB /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C76D246DFCBD00F30ECB /* MenuCell.swift */; };
+		1495C770246DFD8B00F30ECB /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C76F246DFD8B00F30ECB /* Meal.swift */; };
 		493DED219093BDB8CB940845 /* Pods_SwickCustomerIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971283499F2F6CCB9D24A97D /* Pods_SwickCustomerIOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +51,10 @@
 		1495C760246CB2C200F30ECB /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		1495C762246CB34C00F30ECB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1495C764246DD3C600F30ECB /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		1495C769246DEEA000F30ECB /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCell.swift; sourceTree = "<group>"; };
+		1495C76B246DFBDE00F30ECB /* MenuVCTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVCTableViewController.swift; sourceTree = "<group>"; };
+		1495C76D246DFCBD00F30ECB /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		1495C76F246DFD8B00F30ECB /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		95E5BDAC5BCC78F8F1824B61 /* Pods-SwickCustomerIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwickCustomerIOS.debug.xcconfig"; path = "Target Support Files/Pods-SwickCustomerIOS/Pods-SwickCustomerIOS.debug.xcconfig"; sourceTree = "<group>"; };
 		971283499F2F6CCB9D24A97D /* Pods_SwickCustomerIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwickCustomerIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6DD97C655BA4FE3422DDED7 /* Pods-SwickCustomerIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwickCustomerIOS.release.xcconfig"; path = "Target Support Files/Pods-SwickCustomerIOS/Pods-SwickCustomerIOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -90,10 +98,10 @@
 				1495C733246B79F100F30ECB /* Assets.xcassets */,
 				1495C735246B79F100F30ECB /* LaunchScreen.storyboard */,
 				1495C738246B79F100F30ECB /* Info.plist */,
-				1495C759246C9BE900F30ECB /* Helper.swift */,
 				1495C740246B99AC00F30ECB /* View Controllers */,
-				1495C755246C822600F30ECB /* Managers */,
+				1495C768246DEE4D00F30ECB /* Cells */,
 				1495C75B246CA83200F30ECB /* Models */,
+				1495C755246C822600F30ECB /* Helpers */,
 			);
 			path = SwickCustomerIOS;
 			sourceTree = "<group>";
@@ -110,25 +118,37 @@
 				1495C74D246BDA0200F30ECB /* OrdersTVC.swift */,
 				1495C74F246BDA9F00F30ECB /* OrderDetailsVC.swift */,
 				1495C75E246CAB6600F30ECB /* AccountVC.swift */,
+				1495C76B246DFBDE00F30ECB /* MenuVCTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
-		1495C755246C822600F30ECB /* Managers */ = {
+		1495C755246C822600F30ECB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				1495C759246C9BE900F30ECB /* Helper.swift */,
 				1495C760246CB2C200F30ECB /* APIManager.swift */,
 				1495C762246CB34C00F30ECB /* Constants.swift */,
 			);
-			path = Managers;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		1495C75B246CA83200F30ECB /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				1495C764246DD3C600F30ECB /* Restaurant.swift */,
+				1495C76F246DFD8B00F30ECB /* Meal.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		1495C768246DEE4D00F30ECB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1495C769246DEEA000F30ECB /* RestaurantCell.swift */,
+				1495C76D246DFCBD00F30ECB /* MenuCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		3CBCF34D2EF51E0BBFA0293F /* Frameworks */ = {
@@ -263,9 +283,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1495C76A246DEEA000F30ECB /* RestaurantCell.swift in Sources */,
 				1495C75A246C9BE900F30ECB /* Helper.swift in Sources */,
 				1495C72B246B79EF00F30ECB /* AppDelegate.swift in Sources */,
 				1495C744246B9C9300F30ECB /* MenuVC.swift in Sources */,
+				1495C770246DFD8B00F30ECB /* Meal.swift in Sources */,
 				1495C748246BC37D00F30ECB /* CartVC.swift in Sources */,
 				1495C765246DD3C600F30ECB /* Restaurant.swift in Sources */,
 				1495C763246CB34C00F30ECB /* Constants.swift in Sources */,
@@ -277,6 +299,8 @@
 				1495C74A246BC86400F30ECB /* AddPaymentVC.swift in Sources */,
 				1495C74E246BDA0200F30ECB /* OrdersTVC.swift in Sources */,
 				1495C746246BB3F600F30ECB /* MealVC.swift in Sources */,
+				1495C76E246DFCBD00F30ECB /* MenuCell.swift in Sources */,
+				1495C76C246DFBDE00F30ECB /* MenuVCTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

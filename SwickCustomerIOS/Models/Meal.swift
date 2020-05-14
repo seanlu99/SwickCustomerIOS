@@ -1,5 +1,5 @@
 //
-//  Restaurant.swift
+//  Meal.swift
 //  SwickCustomerIOS
 //
 //  Created by Sean Lu on 5/14/20.
@@ -9,16 +9,19 @@
 import Foundation
 import SwiftyJSON
 
-class Restaurant {
+class Meal {
     var id: Int?
     var name: String?
-    var address: String?
+    var description: String?
+    var price: Double?
     var image: String?
     
     init(json: JSON) {
         self.id = json["id"].int
         self.name = json["name"].string
-        self.address = json["address"].string
+        self.description = json["description"].string
+        let p = json["price"].string!
+        self.price = Double(p)
         self.image = json["image"].string
     }
 }

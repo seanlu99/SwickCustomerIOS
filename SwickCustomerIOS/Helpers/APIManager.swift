@@ -137,8 +137,14 @@ class APIManager {
     }
     
     // API call to get restaurant list
-    func getRestaurants(completionHandler: @escaping (JSON?) -> Void) {
+    func getRestaurants(completionHandler: @escaping (JSON) -> Void) {
         let path = "api/customer/get_restaurants/"
+        requestServer(path, .get, nil, completionHandler)
+    }
+    
+    // API call to get menu
+    func getMenu(restaurantId: Int, completionHandler: @escaping (JSON) -> Void) {
+        let path = "api/customer/get_menu/\(restaurantId)/"
         requestServer(path, .get, nil, completionHandler)
     }
 }
