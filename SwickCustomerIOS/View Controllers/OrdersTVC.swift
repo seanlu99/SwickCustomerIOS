@@ -9,16 +9,16 @@
 import UIKit
 
 class OrdersTVC: UITableViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
     // Set number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     // Set number of rows in each section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3

@@ -9,7 +9,7 @@
 import UIKit
 
 class MealVC: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

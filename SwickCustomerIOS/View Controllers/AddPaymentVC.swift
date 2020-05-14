@@ -10,7 +10,7 @@ import UIKit
 import Stripe
 
 class AddPaymentVC: UIViewController {
-
+    
     @IBOutlet weak var cardTextField: STPPaymentCardTextField!
     
     override func viewDidLoad() {

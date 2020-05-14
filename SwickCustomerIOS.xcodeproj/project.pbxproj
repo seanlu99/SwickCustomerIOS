@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1495C72B246B79EF00F30ECB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C72A246B79EF00F30ECB /* AppDelegate.swift */; };
-		1495C72D246B79EF00F30ECB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C72C246B79EF00F30ECB /* SceneDelegate.swift */; };
 		1495C732246B79EF00F30ECB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1495C730246B79EF00F30ECB /* Main.storyboard */; };
 		1495C734246B79F100F30ECB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1495C733246B79F100F30ECB /* Assets.xcassets */; };
 		1495C737246B79F100F30ECB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1495C735246B79F100F30ECB /* LaunchScreen.storyboard */; };
@@ -19,24 +18,37 @@
 		1495C74A246BC86400F30ECB /* AddPaymentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C749246BC86400F30ECB /* AddPaymentVC.swift */; };
 		1495C74E246BDA0200F30ECB /* OrdersTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C74D246BDA0200F30ECB /* OrdersTVC.swift */; };
 		1495C750246BDA9F00F30ECB /* OrderDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C74F246BDA9F00F30ECB /* OrderDetailsVC.swift */; };
+		1495C752246C770600F30ECB /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C751246C770600F30ECB /* LoginVC.swift */; };
+		1495C754246C822000F30ECB /* FBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C753246C822000F30ECB /* FBManager.swift */; };
+		1495C75A246C9BE900F30ECB /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C759246C9BE900F30ECB /* Helper.swift */; };
+		1495C75D246CA88200F30ECB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C75C246CA88200F30ECB /* User.swift */; };
+		1495C75F246CAB6600F30ECB /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C75E246CAB6600F30ECB /* AccountVC.swift */; };
+		1495C761246CB2C200F30ECB /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C760246CB2C200F30ECB /* APIManager.swift */; };
+		1495C763246CB34C00F30ECB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C762246CB34C00F30ECB /* Constants.swift */; };
 		493DED219093BDB8CB940845 /* Pods_SwickCustomerIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971283499F2F6CCB9D24A97D /* Pods_SwickCustomerIOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1495C727246B79EF00F30ECB /* Swick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swick.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1495C72A246B79EF00F30ECB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1495C72C246B79EF00F30ECB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1495C731246B79EF00F30ECB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1495C733246B79F100F30ECB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1495C736246B79F100F30ECB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1495C738246B79F100F30ECB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1495C73E246B935800F30ECB /* RestaurantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RestaurantVC.swift; path = ../RestaurantVC.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		1495C73E246B935800F30ECB /* RestaurantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RestaurantVC.swift; path = ../RestaurantVC.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		1495C743246B9C9300F30ECB /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		1495C745246BB3F600F30ECB /* MealVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealVC.swift; sourceTree = "<group>"; };
 		1495C747246BC37D00F30ECB /* CartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartVC.swift; sourceTree = "<group>"; };
 		1495C749246BC86400F30ECB /* AddPaymentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPaymentVC.swift; sourceTree = "<group>"; };
 		1495C74D246BDA0200F30ECB /* OrdersTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersTVC.swift; sourceTree = "<group>"; };
 		1495C74F246BDA9F00F30ECB /* OrderDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsVC.swift; sourceTree = "<group>"; };
+		1495C751246C770600F30ECB /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		1495C753246C822000F30ECB /* FBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBManager.swift; sourceTree = "<group>"; };
+		1495C759246C9BE900F30ECB /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		1495C75C246CA88200F30ECB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		1495C75E246CAB6600F30ECB /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
+		1495C760246CB2C200F30ECB /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		1495C762246CB34C00F30ECB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		95E5BDAC5BCC78F8F1824B61 /* Pods-SwickCustomerIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwickCustomerIOS.debug.xcconfig"; path = "Target Support Files/Pods-SwickCustomerIOS/Pods-SwickCustomerIOS.debug.xcconfig"; sourceTree = "<group>"; };
 		971283499F2F6CCB9D24A97D /* Pods_SwickCustomerIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwickCustomerIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6DD97C655BA4FE3422DDED7 /* Pods-SwickCustomerIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwickCustomerIOS.release.xcconfig"; path = "Target Support Files/Pods-SwickCustomerIOS/Pods-SwickCustomerIOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -76,12 +88,14 @@
 			isa = PBXGroup;
 			children = (
 				1495C72A246B79EF00F30ECB /* AppDelegate.swift */,
-				1495C72C246B79EF00F30ECB /* SceneDelegate.swift */,
 				1495C730246B79EF00F30ECB /* Main.storyboard */,
 				1495C733246B79F100F30ECB /* Assets.xcassets */,
 				1495C735246B79F100F30ECB /* LaunchScreen.storyboard */,
 				1495C738246B79F100F30ECB /* Info.plist */,
+				1495C759246C9BE900F30ECB /* Helper.swift */,
 				1495C740246B99AC00F30ECB /* View Controllers */,
+				1495C755246C822600F30ECB /* Managers */,
+				1495C75B246CA83200F30ECB /* Models */,
 			);
 			path = SwickCustomerIOS;
 			sourceTree = "<group>";
@@ -89,6 +103,7 @@
 		1495C740246B99AC00F30ECB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1495C751246C770600F30ECB /* LoginVC.swift */,
 				1495C73E246B935800F30ECB /* RestaurantVC.swift */,
 				1495C743246B9C9300F30ECB /* MenuVC.swift */,
 				1495C745246BB3F600F30ECB /* MealVC.swift */,
@@ -96,8 +111,27 @@
 				1495C749246BC86400F30ECB /* AddPaymentVC.swift */,
 				1495C74D246BDA0200F30ECB /* OrdersTVC.swift */,
 				1495C74F246BDA9F00F30ECB /* OrderDetailsVC.swift */,
+				1495C75E246CAB6600F30ECB /* AccountVC.swift */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		1495C755246C822600F30ECB /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				1495C753246C822000F30ECB /* FBManager.swift */,
+				1495C760246CB2C200F30ECB /* APIManager.swift */,
+				1495C762246CB34C00F30ECB /* Constants.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		1495C75B246CA83200F30ECB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1495C75C246CA88200F30ECB /* User.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		3CBCF34D2EF51E0BBFA0293F /* Frameworks */ = {
@@ -232,12 +266,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1495C75A246C9BE900F30ECB /* Helper.swift in Sources */,
 				1495C72B246B79EF00F30ECB /* AppDelegate.swift in Sources */,
+				1495C754246C822000F30ECB /* FBManager.swift in Sources */,
 				1495C744246B9C9300F30ECB /* MenuVC.swift in Sources */,
 				1495C748246BC37D00F30ECB /* CartVC.swift in Sources */,
+				1495C763246CB34C00F30ECB /* Constants.swift in Sources */,
 				1495C750246BDA9F00F30ECB /* OrderDetailsVC.swift in Sources */,
-				1495C72D246B79EF00F30ECB /* SceneDelegate.swift in Sources */,
+				1495C761246CB2C200F30ECB /* APIManager.swift in Sources */,
+				1495C752246C770600F30ECB /* LoginVC.swift in Sources */,
+				1495C75F246CAB6600F30ECB /* AccountVC.swift in Sources */,
 				1495C73F246B935800F30ECB /* RestaurantVC.swift in Sources */,
+				1495C75D246CA88200F30ECB /* User.swift in Sources */,
 				1495C74A246BC86400F30ECB /* AddPaymentVC.swift in Sources */,
 				1495C74E246BDA0200F30ECB /* OrdersTVC.swift in Sources */,
 				1495C746246BB3F600F30ECB /* MealVC.swift in Sources */,
@@ -385,9 +425,11 @@
 			baseConfigurationReference = 95E5BDAC5BCC78F8F1824B61 /* Pods-SwickCustomerIOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SwickCustomerIOS/Swick.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 78G3K9TQHP;
 				INFOPLIST_FILE = SwickCustomerIOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -404,9 +446,11 @@
 			baseConfigurationReference = C6DD97C655BA4FE3422DDED7 /* Pods-SwickCustomerIOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SwickCustomerIOS/Swick.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 78G3K9TQHP;
 				INFOPLIST_FILE = SwickCustomerIOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
