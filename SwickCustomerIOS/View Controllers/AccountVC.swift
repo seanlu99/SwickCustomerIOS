@@ -21,7 +21,7 @@ class AccountVC: UIViewController {
     
     // Load user info view from API call
     func loadUserInfo() {
-        APIManager.shared.getUserInfo{ (json) in
+        APIManager.shared.getUserInfo{ json in
             self.nameLabel.text = json["name"].string
             self.emailLabel.text = json["email"].string
         }
@@ -32,11 +32,9 @@ class AccountVC: UIViewController {
         // Revoke Django access token from server
         // Then logout with FB Login Manager
         // Then switch root view
-        APIManager.shared.revokeToken{ (error) in
-            if error == nil {
-                LoginManager().logOut()
-                self.switchRootView()
-            }
+        APIManager.shared.revokeToken{
+            LoginManager().logOut()
+            self.switchRootView()
         }
     }
     

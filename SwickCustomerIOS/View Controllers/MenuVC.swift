@@ -33,16 +33,15 @@ class MenuVC: UIViewController {
         // Show activity indicator while loading data
         Helper.showActivityIndicator(self.activityIndicator, view)
         
-        APIManager.shared.getMenu(restaurantId: restaurant.id!){ (json) in
+        APIManager.shared.getMenu(restaurantId: restaurant.id!){ json in
             self.menu = []
             // mealList = array of JSON meals
-            if let mealList = json["menu"].array {
-                // meal = a JSON meal
-                for meal in mealList {
-                    // m = meal object
-                    let m = Meal(json: meal)
-                    self.menu.append(m)
-                }
+            let mealList = json["menu"].array!
+            // meal = a JSON meal
+            for meal in mealList {
+                // m = meal object
+                let m = Meal(json: meal)
+                self.menu.append(m)
             }
             
             // Reload table view after getting menu data from server

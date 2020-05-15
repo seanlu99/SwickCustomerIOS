@@ -31,12 +31,10 @@ class LoginVC: UIViewController {
             permissions: ["public_profile", "email"],
             from: self,
             handler: { (result, error) in
-                if (error == nil) {
-                    APIManager.shared.getToken(completionHandler: { (error) in
-                        if error == nil {
-                            self.switchRootView()
-                        }
-                    })
+                if (error == nil && AccessToken.current != nil) {
+                    APIManager.shared.getToken() {
+                        self.switchRootView()
+                    }
                 }
         })
     }

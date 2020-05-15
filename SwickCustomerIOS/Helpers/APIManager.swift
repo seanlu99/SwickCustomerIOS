@@ -16,10 +16,25 @@ class APIManager {
     let baseURL = NSURL(string: BASE_URL)
     let tokenDefaults = UserDefaults.standard
     
-    // Call server API to get Django access token
-    func getToken(completionHandler: @escaping (NSError?) -> Void) {
-        let path = "auth/convert-token/"
+    // Generic call to server API
+    func requestServer(_ path: String, _ method: Alamofire.HTTPMethod, _ params: [String: Any]?, _ encoding: ParameterEncoding, _ completionHandler: @escaping (JSON) -> Void) {
         let url = baseURL!.appendingPathComponent(path)
+        AF.request(url!, method: method, parameters: params, encoding: encoding).responseJSON{ (response) in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                completionHandler(json)
+                break
+                
+            case .failure:
+                break
+            }
+        }
+    }
+    
+    // Call server API to get Django access token
+    func getToken(completionHandler: @escaping () -> Void) {
+        let path = "auth/convert-token/"
         let params: [String: String] = [
             "grant_type": "convert_token",
             "client_id": CLIENT_ID,
@@ -29,53 +44,30 @@ class APIManager {
             "token": AccessToken.current!.tokenString,
             "user_type": "customer"
         ]
-        
-        // Send HTTP request
-        AF.request(url!, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { (response) in
-            switch response.result {
-                
-            // If successful, set access token, refresh token and expiration date
-            case .success(let value):
-                let jsonData = JSON(value)
-                let accessToken = jsonData["access_token"].string!
-                let refreshToken = jsonData["refresh_token"].string!
-                // expires_in is time till expiration
-                // Convert expires_in to expiration date/time
-                let expiration = Date().addingTimeInterval(TimeInterval(jsonData["expires_in"].int!))
-                self.tokenDefaults.set(accessToken, forKey: "accessToken")
-                self.tokenDefaults.set(refreshToken, forKey: "refreshToken")
-                self.tokenDefaults.set(expiration, forKey: "expiration")
-                completionHandler(nil)
-                break
-                
-            case .failure(let error):
-                completionHandler(error as NSError?)
-                break
-            }
+        requestServer(path, .post, params, JSONEncoding.default) { json in
+            let accessToken = json["access_token"].string!
+            let refreshToken = json["refresh_token"].string!
+            // expires_in is time till expiration
+            // Convert expires_in to expiration date/time
+            let expiration = Date().addingTimeInterval(TimeInterval(json["expires_in"].int!))
+            self.tokenDefaults.set(accessToken, forKey: "accessToken")
+            self.tokenDefaults.set(refreshToken, forKey: "refreshToken")
+            self.tokenDefaults.set(expiration, forKey: "expiration")
+            completionHandler()
         }
     }
     
     // Call server API to revoke Django access token
-    func revokeToken(completionHandler: @escaping (NSError?) -> Void) {
+    func revokeToken(completionHandler: @escaping () -> Void) {
         let path = "auth/revoke-token/"
-        let url = baseURL!.appendingPathComponent(path)
         let params: [String: String] = [
             "client_id": CLIENT_ID,
             "client_secret": CLIENT_SECRET,
             // Django access token
             "token": tokenDefaults.object(forKey: "accessToken") as! String
         ]
-        AF.request(url!, method: .post, parameters: params, encoding: JSONEncoding.default).responseString { (response) in
-            switch response.result {
-                
-            case .success:
-                completionHandler(nil)
-                break
-                
-            case .failure(let error):
-                completionHandler(error as NSError?)
-                break
-            }
+        requestServer(path, .post, params, JSONEncoding.default) { _ in
+            completionHandler()
         }
     }
     
@@ -84,33 +76,22 @@ class APIManager {
         // If access token is expired
         if (Date() > tokenDefaults.object(forKey: "expiration") as! Date) {
             let path = "auth/token/"
-            let url = baseURL?.appendingPathComponent(path)
             let params: [String: String] = [
                 "grant_type": "refresh_token",
                 "client_id": CLIENT_ID,
                 "client_secret": CLIENT_SECRET,
                 "refresh_token": tokenDefaults.object(forKey: "refreshToken") as! String
             ]
-            AF.request(url!, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON{ (response) in
-                switch response.result {
-                    
-                // If successful, set access token, refresh token and expiration date
-                case .success(let value):
-                    let jsonData = JSON(value)
-                    let accessToken = jsonData["access_token"].string!
-                    let refreshToken = jsonData["refresh_token"].string!
-                    // expires_in is time till expiration
-                    // Convert expires_in to expiration date/time
-                    let expiration = Date().addingTimeInterval(TimeInterval(jsonData["expires_in"].int!))
-                    self.tokenDefaults.set(accessToken, forKey: "accessToken")
-                    self.tokenDefaults.set(refreshToken, forKey: "refreshToken")
-                    self.tokenDefaults.set(expiration, forKey: "expiration")
-                    completionHandler()
-                    break
-                    
-                case .failure:
-                    break
-                }
+            requestServer(path, .post, params, JSONEncoding.default) { json in
+                let accessToken = json["access_token"].string!
+                let refreshToken = json["refresh_token"].string!
+                // expires_in is time till expiration
+                // Convert expires_in to expiration date/time
+                let expiration = Date().addingTimeInterval(TimeInterval(json["expires_in"].int!))
+                self.tokenDefaults.set(accessToken, forKey: "accessToken")
+                self.tokenDefaults.set(refreshToken, forKey: "refreshToken")
+                self.tokenDefaults.set(expiration, forKey: "expiration")
+                completionHandler()
             }
         }
         else {
@@ -118,42 +99,26 @@ class APIManager {
         }
     }
     
-    // Generic call to server API
-    func requestServer(_ path: String, _ method: Alamofire.HTTPMethod, _ params: [String: Any]?, _ encoding: ParameterEncoding, _ completionHandler: @escaping (JSON) -> Void) {
-        let url = baseURL?.appendingPathComponent(path)
-        refreshToken {
-            AF.request(url!, method: method, parameters: params, encoding: encoding).responseJSON{ (response) in
-                switch response.result {
-                case .success(let value):
-                    let jsonData = JSON(value)
-                    completionHandler(jsonData)
-                    break
-
-                case .failure:
-                    break
-                }
-            }
-        }
-    }
-    
     // API call to get restaurant list
     func getRestaurants(completionHandler: @escaping (JSON) -> Void) {
         let path = "api/customer/get_restaurants/"
-        requestServer(path, .get, nil, URLEncoding.default, completionHandler)
+        self.requestServer(path, .get, nil, URLEncoding.default, completionHandler)
     }
     
     // API call to get menu
     func getMenu(restaurantId: Int, completionHandler: @escaping (JSON) -> Void) {
         let path = "api/customer/get_menu/\(restaurantId)/"
-        requestServer(path, .get, nil, URLEncoding.default, completionHandler)
+        self.requestServer(path, .get, nil, URLEncoding.default, completionHandler)
     }
     
     // API call to get user info
     func getUserInfo(completionHandler: @escaping (JSON) -> Void) {
-        let path = "api/get_user_info/"
-        let params: [String: Any] = [
-            "access_token": tokenDefaults.object(forKey: "accessToken") as! String
-        ]
-        requestServer(path, .get, params, URLEncoding.default, completionHandler)
+        refreshToken {
+            let path = "api/get_user_info/"
+            let params: [String: Any] = [
+                "access_token": self.tokenDefaults.object(forKey: "accessToken") as! String
+            ]
+            self.requestServer(path, .get, params, URLEncoding.default, completionHandler)
+        }
     }
 }

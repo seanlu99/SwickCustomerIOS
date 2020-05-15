@@ -40,9 +40,7 @@ class MealVC: UIViewController {
         if quantity >= 2 {
             quantity -= 1
             quantityLabel.text = String(quantity)
-            if let price = meal?.price {
-                priceLabel.text = Helper.formatPrice(price * Double(quantity))
-            }
+            priceLabel.text = Helper.formatPrice(meal.price * Double(quantity))
         }
     }
     
@@ -50,9 +48,7 @@ class MealVC: UIViewController {
         if quantity < 99 {
             quantity += 1
             quantityLabel.text = String(quantity)
-            if let price = meal?.price {
-                priceLabel.text = Helper.formatPrice(price * Double(quantity))
-            }
+            priceLabel.text = Helper.formatPrice(meal.price * Double(quantity))
         }
     }
     
