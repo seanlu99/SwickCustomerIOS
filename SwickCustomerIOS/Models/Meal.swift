@@ -10,10 +10,10 @@ import Foundation
 import SwiftyJSON
 
 class Meal {
-    var id: Int?
-    var name: String?
-    var description: String?
-    var price: Double?
+    var id: Int!
+    var name: String!
+    var description: String!
+    var price: Double!
     var image: String?
     
     init(json: JSON) {

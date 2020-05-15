@@ -50,9 +50,17 @@ class RestaurantVC: UIViewController {
     
     // Send restaurant object to menu VC when a restaurant is clicked on
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ToMenu" {
+        if segue.identifier == "RestaurantToMenu" {
             let menuVC = segue.destination as! MenuVC
-            menuVC.restaurant = restaurants[(tableView.indexPathForSelectedRow?.row)!]
+            // If search bar is being used
+            if searchBar.text != "" {
+                menuVC.restaurant = searchedRestaurants[(tableView.indexPathForSelectedRow?.row)!]
+            }
+            // If search bar is not being used
+            else {
+                menuVC.restaurant = restaurants[(tableView.indexPathForSelectedRow?.row)!]
+            }
+            
         }
     }
 }
@@ -63,7 +71,7 @@ extension RestaurantVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchedRestaurants = self.restaurants.filter({ (rest: Restaurant) -> Bool in
             // Compare restaurant names with search text
-            return rest.name!.lowercased().range(of: searchText.lowercased()) != nil
+            return rest.name.lowercased().range(of: searchText.lowercased()) != nil
         })
         
         // Reload table view after search
@@ -84,7 +92,6 @@ extension RestaurantVC: UITableViewDelegate, UITableViewDataSource {
         if searchBar.text != "" {
             return self.searchedRestaurants.count
         }
-        
         // If search bar is not being used
         return self.restaurants.count
     }
@@ -103,8 +110,8 @@ extension RestaurantVC: UITableViewDelegate, UITableViewDataSource {
             restaurant = restaurants[indexPath.row]
         }
         
-        cell.nameLabel.text = restaurant.name!
-        cell.addressLabel.text = restaurant.address!
+        cell.nameLabel.text = restaurant.name
+        cell.addressLabel.text = restaurant.address
         if let imageString = restaurant.image {
             Helper.loadImage(cell.restaurantImage, "\(imageString)")
         }

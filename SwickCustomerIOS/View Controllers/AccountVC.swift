@@ -16,6 +16,15 @@ class AccountVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadUserInfo()
+    }
+    
+    // Load user info view from API call
+    func loadUserInfo() {
+        APIManager.shared.getUserInfo{ (json) in
+            self.nameLabel.text = json["name"].string
+            self.emailLabel.text = json["email"].string
+        }
     }
     
     // When logout button is clicked

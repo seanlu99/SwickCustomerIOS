@@ -29,8 +29,9 @@ class APIManager {
             "token": AccessToken.current!.tokenString,
             "user_type": "customer"
         ]
+        
         // Send HTTP request
-        AF.request(url!, method: .post, parameters: params, encoder: JSONParameterEncoder.default).responseJSON { (response) in
+        AF.request(url!, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { (response) in
             switch response.result {
                 
             // If successful, set access token, refresh token and expiration date
@@ -64,7 +65,7 @@ class APIManager {
             // Django access token
             "token": tokenDefaults.object(forKey: "accessToken") as! String
         ]
-        AF.request(url!, method: .post, parameters: params, encoder: JSONParameterEncoder.default).responseString { (response) in
+        AF.request(url!, method: .post, parameters: params, encoding: JSONEncoding.default).responseString { (response) in
             switch response.result {
                 
             case .success:
@@ -90,7 +91,7 @@ class APIManager {
                 "client_secret": CLIENT_SECRET,
                 "refresh_token": tokenDefaults.object(forKey: "refreshToken") as! String
             ]
-            AF.request(url!, method: .post, parameters: params, encoder: JSONParameterEncoder.default).responseJSON{ (response) in
+            AF.request(url!, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON{ (response) in
                 switch response.result {
                     
                 // If successful, set access token, refresh token and expiration date
@@ -118,18 +119,17 @@ class APIManager {
     }
     
     // Generic call to server API
-    func requestServer(_ path: String,_ method: Alamofire.HTTPMethod,_ params: [String: String]?,_ completionHandler: @escaping (JSON) -> Void) {
+    func requestServer(_ path: String, _ method: Alamofire.HTTPMethod, _ params: [String: Any]?, _ encoding: ParameterEncoding, _ completionHandler: @escaping (JSON) -> Void) {
         let url = baseURL?.appendingPathComponent(path)
         refreshToken {
-            AF.request(url!, method: method, parameters: params, encoder: JSONParameterEncoder.default).responseJSON{ (response) in
+            AF.request(url!, method: method, parameters: params, encoding: encoding).responseJSON{ (response) in
                 switch response.result {
                 case .success(let value):
                     let jsonData = JSON(value)
                     completionHandler(jsonData)
                     break
-                    
+
                 case .failure:
-                    completionHandler(nil!)
                     break
                 }
             }
@@ -139,12 +139,21 @@ class APIManager {
     // API call to get restaurant list
     func getRestaurants(completionHandler: @escaping (JSON) -> Void) {
         let path = "api/customer/get_restaurants/"
-        requestServer(path, .get, nil, completionHandler)
+        requestServer(path, .get, nil, URLEncoding.default, completionHandler)
     }
     
     // API call to get menu
     func getMenu(restaurantId: Int, completionHandler: @escaping (JSON) -> Void) {
         let path = "api/customer/get_menu/\(restaurantId)/"
-        requestServer(path, .get, nil, completionHandler)
+        requestServer(path, .get, nil, URLEncoding.default, completionHandler)
+    }
+    
+    // API call to get user info
+    func getUserInfo(completionHandler: @escaping (JSON) -> Void) {
+        let path = "api/get_user_info/"
+        let params: [String: Any] = [
+            "access_token": tokenDefaults.object(forKey: "accessToken") as! String
+        ]
+        requestServer(path, .get, params, URLEncoding.default, completionHandler)
     }
 }

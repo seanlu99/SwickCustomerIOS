@@ -51,6 +51,24 @@ class MenuVC: UIViewController {
             Helper.hideActivityIndicator(self.activityIndicator)
         }
     }
+    
+    // Send restaurant and meal objects to meal VC when a meal is clicked on
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "MenuToMeal" {
+            let mealVC = segue.destination as! MealVC
+            // If search bar is being used
+            if searchBar.text != "" {
+                mealVC.meal = searchedMenu[(tableView.indexPathForSelectedRow?.row)!]
+            }
+            // If search bar is not being used
+            else {
+                mealVC.meal = menu[(tableView.indexPathForSelectedRow?.row)!]
+            }
+        }
+    }
+    
+    // Unwind from meal VC to menu VC
+    @IBAction func unwind( _ seg: UIStoryboardSegue) { }
 }
 
 extension MenuVC: UISearchBarDelegate {
@@ -59,7 +77,7 @@ extension MenuVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchedMenu = self.menu.filter({ (m: Meal) -> Bool in
             // Compare Meal names with search text
-            return m.name!.lowercased().range(of: searchText.lowercased()) != nil
+            return m.name.lowercased().range(of: searchText.lowercased()) != nil
         })
         
         // Reload table view after search
@@ -80,7 +98,6 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
         if searchBar.text != "" {
             return self.searchedMenu.count
         }
-        
         // If search bar is not being used
         return self.menu.count
     }
@@ -99,9 +116,9 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
             meal = menu[indexPath.row]
         }
         
-        cell.nameLabel.text = meal.name!
-        cell.descriptionLabel.text = meal.description!
-        cell.priceLabel.text = Helper.formatPrice(meal.price!)
+        cell.nameLabel.text = meal.name
+        cell.descriptionLabel.text = meal.description
+        cell.priceLabel.text = Helper.formatPrice(meal.price)
         if let imageString = meal.image {
             Helper.loadImage(cell.mealImage, "\(imageString)")
         }

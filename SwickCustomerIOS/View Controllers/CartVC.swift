@@ -10,8 +10,54 @@ import UIKit
 
 class CartVC: UIViewController {
     
+    @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var totalView: UIView!
+    @IBOutlet weak var paymentButton: UIButton!
+    @IBOutlet weak var orderButton: UIButton!
+    
+    var emptyLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Create a label saying cart is empty
+        emptyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 40))
+        emptyLabel.center = self.view.center
+        emptyLabel.textAlignment = NSTextAlignment.center
+        emptyLabel.text = "Your cart is empty"
+        self.view.addSubview(emptyLabel)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // If there are no meals in tray
+        if Cart.shared.items.count == 0 {
+            // Hide views
+            tableView.isHidden = true
+            totalView.isHidden = true
+            paymentButton.isHidden = true
+            orderButton.isHidden = true
+            // Show empty label
+            emptyLabel.isHidden = false
+        }
+            
+        // If there are meals in tray
+        else {
+            // Show views
+            tableView.isHidden = false
+            totalView.isHidden = false
+            paymentButton.isHidden = false
+            orderButton.isHidden = false
+            tableView.reloadData()
+            totalLabel.text = Cart.shared.getTotal()
+            // Hide empty label
+            emptyLabel.isHidden = true
+        }
+    }
+    
+    @IBAction func addPayment(_ sender: Any) {
+    }
+    
+    @IBAction func placeOrder(_ sender: Any) {
     }
 }
 
@@ -24,12 +70,16 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
     
     // Set number of rows in each section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        return Cart.shared.items.count
     }
     
     // Properties for each cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CartCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CartCell", for: indexPath) as! CartCell
+        let cartItem = Cart.shared.items[indexPath.row]
+        cell.nameLabel.text = cartItem.meal.name
+        cell.quantityLabel.text = String(cartItem.quantity)
+        cell.priceLabel.text = Helper.formatPrice(cartItem.meal.price * Double(cartItem.quantity))
         return cell
     }
 }

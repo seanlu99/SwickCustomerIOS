@@ -21,14 +21,6 @@ class LoginVC: UIViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        // If user is already logged in
-        // Switch root view
-        if (AccessToken.current != nil) {
-            switchRootView()
-        }
-    }
-    
     // When Facebook login button is clicked
     @IBAction func fbLogin(_ sender: Any) {
         // If user is not logged in

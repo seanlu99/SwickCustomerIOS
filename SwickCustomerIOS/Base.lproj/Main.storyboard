@@ -83,7 +83,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="530"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CartCell" id="dHX-ya-4dC">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CartCell" id="dHX-ya-4dC" customClass="CartCell" customModule="Swick" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dHX-ya-4dC" id="0mi-Mj-pOU">
@@ -125,6 +125,11 @@
                                                 <constraint firstItem="pC4-La-W9H" firstAttribute="centerY" secondItem="0mi-Mj-pOU" secondAttribute="centerY" id="yd8-qi-wxp"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="iDd-ve-x6n" id="qWN-KY-7tK"/>
+                                            <outlet property="priceLabel" destination="MsA-HR-Mrn" id="UvP-OY-OI6"/>
+                                            <outlet property="quantityLabel" destination="pC4-La-W9H" id="f77-x1-7sc"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -144,7 +149,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tqv-ck-fLD">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="total" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tqv-ck-fLD">
                                         <rect key="frame" x="78" y="19.5" width="316" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -172,6 +177,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
+                                    <action selector="addPayment:" destination="5bS-NI-N8V" eventType="touchUpInside" id="9mu-Pa-ZuZ"/>
                                     <segue destination="HJ9-Vi-b1F" kind="showDetail" id="g7P-sC-7sg"/>
                                 </connections>
                             </button>
@@ -185,6 +191,9 @@
                                 <state key="normal" title="PLACE ORDER">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="placeOrder:" destination="5bS-NI-N8V" eventType="touchUpInside" id="Zb0-dt-bfG"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -206,6 +215,13 @@
                         <viewLayoutGuide key="safeArea" id="ZQJ-aA-jzf"/>
                     </view>
                     <navigationItem key="navigationItem" title="Cart" id="JsQ-jj-MDr"/>
+                    <connections>
+                        <outlet property="orderButton" destination="aND-gv-IPT" id="Uuh-ML-etv"/>
+                        <outlet property="paymentButton" destination="tY9-V1-gLV" id="BqK-C1-6yO"/>
+                        <outlet property="tableView" destination="lOh-PU-qK0" id="zsl-GX-fca"/>
+                        <outlet property="totalLabel" destination="tqv-ck-fLD" id="zhx-0Y-5ri"/>
+                        <outlet property="totalView" destination="6a3-q6-QFE" id="17s-fr-xOA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="09a-zx-VgF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -277,7 +293,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <outlet property="delegate" destination="uFr-Yt-AZe" id="wvp-kC-eqZ"/>
+                                    <outlet property="delegate" destination="uFr-Yt-AZe" id="h2y-Ms-uyf"/>
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="310" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PRS-NW-JAb">
@@ -326,7 +342,7 @@
                                             <outlet property="addressLabel" destination="6Xa-0l-gXo" id="8wC-r2-qVt"/>
                                             <outlet property="nameLabel" destination="6Hw-Px-mTt" id="bLC-ra-PjC"/>
                                             <outlet property="restaurantImage" destination="StU-TC-Nzx" id="l3W-qK-Kbw"/>
-                                            <segue destination="wlf-cc-ONJ" kind="show" identifier="ToMenu" id="0XJ-pL-fC1"/>
+                                            <segue destination="wlf-cc-ONJ" kind="show" identifier="RestaurantToMenu" id="0XJ-pL-fC1"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -358,10 +374,10 @@
             </objects>
             <point key="canvasLocation" x="2696" y="-567"/>
         </scene>
-        <!--Restaurant name-->
+        <!--Menu-->
         <scene sceneID="gTI-c1-f7D">
             <objects>
-                <viewController id="wlf-cc-ONJ" customClass="MenuVC" customModule="Swick" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wlf-cc-ONJ" userLabel="Menu" customClass="MenuVC" customModule="Swick" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LCb-jm-jVd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -369,6 +385,9 @@
                             <searchBar contentMode="redraw" placeholder="Search menu" translatesAutoresizingMaskIntoConstraints="NO" id="n6U-LH-GiZ">
                                 <rect key="frame" x="0.0" y="88" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="wlf-cc-ONJ" id="YQW-cT-HVh"/>
+                                </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="135" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YK5-eD-BEM">
                                 <rect key="frame" x="0.0" y="144" width="414" height="669"/>
@@ -426,7 +445,7 @@
                                             <outlet property="mealImage" destination="lb3-oH-V9C" id="iof-dD-azD"/>
                                             <outlet property="nameLabel" destination="KeO-Uz-xQu" id="ZWz-Kg-2x2"/>
                                             <outlet property="priceLabel" destination="Xmj-zA-fiM" id="uu2-vz-SKu"/>
-                                            <segue destination="wIl-PM-DLd" kind="show" id="HG8-qX-c8b"/>
+                                            <segue destination="wIl-PM-DLd" kind="show" identifier="MenuToMeal" id="HG8-qX-c8b"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -448,7 +467,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xrL-mS-BBb"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Restaurant name" id="vis-vr-fTk"/>
+                    <navigationItem key="navigationItem" id="vis-vr-fTk"/>
                     <connections>
                         <outlet property="searchBar" destination="n6U-LH-GiZ" id="EB5-so-mWg"/>
                         <outlet property="tableView" destination="YK5-eD-BEM" id="jsP-ea-wf9"/>
@@ -458,7 +477,7 @@
             </objects>
             <point key="canvasLocation" x="3507" y="-567"/>
         </scene>
-        <!--Restaurant name-->
+        <!--MealVC-->
         <scene sceneID="9Z8-C2-9DN">
             <objects>
                 <viewController id="wIl-PM-DLd" customClass="MealVC" customModule="Swick" customModuleProvider="target" sceneMemberID="viewController">
@@ -496,24 +515,30 @@
                                         <state key="normal" title="ADD TO CART">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="addToCart:" destination="wIl-PM-DLd" eventType="touchUpInside" id="vyw-X6-n6E"/>
+                                        </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Q" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdW-rV-bOp">
-                                        <rect key="frame" x="200.5" y="15" width="13" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdW-rV-bOp">
+                                        <rect key="frame" x="203" y="15" width="8" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O7F-AP-hzS">
-                                        <rect key="frame" x="140.5" y="5.5" width="40" height="39"/>
+                                        <rect key="frame" x="143" y="5.5" width="40" height="39"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="bST-Y0-IxC"/>
                                             <constraint firstAttribute="width" constant="40" id="l1t-b3-std"/>
                                         </constraints>
                                         <color key="tintColor" red="0.026695858690000001" green="0.2347497046" blue="0.47077780959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" backgroundImage="minus.circle.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="subQuantity:" destination="wIl-PM-DLd" eventType="touchUpInside" id="rBf-WU-pFb"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ld9-Lu-RUj">
-                                        <rect key="frame" x="233.5" y="5.5" width="40" height="39"/>
+                                        <rect key="frame" x="231" y="5.5" width="40" height="39"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="aav-hn-g5L"/>
                                             <constraint firstAttribute="height" constant="40" id="eTM-8C-t6m"/>
@@ -521,6 +546,9 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="tintColor" red="0.026695858690000001" green="0.2347497046" blue="0.47077780959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" backgroundImage="plus.circle.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="addQuantity:" destination="wIl-PM-DLd" eventType="touchUpInside" id="00p-fC-xxc"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cL0-ve-zLe">
                                         <rect key="frame" x="294" y="81" width="100" height="18"/>
@@ -566,9 +594,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ODW-4I-JeM"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Restaurant name" id="ocu-Im-WSN"/>
+                    <navigationItem key="navigationItem" id="ocu-Im-WSN"/>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="3Zv-p1-KMP" id="L81-mh-eXr"/>
+                        <outlet property="mealImage" destination="npQ-3b-RtP" id="nWt-x5-B32"/>
+                        <outlet property="nameLabel" destination="sT6-EP-cjl" id="LEv-ut-oxP"/>
+                        <outlet property="priceLabel" destination="cL0-ve-zLe" id="uai-mm-tam"/>
+                        <outlet property="quantityLabel" destination="xdW-rV-bOp" id="2fo-gd-ENI"/>
+                        <segue destination="k0T-wd-dRe" kind="unwind" identifier="MealToMenu" unwindAction="unwind:" id="bBa-ya-JFp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KN6-KY-ACY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="k0T-wd-dRe" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4293" y="-567"/>
         </scene>
@@ -697,7 +734,7 @@
             </objects>
             <point key="canvasLocation" x="2694.202898550725" y="813.61607142857144"/>
         </scene>
-        <!--Restaurant name-->
+        <!--Order DetailsVC-->
         <scene sceneID="Z9I-7Y-JPr">
             <objects>
                 <viewController id="lnZ-Ts-Tf3" customClass="OrderDetailsVC" customModule="Swick" customModuleProvider="target" sceneMemberID="viewController">
@@ -720,8 +757,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jwg-xh-xa6">
-                                                <rect key="frame" x="355" y="10" width="39" height="20.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="total" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jwg-xh-xa6">
+                                                <rect key="frame" x="77.5" y="10" width="316.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -734,6 +771,7 @@
                                             <constraint firstItem="Jwg-xh-xa6" firstAttribute="centerY" secondItem="jy2-as-2KI" secondAttribute="centerY" id="JhS-rr-qfS"/>
                                             <constraint firstAttribute="height" constant="40" id="OWs-WO-rVN"/>
                                             <constraint firstItem="5Ev-m1-DtC" firstAttribute="centerY" secondItem="jy2-as-2KI" secondAttribute="centerY" id="a8w-XZ-CBg"/>
+                                            <constraint firstItem="Jwg-xh-xa6" firstAttribute="leading" secondItem="5Ev-m1-DtC" secondAttribute="trailing" constant="20" id="f2j-9C-qWg"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nkz-NV-2hL">
@@ -920,7 +958,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9GK-Vt-YVq"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Restaurant name" id="bKK-5i-hQL"/>
+                    <navigationItem key="navigationItem" id="bKK-5i-hQL"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eDl-qf-PlM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -981,7 +1019,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JH3-yV-crr">
-                                        <rect key="frame" x="75" y="19.5" width="319" height="21"/>
+                                        <rect key="frame" x="75" y="20" width="319" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1010,7 +1048,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="txt-ba-XD8">
-                                        <rect key="frame" x="71" y="19.5" width="323" height="21"/>
+                                        <rect key="frame" x="71" y="20" width="323" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

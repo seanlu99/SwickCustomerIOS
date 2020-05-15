@@ -25,9 +25,10 @@
 		1495C763246CB34C00F30ECB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C762246CB34C00F30ECB /* Constants.swift */; };
 		1495C765246DD3C600F30ECB /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C764246DD3C600F30ECB /* Restaurant.swift */; };
 		1495C76A246DEEA000F30ECB /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C769246DEEA000F30ECB /* RestaurantCell.swift */; };
-		1495C76C246DFBDE00F30ECB /* MenuVCTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C76B246DFBDE00F30ECB /* MenuVCTableViewController.swift */; };
 		1495C76E246DFCBD00F30ECB /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C76D246DFCBD00F30ECB /* MenuCell.swift */; };
 		1495C770246DFD8B00F30ECB /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C76F246DFD8B00F30ECB /* Meal.swift */; };
+		1495C772246E724100F30ECB /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C771246E724100F30ECB /* Cart.swift */; };
+		1495C776246E77DC00F30ECB /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C775246E77DC00F30ECB /* CartCell.swift */; };
 		493DED219093BDB8CB940845 /* Pods_SwickCustomerIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971283499F2F6CCB9D24A97D /* Pods_SwickCustomerIOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,9 +53,10 @@
 		1495C762246CB34C00F30ECB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1495C764246DD3C600F30ECB /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		1495C769246DEEA000F30ECB /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCell.swift; sourceTree = "<group>"; };
-		1495C76B246DFBDE00F30ECB /* MenuVCTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVCTableViewController.swift; sourceTree = "<group>"; };
 		1495C76D246DFCBD00F30ECB /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		1495C76F246DFD8B00F30ECB /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		1495C771246E724100F30ECB /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		1495C775246E77DC00F30ECB /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		95E5BDAC5BCC78F8F1824B61 /* Pods-SwickCustomerIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwickCustomerIOS.debug.xcconfig"; path = "Target Support Files/Pods-SwickCustomerIOS/Pods-SwickCustomerIOS.debug.xcconfig"; sourceTree = "<group>"; };
 		971283499F2F6CCB9D24A97D /* Pods_SwickCustomerIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwickCustomerIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6DD97C655BA4FE3422DDED7 /* Pods-SwickCustomerIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwickCustomerIOS.release.xcconfig"; path = "Target Support Files/Pods-SwickCustomerIOS/Pods-SwickCustomerIOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -118,7 +120,6 @@
 				1495C74D246BDA0200F30ECB /* OrdersTVC.swift */,
 				1495C74F246BDA9F00F30ECB /* OrderDetailsVC.swift */,
 				1495C75E246CAB6600F30ECB /* AccountVC.swift */,
-				1495C76B246DFBDE00F30ECB /* MenuVCTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -138,6 +139,7 @@
 			children = (
 				1495C764246DD3C600F30ECB /* Restaurant.swift */,
 				1495C76F246DFD8B00F30ECB /* Meal.swift */,
+				1495C771246E724100F30ECB /* Cart.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -147,6 +149,7 @@
 			children = (
 				1495C769246DEEA000F30ECB /* RestaurantCell.swift */,
 				1495C76D246DFCBD00F30ECB /* MenuCell.swift */,
+				1495C775246E77DC00F30ECB /* CartCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -284,6 +287,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1495C76A246DEEA000F30ECB /* RestaurantCell.swift in Sources */,
+				1495C776246E77DC00F30ECB /* CartCell.swift in Sources */,
+				1495C772246E724100F30ECB /* Cart.swift in Sources */,
 				1495C75A246C9BE900F30ECB /* Helper.swift in Sources */,
 				1495C72B246B79EF00F30ECB /* AppDelegate.swift in Sources */,
 				1495C744246B9C9300F30ECB /* MenuVC.swift in Sources */,
@@ -300,7 +305,6 @@
 				1495C74E246BDA0200F30ECB /* OrdersTVC.swift in Sources */,
 				1495C746246BB3F600F30ECB /* MealVC.swift in Sources */,
 				1495C76E246DFCBD00F30ECB /* MenuCell.swift in Sources */,
-				1495C76C246DFBDE00F30ECB /* MenuVCTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
