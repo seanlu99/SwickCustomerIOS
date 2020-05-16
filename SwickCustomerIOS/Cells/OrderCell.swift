@@ -1,5 +1,5 @@
 //
-//  CartCell.swift
+//  OrderCell.swift
 //  SwickCustomerIOS
 //
 //  Created by Sean Lu on 5/15/20.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class CartCell: UITableViewCell {
-
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var quantityLabel: UILabel!
-    @IBOutlet weak var totalLabel: UILabel!
+class OrderCell: UITableViewCell {
     
+    @IBOutlet weak var restaurantNameLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }

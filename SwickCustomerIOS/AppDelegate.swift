@@ -8,6 +8,7 @@
 
 import UIKit
 import FBSDKCoreKit
+import Stripe
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application,
             didFinishLaunchingWithOptions: launchOptions
         )
+        
+        // Stripe SDK
+        Stripe.setDefaultPublishableKey(STRIPE_PUBLIC_KEY)
         
         return true
     }

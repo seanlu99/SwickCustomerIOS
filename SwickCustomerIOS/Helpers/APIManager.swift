@@ -111,6 +111,46 @@ class APIManager {
         self.requestServer(path, .get, nil, URLEncoding.default, completionHandler)
     }
     
+    // API to place order
+    func placeOrder(completionHandler: @escaping (JSON) -> Void) {
+        refreshToken {
+            let path = "api/customer/place_order/"
+            // Transform order items into JSON format
+            let itemsArray = Cart.shared.items.map {item in
+                return [
+                    "meal_id": item.meal.id,
+                    "quantity": item.quantity
+                ]
+            }
+            do {
+                let itemsData = try JSONSerialization.data(withJSONObject: itemsArray, options: [])
+                let itemsString = NSString(data: itemsData, encoding: String.Encoding.utf8.rawValue)!
+                let params: [String: Any] = [
+                    "access_token": self.tokenDefaults.object(forKey: "accessToken") as! String,
+                    // HARDCODED FOR TESTING
+                    "restaurant_id": "1",
+                    "table": "5",
+                    "order_items": itemsString
+                ]
+                self.requestServer(path, .post, params, URLEncoding.default, completionHandler)
+            }
+            catch {
+                print(error)
+            }
+        }
+    }
+    
+    // API call to get orders
+    func getOrders(completionHandler: @escaping (JSON) -> Void) {
+        refreshToken {
+            let path = "api/customer/get_orders/"
+            let params: [String: Any] = [
+                "access_token": self.tokenDefaults.object(forKey: "accessToken") as! String
+            ]
+            self.requestServer(path, .get, params, URLEncoding.default, completionHandler)
+        }
+    }
+    
     // API call to get user info
     func getUserInfo(completionHandler: @escaping (JSON) -> Void) {
         refreshToken {

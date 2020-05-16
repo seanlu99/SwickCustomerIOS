@@ -24,7 +24,7 @@ class MenuVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set navigation bar title to restaurant name
-        self.title = restaurant.name!
+        self.title = restaurant.name
         loadMeals()
     }
     
@@ -33,7 +33,7 @@ class MenuVC: UIViewController {
         // Show activity indicator while loading data
         Helper.showActivityIndicator(self.activityIndicator, view)
         
-        APIManager.shared.getMenu(restaurantId: restaurant.id!){ json in
+        APIManager.shared.getMenu(restaurantId: restaurant.id!) { json in
             self.menu = []
             // mealList = array of JSON meals
             let mealList = json["menu"].array!
@@ -67,7 +67,7 @@ class MenuVC: UIViewController {
     }
     
     // Unwind from meal VC to menu VC
-    @IBAction func unwind( _ seg: UIStoryboardSegue) { }
+    @IBAction func unwindFromMeal( _ seg: UIStoryboardSegue) { }
 }
 
 extension MenuVC: UISearchBarDelegate {

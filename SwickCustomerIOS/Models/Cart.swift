@@ -11,7 +11,7 @@ import Foundation
 class Cart {
     static let shared = Cart()
     var items = [CartItem]()
-//    var table: Int!
+//    var table: String!
     
     func getTotal() -> String {
         var total: Double = 0

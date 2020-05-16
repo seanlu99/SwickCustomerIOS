@@ -58,6 +58,10 @@ class CartVC: UIViewController {
     }
     
     @IBAction func placeOrder(_ sender: Any) {
+        APIManager.shared.placeOrder { json in
+            Cart.shared.reset()
+            //self.performSegue(withIdentifier: "ViewOrder", sender: self)
+        }
     }
 }
 
@@ -79,7 +83,7 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
         let cartItem = Cart.shared.items[indexPath.row]
         cell.nameLabel.text = cartItem.meal.name
         cell.quantityLabel.text = String(cartItem.quantity)
-        cell.priceLabel.text = Helper.formatPrice(cartItem.meal.price * Double(cartItem.quantity))
+        cell.totalLabel.text = Helper.formatPrice(cartItem.meal.price * Double(cartItem.quantity))
         return cell
     }
 }
