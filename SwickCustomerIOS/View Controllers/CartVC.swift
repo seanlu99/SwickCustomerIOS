@@ -86,4 +86,14 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
         cell.totalLabel.text = Helper.formatPrice(cartItem.meal.price * Double(cartItem.quantity))
         return cell
     }
+    
+    // Delete cells
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            Cart.shared.items.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            // Reload view
+            viewDidAppear(true)
+        }
+    }
 }

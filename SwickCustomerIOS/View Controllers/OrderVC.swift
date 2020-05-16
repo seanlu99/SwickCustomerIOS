@@ -34,7 +34,8 @@ class OrderVC: UITableViewController {
     // Load restaurant data from API call to table view
     func loadOrders() {
         // Show activity indicator while loading data
-        Helper.showActivityIndicator(self.activityIndicator, view)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        Helper.showActivityIndicator(self.activityIndicator, appDelegate.window!)
         
         APIManager.shared.getOrders { json in
             self.orders = []
