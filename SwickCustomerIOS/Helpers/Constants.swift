@@ -9,9 +9,21 @@
 import Foundation
 
 // Server URL
+// Development
 let BASE_URL = "http://localhost:8000"
+// Production
+//let BASE_URL = "https://swickapp.herokuapp.com"
+
 // Django -> Applications client_id
-let CLIENT_ID = "WHQboXMUhCsEOIUpu5wW9TmrDMI1u0zvELOWVQWL"
+// Development
+let CLIENT_ID = "u477FLg4uiW1h7sitAdNERhQadzDtreHgDouWDFR"
+// Production
+//let CLIENT_ID = "0opnQWODVqDELF7Sby7ENpyhdv3T0Ynym4Vf2g6l"
+
 // Django -> Applications client_secret
-let CLIENT_SECRET = "aS9EgH8XxwYJuyhjmxQrUiZrNqtN1igkmjf66utJOMKP4T4cKZ1ZZO0gua1LfsDzMzXK7XgrCcBNQIFHIGwzOPeYrNTTqAtc5mhUCdm6hwM2ikK040daXHilhfQYsqPL"
+// Development
+let CLIENT_SECRET = "zqnOA9ONGgrjVxASCLMGZWlmGGJt3Vo0P694rC3L2kMfG9NuSf89E9pslkCpHbT0P5fIJZEElged3XDrQiEednSxh6nfjjNVu3HQYjPbKiMPn5GiHmdW0rxBpQYRUdki"
+// Production
+//let CLIENT_SECRET = "E0hwLNnLshej3ejXl928x3crgDHkqZE8jIIfZ5JfMlxuEpniiLryLlHICpiAFYZqMc8cNpMbP0aU6Zh9SDbFfNnG0eN6thVbwgKXYOtoa1yojK0keZ1F7O8kkrzGepoj"
+
 let STRIPE_PUBLIC_KEY = "pk_test_YoEmowu4ykyrOgUO8dfmShpQ00ck79Hp8Q"

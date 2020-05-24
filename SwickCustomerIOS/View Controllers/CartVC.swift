@@ -12,9 +12,7 @@ class CartVC: UIViewController {
     
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var totalView: UIView!
-    @IBOutlet weak var paymentButton: UIButton!
-    @IBOutlet weak var orderButton: UIButton!
+    @IBOutlet weak var bottomView: UIView!
     
     var emptyLabel: UILabel!
     
@@ -33,9 +31,7 @@ class CartVC: UIViewController {
         if Cart.shared.items.count == 0 {
             // Hide views
             tableView.isHidden = true
-            totalView.isHidden = true
-            paymentButton.isHidden = true
-            orderButton.isHidden = true
+            bottomView.isHidden = true
             // Show empty label
             emptyLabel.isHidden = false
         }
@@ -44,9 +40,7 @@ class CartVC: UIViewController {
         else {
             // Show views
             tableView.isHidden = false
-            totalView.isHidden = false
-            paymentButton.isHidden = false
-            orderButton.isHidden = false
+            bottomView.isHidden = false
             tableView.reloadData()
             totalLabel.text = Cart.shared.getTotal()
             // Hide empty label
