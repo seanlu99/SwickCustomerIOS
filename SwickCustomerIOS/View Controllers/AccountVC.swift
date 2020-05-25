@@ -13,6 +13,7 @@ class AccountVC: UIViewController {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
+    let activityIndicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +22,16 @@ class AccountVC: UIViewController {
     
     // Load user info view from API call
     func loadUserInfo() {
+        // Show activity indicator while loading data
+        Helper.showActivityIndicator(self.activityIndicator, view)
+        
         APIManager.shared.getUserInfo{ json in
             self.nameLabel.text = json["name"].string
             self.emailLabel.text = json["email"].string
         }
+        
+        // Hide activity indicator when finished loading data
+        Helper.hideActivityIndicator(self.activityIndicator)
     }
     
     // When logout button is clicked

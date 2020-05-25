@@ -24,6 +24,10 @@ class CartVC: UIViewController {
         emptyLabel.textAlignment = NSTextAlignment.center
         emptyLabel.text = "Your cart is empty"
         self.view.addSubview(emptyLabel)
+        
+        // Enable dynamic table view cell height
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 60
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -54,7 +58,6 @@ class CartVC: UIViewController {
     @IBAction func placeOrder(_ sender: Any) {
         APIManager.shared.placeOrder { json in
             Cart.shared.reset()
-            //self.performSegue(withIdentifier: "ViewOrder", sender: self)
         }
     }
 }
@@ -75,9 +78,32 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CartCell", for: indexPath) as! CartCell
         let cartItem = Cart.shared.items[indexPath.row]
+        
+        // Set labels
         cell.nameLabel.text = cartItem.meal.name
         cell.quantityLabel.text = String(cartItem.quantity)
-        cell.totalLabel.text = Helper.formatPrice(cartItem.meal.price * Double(cartItem.quantity))
+        cell.totalLabel.text = Helper.formatPrice(cartItem.total)
+        
+        // Build customization label and set
+        var custText = ""
+        for cust in cartItem.customizations {
+            var optionsText = ""
+            for opt in cust.options {
+                if opt.isChecked == true {
+                    optionsText += "- " + opt.name + "\n"
+                }
+            }
+            // Only add customization name if at least one option was checked
+            if optionsText != "" {
+                custText += cust.name + "\n" + optionsText
+            }
+        }
+        // Remove last new line
+        if custText != "" {
+            custText.remove(at: custText.index(before: custText.endIndex))
+        }
+        cell.customizationLabel.text = custText
+        
         return cell
     }
     

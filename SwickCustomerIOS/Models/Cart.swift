@@ -13,10 +13,11 @@ class Cart {
     var items = [CartItem]()
 //    var table: String!
     
+    // Get total of cart
     func getTotal() -> String {
         var total: Double = 0
-        for item in self.items {
-            total = total + item.meal.price * Double(item.quantity)
+        for item in items {
+            total += item.total
         }
         return Helper.formatPrice(total)
     }
@@ -30,9 +31,13 @@ class Cart {
 class CartItem {
     var meal: Meal!
     var quantity: Int!
+    var total: Double!
+    var customizations: [Customization]!
     
-    init(_ meal: Meal, _ quantity: Int) {
+    init(_ meal: Meal, _ quantity: Int, _ total: Double, _ customizations: [Customization]) {
         self.meal = meal
         self.quantity = quantity
+        self.total = total
+        self.customizations = customizations
     }
 }

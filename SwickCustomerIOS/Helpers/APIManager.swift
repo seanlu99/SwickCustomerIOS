@@ -111,18 +111,49 @@ class APIManager {
         self.requestServer(path, .get, nil, URLEncoding.default, completionHandler)
     }
     
+    // API call to get meal
+    func getMeal(mealId: Int, completionHandler: @escaping (JSON) -> Void) {
+        let path = "api/customer/get_meal/\(mealId)/"
+        self.requestServer(path, .get, nil, URLEncoding.default, completionHandler)
+    }
+    
     // API to place order
     func placeOrder(completionHandler: @escaping (JSON) -> Void) {
         refreshToken {
             let path = "api/customer/place_order/"
-            // Transform order items into JSON format
-            let itemsArray = Cart.shared.items.map {item in
-                return [
-                    "meal_id": item.meal.id,
-                    "quantity": item.quantity
-                ]
+            
+            // Build items array
+            var itemsArray: [[String: Any]] = []
+            for item in Cart.shared.items {
+                // Build customization array
+                var custArray: [[String: Any]] = []
+                for cust in item.customizations {
+                    var options: [Int] = []
+                    // Build options array
+                    for (i, opt) in cust.options.enumerated() {
+                        if opt.isChecked == true {
+                            options.append(i)
+                        }
+                    }
+                    // Only add customization if at least one option was checked
+                    if options != [] {
+                        custArray.append(
+                            ["customization_id": cust.id!,
+                             "options": options
+                            ]
+                        )
+                    }
+                }
+                // Add item to items array
+                itemsArray.append(
+                    ["meal_id": item.meal.id!,
+                     "quantity": item.quantity!,
+                     "customizations": custArray]
+                )
             }
+
             do {
+                // Convert items array into string format
                 let itemsData = try JSONSerialization.data(withJSONObject: itemsArray, options: [])
                 let itemsString = NSString(data: itemsData, encoding: String.Encoding.utf8.rawValue)!
                 let params: [String: Any] = [
