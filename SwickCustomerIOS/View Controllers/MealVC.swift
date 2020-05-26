@@ -16,7 +16,6 @@ class MealVC: UIViewController {
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    
     let activityIndicator = UIActivityIndicatorView()
     
     // Meal clicked on in previous view

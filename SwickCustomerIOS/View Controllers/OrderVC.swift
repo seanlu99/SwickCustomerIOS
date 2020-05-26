@@ -11,7 +11,6 @@ import UIKit
 class OrderVC: UITableViewController {
     
     @IBOutlet var orderTableView: UITableView!
-    
     let activityIndicator = UIActivityIndicatorView()
     
     // Array of all orders
@@ -55,7 +54,7 @@ class OrderVC: UITableViewController {
         }
     }
     
-    // Send order object to order details VC when an order is clicked on
+    // Send order id to order details VC when an order is clicked on
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "OrderToOrderDetails" {
             let orderDetailsVC = segue.destination as! OrderDetailsVC

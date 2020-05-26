@@ -171,10 +171,21 @@ class APIManager {
         }
     }
     
-    // API call to get orders
+    // API call to get order details
     func getOrders(completionHandler: @escaping (JSON) -> Void) {
         refreshToken {
             let path = "api/customer/get_orders/"
+            let params: [String: Any] = [
+                "access_token": self.tokenDefaults.object(forKey: "accessToken") as! String
+            ]
+            self.requestServer(path, .get, params, URLEncoding.default, completionHandler)
+        }
+    }
+    
+    // API call to get order details
+    func getOrderDetails(orderId: Int, completionHandler: @escaping (JSON) -> Void) {
+        refreshToken {
+            let path = "api/customer/get_order_details/\(orderId)/"
             let params: [String: Any] = [
                 "access_token": self.tokenDefaults.object(forKey: "accessToken") as! String
             ]
