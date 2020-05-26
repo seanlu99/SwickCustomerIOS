@@ -76,17 +76,23 @@ class MealVC: UIViewController {
     // Add or remove price addition from adjusted price accordingly
     // Update total
     @IBAction func checkboxClicked(_ sender: Checkbox) {
-        let option = customizations[sender.section].options[sender.row]
-        if option.isChecked == true {
+        let cust = customizations[sender.section]
+        let option = cust.options[sender.row]
+        // Check
+        if option.isChecked == false {
+            if cust.numChecked < cust.max {
+                option.isChecked = true
+                sender.check()
+                adjustedPrice += option.priceAddition
+                cust.numChecked += 1
+            }
+        }
+        // Uncheck
+        else {
             option.isChecked = false
             sender.uncheck()
             adjustedPrice -= option.priceAddition
-            
-        }
-        else {
-            option.isChecked = true
-            sender.check()
-            adjustedPrice += option.priceAddition
+            cust.numChecked -= 1
         }
         updateTotal()
     }
@@ -113,8 +119,32 @@ class MealVC: UIViewController {
     
     // Send item to cart
     @IBAction func addToCart(_ sender: Any) {
-        let cartItem = CartItem(meal, quantity, total, customizations)
-        Cart.shared.items.append(cartItem)
+        var minimumSelected = true
+        for cust in customizations {
+            if cust.numChecked < cust.min {
+                minimumSelected = false
+                break
+            }
+        }
+        
+        // If minimum customizations selected
+        if minimumSelected {
+            let cartItem = CartItem(meal, quantity, total, customizations)
+            Cart.shared.items.append(cartItem)
+            performSegue(withIdentifier: "unwindToMenu", sender: self)
+        }
+        
+        // If minimum customizations not selected
+        else {
+            let alertView = UIAlertController(
+                title: "Error",
+                message: "Please select mininum number of options",
+                preferredStyle: .alert
+            )
+            let okAction = UIAlertAction(title: "Ok", style: .default)
+            alertView.addAction(okAction)
+            self.present(alertView, animated: true, completion: nil)
+        }
     }
 }
 
@@ -126,8 +156,30 @@ extension MealVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     // Set section header
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return customizations[section].name
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        // Section view
+        let screenWidth = UIScreen.main.bounds.width
+        let sectionView = UIView()
+        sectionView.backgroundColor = Helper.hexColor(0xBAD9F5)
+        
+        // Customization name label
+        let customizationLabel = UILabel(frame: CGRect(x: 20, y: 10, width: screenWidth - 40, height: 17))
+        customizationLabel.text = customizations[section].name
+        sectionView.addSubview(customizationLabel)
+        
+        // Min max label
+        let minMaxLabel = UILabel(frame: CGRect(x: 20, y: 35, width: screenWidth - 40, height: 15))
+        minMaxLabel.text = "Min: " + String(customizations[section].min) + ", Max: " + String(customizations[section].max)
+        minMaxLabel.font = minMaxLabel.font.withSize(15)
+        sectionView.addSubview(minMaxLabel)
+        
+        return sectionView
+    }
+    
+    // Set section header height
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
     }
     
     // Set number of rows in each section

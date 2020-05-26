@@ -16,13 +16,15 @@ class Checkbox: UIButton {
     var row: Int!
     
     func check() {
-        let checkedImage = resizeImage(UIImage(systemName: "checkmark.square")!, 40, 30)
+        var checkedImage = resizeImage(UIImage(systemName: "checkmark.square")!, 40, 30)
+        checkedImage = checkedImage!.withTintColor(Helper.hexColor(0x073C78))
         self.setImage(checkedImage, for: UIControl.State.normal)
         
     }
     
     func uncheck() {
-        let uncheckedImage = resizeImage(UIImage(systemName: "square")!, 40, 30)
+        var uncheckedImage = resizeImage(UIImage(systemName: "square")!, 40, 30)
+        uncheckedImage = uncheckedImage!.withTintColor(Helper.hexColor(0x073C78))
         self.setImage(uncheckedImage, for: UIControl.State.normal)
     }
 }

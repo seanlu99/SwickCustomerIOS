@@ -15,6 +15,7 @@ class Customization {
     var min: Int!
     var max: Int!
     var options: [Option] = []
+    var numChecked = 0
     
     init(json: JSON) {
         self.id = json["id"].int
