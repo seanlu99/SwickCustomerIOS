@@ -31,9 +31,16 @@ class LoginVC: UIViewController {
             permissions: ["public_profile", "email"],
             from: self,
             handler: { (result, error) in
+                // If Facebook login successful
                 if (error == nil && AccessToken.current != nil) {
                     APIManager.shared.getToken() {
-                        self.switchRootView()
+                        // If Django access token successfully obtained
+                        if (APIManager.shared.getAccessToken() != nil) {
+                            self.switchRootView()
+                        }
+                        else {
+                            Helper.alert("Error", "Failed to login. Please try again.", self)
+                        }
                     }
                 }
         })

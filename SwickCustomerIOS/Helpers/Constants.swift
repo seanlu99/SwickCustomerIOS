@@ -10,9 +10,9 @@ import Foundation
 
 // Server URL
 // Development
-let BASE_URL = "http://localhost:8000"
+let SERVER_URL = "http://localhost:8000"
 // Production
-//let BASE_URL = "https://swickapp.herokuapp.com"
+//let SERVER_URL = "https://swickapp.herokuapp.com"
 
 // Django -> Applications client_id
 // Development

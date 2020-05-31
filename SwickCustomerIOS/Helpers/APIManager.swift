@@ -13,20 +13,23 @@ import FBSDKLoginKit
 
 class APIManager {
     static let shared = APIManager()
-    let baseURL = NSURL(string: BASE_URL)
+    let serverURL = NSURL(string: SERVER_URL)
     let tokenDefaults = UserDefaults.standard
     
     // Generic call to server API
     func requestServer(_ path: String, _ method: Alamofire.HTTPMethod, _ params: [String: Any]?, _ encoding: ParameterEncoding, _ completionHandler: @escaping (JSON) -> Void) {
-        let url = baseURL!.appendingPathComponent(path)
-        AF.request(url!, method: method, parameters: params, encoding: encoding).responseJSON{ (response) in
+        guard let url = serverURL?.appendingPathComponent(path) else {
+            print("Error: server URL not set\n")
+            return
+        }
+        AF.request(url, method: method, parameters: params, encoding: encoding).responseJSON{ (response) in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
                 completionHandler(json)
                 break
-                
-            case .failure:
+            case .failure(let error):
+                print(error)
                 break
             }
         }
@@ -34,22 +37,26 @@ class APIManager {
     
     // Call server API to get Django access token
     func getToken(completionHandler: @escaping () -> Void) {
+        guard let fbToken = AccessToken.current?.tokenString else {
+            print("Error: no Facebook access token\n")
+            return
+        }
         let path = "auth/convert-token/"
         let params: [String: String] = [
             "grant_type": "convert_token",
             "client_id": CLIENT_ID,
             "client_secret": CLIENT_SECRET,
             "backend": "facebook",
-            // Facebook access token
-            "token": AccessToken.current!.tokenString,
+            "token": fbToken,
             "user_type": "customer"
         ]
         requestServer(path, .post, params, JSONEncoding.default) { json in
-            let accessToken = json["access_token"].string!
-            let refreshToken = json["refresh_token"].string!
+            let accessToken = json["access_token"].string
+            let refreshToken = json["refresh_token"].string
             // expires_in is time till expiration
             // Convert expires_in to expiration date/time
-            let expiration = Date().addingTimeInterval(TimeInterval(json["expires_in"].int!))
+            let expiresIn = json["expires_in"].int ?? 0
+            let expiration = Date().addingTimeInterval(TimeInterval(expiresIn))
             self.tokenDefaults.set(accessToken, forKey: "accessToken")
             self.tokenDefaults.set(refreshToken, forKey: "refreshToken")
             self.tokenDefaults.set(expiration, forKey: "expiration")
@@ -59,12 +66,16 @@ class APIManager {
     
     // Call server API to revoke Django access token
     func revokeToken(completionHandler: @escaping () -> Void) {
+        guard let accessToken = tokenDefaults.object(forKey: "accessToken") as? String else {
+            print("Error: no Django access token\n")
+            return
+        }
         let path = "auth/revoke-token/"
         let params: [String: String] = [
             "client_id": CLIENT_ID,
             "client_secret": CLIENT_SECRET,
             // Django access token
-            "token": tokenDefaults.object(forKey: "accessToken") as! String
+            "token": accessToken
         ]
         requestServer(path, .post, params, JSONEncoding.default) { _ in
             completionHandler()
@@ -73,21 +84,30 @@ class APIManager {
     
     // Call server API to refresh token if it's expired
     func refreshToken(completionHandler: @escaping () -> Void) {
+        guard let refreshToken = self.tokenDefaults.object(forKey: "refreshToken") as? String else {
+            print("Error: no Django access token\n")
+            return
+        }
+        guard let expiration = tokenDefaults.object(forKey: "expiration") as? Date else {
+            print("Error: no Django access token expiration date\n")
+            return
+        }
         // If access token is expired
-        if (Date() > tokenDefaults.object(forKey: "expiration") as! Date) {
+        if (Date() > expiration) {
             let path = "auth/token/"
             let params: [String: String] = [
                 "grant_type": "refresh_token",
                 "client_id": CLIENT_ID,
                 "client_secret": CLIENT_SECRET,
-                "refresh_token": tokenDefaults.object(forKey: "refreshToken") as! String
+                "refresh_token": refreshToken
             ]
             requestServer(path, .post, params, JSONEncoding.default) { json in
-                let accessToken = json["access_token"].string!
-                let refreshToken = json["refresh_token"].string!
+                let accessToken = json["access_token"].string
+                let refreshToken = json["refresh_token"].string
                 // expires_in is time till expiration
                 // Convert expires_in to expiration date/time
-                let expiration = Date().addingTimeInterval(TimeInterval(json["expires_in"].int!))
+                let expiresIn = json["expires_in"].int ?? 0
+                let expiration = Date().addingTimeInterval(TimeInterval(expiresIn))
                 self.tokenDefaults.set(accessToken, forKey: "accessToken")
                 self.tokenDefaults.set(refreshToken, forKey: "refreshToken")
                 self.tokenDefaults.set(expiration, forKey: "expiration")
@@ -97,6 +117,10 @@ class APIManager {
         else {
             completionHandler()
         }
+    }
+    
+    func getAccessToken() -> Any? {
+        return tokenDefaults.object(forKey: "accessToken")
     }
     
     // API call to get restaurant list
@@ -120,6 +144,10 @@ class APIManager {
     // API to place order
     func placeOrder(completionHandler: @escaping (JSON) -> Void) {
         refreshToken {
+            guard let accessToken = self.tokenDefaults.object(forKey: "accessToken") as? String else {
+                print("Error: no Django access token\n")
+                return
+            }
             let path = "api/customer/place_order/"
             
             // Build items array
@@ -138,7 +166,7 @@ class APIManager {
                     // Only add customization if at least one option was checked
                     if options != [] {
                         custArray.append(
-                            ["customization_id": cust.id!,
+                            ["customization_id": cust.id,
                              "options": options
                             ]
                         )
@@ -146,8 +174,8 @@ class APIManager {
                 }
                 // Add item to items array
                 itemsArray.append(
-                    ["meal_id": item.meal.id!,
-                     "quantity": item.quantity!,
+                    ["meal_id": item.meal.id,
+                     "quantity": item.quantity,
                      "customizations": custArray]
                 )
             }
@@ -155,13 +183,13 @@ class APIManager {
             do {
                 // Convert items array into string format
                 let itemsData = try JSONSerialization.data(withJSONObject: itemsArray, options: [])
-                let itemsString = NSString(data: itemsData, encoding: String.Encoding.utf8.rawValue)!
+                let itemsString = NSString(data: itemsData, encoding: String.Encoding.utf8.rawValue)
                 let params: [String: Any] = [
-                    "access_token": self.tokenDefaults.object(forKey: "accessToken") as! String,
+                    "access_token": accessToken,
                     // HARDCODED FOR TESTING
                     "restaurant_id": "1",
                     "table": "5",
-                    "order_items": itemsString
+                    "order_items": itemsString ?? ""
                 ]
                 self.requestServer(path, .post, params, URLEncoding.default, completionHandler)
             }
@@ -174,9 +202,13 @@ class APIManager {
     // API call to get order details
     func getOrders(completionHandler: @escaping (JSON) -> Void) {
         refreshToken {
+            guard let accessToken = self.tokenDefaults.object(forKey: "accessToken") as? String else {
+                print("Error: no Django access token\n")
+                return
+            }
             let path = "api/customer/get_orders/"
             let params: [String: Any] = [
-                "access_token": self.tokenDefaults.object(forKey: "accessToken") as! String
+                "access_token": accessToken
             ]
             self.requestServer(path, .get, params, URLEncoding.default, completionHandler)
         }
@@ -185,9 +217,13 @@ class APIManager {
     // API call to get order details
     func getOrderDetails(orderId: Int, completionHandler: @escaping (JSON) -> Void) {
         refreshToken {
+            guard let accessToken = self.tokenDefaults.object(forKey: "accessToken") as? String else {
+                print("Error: no Django access token\n")
+                return
+            }
             let path = "api/customer/get_order_details/\(orderId)/"
             let params: [String: Any] = [
-                "access_token": self.tokenDefaults.object(forKey: "accessToken") as! String
+                "access_token": accessToken
             ]
             self.requestServer(path, .get, params, URLEncoding.default, completionHandler)
         }
@@ -196,9 +232,13 @@ class APIManager {
     // API call to get user info
     func getUserInfo(completionHandler: @escaping (JSON) -> Void) {
         refreshToken {
+            guard let accessToken = self.tokenDefaults.object(forKey: "accessToken") as? String else {
+                print("Error: no Django access token\n")
+                return
+            }
             let path = "api/get_user_info/"
             let params: [String: Any] = [
-                "access_token": self.tokenDefaults.object(forKey: "accessToken") as! String
+                "access_token": accessToken
             ]
             self.requestServer(path, .get, params, URLEncoding.default, completionHandler)
         }

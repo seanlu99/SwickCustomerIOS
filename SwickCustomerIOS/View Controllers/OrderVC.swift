@@ -37,18 +37,22 @@ class OrderVC: UITableViewController {
         Helper.showActivityIndicator(self.activityIndicator, appDelegate.window!)
         
         APIManager.shared.getOrders { json in
-            self.orders = []
-            // orderList = array of JSON orders
-            let orderList = json["orders"].array!
-            // order = a JSON order
-            for order in orderList {
-                // o = order object
-                let o = Order(json: order)
-                self.orders.append(o)
+            if (json["status"] == "success") {
+                self.orders = []
+                // orderList = array of JSON orders
+                let orderList = json["orders"].array ?? []
+                // order = a JSON order
+                for order in orderList {
+                    // o = order object
+                    let o = Order(json: order)
+                    self.orders.append(o)
+                }
+                // Reload table view after getting menu data from server
+                self.tableView.reloadData()
             }
-            
-            // Reload table view after getting menu data from server
-            self.tableView.reloadData()
+            else {
+                Helper.alert("Error", "Failed to get orders. Please click refresh to try again.", self)
+            }
             // Hide activity indicator when finished loading data
             Helper.hideActivityIndicator(self.activityIndicator)
         }
@@ -58,7 +62,7 @@ class OrderVC: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "OrderToOrderDetails" {
             let orderDetailsVC = segue.destination as! OrderDetailsVC
-            orderDetailsVC.order = orders[(tableView.indexPathForSelectedRow?.row)!]
+            orderDetailsVC.order = orders[(tableView.indexPathForSelectedRow?.row) ?? 0]
         }
     }
     

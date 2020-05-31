@@ -11,7 +11,7 @@ import Foundation
 class Cart {
     static let shared = Cart()
     var items = [CartItem]()
-//    var table: String!
+//    var table: String
     
     // Get total of cart
     func getTotal() -> String {
@@ -29,10 +29,10 @@ class Cart {
 }
 
 class CartItem {
-    var meal: Meal!
-    var quantity: Int!
-    var total: Double!
-    var customizations: [Customization]!
+    var meal: Meal
+    var quantity: Int
+    var total: Double
+    var customizations: [Customization]
     
     init(_ meal: Meal, _ quantity: Int, _ total: Double, _ customizations: [Customization]) {
         self.meal = meal

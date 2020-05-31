@@ -26,8 +26,13 @@ class AccountVC: UIViewController {
         Helper.showActivityIndicator(self.activityIndicator, view)
         
         APIManager.shared.getUserInfo{ json in
-            self.nameLabel.text = json["name"].string
-            self.emailLabel.text = json["email"].string
+            if (json["status"] == "success") {
+                self.nameLabel.text = json["name"].string
+                self.emailLabel.text = json["email"].string
+            }
+            else {
+                Helper.alert("Error", "Failed to get account info. Please restart app and try again.", self)
+            }
         }
         
         // Hide activity indicator when finished loading data

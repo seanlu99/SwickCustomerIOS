@@ -142,7 +142,6 @@
                                             </state>
                                             <connections>
                                                 <action selector="placeOrder:" destination="5bS-NI-N8V" eventType="touchUpInside" id="Zb0-dt-bfG"/>
-                                                <segue destination="mPZ-wW-gBM" kind="unwind" unwindAction="unwindFromCart:" id="DEU-Mx-8zX"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -240,6 +239,7 @@
                         <outlet property="bottomView" destination="Txd-yR-0XD" id="aaM-ua-eMe"/>
                         <outlet property="tableView" destination="lOh-PU-qK0" id="zsl-GX-fca"/>
                         <outlet property="totalLabel" destination="tqv-ck-fLD" id="zhx-0Y-5ri"/>
+                        <segue destination="mPZ-wW-gBM" kind="unwind" identifier="unwindToOrder" unwindAction="unwindFromCart:" id="GHh-ud-yas"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="09a-zx-VgF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

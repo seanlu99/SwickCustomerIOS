@@ -30,18 +30,22 @@ class RestaurantVC: UIViewController {
         Helper.showActivityIndicator(self.activityIndicator, view)
         
         APIManager.shared.getRestaurants{ json in
-            self.restaurants = []
-            // restlist = array of JSON restaurants
-            let restList = json["restaurants"].array!
-            // rest = a JSON restaurant
-            for rest in restList {
-                // restaurant = restaurant object
-                let restaurant = Restaurant(json: rest)
-                self.restaurants.append(restaurant)
+            if (json["status"] == "success") {
+                self.restaurants = []
+                // restlist = array of JSON restaurants
+                let restList = json["restaurants"].array ?? []
+                // rest = a JSON restaurant
+                for rest in restList {
+                    // restaurant = restaurant object
+                    let restaurant = Restaurant(json: rest)
+                    self.restaurants.append(restaurant)
+                }
+                // Reload table view after getting restaurants data from server
+                self.tableView.reloadData()
             }
-            
-            // Reload table view after getting restaurants data from server
-            self.tableView.reloadData()
+            else {
+                Helper.alert("Error", "Failed to get restaurants. Please restart app and try again.", self)
+            }
             // Hide activity indicator when finished loading data
             Helper.hideActivityIndicator(self.activityIndicator)
         }
@@ -53,11 +57,11 @@ class RestaurantVC: UIViewController {
             let menuVC = segue.destination as! MenuVC
             // If search bar is being used
             if searchBar.text != "" {
-                menuVC.restaurant = searchedRestaurants[(tableView.indexPathForSelectedRow?.row)!]
+                menuVC.restaurant = searchedRestaurants[(tableView.indexPathForSelectedRow?.row) ?? 0]
             }
             // If search bar is not being used
             else {
-                menuVC.restaurant = restaurants[(tableView.indexPathForSelectedRow?.row)!]
+                menuVC.restaurant = restaurants[(tableView.indexPathForSelectedRow?.row) ?? 0]
             }
             
         }
@@ -111,9 +115,7 @@ extension RestaurantVC: UITableViewDelegate, UITableViewDataSource {
         
         cell.nameLabel.text = restaurant.name
         cell.addressLabel.text = restaurant.address
-        if let imageString = restaurant.image {
-            Helper.loadImage(cell.restaurantImage, "\(imageString)")
-        }
+        Helper.loadImage(cell.restaurantImage, "\(restaurant.image)")
         
         return cell
     }

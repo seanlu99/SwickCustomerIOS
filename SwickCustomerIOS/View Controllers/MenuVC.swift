@@ -33,19 +33,23 @@ class MenuVC: UIViewController {
         // Show activity indicator while loading data
         Helper.showActivityIndicator(self.activityIndicator, view)
         
-        APIManager.shared.getMenu(restaurantId: restaurant.id!) { json in
-            self.menu = []
-            // mealList = array of JSON meals
-            let mealList = json["menu"].array!
-            // meal = a JSON meal
-            for meal in mealList {
-                // m = meal object
-                let m = Meal(json: meal)
-                self.menu.append(m)
+        APIManager.shared.getMenu(restaurantId: restaurant.id) { json in
+            if (json["status"] == "success") {
+                self.menu = []
+                // mealList = array of JSON meals
+                let mealList = json["menu"].array ?? []
+                // meal = a JSON meal
+                for meal in mealList {
+                    // m = meal object
+                    let m = Meal(json: meal)
+                    self.menu.append(m)
+                }
+                // Reload table view after getting menu data from server
+                self.tableView.reloadData()
             }
-            
-            // Reload table view after getting menu data from server
-            self.tableView.reloadData()
+            else {
+                Helper.alert("Error", "Failed to get menu. Please restart app and try again.", self)
+            }
             // Hide activity indicator when finished loading data
             Helper.hideActivityIndicator(self.activityIndicator)
         }
@@ -57,11 +61,11 @@ class MenuVC: UIViewController {
             let mealVC = segue.destination as! MealVC
             // If search bar is being used
             if searchBar.text != "" {
-                mealVC.meal = searchedMenu[(tableView.indexPathForSelectedRow?.row)!]
+                mealVC.meal = searchedMenu[(tableView.indexPathForSelectedRow?.row) ?? 0]
             }
             // If search bar is not being used
             else {
-                mealVC.meal = menu[(tableView.indexPathForSelectedRow?.row)!]
+                mealVC.meal = menu[(tableView.indexPathForSelectedRow?.row) ?? 0]
             }
         }
     }
@@ -118,9 +122,7 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
         cell.nameLabel.text = meal.name
         cell.descriptionLabel.text = meal.description
         cell.priceLabel.text = Helper.formatPrice(meal.price)
-        if let imageString = meal.image {
-            Helper.loadImage(cell.mealImage, "\(imageString)")
-        }
+        Helper.loadImage(cell.mealImage, "\(meal.image)")
         
         return cell
     }

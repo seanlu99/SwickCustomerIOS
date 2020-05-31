@@ -47,16 +47,19 @@ class OrderDetailsVC: UIViewController {
         timeLabel.text = order.time
         
         // Load order details from API call
-        APIManager.shared.getOrderDetails(orderId: order.id!) { json in
-            self.orderDetails = OrderDetails(json: json["order_details"])
-            
-            self.statusLabel.text = self.orderDetails.status
-            self.tableLabel.text = self.orderDetails.table
-            self.serverLabel.text = self.orderDetails.serverName
-            self.totalLabel.text = Helper.formatPrice(self.orderDetails.total)
-            
-            // Reload table view after getting menu data from server
-            self.tableView.reloadData()
+        APIManager.shared.getOrderDetails(orderId: order.id) { json in
+            if (json["status"] == "success") {
+                self.orderDetails = OrderDetails(json: json["order_details"])
+                self.statusLabel.text = self.orderDetails.status
+                self.tableLabel.text = self.orderDetails.table
+                self.serverLabel.text = self.orderDetails.serverName
+                self.totalLabel.text = Helper.formatPrice(self.orderDetails.total)
+                // Reload table view after getting menu data from server
+                self.tableView.reloadData()
+            }
+            else {
+                Helper.alert("Error", "Failed to get order details. Please click refresh to try again.", self)
+            }
             // Hide activity indicator when finished loading data
             Helper.hideActivityIndicator(self.activityIndicator)
         }

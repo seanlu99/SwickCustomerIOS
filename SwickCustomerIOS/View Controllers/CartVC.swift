@@ -13,7 +13,6 @@ class CartVC: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bottomView: UIView!
-    
     var emptyLabel: UILabel!
     
     override func viewDidLoad() {
@@ -57,7 +56,26 @@ class CartVC: UIViewController {
     
     @IBAction func placeOrder(_ sender: Any) {
         APIManager.shared.placeOrder { json in
-            Cart.shared.reset()
+            if (json["status"] == "success") {
+                // Reset cart
+                Cart.shared.reset()
+                
+                // Show alert with success
+                // "Go to orders" button segues to orders page
+                let alertView = UIAlertController(
+                    title: "Success",
+                    message: "Your order has been placed.",
+                    preferredStyle: .alert
+                )
+                let goToOrders = UIAlertAction(title: "Go to orders", style: .default) { _ in
+                    self.performSegue(withIdentifier: "unwindToOrder", sender: self)
+                }
+                alertView.addAction(goToOrders)
+                self.present(alertView, animated: true, completion: nil)
+            }
+            else {
+                Helper.alert("Error", "Failed to place order. Please try again.", self)
+            }
         }
     }
 }

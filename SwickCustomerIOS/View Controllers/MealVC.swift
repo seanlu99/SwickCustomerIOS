@@ -23,11 +23,11 @@ class MealVC: UIViewController {
     // Array of all customizations
     var customizations = [Customization]()
     // Meal price with customizations
-    var adjustedPrice: Double!
+    var adjustedPrice: Double = 0
     // Initial quantity
     var quantity = 1
     // Adjusted price * quantity
-    var total: Double!
+    var total: Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,25 +42,27 @@ class MealVC: UIViewController {
         // Load meal into view with object from previous view
         nameLabel.text = meal.name
         descriptionLabel.text = meal.description
-        if let imageString = meal.image {
-            Helper.loadImage(mealImage, "\(imageString)")
-        }
+        Helper.loadImage(mealImage, String(describing: meal.image))
         updateTotal()
         
         // Load customizations of meal from API call
-        APIManager.shared.getMeal(mealId: meal.id!) { json in
-            self.customizations = []
-            // customizationList = array of JSON customizations
-            let customizationList = json["customizations"].array!
-            // customization = a JSON customization
-            for customization in customizationList {
-                // cust = customization object
-                let cust = Customization(json: customization)
-                self.customizations.append(cust)
+        APIManager.shared.getMeal(mealId: meal.id) { json in
+            if (json["status"] == "success") {
+                self.customizations = []
+                // customizationList = array of JSON customizations
+                let customizationList = json["customizations"].array ?? []
+                // customization = a JSON customization
+                for customization in customizationList {
+                    // cust = customization object
+                    let cust = Customization(json: customization)
+                    self.customizations.append(cust)
+                }
+                // Reload table view after getting menu data from server
+                self.tableView.reloadData()
             }
-            
-            // Reload table view after getting menu data from server
-            self.tableView.reloadData()
+            else {
+                Helper.alert("Error", "Failed to get meal. Please restart app and try again.", self)
+            }
             // Hide activity indicator when finished loading data
             Helper.hideActivityIndicator(self.activityIndicator)
         }
@@ -76,8 +78,8 @@ class MealVC: UIViewController {
     // Add or remove price addition from adjusted price accordingly
     // Update total
     @IBAction func checkboxClicked(_ sender: Checkbox) {
-        let cust = customizations[sender.section]
-        let option = cust.options[sender.row]
+        let cust = customizations[sender.section ?? 0]
+        let option = cust.options[sender.row ?? 0]
         // Check
         if option.isChecked == false {
             if cust.numChecked < cust.max {
@@ -136,14 +138,7 @@ class MealVC: UIViewController {
         
         // If minimum customizations not selected
         else {
-            let alertView = UIAlertController(
-                title: "Error",
-                message: "Please select mininum number of options",
-                preferredStyle: .alert
-            )
-            let okAction = UIAlertAction(title: "Ok", style: .default)
-            alertView.addAction(okAction)
-            self.present(alertView, animated: true, completion: nil)
+            Helper.alert("Error", "Please select mininum number of options.", self)
         }
     }
 }

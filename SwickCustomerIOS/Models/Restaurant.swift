@@ -10,15 +10,15 @@ import Foundation
 import SwiftyJSON
 
 class Restaurant {
-    var id: Int!
-    var name: String!
-    var address: String!
-    var image: String?
+    var id: Int
+    var name: String
+    var address: String
+    var image: String
     
     init(json: JSON) {
-        self.id = json["id"].int
-        self.name = json["name"].string
-        self.address = json["address"].string
-        self.image = json["image"].string
+        self.id = json["id"].int ?? -1
+        self.name = json["name"].string ?? ""
+        self.address = json["address"].string ?? ""
+        self.image = json["image"].string ?? ""
     }
 }

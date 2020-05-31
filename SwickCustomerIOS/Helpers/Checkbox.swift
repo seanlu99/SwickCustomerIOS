@@ -11,20 +11,20 @@ import UIKit
 class Checkbox: UIButton {
     
     // Section of table view checkbox is located in
-    var section: Int!
+    var section: Int?
     // Row of section of table view checkbox is located in
-    var row: Int!
+    var row: Int?
     
     func check() {
-        var checkedImage = resizeImage(UIImage(systemName: "checkmark.square")!, 40, 30)
-        checkedImage = checkedImage!.withTintColor(Helper.hexColor(0x073C78))
+        var checkedImage = resizeImage(UIImage(systemName: "checkmark.square") ?? UIImage(), 40, 30)
+        checkedImage = checkedImage?.withTintColor(Helper.hexColor(0x073C78))
         self.setImage(checkedImage, for: UIControl.State.normal)
         
     }
     
     func uncheck() {
-        var uncheckedImage = resizeImage(UIImage(systemName: "square")!, 40, 30)
-        uncheckedImage = uncheckedImage!.withTintColor(Helper.hexColor(0x073C78))
+        var uncheckedImage = resizeImage(UIImage(systemName: "square") ?? UIImage(), 40, 30)
+        uncheckedImage = uncheckedImage?.withTintColor(Helper.hexColor(0x073C78))
         self.setImage(uncheckedImage, for: UIControl.State.normal)
     }
 }

@@ -14,7 +14,10 @@ class Helper {
     
     // Load imageString image into imageView
     static func loadImage(_ imageView: UIImageView,_ imageString: String) {
-        let imageUrl = URL(string: imageString)!
+        guard let imageUrl = URL(string: imageString) else {
+            print("Error: invalid image URL\n")
+            return
+        }
         URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
             guard let data = data, error == nil else { return }
             DispatchQueue.main.async(execute: {
@@ -24,7 +27,7 @@ class Helper {
     }
     
     // Show activity indicator
-    static func showActivityIndicator(_ activityIndicator: UIActivityIndicatorView,_ view: UIView) {
+    static func showActivityIndicator(_ activityIndicator: UIActivityIndicatorView, _ view: UIView) {
         activityIndicator.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0)
         activityIndicator.center = view.center
         activityIndicator.hidesWhenStopped = true
@@ -37,6 +40,18 @@ class Helper {
     // Hide activity indicator
     static func hideActivityIndicator(_ activityIndicator: UIActivityIndicatorView) {
         activityIndicator.stopAnimating()
+    }
+    
+    // Show alert
+    static func alert(_ title: String, _ message: String, _ view: UIViewController) {
+        let alertView = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        alertView.addAction(okAction)
+        view.present(alertView, animated: true, completion: nil)
     }
     
     // Format double as price
