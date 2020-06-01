@@ -129,9 +129,15 @@ class APIManager {
         self.requestServer(path, .get, nil, URLEncoding.default, completionHandler)
     }
     
+    // API call to get categories list
+    func getCategories(restaurantId: Int, completionHandler: @escaping (JSON) -> Void) {
+        let path = "api/customer/get_categories/\(restaurantId)"
+        self.requestServer(path, .get, nil, URLEncoding.default, completionHandler)
+    }
+    
     // API call to get menu
-    func getMenu(restaurantId: Int, completionHandler: @escaping (JSON) -> Void) {
-        let path = "api/customer/get_menu/\(restaurantId)/"
+    func getMenu(restaurantId: Int, category: String, completionHandler: @escaping (JSON) -> Void) {
+        let path = "api/customer/get_menu/\(restaurantId)/\(category)/"
         self.requestServer(path, .get, nil, URLEncoding.default, completionHandler)
     }
     

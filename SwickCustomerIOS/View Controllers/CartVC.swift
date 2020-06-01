@@ -13,6 +13,7 @@ class CartVC: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bottomView: UIView!
+    let activityIndicator = UIActivityIndicatorView()
     var emptyLabel: UILabel!
     
     override func viewDidLoad() {
@@ -55,6 +56,9 @@ class CartVC: UIViewController {
     }
     
     @IBAction func placeOrder(_ sender: Any) {
+        // Show activity indicator while sending data
+        Helper.showActivityIndicator(self.activityIndicator, view)
+        
         APIManager.shared.placeOrder { json in
             if (json["status"] == "success") {
                 // Reset cart
@@ -76,6 +80,8 @@ class CartVC: UIViewController {
             else {
                 Helper.alert("Error", "Failed to place order. Please try again.", self)
             }
+            // Hide activity indicator when finished sending data
+            Helper.hideActivityIndicator(self.activityIndicator)
         }
     }
 }

@@ -14,8 +14,10 @@ class MenuVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     let activityIndicator = UIActivityIndicatorView()
     
-    // Restaurant clicked on in previous view
+    // Restaurant clicked on two views ago
     var restaurant: Restaurant!
+    // Category clicked on in previous view
+    var category: String!
     // Array of all meals
     var menu = [Meal]()
     // Array of searched meals
@@ -24,7 +26,7 @@ class MenuVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set navigation bar title to restaurant name
-        self.title = restaurant.name
+        self.title = category
         loadMeals()
     }
     
@@ -33,7 +35,7 @@ class MenuVC: UIViewController {
         // Show activity indicator while loading data
         Helper.showActivityIndicator(self.activityIndicator, view)
         
-        APIManager.shared.getMenu(restaurantId: restaurant.id) { json in
+        APIManager.shared.getMenu(restaurantId: restaurant.id, category: category) { json in
             if (json["status"] == "success") {
                 self.menu = []
                 // mealList = array of JSON meals

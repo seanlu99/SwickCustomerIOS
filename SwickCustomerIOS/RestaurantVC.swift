@@ -53,15 +53,15 @@ class RestaurantVC: UIViewController {
     
     // Send restaurant object to menu VC when a restaurant is clicked on
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "RestaurantToMenu" {
-            let menuVC = segue.destination as! MenuVC
+        if segue.identifier == "RestaurantToCategory" {
+            let categoryVC = segue.destination as! CategoryVC
             // If search bar is being used
             if searchBar.text != "" {
-                menuVC.restaurant = searchedRestaurants[(tableView.indexPathForSelectedRow?.row) ?? 0]
+                categoryVC.restaurant = searchedRestaurants[(tableView.indexPathForSelectedRow?.row) ?? 0]
             }
             // If search bar is not being used
             else {
-                menuVC.restaurant = restaurants[(tableView.indexPathForSelectedRow?.row) ?? 0]
+                categoryVC.restaurant = restaurants[(tableView.indexPathForSelectedRow?.row) ?? 0]
             }
             
         }
