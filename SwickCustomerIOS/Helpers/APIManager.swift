@@ -154,7 +154,7 @@ class APIManager {
     }
     
     // API to place order
-    func placeOrder(stripeToken: String, completionHandler: @escaping (JSON) -> Void) {
+    func placeOrder(restaurantId: Int, table: Int, stripeToken: String, completionHandler: @escaping (JSON) -> Void) {
         refreshToken {
             guard let accessToken = self.tokenDefaults.object(forKey: "accessToken") as? String else {
                 print("Error: no Django access token\n")
@@ -198,9 +198,8 @@ class APIManager {
                 let itemsString = NSString(data: itemsData, encoding: String.Encoding.utf8.rawValue)
                 let params: [String: Any] = [
                     "access_token": accessToken,
-                    // HARDCODED FOR TESTING
-                    "restaurant_id": "1",
-                    "table": "5",
+                    "restaurant_id": restaurantId,
+                    "table": table,
                     "order_items": itemsString ?? "",
                     "stripe_token": stripeToken
                 ]

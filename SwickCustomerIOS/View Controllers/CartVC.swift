@@ -21,9 +21,9 @@ class CartVC: UIViewController {
     
     let activityIndicator = UIActivityIndicatorView()
     
-    // Restaurant clicked on in previous view
+    // Restaurant scanned in previous view
     var restaurant: Restaurant!
-    // Table clicked on in previous view
+    // Table scanned in previous view
     var table: Int!
     
     override func viewDidLoad() {
@@ -41,6 +41,7 @@ class CartVC: UIViewController {
     }
     
     func toggleViews() {
+        tableView.reloadData()
         // If there are no meals in cart
         if Cart.shared.items.count == 0 {
             totalLabel.isHidden = true
@@ -52,7 +53,6 @@ class CartVC: UIViewController {
         }
         // If there are meals in cart
         else {
-            tableView.reloadData()
             totalLabel.isHidden = false
             totalPriceLabel.isHidden = false
             totalPriceLabel.text = Cart.shared.getTotal()
@@ -92,10 +92,11 @@ class CartVC: UIViewController {
             }
             // If card is validated
             else if let stripeToken = token?.tokenId {
-                APIManager.shared.placeOrder(stripeToken: stripeToken) { json in
+                APIManager.shared.placeOrder(restaurantId: self.restaurant.id, table: self.table, stripeToken: stripeToken) { json in
                     if (json["status"] == "success") {
                         // Reset cart
                         Cart.shared.reset()
+                        self.toggleViews()
                         
                         // Show alert with success
                         // "Go to orders" button segues to orders page

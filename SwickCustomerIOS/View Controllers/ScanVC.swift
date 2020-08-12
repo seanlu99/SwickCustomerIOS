@@ -121,7 +121,7 @@ class ScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         let codeArray = code.components(separatedBy: "-")
         let swickString = codeArray[0]
         let restaurantId = Int(codeArray[1])
-        let table = Int(codeArray[2])
+        table = Int(codeArray[2])
         if swickString != "swick" || restaurantId == nil || table == nil {
             self.present(alertView, animated: true, completion: nil)
         }
