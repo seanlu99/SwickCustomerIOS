@@ -16,6 +16,8 @@ class CategoryVC: UIViewController {
     
     // Restaurant clicked on in previous view
     var restaurant: Restaurant!
+    // If the previous view was cart
+    var cameFromCart = false
     // Array of all categories
     var categories = [String]()
     // Array of searched categories
@@ -54,12 +56,13 @@ class CategoryVC: UIViewController {
         }
     }
     
-    // Send restaurant object and category string to menu VC
-    // when a category is clicked on
+    // Send restaurant object, category string and cameFromCart flag
+    // to menu VC when a category is clicked on
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CategoryToMenu" {
             let menuVC = segue.destination as! MenuVC
             menuVC.restaurant = restaurant
+            menuVC.cameFromCart = cameFromCart
             // If search bar is being used
             if searchBar.text != "" {
                 menuVC.category = searchedCategories[(tableView.indexPathForSelectedRow?.row) ?? 0]

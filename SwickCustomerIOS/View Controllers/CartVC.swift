@@ -7,81 +7,116 @@
 //
 
 import UIKit
+import Stripe
 
 class CartVC: UIViewController {
     
-    @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var totalPriceLabel: UILabel!
+    @IBOutlet weak var emptyLabel: UILabel!
+    @IBOutlet weak var paymentLabel: UILabel!
+    @IBOutlet weak var paymentTextField: STPPaymentCardTextField!
+    @IBOutlet weak var placeOrderButton: UIButton!
+    
     let activityIndicator = UIActivityIndicatorView()
-    var emptyLabel: UILabel!
+    
+    // Restaurant clicked on in previous view
+    var restaurant: Restaurant!
+    // Table clicked on in previous view
+    var table: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Create a label saying cart is empty
-        emptyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 40))
-        emptyLabel.center = self.view.center
-        emptyLabel.textAlignment = NSTextAlignment.center
-        emptyLabel.text = "Your cart is empty"
-        self.view.addSubview(emptyLabel)
         
         // Enable dynamic table view cell height
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 60
+        
+        toggleViews()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        // If there are no meals in tray
+        toggleViews()
+    }
+    
+    func toggleViews() {
+        // If there are no meals in cart
         if Cart.shared.items.count == 0 {
-            // Hide views
-            tableView.isHidden = true
-            bottomView.isHidden = true
-            // Show empty label
+            totalLabel.isHidden = true
+            totalPriceLabel.isHidden = true
+            paymentLabel.isHidden = true
+            paymentTextField.isHidden = true
+            placeOrderButton.isHidden = true
             emptyLabel.isHidden = false
         }
-            
-        // If there are meals in tray
+        // If there are meals in cart
         else {
-            // Show views
-            tableView.isHidden = false
-            bottomView.isHidden = false
             tableView.reloadData()
-            totalLabel.text = Cart.shared.getTotal()
-            // Hide empty label
+            totalLabel.isHidden = false
+            totalPriceLabel.isHidden = false
+            totalPriceLabel.text = Cart.shared.getTotal()
+            paymentLabel.isHidden = false
+            paymentTextField.isHidden = false
+            placeOrderButton.isHidden = false
             emptyLabel.isHidden = true
         }
     }
     
-    @IBAction func addPayment(_ sender: Any) {
+    // Send restaurant object to categories VC and set cameFromCart flag
+    // to true when "Add items to cart" button is clicked
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CartToCategory" {
+            let categoryVC = segue.destination as! CategoryVC
+            categoryVC.restaurant = restaurant
+            categoryVC.cameFromCart = true
+        }
     }
     
     @IBAction func placeOrder(_ sender: Any) {
         // Show activity indicator while sending data
         Helper.showActivityIndicator(self.activityIndicator, view)
         
-        APIManager.shared.placeOrder { json in
-            if (json["status"] == "success") {
-                // Reset cart
-                Cart.shared.reset()
-                
-                // Show alert with success
-                // "Go to orders" button segues to orders page
-                let alertView = UIAlertController(
-                    title: "Success",
-                    message: "Your order has been placed.",
-                    preferredStyle: .alert
-                )
-                let goToOrders = UIAlertAction(title: "Go to orders", style: .default) { _ in
-                    self.performSegue(withIdentifier: "unwindToOrder", sender: self)
+        // Set card parameters from payment text field
+        let cardParams = STPCardParams()
+        cardParams.number = self.paymentTextField.cardNumber
+        cardParams.expMonth = self.paymentTextField.expirationMonth
+        cardParams.expYear = self.paymentTextField.expirationYear
+        cardParams.cvc = self.paymentTextField.cvc
+        
+        // Try to validate credit card from Stripe
+        STPAPIClient.shared().createToken(withCard: cardParams) {(token, error) in
+            // If Stripe error
+            if (error != nil) {
+                Helper.alert("Error", "Failed to validate card. Please try again", self)
+            }
+            // If card is validated
+            else if let stripeToken = token?.tokenId {
+                APIManager.shared.placeOrder(stripeToken: stripeToken) { json in
+                    if (json["status"] == "success") {
+                        // Reset cart
+                        Cart.shared.reset()
+                        
+                        // Show alert with success
+                        // "Go to orders" button segues to orders page
+                        let alertView = UIAlertController(
+                            title: "Success",
+                            message: "Your order has been placed.",
+                            preferredStyle: .alert
+                        )
+                        let goToOrders = UIAlertAction(title: "Go to orders", style: .default) { _ in
+                            self.performSegue(withIdentifier: "unwindToOrder", sender: self)
+                        }
+                        alertView.addAction(goToOrders)
+                        self.present(alertView, animated: true, completion: nil)
+                    }
+                    else {
+                        Helper.alert("Error", "Failed to place order. Please try again.", self)
+                    }
+                    // Hide activity indicator when finished sending data
+                    Helper.hideActivityIndicator(self.activityIndicator)
                 }
-                alertView.addAction(goToOrders)
-                self.present(alertView, animated: true, completion: nil)
             }
-            else {
-                Helper.alert("Error", "Failed to place order. Please try again.", self)
-            }
-            // Hide activity indicator when finished sending data
-            Helper.hideActivityIndicator(self.activityIndicator)
         }
     }
 }

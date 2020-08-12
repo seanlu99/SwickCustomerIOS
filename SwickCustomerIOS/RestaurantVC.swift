@@ -28,7 +28,6 @@ class RestaurantVC: UIViewController {
     func loadRestaurants() {
         // Show activity indicator while loading data
         Helper.showActivityIndicator(self.activityIndicator, view)
-        
         APIManager.shared.getRestaurants{ json in
             if (json["status"] == "success") {
                 self.restaurants = []
@@ -63,7 +62,6 @@ class RestaurantVC: UIViewController {
             else {
                 categoryVC.restaurant = restaurants[(tableView.indexPathForSelectedRow?.row) ?? 0]
             }
-            
         }
     }
 }
@@ -91,6 +89,7 @@ extension RestaurantVC: UITableViewDelegate, UITableViewDataSource {
     
     // Set number of rows in each section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         // If search bar is being used
         if searchBar.text != "" {
             return self.searchedRestaurants.count

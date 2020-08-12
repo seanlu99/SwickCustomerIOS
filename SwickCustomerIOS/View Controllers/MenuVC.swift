@@ -18,6 +18,8 @@ class MenuVC: UIViewController {
     var restaurant: Restaurant!
     // Category clicked on in previous view
     var category: String!
+    // If this view was derived from cart VC
+    var cameFromCart = false
     // Array of all meals
     var menu = [Meal]()
     // Array of searched meals
@@ -127,5 +129,12 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
         Helper.loadImage(cell.mealImage, "\(meal.image)")
         
         return cell
+    }
+    
+    // On cell click
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (cameFromCart) {
+            self.performSegue(withIdentifier: "MenuToMeal", sender: self)
+        }
     }
 }

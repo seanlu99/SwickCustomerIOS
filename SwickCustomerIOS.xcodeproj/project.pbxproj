@@ -15,7 +15,6 @@
 		1495C744246B9C9300F30ECB /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C743246B9C9300F30ECB /* MenuVC.swift */; };
 		1495C746246BB3F600F30ECB /* MealVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C745246BB3F600F30ECB /* MealVC.swift */; };
 		1495C748246BC37D00F30ECB /* CartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C747246BC37D00F30ECB /* CartVC.swift */; };
-		1495C74A246BC86400F30ECB /* AddPaymentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C749246BC86400F30ECB /* AddPaymentVC.swift */; };
 		1495C74E246BDA0200F30ECB /* OrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C74D246BDA0200F30ECB /* OrderVC.swift */; };
 		1495C750246BDA9F00F30ECB /* OrderDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C74F246BDA9F00F30ECB /* OrderDetailsVC.swift */; };
 		1495C752246C770600F30ECB /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C751246C770600F30ECB /* LoginVC.swift */; };
@@ -37,6 +36,7 @@
 		14AA783C247B480A00145D40 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA783B247B480A00145D40 /* Checkbox.swift */; };
 		14AA78422484868700145D40 /* CategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA78412484868700145D40 /* CategoryVC.swift */; };
 		14AA7844248486A200145D40 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA7843248486A200145D40 /* CategoryCell.swift */; };
+		14AA78482484C59900145D40 /* ScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA78472484C59900145D40 /* ScanVC.swift */; };
 		493DED219093BDB8CB940845 /* Pods_SwickCustomerIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971283499F2F6CCB9D24A97D /* Pods_SwickCustomerIOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,7 +51,6 @@
 		1495C743246B9C9300F30ECB /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		1495C745246BB3F600F30ECB /* MealVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealVC.swift; sourceTree = "<group>"; };
 		1495C747246BC37D00F30ECB /* CartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartVC.swift; sourceTree = "<group>"; };
-		1495C749246BC86400F30ECB /* AddPaymentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPaymentVC.swift; sourceTree = "<group>"; };
 		1495C74D246BDA0200F30ECB /* OrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderVC.swift; sourceTree = "<group>"; };
 		1495C74F246BDA9F00F30ECB /* OrderDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsVC.swift; sourceTree = "<group>"; };
 		1495C751246C770600F30ECB /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -73,6 +72,7 @@
 		14AA783B247B480A00145D40 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		14AA78412484868700145D40 /* CategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryVC.swift; sourceTree = "<group>"; };
 		14AA7843248486A200145D40 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		14AA78472484C59900145D40 /* ScanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanVC.swift; sourceTree = "<group>"; };
 		95E5BDAC5BCC78F8F1824B61 /* Pods-SwickCustomerIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwickCustomerIOS.debug.xcconfig"; path = "Target Support Files/Pods-SwickCustomerIOS/Pods-SwickCustomerIOS.debug.xcconfig"; sourceTree = "<group>"; };
 		971283499F2F6CCB9D24A97D /* Pods_SwickCustomerIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwickCustomerIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6DD97C655BA4FE3422DDED7 /* Pods-SwickCustomerIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwickCustomerIOS.release.xcconfig"; path = "Target Support Files/Pods-SwickCustomerIOS/Pods-SwickCustomerIOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -132,8 +132,8 @@
 				14AA78412484868700145D40 /* CategoryVC.swift */,
 				1495C743246B9C9300F30ECB /* MenuVC.swift */,
 				1495C745246BB3F600F30ECB /* MealVC.swift */,
+				14AA78472484C59900145D40 /* ScanVC.swift */,
 				1495C747246BC37D00F30ECB /* CartVC.swift */,
-				1495C749246BC86400F30ECB /* AddPaymentVC.swift */,
 				1495C74D246BDA0200F30ECB /* OrderVC.swift */,
 				1495C74F246BDA9F00F30ECB /* OrderDetailsVC.swift */,
 				1495C75E246CAB6600F30ECB /* AccountVC.swift */,
@@ -331,10 +331,10 @@
 				1495C73F246B935800F30ECB /* RestaurantVC.swift in Sources */,
 				1495C77A246F654200F30ECB /* OrderCell.swift in Sources */,
 				14AA78422484868700145D40 /* CategoryVC.swift in Sources */,
-				1495C74A246BC86400F30ECB /* AddPaymentVC.swift in Sources */,
 				1495C74E246BDA0200F30ECB /* OrderVC.swift in Sources */,
 				14AA7844248486A200145D40 /* CategoryCell.swift in Sources */,
 				1495C746246BB3F600F30ECB /* MealVC.swift in Sources */,
+				14AA78482484C59900145D40 /* ScanVC.swift in Sources */,
 				1495C76E246DFCBD00F30ECB /* MenuCell.swift in Sources */,
 				14AA783A247B2E1400145D40 /* Customization.swift in Sources */,
 			);

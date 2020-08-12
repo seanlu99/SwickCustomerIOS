@@ -129,6 +129,12 @@ class APIManager {
         self.requestServer(path, .get, nil, URLEncoding.default, completionHandler)
     }
     
+    // API call to get restaurant
+    func getRestaurant(restaurantId: Int, completionHandler: @escaping (JSON) -> Void) {
+        let path = "api/customer/get_restaurant/\(restaurantId)/"
+        self.requestServer(path, .get, nil, URLEncoding.default, completionHandler)
+    }
+    
     // API call to get categories list
     func getCategories(restaurantId: Int, completionHandler: @escaping (JSON) -> Void) {
         let path = "api/customer/get_categories/\(restaurantId)"
@@ -148,7 +154,7 @@ class APIManager {
     }
     
     // API to place order
-    func placeOrder(completionHandler: @escaping (JSON) -> Void) {
+    func placeOrder(stripeToken: String, completionHandler: @escaping (JSON) -> Void) {
         refreshToken {
             guard let accessToken = self.tokenDefaults.object(forKey: "accessToken") as? String else {
                 print("Error: no Django access token\n")
@@ -195,7 +201,8 @@ class APIManager {
                     // HARDCODED FOR TESTING
                     "restaurant_id": "1",
                     "table": "5",
-                    "order_items": itemsString ?? ""
+                    "order_items": itemsString ?? "",
+                    "stripe_token": stripeToken
                 ]
                 self.requestServer(path, .post, params, URLEncoding.default, completionHandler)
             }
