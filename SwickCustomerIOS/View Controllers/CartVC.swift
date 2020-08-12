@@ -113,10 +113,10 @@ class CartVC: UIViewController {
                     else {
                         Helper.alert("Error", "Failed to place order. Please try again.", self)
                     }
-                    // Hide activity indicator when finished sending data
-                    Helper.hideActivityIndicator(self.activityIndicator)
                 }
             }
+            // Hide activity indicator when finished sending data
+            Helper.hideActivityIndicator(self.activityIndicator)
         }
     }
 }

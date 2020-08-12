@@ -90,6 +90,11 @@ extension MenuVC: UISearchBarDelegate {
         // Reload table view after search
         self.tableView.reloadData()
     }
+    
+    // Close keyboard when search button clicked
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
 }
 
 extension MenuVC: UITableViewDelegate, UITableViewDataSource {

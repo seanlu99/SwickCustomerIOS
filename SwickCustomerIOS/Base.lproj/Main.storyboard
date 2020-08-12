@@ -104,7 +104,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="Txd-yR-0XD">
-                                    <rect key="frame" x="0.0" y="146.5" width="414" height="306"/>
+                                    <rect key="frame" x="0.0" y="146.5" width="414" height="515"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6a3-q6-QFE">
