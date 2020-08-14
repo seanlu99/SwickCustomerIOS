@@ -74,9 +74,6 @@ class CartVC: UIViewController {
     }
     
     @IBAction func placeOrder(_ sender: Any) {
-        // Show activity indicator while sending data
-        Helper.showActivityIndicator(self.activityIndicator, view)
-        
         // Set card parameters from payment text field
         let cardParams = STPCardParams()
         cardParams.number = self.paymentTextField.cardNumber
@@ -116,8 +113,6 @@ class CartVC: UIViewController {
                     }
                 }
             }
-            // Hide activity indicator when finished sending data
-            Helper.hideActivityIndicator(self.activityIndicator)
         }
     }
 }

@@ -10,8 +10,6 @@ import UIKit
 
 class OrderVC: UITableViewController {
     
-    let activityIndicator = UIActivityIndicatorView()
-    
     // Array of all orders
     var orders = [Order]()
     
@@ -31,10 +29,6 @@ class OrderVC: UITableViewController {
     
     // Load restaurant data from API call to table view
     func loadOrders() {
-        // Show activity indicator while loading data
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        Helper.showActivityIndicator(self.activityIndicator, appDelegate.window!)
-        
         APIManager.shared.getOrders { json in
             if (json["status"] == "success") {
                 self.orders = []
@@ -52,8 +46,6 @@ class OrderVC: UITableViewController {
             else {
                 Helper.alert("Error", "Failed to get orders. Please click refresh to try again.", self)
             }
-            // Hide activity indicator when finished loading data
-            Helper.hideActivityIndicator(self.activityIndicator)
         }
     }
     

@@ -12,7 +12,6 @@ class CategoryVC: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-    let activityIndicator = UIActivityIndicatorView()
     
     // Restaurant clicked on in previous view
     var restaurant: Restaurant!
@@ -32,9 +31,6 @@ class CategoryVC: UIViewController {
     
     // Load categories data from API call to table view
     func loadCategories() {
-        // Show activity indicator while loading data
-        Helper.showActivityIndicator(self.activityIndicator, view)
-        
         APIManager.shared.getCategories(restaurantId: restaurant.id) { json in
             if (json["status"] == "success") {
                 self.categories = ["All"]
@@ -51,8 +47,6 @@ class CategoryVC: UIViewController {
             else {
                 Helper.alert("Error", "Failed to get categories. Please restart app and try again.", self)
             }
-            // Hide activity indicator when finished loading data
-            Helper.hideActivityIndicator(self.activityIndicator)
         }
     }
     

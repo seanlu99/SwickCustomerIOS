@@ -12,7 +12,6 @@ class RestaurantVC: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-    let activityIndicator = UIActivityIndicatorView()
     
     // Array of all restaurants
     var restaurants = [Restaurant]()
@@ -26,8 +25,6 @@ class RestaurantVC: UIViewController {
     
     // Load restaurant data from API call to table view
     func loadRestaurants() {
-        // Show activity indicator while loading data
-        Helper.showActivityIndicator(self.activityIndicator, view)
         APIManager.shared.getRestaurants{ json in
             if (json["status"] == "success") {
                 self.restaurants = []
@@ -45,8 +42,6 @@ class RestaurantVC: UIViewController {
             else {
                 Helper.alert("Error", "Failed to get restaurants. Please restart app and try again.", self)
             }
-            // Hide activity indicator when finished loading data
-            Helper.hideActivityIndicator(self.activityIndicator)
         }
     }
     

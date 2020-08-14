@@ -16,7 +16,6 @@ class MealVC: UIViewController {
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    let activityIndicator = UIActivityIndicatorView()
     
     // Meal clicked on in previous view
     var meal: Meal!
@@ -36,9 +35,6 @@ class MealVC: UIViewController {
     }
     
     func loadMeal() {
-        // Show activity indicator while loading data
-        Helper.showActivityIndicator(self.activityIndicator, view)
-        
         // Load meal into view with object from previous view
         nameLabel.text = meal.name
         descriptionLabel.text = meal.description
@@ -63,8 +59,6 @@ class MealVC: UIViewController {
             else {
                 Helper.alert("Error", "Failed to get meal. Please restart app and try again.", self)
             }
-            // Hide activity indicator when finished loading data
-            Helper.hideActivityIndicator(self.activityIndicator)
         }
     }
     

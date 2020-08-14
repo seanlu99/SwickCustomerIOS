@@ -16,7 +16,6 @@ class OrderDetailsVC: UIViewController {
     @IBOutlet weak var serverLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    let activityIndicator = UIActivityIndicatorView()
     
     // Order clicked on in previous view
     var order: Order!
@@ -40,9 +39,6 @@ class OrderDetailsVC: UIViewController {
     }
     
     func loadOrderDetails() {
-        // Show activity indicator while loading data
-        Helper.showActivityIndicator(self.activityIndicator, view)
-        
         // Load time into view with object from previous view
         timeLabel.text = order.time
         
@@ -60,8 +56,6 @@ class OrderDetailsVC: UIViewController {
             else {
                 Helper.alert("Error", "Failed to get order details. Please click refresh to try again.", self)
             }
-            // Hide activity indicator when finished loading data
-            Helper.hideActivityIndicator(self.activityIndicator)
         }
     }
 }

@@ -12,7 +12,6 @@ class MenuVC: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-    let activityIndicator = UIActivityIndicatorView()
     
     // Restaurant clicked on two views ago
     var restaurant: Restaurant!
@@ -34,9 +33,6 @@ class MenuVC: UIViewController {
     
     // Load restaurant data from API call to table view
     func loadMeals() {
-        // Show activity indicator while loading data
-        Helper.showActivityIndicator(self.activityIndicator, view)
-        
         APIManager.shared.getMenu(restaurantId: restaurant.id, category: category) { json in
             if (json["status"] == "success") {
                 self.menu = []
@@ -54,8 +50,6 @@ class MenuVC: UIViewController {
             else {
                 Helper.alert("Error", "Failed to get menu. Please restart app and try again.", self)
             }
-            // Hide activity indicator when finished loading data
-            Helper.hideActivityIndicator(self.activityIndicator)
         }
     }
     

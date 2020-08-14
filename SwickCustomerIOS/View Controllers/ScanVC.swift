@@ -13,7 +13,6 @@ class ScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
-    let activityIndicator = UIActivityIndicatorView()
     
     // Restaurant scanned
     var restaurant: Restaurant?
@@ -126,9 +125,6 @@ class ScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             self.present(alertView, animated: true, completion: nil)
         }
         else {
-            // Show activity indicator while loading data
-            Helper.showActivityIndicator(self.activityIndicator, view)
-            
             // Load restaurant from API call
             APIManager.shared.getRestaurant(restaurantId: restaurantId!) { json in
                 if (json["status"] == "success") {
@@ -141,8 +137,6 @@ class ScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
                 else {
                     Helper.alert("Error", "Failed to get restaurant. Please restart app and try again.", self)
                 }
-                // Hide activity indicator when finished loading data
-                Helper.hideActivityIndicator(self.activityIndicator)
             }
         }
     }
