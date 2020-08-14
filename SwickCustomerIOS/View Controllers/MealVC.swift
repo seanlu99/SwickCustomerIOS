@@ -57,7 +57,7 @@ class MealVC: UIViewController {
                     let cust = Customization(json: customization)
                     self.customizations.append(cust)
                 }
-                // Reload table view after getting menu data from server
+                // Reload table view after getting meal data from server
                 self.tableView.reloadData()
             }
             else {

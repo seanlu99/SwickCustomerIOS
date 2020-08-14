@@ -10,7 +10,6 @@ import UIKit
 
 class OrderVC: UITableViewController {
     
-    @IBOutlet var orderTableView: UITableView!
     let activityIndicator = UIActivityIndicatorView()
     
     // Array of all orders
@@ -47,7 +46,7 @@ class OrderVC: UITableViewController {
                     let o = Order(json: order)
                     self.orders.append(o)
                 }
-                // Reload table view after getting menu data from server
+                // Reload table view after getting order data from server
                 self.tableView.reloadData()
             }
             else {

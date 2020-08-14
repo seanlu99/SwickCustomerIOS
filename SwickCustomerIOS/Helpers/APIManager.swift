@@ -248,7 +248,7 @@ class APIManager {
                 print("Error: no Django access token\n")
                 return
             }
-            let path = "api/get_user_info/"
+            let path = "api/customer/get_info/"
             let params: [String: Any] = [
                 "access_token": accessToken
             ]

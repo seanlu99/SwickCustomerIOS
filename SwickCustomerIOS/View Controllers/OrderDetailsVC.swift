@@ -54,7 +54,7 @@ class OrderDetailsVC: UIViewController {
                 self.tableLabel.text = self.orderDetails.table
                 self.serverLabel.text = self.orderDetails.serverName
                 self.totalLabel.text = Helper.formatPrice(self.orderDetails.total)
-                // Reload table view after getting menu data from server
+                // Reload table view after getting order details data from server
                 self.tableView.reloadData()
             }
             else {
