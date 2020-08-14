@@ -28,6 +28,10 @@ class MenuVC: UIViewController {
         super.viewDidLoad()
         // Set navigation bar title to restaurant name
         self.title = category
+        // Hide cart button if view derived from home
+        if (!cameFromCart) {
+            self.navigationItem.rightBarButtonItem = nil
+        }
         loadMeals()
     }
     
@@ -68,8 +72,7 @@ class MenuVC: UIViewController {
         }
     }
     
-    // Unwind from meal VC to menu VC
-    @IBAction func unwindFromMeal( _ seg: UIStoryboardSegue) { }
+    @IBAction func unwindToMenu( _ seg: UIStoryboardSegue) { }
 }
 
 extension MenuVC: UISearchBarDelegate {

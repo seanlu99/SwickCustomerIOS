@@ -57,8 +57,7 @@ class OrderVC: UITableViewController {
         }
     }
     
-    // Unwind from cart VC to order VC
-    @IBAction func unwindFromCart( _ seg: UIStoryboardSegue) { }
+    @IBAction func unwindToOrder( _ seg: UIStoryboardSegue) { }
     
     // Set number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {

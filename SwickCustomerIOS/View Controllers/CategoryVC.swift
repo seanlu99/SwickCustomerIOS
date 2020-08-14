@@ -26,6 +26,10 @@ class CategoryVC: UIViewController {
         super.viewDidLoad()
         // Set navigation bar title to restaurant name
         self.title = restaurant.name
+        // Hide cart button if view derived from home
+        if (!cameFromCart) {
+            self.navigationItem.rightBarButtonItem = nil
+        }
         loadCategories()
     }
     
@@ -49,6 +53,7 @@ class CategoryVC: UIViewController {
             }
         }
     }
+    
     
     // Send restaurant object, category string and cameFromCart flag
     // to menu VC when a category is clicked on

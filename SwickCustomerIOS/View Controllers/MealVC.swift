@@ -127,7 +127,7 @@ class MealVC: UIViewController {
         if minimumSelected {
             let cartItem = CartItem(meal, quantity, total, customizations)
             Cart.shared.items.append(cartItem)
-            performSegue(withIdentifier: "unwindToMenu", sender: self)
+            performSegue(withIdentifier: "unwindFromMealToMenu", sender: self)
         }
         
         // If minimum customizations not selected

@@ -103,7 +103,7 @@ class CartVC: UIViewController {
                             preferredStyle: .alert
                         )
                         let goToOrders = UIAlertAction(title: "Go to orders", style: .default) { _ in
-                            self.performSegue(withIdentifier: "unwindToOrder", sender: self)
+                            self.performSegue(withIdentifier: "unwindFromCartToOrder", sender: self)
                         }
                         alertView.addAction(goToOrders)
                         self.present(alertView, animated: true, completion: nil)
@@ -115,6 +115,8 @@ class CartVC: UIViewController {
             }
         }
     }
+    
+    @IBAction func unwindToCart( _ seg: UIStoryboardSegue) { }
 }
 
 extension CartVC: UITableViewDelegate, UITableViewDataSource {

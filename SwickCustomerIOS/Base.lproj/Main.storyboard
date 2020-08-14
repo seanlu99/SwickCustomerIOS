@@ -289,7 +289,7 @@
                         <outlet property="tableView" destination="lOh-PU-qK0" id="zsl-GX-fca"/>
                         <outlet property="totalLabel" destination="oZJ-m9-Wli" id="vN1-9c-hY8"/>
                         <outlet property="totalPriceLabel" destination="tqv-ck-fLD" id="6zv-pu-yjB"/>
-                        <segue destination="mPZ-wW-gBM" kind="unwind" identifier="unwindToOrder" unwindAction="unwindFromCart:" id="GHh-ud-yas"/>
+                        <segue destination="mPZ-wW-gBM" kind="unwind" identifier="unwindFromCartToOrder" unwindAction="unwindToOrder:" id="GHh-ud-yas"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="09a-zx-VgF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -453,13 +453,20 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1QZ-a3-PYY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="uU3-w9-LoM"/>
+                    <navigationItem key="navigationItem" id="uU3-w9-LoM">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="cart.fill" catalog="system" id="Fi2-Xx-6SO">
+                            <connections>
+                                <segue destination="Rah-ko-qIh" kind="unwind" unwindAction="unwindToCart:" id="SSj-Bo-m2b"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="5bH-DH-ZJ6" id="7qz-vO-6X4"/>
                         <outlet property="tableView" destination="q7h-4M-PIl" id="iHJ-gT-LRm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDo-L9-t6W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Rah-ko-qIh" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3506" y="-1084"/>
         </scene>
@@ -555,7 +562,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xrL-mS-BBb"/>
                     </view>
-                    <navigationItem key="navigationItem" id="vis-vr-fTk"/>
+                    <navigationItem key="navigationItem" id="vis-vr-fTk">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="cart.fill" catalog="system" id="1Mm-Mq-SF1">
+                            <connections>
+                                <segue destination="sa8-N8-fhZ" kind="unwind" unwindAction="unwindToCart:" id="Xc1-eE-Wny"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="n6U-LH-GiZ" id="EB5-so-mWg"/>
                         <outlet property="tableView" destination="YK5-eD-BEM" id="jsP-ea-wf9"/>
@@ -563,6 +576,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h7H-ce-dF5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="sa8-N8-fhZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4290" y="-1084"/>
         </scene>
@@ -753,7 +767,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ODW-4I-JeM"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ocu-Im-WSN"/>
+                    <navigationItem key="navigationItem" id="ocu-Im-WSN">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="cart.fill" catalog="system" id="lMt-gZ-55G">
+                            <connections>
+                                <segue destination="k0T-wd-dRe" kind="unwind" unwindAction="unwindToCart:" id="E7O-1V-5yx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="descriptionLabel" destination="3Zv-p1-KMP" id="L81-mh-eXr"/>
                         <outlet property="mealImage" destination="npQ-3b-RtP" id="nWt-x5-B32"/>
@@ -761,7 +781,7 @@
                         <outlet property="quantityLabel" destination="xdW-rV-bOp" id="2fo-gd-ENI"/>
                         <outlet property="tableView" destination="Zw5-IX-62G" id="LX5-dM-wam"/>
                         <outlet property="totalLabel" destination="cL0-ve-zLe" id="EHO-ij-Sn4"/>
-                        <segue destination="k0T-wd-dRe" kind="unwind" identifier="unwindToMenu" unwindAction="unwindFromMeal:" id="wuG-4c-ZtC"/>
+                        <segue destination="k0T-wd-dRe" kind="unwind" identifier="unwindFromMealToMenu" unwindAction="unwindToMenu:" id="wuG-4c-ZtC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KN6-KY-ACY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1324,7 +1344,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="XCb-6z-9mQ"/>
+        <segue reference="DHK-HO-fuY"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
