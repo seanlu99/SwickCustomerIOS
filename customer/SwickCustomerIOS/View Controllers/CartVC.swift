@@ -18,6 +18,17 @@ class CartVC: UIViewController {
     @IBOutlet weak var paymentLabel: UILabel!
     @IBOutlet weak var paymentTextField: STPPaymentCardTextField!
     @IBOutlet weak var placeOrderButton: UIButton!
+    @IBAction func leaveRestaurant(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "Leaving Restaurant", message: "Your cart will be lost", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            scannedRestaurant = false
+            _ = self.navigationController?.popViewController(animated: true)
+          }))
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in }))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     let activityIndicator = UIActivityIndicatorView()
     

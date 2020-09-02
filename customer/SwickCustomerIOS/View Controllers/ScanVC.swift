@@ -129,6 +129,7 @@ class ScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             APIManager.shared.getRestaurant(restaurantId: restaurantId!) { json in
                 if (json["status"] == "success") {
                     self.restaurant = Restaurant(json: json["restaurant"])
+                    scannedRestaurant = true
                     self.performSegue(withIdentifier: "ScanToCart", sender: self)
                 }
                 else if (json["status"] == "restaurant_does_not_exist") {

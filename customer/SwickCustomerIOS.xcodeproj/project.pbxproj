@@ -38,6 +38,7 @@
 		14AA7844248486A200145D40 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA7843248486A200145D40 /* CategoryCell.swift */; };
 		14AA78482484C59900145D40 /* ScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA78472484C59900145D40 /* ScanVC.swift */; };
 		493DED219093BDB8CB940845 /* Pods_SwickCustomerIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971283499F2F6CCB9D24A97D /* Pods_SwickCustomerIOS.framework */; };
+		F2B4BE3E250045D500B47615 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B4BE3D250045D500B47615 /* TabBarVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		95E5BDAC5BCC78F8F1824B61 /* Pods-SwickCustomerIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwickCustomerIOS.debug.xcconfig"; path = "Target Support Files/Pods-SwickCustomerIOS/Pods-SwickCustomerIOS.debug.xcconfig"; sourceTree = "<group>"; };
 		971283499F2F6CCB9D24A97D /* Pods_SwickCustomerIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwickCustomerIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6DD97C655BA4FE3422DDED7 /* Pods-SwickCustomerIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwickCustomerIOS.release.xcconfig"; path = "Target Support Files/Pods-SwickCustomerIOS/Pods-SwickCustomerIOS.release.xcconfig"; sourceTree = "<group>"; };
+		F2B4BE3D250045D500B47615 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 				1495C74D246BDA0200F30ECB /* OrderVC.swift */,
 				1495C74F246BDA9F00F30ECB /* OrderDetailsVC.swift */,
 				1495C75E246CAB6600F30ECB /* AccountVC.swift */,
+				F2B4BE3D250045D500B47615 /* TabBarVC.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				1495C765246DD3C600F30ECB /* Restaurant.swift in Sources */,
 				1495C763246CB34C00F30ECB /* Constants.swift in Sources */,
 				1495C750246BDA9F00F30ECB /* OrderDetailsVC.swift in Sources */,
+				F2B4BE3E250045D500B47615 /* TabBarVC.swift in Sources */,
 				1495C761246CB2C200F30ECB /* APIManager.swift in Sources */,
 				14AA7838247B2D4100145D40 /* CustomizationCell.swift in Sources */,
 				1495C752246C770600F30ECB /* LoginVC.swift in Sources */,
