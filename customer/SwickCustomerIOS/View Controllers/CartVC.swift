@@ -18,17 +18,6 @@ class CartVC: UIViewController {
     @IBOutlet weak var paymentLabel: UILabel!
     @IBOutlet weak var paymentTextField: STPPaymentCardTextField!
     @IBOutlet weak var placeOrderButton: UIButton!
-    @IBAction func leaveRestaurant(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Leaving Restaurant", message: "Your cart will be lost", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default){_ in
-            (self.tabBarController as? TabBarVC)?.scannedRestaurant = false
-             self.navigationController?.popViewController(animated: true)
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) //, handler: { (action: UIAlertAction!) in })
-        alert.addAction(okAction)
-        alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
-    }
     
     let activityIndicator = UIActivityIndicatorView()
     
@@ -82,6 +71,18 @@ class CartVC: UIViewController {
             categoryVC.restaurant = restaurant
             categoryVC.cameFromCart = true
         }
+    }
+    
+    @IBAction func leaveRestaurant(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "Leaving restaurant", message: "Your cart will be lost", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default){_ in
+            (self.tabBarController as? TabBarVC)?.scannedRestaurant = false
+             self.navigationController?.popViewController(animated: true)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func placeOrder(_ sender: Any) {

@@ -279,7 +279,7 @@
                         <viewLayoutGuide key="safeArea" id="ZQJ-aA-jzf"/>
                     </view>
                     <navigationItem key="navigationItem" title="Cart" id="JsQ-jj-MDr">
-                        <barButtonItem key="leftBarButtonItem" title="Leave Restaurant" id="i1M-3v-X7s">
+                        <barButtonItem key="leftBarButtonItem" title="Leave restaurant" id="i1M-3v-X7s">
                             <connections>
                                 <action selector="leaveRestaurant:" destination="5bS-NI-N8V" id="qhQ-4G-hi9"/>
                             </connections>
