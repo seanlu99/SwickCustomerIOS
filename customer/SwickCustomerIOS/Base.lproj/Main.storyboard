@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -81,9 +81,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="tui-AN-kwz"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Scan" id="vWt-rk-U6u">
-                        <barButtonItem key="backBarButtonItem" title="Leave restaurant" id="i1M-3v-X7s"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Scan" id="vWt-rk-U6u"/>
                     <connections>
                         <segue destination="5bS-NI-N8V" kind="show" identifier="ScanToCart" id="fkH-8f-zJ3"/>
                     </connections>
@@ -280,7 +278,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZQJ-aA-jzf"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Cart" id="JsQ-jj-MDr"/>
+                    <navigationItem key="navigationItem" title="Cart" id="JsQ-jj-MDr">
+                        <barButtonItem key="leftBarButtonItem" title="Leave restaurant" id="i1M-3v-X7s">
+                            <connections>
+                                <action selector="leaveRestaurant:" destination="5bS-NI-N8V" id="qhQ-4G-hi9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="emptyLabel" destination="fbo-WB-v7J" id="F7G-XF-CcV"/>
                         <outlet property="paymentLabel" destination="P0e-PJ-NQf" id="4XJ-zl-gn9"/>
@@ -789,10 +793,10 @@
             </objects>
             <point key="canvasLocation" x="5117" y="-1084"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab BarVC-->
         <scene sceneID="urb-JC-NYg">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarController" id="rxd-xA-s1c" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" id="rxd-xA-s1c" customClass="TabBarVC" customModule="Swick" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="bKb-gn-W8S"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iLC-4i-d9A">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>

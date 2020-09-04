@@ -73,6 +73,18 @@ class CartVC: UIViewController {
         }
     }
     
+    @IBAction func leaveRestaurant(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "Leaving restaurant", message: "Your cart will be lost", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default){_ in
+            (self.tabBarController as? TabBarVC)?.scannedRestaurant = false
+             self.navigationController?.popViewController(animated: true)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func placeOrder(_ sender: Any) {
         // Set card parameters from payment text field
         let cardParams = STPCardParams()
