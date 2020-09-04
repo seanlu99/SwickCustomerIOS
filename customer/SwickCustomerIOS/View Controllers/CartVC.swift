@@ -20,13 +20,15 @@ class CartVC: UIViewController {
     @IBOutlet weak var placeOrderButton: UIButton!
     @IBAction func leaveRestaurant(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Leaving Restaurant", message: "Your cart will be lost", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-            scannedRestaurant = false
+        let okAction = UIAlertAction(title: "Ok", style: .default){_ in
+            (self.tabBarController as? TabBarVC)?.scannedRestaurant = false
             _ = self.navigationController?.popViewController(animated: true)
-          }))
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) //, handler: { (action: UIAlertAction!) in })
+        
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in }))
         self.present(alert, animated: true, completion: nil)
     }
     
