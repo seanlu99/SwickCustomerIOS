@@ -22,13 +22,11 @@ class CartVC: UIViewController {
         let alert = UIAlertController(title: "Leaving Restaurant", message: "Your cart will be lost", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default){_ in
             (self.tabBarController as? TabBarVC)?.scannedRestaurant = false
-            _ = self.navigationController?.popViewController(animated: true)
+             self.navigationController?.popViewController(animated: true)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) //, handler: { (action: UIAlertAction!) in })
-        
         alert.addAction(okAction)
         alert.addAction(cancelAction)
-
         self.present(alert, animated: true, completion: nil)
     }
     
