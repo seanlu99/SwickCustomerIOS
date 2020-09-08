@@ -130,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				1495C751246C770600F30ECB /* LoginVC.swift */,
+				F2B4BE3D250045D500B47615 /* TabBarVC.swift */,
 				1495C73E246B935800F30ECB /* RestaurantVC.swift */,
 				14AA78412484868700145D40 /* CategoryVC.swift */,
 				1495C743246B9C9300F30ECB /* MenuVC.swift */,
@@ -139,7 +140,6 @@
 				1495C74D246BDA0200F30ECB /* OrderVC.swift */,
 				1495C74F246BDA9F00F30ECB /* OrderDetailsVC.swift */,
 				1495C75E246CAB6600F30ECB /* AccountVC.swift */,
-				F2B4BE3D250045D500B47615 /* TabBarVC.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";

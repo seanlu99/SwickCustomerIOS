@@ -74,7 +74,7 @@ class OrderVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrderCell", for: indexPath) as! OrderCell
         let order = orders[indexPath.row]
         cell.restaurantNameLabel.text = order.restaurantName
-        cell.timeLabel.text = order.time
+        cell.timeLabel.text = Helper.convertDateToString(order.time)
         cell.statusLabel.text = order.status
         return cell
     }

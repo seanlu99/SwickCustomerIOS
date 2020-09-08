@@ -13,13 +13,13 @@ class Order {
     var id: Int
     var restaurantName: String
     var status: String
-    var time: String
+    var time: Date
     
     init(json: JSON) {
         self.id = json["id"].int ?? -1
         self.restaurantName = json["restaurant"]["name"].string ?? ""
         self.status = json["status"].string ?? ""
-        self.time = json["order_time"].string ?? ""
+        self.time = Helper.convertStringToDate(json["order_time"].string ?? "")
     }
 }
 
