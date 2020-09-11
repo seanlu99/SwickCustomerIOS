@@ -29,7 +29,7 @@ class OrderVC: UITableViewController {
     
     // Load restaurant data from API call to table view
     func loadOrders() {
-        APIManager.shared.getOrders { json in
+        API.getOrders { json in
             if (json["status"] == "success") {
                 self.orders = []
                 // orderList = array of JSON orders
@@ -44,7 +44,7 @@ class OrderVC: UITableViewController {
                 self.tableView.reloadData()
             }
             else {
-                Helper.alert("Error", "Failed to get orders. Please click refresh to try again.", self)
+                Helper.alertError(self, "Failed to get orders. Please click refresh to try again.")
             }
         }
     }

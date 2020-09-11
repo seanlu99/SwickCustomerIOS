@@ -25,7 +25,7 @@ class RestaurantVC: UIViewController {
     
     // Load restaurant data from API call to table view
     func loadRestaurants() {
-        APIManager.shared.getRestaurants{ json in
+        API.getRestaurants{ json in
             if (json["status"] == "success") {
                 self.restaurants = []
                 // restlist = array of JSON restaurants
@@ -40,7 +40,7 @@ class RestaurantVC: UIViewController {
                 self.tableView.reloadData()
             }
             else {
-                Helper.alert("Error", "Failed to get restaurants. Please restart app and try again.", self)
+                Helper.alertError(self, "Failed to get restaurants. Please restart app and try again.")
             }
         }
     }

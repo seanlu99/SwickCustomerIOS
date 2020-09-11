@@ -6,7 +6,6 @@ target 'SwickServerIOS' do
   use_frameworks!
 
   # Pods for SwickCustomerIOS
-  pod 'FBSDKLoginKit'
   pod 'Alamofire'
   pod 'SwiftyJSON'
 

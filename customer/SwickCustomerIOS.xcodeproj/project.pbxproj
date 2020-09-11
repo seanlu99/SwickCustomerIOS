@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		147BFFEB250AC9D2006985EF /* LoginEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BFFEA250AC9D2006985EF /* LoginEmailVC.swift */; };
+		147BFFED250AC9E3006985EF /* LoginCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BFFEC250AC9E3006985EF /* LoginCodeVC.swift */; };
 		1495C72B246B79EF00F30ECB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C72A246B79EF00F30ECB /* AppDelegate.swift */; };
 		1495C732246B79EF00F30ECB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1495C730246B79EF00F30ECB /* Main.storyboard */; };
 		1495C734246B79F100F30ECB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1495C733246B79F100F30ECB /* Assets.xcassets */; };
@@ -20,7 +22,7 @@
 		1495C752246C770600F30ECB /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C751246C770600F30ECB /* LoginVC.swift */; };
 		1495C75A246C9BE900F30ECB /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C759246C9BE900F30ECB /* Helper.swift */; };
 		1495C75F246CAB6600F30ECB /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C75E246CAB6600F30ECB /* AccountVC.swift */; };
-		1495C761246CB2C200F30ECB /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C760246CB2C200F30ECB /* APIManager.swift */; };
+		1495C761246CB2C200F30ECB /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C760246CB2C200F30ECB /* API.swift */; };
 		1495C763246CB34C00F30ECB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C762246CB34C00F30ECB /* Constants.swift */; };
 		1495C765246DD3C600F30ECB /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C764246DD3C600F30ECB /* Restaurant.swift */; };
 		1495C76A246DEEA000F30ECB /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C769246DEEA000F30ECB /* RestaurantCell.swift */; };
@@ -42,6 +44,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		147BFFEA250AC9D2006985EF /* LoginEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEmailVC.swift; sourceTree = "<group>"; };
+		147BFFEC250AC9E3006985EF /* LoginCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCodeVC.swift; sourceTree = "<group>"; };
 		1495C727246B79EF00F30ECB /* Swick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swick.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1495C72A246B79EF00F30ECB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1495C731246B79EF00F30ECB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -57,7 +61,7 @@
 		1495C751246C770600F30ECB /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		1495C759246C9BE900F30ECB /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		1495C75E246CAB6600F30ECB /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
-		1495C760246CB2C200F30ECB /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		1495C760246CB2C200F30ECB /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		1495C762246CB34C00F30ECB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1495C764246DD3C600F30ECB /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		1495C769246DEEA000F30ECB /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCell.swift; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 			isa = PBXGroup;
 			children = (
 				1495C751246C770600F30ECB /* LoginVC.swift */,
+				147BFFEA250AC9D2006985EF /* LoginEmailVC.swift */,
+				147BFFEC250AC9E3006985EF /* LoginCodeVC.swift */,
 				F2B4BE3D250045D500B47615 /* TabBarVC.swift */,
 				1495C73E246B935800F30ECB /* RestaurantVC.swift */,
 				14AA78412484868700145D40 /* CategoryVC.swift */,
@@ -148,7 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				1495C759246C9BE900F30ECB /* Helper.swift */,
-				1495C760246CB2C200F30ECB /* APIManager.swift */,
+				1495C760246CB2C200F30ECB /* API.swift */,
 				1495C762246CB34C00F30ECB /* Constants.swift */,
 				14AA783B247B480A00145D40 /* Checkbox.swift */,
 			);
@@ -320,6 +326,7 @@
 				1495C75A246C9BE900F30ECB /* Helper.swift in Sources */,
 				1495C77E246F6BE600F30ECB /* OrderDetailsCell.swift in Sources */,
 				1495C72B246B79EF00F30ECB /* AppDelegate.swift in Sources */,
+				147BFFEB250AC9D2006985EF /* LoginEmailVC.swift in Sources */,
 				1495C744246B9C9300F30ECB /* MenuVC.swift in Sources */,
 				1495C770246DFD8B00F30ECB /* Meal.swift in Sources */,
 				14AA783C247B480A00145D40 /* Checkbox.swift in Sources */,
@@ -328,7 +335,8 @@
 				1495C763246CB34C00F30ECB /* Constants.swift in Sources */,
 				1495C750246BDA9F00F30ECB /* OrderDetailsVC.swift in Sources */,
 				F2B4BE3E250045D500B47615 /* TabBarVC.swift in Sources */,
-				1495C761246CB2C200F30ECB /* APIManager.swift in Sources */,
+				1495C761246CB2C200F30ECB /* API.swift in Sources */,
+				147BFFED250AC9E3006985EF /* LoginCodeVC.swift in Sources */,
 				14AA7838247B2D4100145D40 /* CustomizationCell.swift in Sources */,
 				1495C752246C770600F30ECB /* LoginVC.swift in Sources */,
 				1495C75F246CAB6600F30ECB /* AccountVC.swift in Sources */,

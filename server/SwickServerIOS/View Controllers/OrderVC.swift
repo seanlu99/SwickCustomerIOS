@@ -61,7 +61,7 @@ class OrderVC: UIViewController {
             status = 2
         }
         
-        APIManager.shared.getOrders(status: status) { json in
+        API.getOrders(status) { json in
             if (json["status"] == "success") {
                 self.orders = []
                 // orderList = array of JSON orders
@@ -85,7 +85,7 @@ class OrderVC: UIViewController {
                 self.noRestaurantLabel.isHidden = false
             }
             else {
-                Helper.alert("Error", "Failed to get orders. Please click refresh to try again.", self)
+                Helper.alertError(self, "Failed to get orders. Please click refresh to try again.")
             }
         }
     }
@@ -99,14 +99,14 @@ class OrderVC: UIViewController {
             status = 2
         }
         
-        APIManager.shared.updateOrderStatus(orderId: orderId, status: status) { json in
+        API.updateOrderStatus(orderId, status) { json in
             if (json["status"] == "success") {
                 // Reload table view after updating order
                 self.loadOrders()
                 self.tableView.reloadData()
             }
             else {
-                Helper.alert("Error", "Failed to update order. Please restart app and try again.", self)
+                Helper.alertError(self, "Failed to update order. Please restart app and try again.")
             }
         }
     }

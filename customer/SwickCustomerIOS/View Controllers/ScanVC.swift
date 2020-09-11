@@ -98,8 +98,6 @@ class ScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             found(code: stringValue)
         }
-
-        //dismiss(animated: true)
     }
     
     // When QR code is found
@@ -126,7 +124,7 @@ class ScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         }
         else {
             // Load restaurant from API call
-            APIManager.shared.getRestaurant(restaurantId: restaurantId!) { json in
+            API.getRestaurant(restaurantId!) { json in
                 if (json["status"] == "success") {
                     self.restaurant = Restaurant(json: json["restaurant"])
                     (self.tabBarController as? TabBarVC)?.scannedRestaurant = true
@@ -136,7 +134,7 @@ class ScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
                     self.present(alertView, animated: true, completion: nil)
                 }
                 else {
-                    Helper.alert("Error", "Failed to get restaurant. Please restart app and try again.", self)
+                    Helper.alertError(self, "Failed to get restaurant. Please restart app and try again.")
                 }
             }
         }

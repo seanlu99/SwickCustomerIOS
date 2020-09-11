@@ -43,7 +43,7 @@ class OrderDetailsVC: UIViewController {
         timeLabel.text = Helper.convertDateToString(order.time)
         
         // Load order details from API call
-        APIManager.shared.getOrderDetails(orderId: order.id) { json in
+        API.getOrderDetails(order.id) { json in
             if (json["status"] == "success") {
                 self.orderDetails = OrderDetails(json: json["order_details"])
                 self.statusLabel.text = self.orderDetails.status
@@ -54,7 +54,7 @@ class OrderDetailsVC: UIViewController {
                 self.tableView.reloadData()
             }
             else {
-                Helper.alert("Error", "Failed to get order details. Please click refresh to try again.", self)
+                Helper.alertError(self, "Failed to get order details. Please click refresh to try again.")
             }
         }
     }

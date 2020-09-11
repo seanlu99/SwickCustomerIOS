@@ -7,50 +7,21 @@
 //
 
 import UIKit
-import FBSDKLoginKit
 
-// Add this to the body
 class LoginVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // If user is already logged in
-        // Switch root view
-        if (AccessToken.current != nil) {
-            switchRootView()
+        
+        // If user is already logged in switch root view
+        if (UserDefaults.standard.string(forKey: "token") != nil) {
+            Helper.switchToTabBar()
         }
-    }
-    
-    // When Facebook login button is clicked
-    @IBAction func fbLogin(_ sender: Any) {
-        // If user is not logged in
-        // Login with FB LoginManager
-        // Then get Django access token from server
-        // Then switch root view
-        LoginManager().logIn(
-            permissions: ["public_profile", "email"],
-            from: self,
-            handler: { (result, error) in
-                // If Facebook login successful
-                if (error == nil && AccessToken.current != nil) {
-                    APIManager.shared.getToken() {
-                        // If Django access token successfully obtained
-                        if (APIManager.shared.getAccessToken() != nil) {
-                            self.switchRootView()
-                        }
-                        else {
-                            Helper.alert("Error", "Failed to login. Please try again.", self)
-                        }
-                    }
-                }
-        })
-    }
-    
-    // Switch root view to tab bar controller
-    func switchRootView() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = tabBarController
+        
+        // Set navigation bar color and make border disappear
+        let navigationBar = navigationController?.navigationBar
+        navigationBar?.barTintColor = Helper.hexColor(0xBAD9F5)
+        navigationBar?.setBackgroundImage(UIImage(), for: .default)
+        navigationBar?.shadowImage = UIImage()
     }
 }

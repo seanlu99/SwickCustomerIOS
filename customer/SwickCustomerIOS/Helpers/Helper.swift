@@ -26,18 +26,6 @@ class Helper {
         }.resume()
     }
     
-    // Show alert
-    static func alert(_ title: String, _ message: String, _ view: UIViewController) {
-        let alertView = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-        let okAction = UIAlertAction(title: "Ok", style: .default)
-        alertView.addAction(okAction)
-        view.present(alertView, animated: true, completion: nil)
-    }
-    
     // Format double as price
     static func formatPrice(_ price: Double) -> String {
         return String(format: "$%.2f", price)
@@ -65,5 +53,41 @@ class Helper {
             blue: CGFloat(hex & 0x0000FF) / 255.0,
             alpha: CGFloat(1.0)
         )
+    }
+    
+    // Test if email is valid
+    static func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
+    
+    // Show error alert
+    static func alertError(_ view: UIViewController,
+                           _ message: String = "Bad request. Please try again.") {
+        let alertView = UIAlertController(
+            title: "Error",
+            message: message,
+            preferredStyle: .alert
+        )
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        alertView.addAction(okAction)
+        view.present(alertView, animated: true, completion: nil)
+    }
+    
+    // Switch root view to tab bar controller
+    static func switchToTabBar() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let tabBarVC = storyboard.instantiateViewController(withIdentifier: "TabBarVC") as! UITabBarController
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = tabBarVC
+    }
+    
+    // Switch root view to login navigation controller
+    static func switchToLogin() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let loginNC = storyboard.instantiateViewController(withIdentifier: "LoginNC") as! UINavigationController
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = loginNC
     }
 }

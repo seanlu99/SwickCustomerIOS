@@ -97,11 +97,11 @@ class CartVC: UIViewController {
         STPAPIClient.shared().createToken(withCard: cardParams) {(token, error) in
             // If Stripe error
             if (error != nil) {
-                Helper.alert("Error", "Failed to validate card. Please try again", self)
+                Helper.alertError(self, "Failed to validate card. Please try again")
             }
             // If card is validated
             else if let stripeToken = token?.tokenId {
-                APIManager.shared.placeOrder(restaurantId: self.restaurant.id, table: self.table, stripeToken: stripeToken) { json in
+                API.placeOrder(self.restaurant.id, self.table, stripeToken) { json in
                     if (json["status"] == "success") {
                         // Reset cart
                         Cart.shared.reset()
@@ -121,7 +121,7 @@ class CartVC: UIViewController {
                         self.present(alertView, animated: true, completion: nil)
                     }
                     else {
-                        Helper.alert("Error", "Failed to place order. Please try again.", self)
+                        Helper.alertError(self, "Failed to place order. Please try again.")
                     }
                 }
             }

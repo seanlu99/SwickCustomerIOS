@@ -35,7 +35,7 @@ class CategoryVC: UIViewController {
     
     // Load categories data from API call to table view
     func loadCategories() {
-        APIManager.shared.getCategories(restaurantId: restaurant.id) { json in
+        API.getCategories(restaurant.id) { json in
             if (json["status"] == "success") {
                 self.categories = ["All"]
                 // mealList = array of JSON meal
@@ -49,7 +49,7 @@ class CategoryVC: UIViewController {
                 self.tableView.reloadData()
             }
             else {
-                Helper.alert("Error", "Failed to get categories. Please restart app and try again.", self)
+                Helper.alertError(self, "Failed to get categories. Please restart app and try again.")
             }
         }
     }

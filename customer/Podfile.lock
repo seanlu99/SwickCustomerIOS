@@ -1,39 +1,24 @@
 PODS:
   - Alamofire (5.1.0)
-  - FBSDKCoreKit (6.5.2):
-    - FBSDKCoreKit/Basics (= 6.5.2)
-    - FBSDKCoreKit/Core (= 6.5.2)
-  - FBSDKCoreKit/Basics (6.5.2)
-  - FBSDKCoreKit/Core (6.5.2):
-    - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (6.5.2):
-    - FBSDKLoginKit/Login (= 6.5.2)
-  - FBSDKLoginKit/Login (6.5.2):
-    - FBSDKCoreKit (~> 6.5.2)
   - Stripe (19.2.0)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - Alamofire
-  - FBSDKLoginKit
   - Stripe
   - SwiftyJSON
 
 SPEC REPOS:
   trunk:
     - Alamofire
-    - FBSDKCoreKit
-    - FBSDKLoginKit
     - Stripe
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
-  FBSDKCoreKit: ada5c8a05188daefc9addb985c52b8a1b26da519
-  FBSDKLoginKit: caa165495afa29a12324cb2307fe6e5b33783142
   Stripe: d481c2dab9a892fd923f097f854661217f70dc7f
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 5b9a1a7e8e9cf5b8bae88817642f3fe919b8e59c
+PODFILE CHECKSUM: aa4ab6aa20aedb9e1a9dc1544d8fd445f0ce3b83
 
 COCOAPODS: 1.9.3

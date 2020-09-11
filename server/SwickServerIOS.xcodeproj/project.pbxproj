@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		147BFFEF250B65EB006985EF /* LoginEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BFFEE250B65EB006985EF /* LoginEmailVC.swift */; };
+		147BFFF1250B6645006985EF /* LoginCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BFFF0250B6645006985EF /* LoginCodeVC.swift */; };
 		14F5853124E4DD9100DAD96D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5853024E4DD9100DAD96D /* AppDelegate.swift */; };
 		14F5853824E4DD9100DAD96D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14F5853624E4DD9100DAD96D /* Main.storyboard */; };
 		14F5853A24E4DD9300DAD96D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14F5853924E4DD9300DAD96D /* Assets.xcassets */; };
 		14F5853D24E4DD9300DAD96D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14F5853B24E4DD9300DAD96D /* LaunchScreen.storyboard */; };
 		14F5854624E4E24100DAD96D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5854524E4E24100DAD96D /* LoginVC.swift */; };
-		14F5854924E4E28700DAD96D /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5854824E4E28700DAD96D /* APIManager.swift */; };
+		14F5854924E4E28700DAD96D /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5854824E4E28700DAD96D /* API.swift */; };
 		14F5854B24E4E2A900DAD96D /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5854A24E4E2A900DAD96D /* Helper.swift */; };
 		14F5854D24E4E30D00DAD96D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5854C24E4E30D00DAD96D /* Constants.swift */; };
 		14F5854F24E4E4E600DAD96D /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5854E24E4E4E600DAD96D /* AccountVC.swift */; };
@@ -30,6 +32,8 @@
 
 /* Begin PBXFileReference section */
 		076E0DB4397FA8B7A7D7B8AD /* Pods_SwickServerIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwickServerIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		147BFFEE250B65EB006985EF /* LoginEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEmailVC.swift; sourceTree = "<group>"; };
+		147BFFF0250B6645006985EF /* LoginCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCodeVC.swift; sourceTree = "<group>"; };
 		14F5852D24E4DD9100DAD96D /* SwickServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwickServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14F5853024E4DD9100DAD96D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14F5853724E4DD9100DAD96D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -37,7 +41,7 @@
 		14F5853C24E4DD9300DAD96D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14F5853E24E4DD9300DAD96D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14F5854524E4E24100DAD96D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
-		14F5854824E4E28700DAD96D /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		14F5854824E4E28700DAD96D /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		14F5854A24E4E2A900DAD96D /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		14F5854C24E4E30D00DAD96D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		14F5854E24E4E4E600DAD96D /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
@@ -104,6 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				14F5854524E4E24100DAD96D /* LoginVC.swift */,
+				147BFFEE250B65EB006985EF /* LoginEmailVC.swift */,
+				147BFFF0250B6645006985EF /* LoginCodeVC.swift */,
 				14F5856424E6178000DAD96D /* CookNC.swift */,
 				14F5856624E6179E00DAD96D /* SendNC.swift */,
 				14F5856824E617AE00DAD96D /* DoneNC.swift */,
@@ -118,7 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				14F5854A24E4E2A900DAD96D /* Helper.swift */,
-				14F5854824E4E28700DAD96D /* APIManager.swift */,
+				14F5854824E4E28700DAD96D /* API.swift */,
 				14F5854C24E4E30D00DAD96D /* Constants.swift */,
 				14F5856A24E7503200DAD96D /* Checkbox.swift */,
 			);
@@ -274,13 +280,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14F5854924E4E28700DAD96D /* APIManager.swift in Sources */,
+				147BFFF1250B6645006985EF /* LoginCodeVC.swift in Sources */,
+				14F5854924E4E28700DAD96D /* API.swift in Sources */,
 				14F5855524E5B65E00DAD96D /* OrderVC.swift in Sources */,
 				14F5856924E617AE00DAD96D /* DoneNC.swift in Sources */,
 				14F5856124E6094100DAD96D /* OrderDetailsCell.swift in Sources */,
 				14F5855A24E5BCE900DAD96D /* OrderCell.swift in Sources */,
 				14F5854B24E4E2A900DAD96D /* Helper.swift in Sources */,
 				14F5854F24E4E4E600DAD96D /* AccountVC.swift in Sources */,
+				147BFFEF250B65EB006985EF /* LoginEmailVC.swift in Sources */,
 				14F5855C24E5C27500DAD96D /* OrderDetailsVC.swift in Sources */,
 				14F5856724E6179E00DAD96D /* SendNC.swift in Sources */,
 				14F5855F24E5C2C500DAD96D /* Order.swift in Sources */,

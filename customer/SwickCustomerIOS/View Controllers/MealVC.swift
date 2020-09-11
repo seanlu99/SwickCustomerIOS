@@ -42,7 +42,7 @@ class MealVC: UIViewController {
         updateTotal()
         
         // Load customizations of meal from API call
-        APIManager.shared.getMeal(mealId: meal.id) { json in
+        API.getMeal(meal.id) { json in
             if (json["status"] == "success") {
                 self.customizations = []
                 // customizationList = array of JSON customizations
@@ -57,7 +57,7 @@ class MealVC: UIViewController {
                 self.tableView.reloadData()
             }
             else {
-                Helper.alert("Error", "Failed to get meal. Please restart app and try again.", self)
+                Helper.alertError(self, "Failed to get meal. Please restart app and try again.")
             }
         }
     }
@@ -132,7 +132,7 @@ class MealVC: UIViewController {
         
         // If minimum customizations not selected
         else {
-            Helper.alert("Error", "Please select mininum number of options.", self)
+            Helper.alertError(self, "Please select mininum number of options.")
         }
     }
 }

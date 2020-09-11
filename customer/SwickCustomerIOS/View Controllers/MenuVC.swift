@@ -37,7 +37,7 @@ class MenuVC: UIViewController {
     
     // Load restaurant data from API call to table view
     func loadMeals() {
-        APIManager.shared.getMenu(restaurantId: restaurant.id, category: category) { json in
+        API.getMenu(restaurant.id, category) { json in
             if (json["status"] == "success") {
                 self.menu = []
                 // mealList = array of JSON meals
@@ -52,7 +52,7 @@ class MenuVC: UIViewController {
                 self.tableView.reloadData()
             }
             else {
-                Helper.alert("Error", "Failed to get menu. Please restart app and try again.", self)
+                Helper.alertError(self, "Failed to get menu. Please restart app and try again.")
             }
         }
     }
