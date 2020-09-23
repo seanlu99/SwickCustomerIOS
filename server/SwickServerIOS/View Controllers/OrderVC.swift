@@ -138,7 +138,7 @@ extension OrderVC: UITableViewDelegate, UITableViewDataSource {
         let order = orders[indexPath.row]
         cell.customerNameLabel.text = order.customerName
         cell.tableLabel.text = order.table
-        cell.timeLabel.text = order.time
+        cell.timeLabel.text = Helper.convertDateToString(order.time)
         cell.checkbox.row = indexPath.row
         
         
@@ -154,5 +154,10 @@ extension OrderVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Make grey row selection disappear
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

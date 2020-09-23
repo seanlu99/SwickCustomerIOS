@@ -43,7 +43,7 @@ class OrderDetailsVC: UIViewController {
         // Load time into view with object from previous view
         customerLabel.text = order.customerName
         tableLabel.text = order.table
-        timeLabel.text = order.time
+        timeLabel.text = Helper.convertDateToString(order.time)
         
         // Load order details from API call
         API.getOrderDetails(order.id) { json in
