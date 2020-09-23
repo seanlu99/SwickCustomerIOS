@@ -13,9 +13,9 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // If user is already logged in switch root view
+        // If user is already logged in, switch to name VC
         if (UserDefaults.standard.string(forKey: "token") != nil) {
-            Helper.switchToTabBar()
+            Helper.switchRootView("NameVC")
         }
         
         // Set navigation bar color and make border disappear

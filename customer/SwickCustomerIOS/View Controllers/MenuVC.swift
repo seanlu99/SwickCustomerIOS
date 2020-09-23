@@ -115,6 +115,11 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuCell", for: indexPath) as! MenuCell
         let meal: Meal
+        
+        // Disable grey row selection if did not come from cart
+        if !cameFromCart {
+            cell.selectionStyle = .none
+        }
             
         // If search bar is being used
         if searchBar.text != "" {
@@ -135,8 +140,10 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
     
     // On cell click
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (cameFromCart) {
+        if cameFromCart {
             self.performSegue(withIdentifier: "MenuToMeal", sender: self)
+            // Make grey row selection disappear
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
 }

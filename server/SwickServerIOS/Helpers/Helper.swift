@@ -61,19 +61,11 @@ class Helper {
         view.present(alertView, animated: true, completion: nil)
     }
     
-    // Switch root view to tab bar controller
-    static func switchToTabBar() {
+    // Switch root view
+    static func switchRootView(_ identifier: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let tabBarVC = storyboard.instantiateViewController(withIdentifier: "TabBarVC") as! UITabBarController
+        let tabBarVC = storyboard.instantiateViewController(withIdentifier: identifier)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.window?.rootViewController = tabBarVC
-    }
-    
-    // Switch root view to login navigation controller
-    static func switchToLogin() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let loginNC = storyboard.instantiateViewController(withIdentifier: "LoginNC") as! UINavigationController
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = loginNC
     }
 }

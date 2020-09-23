@@ -38,9 +38,9 @@ class LoginCodeVC: UIViewController {
             else {
                 UserDefaults.standard.set(token, forKey: "token")
                 
-                // Create account on backend and switch root views
+                // Create acocunt on backend and switch to name VC
                 API.createAccount { json in
-                    Helper.switchToTabBar()
+                    Helper.switchRootView("NameVC")
                 }
             }
         }
