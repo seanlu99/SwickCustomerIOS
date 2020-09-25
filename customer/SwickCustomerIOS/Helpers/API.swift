@@ -108,7 +108,7 @@ class API {
     }
     
     // Place order
-    static func placeOrder(_ restaurantId: Int, _ table: Int, _ stripeToken: String, completion: @escaping (JSON) -> Void) {
+    static func placeOrder(_ restaurantId: Int, _ table: Int, _ methodId: String, completion: @escaping (JSON) -> Void) {
         let path = "api/customer/place_order/"
         
         // Build items array
@@ -149,7 +149,7 @@ class API {
                 "restaurant_id": restaurantId,
                 "table": table,
                 "order_items": itemsString ?? "",
-                "stripe_token": stripeToken
+                "payment_method_id": methodId
             ]
             authRequest(path, method: .post, parameters: params, completion: completion)
         }
@@ -174,5 +174,22 @@ class API {
     static func getUserInfo(completion: @escaping (JSON) -> Void) {
         let path = "api/customer/get_info/"
         authRequest(path, completion: completion)
+    }
+    
+    static func createSetupIntent(completion: @escaping (JSON) -> Void) {
+        let path = "api/customer/setup_card/"
+        authRequest(path, completion: completion)
+    }
+    
+    static func getUserCards(completion: @escaping (JSON) -> Void) {
+        let path = "api/customer/get_cards/"
+        authRequest(path, completion: completion)
+    }
+    
+    static func removeUserCard(_ methodId: String, completion: @escaping (JSON) -> Void) {
+        let path = "api/customer/remove_card/"
+        let params =
+            ["payment_method_id": methodId]
+        authRequest(path, method: .post, parameters: params,completion: completion)
     }
 }

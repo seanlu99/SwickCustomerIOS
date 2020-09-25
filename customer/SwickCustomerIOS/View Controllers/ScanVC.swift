@@ -134,7 +134,7 @@ class ScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
                     self.present(alertView, animated: true, completion: nil)
                 }
                 else {
-                    Helper.alertError(self, "Failed to get restaurant. Please restart app and try again.")
+                    Helper.alert(self, message: "Failed to get restaurant. Please restart app and try again.")
                 }
             }
         }

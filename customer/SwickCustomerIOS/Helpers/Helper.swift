@@ -62,11 +62,12 @@ class Helper {
         return emailPred.evaluate(with: email)
     }
     
-    // Show error alert
-    static func alertError(_ view: UIViewController,
-                           _ message: String = "Bad request. Please try again.") {
+    // Show alert
+    static func alert(_ view: UIViewController,
+                        title: String = "Error",
+                        message: String = "Bad request. Please try again.") {
         let alertView = UIAlertController(
-            title: "Error",
+            title: title,
             message: message,
             preferredStyle: .alert
         )

@@ -7,11 +7,18 @@
 //
 
 import UIKit
+//remove this and next line
+import SwiftyJSON
+import Stripe
 
 class AccountVC: UIViewController {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
+
+    override func viewDidAppear(_ animated: Bool) {
+        //mock_calls()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +33,24 @@ class AccountVC: UIViewController {
                 self.emailLabel.text = json["email"].string
             }
             else {
-                Helper.alertError(self, "Failed to get account info. Please restart app and try again.")
+                Helper.alert(self, message: "Failed to get account info. Please restart app and try again.")
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AccountToPaymentMethods" {
+            let paymentMethodsVC = segue.destination as! PaymentMethodsVC
+            paymentMethodsVC.previousView = "AccountVC"
         }
     }
     
     @IBAction func logout(_ sender: Any) {
         UserDefaults.standard.removeObject(forKey: "token")
         Helper.switchToLogin()
+    }
+    
+    @IBAction func manageCards(_ sender: Any) {
+        self.performSegue(withIdentifier: "AccountToPaymentMethods", sender: self)
     }
 }

@@ -57,7 +57,7 @@ class MealVC: UIViewController {
                 self.tableView.reloadData()
             }
             else {
-                Helper.alertError(self, "Failed to get meal. Please restart app and try again.")
+                Helper.alert(self, message: "Failed to get meal. Please restart app and try again.")
             }
         }
     }
@@ -132,7 +132,7 @@ class MealVC: UIViewController {
         
         // If minimum customizations not selected
         else {
-            Helper.alertError(self, "Please select mininum number of options.")
+            Helper.alert(self, message: "Please select mininum number of options.")
         }
     }
 }

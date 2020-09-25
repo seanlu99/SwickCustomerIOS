@@ -15,9 +15,8 @@ class CartVC: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var emptyLabel: UILabel!
-    @IBOutlet weak var paymentLabel: UILabel!
-    @IBOutlet weak var paymentTextField: STPPaymentCardTextField!
     @IBOutlet weak var placeOrderButton: UIButton!
+    @IBOutlet weak var selectPaymentButton: UIButton!
     
     let activityIndicator = UIActivityIndicatorView()
     
@@ -25,10 +24,11 @@ class CartVC: UIViewController {
     var restaurant: Restaurant!
     // Table scanned in previous view
     var table: Int!
+    // Selected payment method
+    var card: Card!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Enable dynamic table view cell height
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 60
@@ -37,6 +37,7 @@ class CartVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        formatPaymentButton()
         toggleViews()
     }
     
@@ -46,9 +47,8 @@ class CartVC: UIViewController {
         if Cart.shared.items.count == 0 {
             totalLabel.isHidden = true
             totalPriceLabel.isHidden = true
-            paymentLabel.isHidden = true
-            paymentTextField.isHidden = true
             placeOrderButton.isHidden = true
+            selectPaymentButton.isHidden = true
             emptyLabel.isHidden = false
         }
         // If there are meals in cart
@@ -56,11 +56,26 @@ class CartVC: UIViewController {
             totalLabel.isHidden = false
             totalPriceLabel.isHidden = false
             totalPriceLabel.text = Cart.shared.getTotal()
-            paymentLabel.isHidden = false
-            paymentTextField.isHidden = false
             placeOrderButton.isHidden = false
-            emptyLabel.isHidden = true
+            selectPaymentButton.isHidden = false
+            emptyLabel.isHidden = true 
         }
+    }
+    
+    // Format payment button to show either "select payment" or card
+    func formatPaymentButton(){
+        var brandImage: UIImage?
+        var cardInfo: String?
+         
+        if let c = card {
+            brandImage = STPImageLibrary.brandImage(for: STPCard.brand(from: c.brand))
+            cardInfo = "  \(c.brand) \(c.last4)".capitalized
+        }
+        else {
+            cardInfo = "SELECT PAYMENT"
+        }
+        selectPaymentButton.setTitle(cardInfo, for: .normal)
+        selectPaymentButton.setImage(brandImage?.withRenderingMode(.alwaysOriginal), for: .normal)
     }
     
     // Send restaurant object to categories VC and set cameFromCart flag
@@ -70,6 +85,10 @@ class CartVC: UIViewController {
             let categoryVC = segue.destination as! CategoryVC
             categoryVC.restaurant = restaurant
             categoryVC.cameFromCart = true
+        }
+        if segue.identifier == "CartToPaymentMethods" {
+            let paymentMethodsVC = segue.destination as! PaymentMethodsVC
+            paymentMethodsVC.previousView = "CartVC"
         }
     }
     
@@ -86,48 +105,59 @@ class CartVC: UIViewController {
     }
     
     @IBAction func placeOrder(_ sender: Any) {
-        // Set card parameters from payment text field
-        let cardParams = STPCardParams()
-        cardParams.number = self.paymentTextField.cardNumber
-        cardParams.expMonth = self.paymentTextField.expirationMonth
-        cardParams.expYear = self.paymentTextField.expirationYear
-        cardParams.cvc = self.paymentTextField.cvc
-        
-        // Try to validate credit card from Stripe
-        STPAPIClient.shared().createToken(withCard: cardParams) {(token, error) in
-            // If Stripe error
-            if (error != nil) {
-                Helper.alertError(self, "Failed to validate card. Please try again")
-            }
-            // If card is validated
-            else if let stripeToken = token?.tokenId {
-                API.placeOrder(self.restaurant.id, self.table, stripeToken) { json in
-                    if (json["status"] == "success") {
-                        // Reset cart
-                        Cart.shared.reset()
-                        self.toggleViews()
-                        
-                        // Show alert with success
-                        // "Go to orders" button segues to orders page
-                        let alertView = UIAlertController(
-                            title: "Success",
-                            message: "Your order has been placed.",
-                            preferredStyle: .alert
-                        )
-                        let goToOrders = UIAlertAction(title: "Go to orders", style: .default) { _ in
-                            self.performSegue(withIdentifier: "unwindFromCartToOrder", sender: self)
+        if(card == nil){
+            Helper.alert(self, message: "Please choose a payment method")
+        }
+        else{
+            API.placeOrder(self.restaurant.id, self.table, self.card.methodId) { json in
+                if (json["status"] == "success") {
+                    // Retrieve client secret from response
+                    let paymentIntentClientSecret = json["client_secret"].rawString() ?? ""
+                    let paymentIntentParams = STPPaymentIntentParams(clientSecret: paymentIntentClientSecret)
+                    let paymentHandler = STPPaymentHandler.shared()
+                    
+                    // Confirm payment and popup response depending on return status of payment handler
+                    paymentHandler.confirmPayment(withParams: paymentIntentParams, authenticationContext: self) { (status, paymentIntent, error) in
+                        switch (status) {
+                        case .failed:
+                            Helper.alert(self, title: "Payment failed", message: error?.localizedDescription ?? "")
+                            break
+                        case .canceled:
+                            Helper.alert(self, title: "Payment canceled", message: error?.localizedDescription ?? "")
+                            break
+                        case .succeeded:
+                            // Reset cart
+                            Cart.shared.reset()
+                            self.toggleViews()
+                            // Show alert with success
+                            // "Go to orders" button segues to orders page
+                            let alertView = UIAlertController(
+                                title: "Success",
+                                message: "Your order has been placed.",
+                                preferredStyle: .alert
+                            )
+                            let goToOrders = UIAlertAction(title: "Go to orders", style: .default) { _ in
+                                self.performSegue(withIdentifier: "unwindFromCartToOrder", sender: self)
+                            }
+                            alertView.addAction(goToOrders)
+                            self.present(alertView, animated: true, completion: nil)
+                            break
+                        @unknown default:
+                            Helper.alert(self, title: "Payment failed", message: "Please try again.")
+                            break
                         }
-                        alertView.addAction(goToOrders)
-                        self.present(alertView, animated: true, completion: nil)
                     }
-                    else {
-                        Helper.alertError(self, "Failed to place order. Please try again.")
-                    }
+                }
+                else {
+                    Helper.alert(self, message: "Failed to place order. Please try again.")
                 }
             }
         }
     }
     
+    @IBAction func selectPayment(_ sender: Any) {
+        performSegue(withIdentifier: "CartToPaymentMethods", sender: self)
+    }
     @IBAction func unwindToCart( _ seg: UIStoryboardSegue) { }
 }
 
@@ -186,3 +216,10 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
+
+extension CartVC: STPAuthenticationContext {
+    func authenticationPresentingViewController() -> UIViewController {
+        return self
+    }
+}
+

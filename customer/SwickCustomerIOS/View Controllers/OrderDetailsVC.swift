@@ -54,7 +54,7 @@ class OrderDetailsVC: UIViewController {
                 self.tableView.reloadData()
             }
             else {
-                Helper.alertError(self, "Failed to get order details. Please click refresh to try again.")
+                Helper.alert(self, message: "Failed to get order details. Please click refresh to try again.")
             }
         }
     }
