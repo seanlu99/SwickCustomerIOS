@@ -30,6 +30,7 @@ class OrderDetailsVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        // TODO: Only need to do on viewDidLoad() right?
         loadOrderDetails()
     }
     
@@ -54,7 +55,7 @@ class OrderDetailsVC: UIViewController {
                 self.tableView.reloadData()
             }
             else {
-                Helper.alertError(self, "Failed to get order details. Please click refresh to try again.")
+                Helper.alert(self, message: "Failed to get order details. Please click refresh to try again.")
             }
         }
     }

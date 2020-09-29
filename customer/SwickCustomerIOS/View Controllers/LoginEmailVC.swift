@@ -45,13 +45,13 @@ extension LoginEmailVC: UITextFieldDelegate {
                 
                 // Alert error if email not send
                 if detail != "A login token has been sent to your email." {
-                    Helper.alertError(self, "Email could not be sent. Please try again.")
+                    Helper.alert(self, message: "Email could not be sent. Please try again.")
                 }
             }
         }
         // Alert error if invalid email address
         else {
-            Helper.alertError(self, "Invalid email. Please try again.")
+            Helper.alert(self, message: "Invalid email. Please try again.")
         }
         return true
     }

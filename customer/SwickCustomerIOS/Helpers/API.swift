@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class API {
-    
+
     // Generic HTTP request to backend API
     static func request(_ path: String,
                         method: HTTPMethod = .get,
@@ -39,7 +39,7 @@ class API {
                 }
         }
     }
-    
+
     // Generic HTTP request to backend API with auth token
     static func authRequest(_ path: String,
                         method: HTTPMethod = .get,
@@ -51,7 +51,7 @@ class API {
         ]
         request(path, method: method, parameters: parameters, headers: headers, completion: completion)
     }
-    
+
     // Send email to get verification code
     static func getVerificationCode(_ email: String, completion: @escaping (JSON) -> Void) {
         let path = "auth/email/"
@@ -60,7 +60,7 @@ class API {
         ]
         request(path, method: .post, parameters: params, completion: completion)
     }
-    
+
     // Send email and verification code to get auth token
     static func getToken(_ email: String, _ code: String, completion: @escaping (JSON) -> Void) {
         let path = "auth/token/"
@@ -70,47 +70,47 @@ class API {
         ]
         request(path, method: .post, parameters: params, completion: completion)
     }
-    
+
     // Create customer account
     static func createAccount(completion: @escaping (JSON) -> Void) {
         let path = "api/customer/create_account/"
         authRequest(path, method: .post, completion: completion)
     }
-    
+
     // Get restaurant list
     static func getRestaurants(completion: @escaping (JSON) -> Void) {
         let path = "api/customer/get_restaurants/"
         request(path, completion: completion)
     }
-    
+
     // Get restaurant
     static func getRestaurant(_ restaurantId: Int, completion: @escaping (JSON) -> Void) {
         let path = "api/customer/get_restaurant/\(restaurantId)/"
         request(path, completion: completion)
     }
-    
+
     // Get categories list
     static func getCategories(_ restaurantId: Int, completion: @escaping (JSON) -> Void) {
         let path = "api/customer/get_categories/\(restaurantId)"
         request(path, completion: completion)
     }
-    
+
     // Get menu
     static func getMenu(_ restaurantId: Int, _ category: String, completion: @escaping (JSON) -> Void) {
         let path = "api/customer/get_menu/\(restaurantId)/\(category)/"
         request(path, completion: completion)
     }
-    
+
     // Get meal
     static func getMeal(_ mealId: Int, completion: @escaping (JSON) -> Void) {
         let path = "api/customer/get_meal/\(mealId)/"
         request(path, completion: completion)
     }
-    
+
     // Place order
-    static func placeOrder(_ restaurantId: Int, _ table: Int, _ stripeToken: String, completion: @escaping (JSON) -> Void) {
+    static func placeOrder(_ restaurantId: Int, _ table: Int, _ methodId: String, completion: @escaping (JSON) -> Void) {
         let path = "api/customer/place_order/"
-        
+
         // Build items array
         var itemsArray: [[String: Any]] = []
         for item in Cart.shared.items {
@@ -149,7 +149,7 @@ class API {
                 "restaurant_id": restaurantId,
                 "table": table,
                 "order_items": itemsString ?? "",
-                "stripe_token": stripeToken
+                "payment_method_id": methodId
             ]
             authRequest(path, method: .post, parameters: params, completion: completion)
         }
@@ -157,25 +157,25 @@ class API {
             print(error)
         }
     }
-    
+
     // Get orders
     static func getOrders(completion: @escaping (JSON) -> Void) {
         let path = "api/customer/get_orders/"
         authRequest(path, completion: completion)
     }
-    
+
     // Get order details
     static func getOrderDetails(_ orderId: Int, completion: @escaping (JSON) -> Void) {
         let path = "api/customer/get_order_details/\(orderId)/"
         authRequest(path, completion: completion)
     }
-    
+
     // Get user info
     static func getUserInfo(completion: @escaping (JSON) -> Void) {
         let path = "api/customer/get_info/"
         authRequest(path, completion: completion)
     }
-    
+
     // Update user info
     static func updateUserInfo(_ name: String, _ email: String, completion: @escaping (JSON) -> Void) {
         let path = "api/update_info/"
@@ -183,6 +183,30 @@ class API {
             "name": name,
             "email": email
         ]
+        authRequest(path, method: .post, parameters: params, completion: completion)
+    }
+
+    static func createSetupIntent(completion: @escaping (JSON) -> Void) {
+        let path = "api/customer/setup_card/"
+        authRequest(path, completion: completion)
+    }
+
+    static func getUserCards(completion: @escaping (JSON) -> Void) {
+        let path = "api/customer/get_cards/"
+        authRequest(path, completion: completion)
+    }
+
+    static func removeUserCard(_ methodId: String, completion: @escaping (JSON) -> Void) {
+        let path = "api/customer/remove_card/"
+        let params =
+            ["payment_method_id": methodId]
+        authRequest(path, method: .post, parameters: params, completion: completion)
+    }
+    
+    static func retryPayment(_ paymentIntentId: String, completion: @escaping (JSON) -> Void){
+        let path = "api/customer/retry_payment/"
+        let params =
+            ["payment_intent_id": paymentIntentId]
         authRequest(path, method: .post, parameters: params, completion: completion)
     }
 }

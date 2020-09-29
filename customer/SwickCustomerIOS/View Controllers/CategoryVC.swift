@@ -49,7 +49,7 @@ class CategoryVC: UIViewController {
                 self.tableView.reloadData()
             }
             else {
-                Helper.alertError(self, "Failed to get categories. Please restart app and try again.")
+                Helper.alert(self, message: "Failed to get categories. Please restart app and try again.")
             }
         }
     }

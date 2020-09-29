@@ -23,12 +23,12 @@ class AccountDetailsVC: UIViewController {
         let email = self.emailTextField.text ?? ""
         // Check if name is valid
         if name == "" {
-            Helper.alertError(self, "Name cannot be empty.")
+            Helper.alert(self, message: "Name cannot be empty.")
             return
         }
         // Check if email is valid
         if !Helper.isValidEmail(email) {
-            Helper.alertError(self, "Invalid email. Please try again.")
+            Helper.alert(self, message: "Invalid email. Please try again.")
             return
         }
         API.updateUserInfo(name, email) { json in
@@ -39,10 +39,10 @@ class AccountDetailsVC: UIViewController {
                 self.emailTextField.resignFirstResponder()
             }
             else if json["status"] == "email_already_taken" {
-                Helper.alertError(self, "Email already taken. Please try a different email.")
+                Helper.alert(self, message: "Email already taken. Please try a different email.")
             }
             else {
-                Helper.alertError(self, "Failed to update info. Please restart app and try again.")
+                Helper.alert(self, message: "Failed to update info. Please restart app and try again.")
             }
         }
     }
@@ -55,7 +55,7 @@ class AccountDetailsVC: UIViewController {
                 self.emailTextField.text = json["email"].string
             }
             else {
-                Helper.alertError(self, "Failed to get account info. Please restart app and try again.")
+                Helper.alert(self, message: "Failed to get account info. Please restart app and try again.")
             }
         }
     }

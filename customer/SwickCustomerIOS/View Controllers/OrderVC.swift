@@ -44,7 +44,7 @@ class OrderVC: UITableViewController {
                 self.tableView.reloadData()
             }
             else {
-                Helper.alertError(self, "Failed to get orders. Please click refresh to try again.")
+                Helper.alert(self, message: "Failed to get orders. Please click refresh to try again.")
             }
         }
     }
