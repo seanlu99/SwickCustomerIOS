@@ -14,6 +14,7 @@ class CardDetailsVC: UIViewController {
     @IBOutlet weak var last4: UILabel!
     @IBOutlet weak var expDate: UILabel!
     @IBOutlet weak var brandImage: UIImageView!
+    @IBOutlet weak var deleteCardButton: UIButton!
     
     var card: Card!
     override func viewDidLoad() {
@@ -29,14 +30,15 @@ class CardDetailsVC: UIViewController {
     }
     
     @IBAction func deleteCard(_ sender: Any) {
+        deleteCardButton.isEnabled = false;
         API.removeUserCard(card!.methodId){ json in
-            if(json["status"] == "success") {
-                Helper.alert(self, title: "Success", message: "Card has been deleted")
+            if json["status"] == "success" {
                 self.performSegue(withIdentifier: "unwindToPaymentMethods", sender: self)
             }
             else {
                 Helper.alert(self, message: "Failed to delete card. Please try again.")
             }
+            self.deleteCardButton.isEnabled = true
         }
     }
     

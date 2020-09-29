@@ -118,4 +118,9 @@ extension RestaurantVC: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Make grey row selection disappear
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }

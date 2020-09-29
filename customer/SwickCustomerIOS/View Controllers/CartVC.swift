@@ -105,54 +105,102 @@ class CartVC: UIViewController {
     }
     
     @IBAction func placeOrder(_ sender: Any) {
-        if(card == nil){
+        if card == nil {
             Helper.alert(self, message: "Please choose a payment method")
         }
         else{
+            placeOrderButton.isEnabled = false
             API.placeOrder(self.restaurant.id, self.table, self.card.methodId) { json in
-                if (json["status"] == "success") {
-                    // Retrieve client secret from response
-                    let paymentIntentClientSecret = json["client_secret"].rawString() ?? ""
-                    let paymentIntentParams = STPPaymentIntentParams(clientSecret: paymentIntentClientSecret)
-                    let paymentHandler = STPPaymentHandler.shared()
+                if json["status"] == "success" {
+                    let intentStatus = json["intent_status"].string ?? ""
                     
-                    // Confirm payment and popup response depending on return status of payment handler
-                    paymentHandler.confirmPayment(withParams: paymentIntentParams, authenticationContext: self) { (status, paymentIntent, error) in
-                        switch (status) {
-                        case .failed:
-                            Helper.alert(self, title: "Payment failed", message: error?.localizedDescription ?? "")
-                            break
-                        case .canceled:
-                            Helper.alert(self, title: "Payment canceled", message: error?.localizedDescription ?? "")
-                            break
-                        case .succeeded:
-                            // Reset cart
-                            Cart.shared.reset()
-                            self.toggleViews()
-                            // Show alert with success
-                            // "Go to orders" button segues to orders page
-                            let alertView = UIAlertController(
-                                title: "Success",
-                                message: "Your order has been placed.",
-                                preferredStyle: .alert
-                            )
-                            let goToOrders = UIAlertAction(title: "Go to orders", style: .default) { _ in
-                                self.performSegue(withIdentifier: "unwindFromCartToOrder", sender: self)
+                    if intentStatus == "card_error" || intentStatus == "requires_payment_method" {
+                        let paymentError = json["error"].string ?? ""
+                        Helper.alert(self, title: "Payment failed", message: paymentError)
+                        self.placeOrderButton.isEnabled = true
+                    }
+                    else if intentStatus == "succeeded" {
+                        Cart.shared.reset()
+                        self.toggleViews()
+                        
+                        let alertView = UIAlertController(title: "Success",
+                                                          message: "Your order has been placed.",
+                                                          preferredStyle: .alert)
+                        
+                        let goToOrders = UIAlertAction(title: "Go to orders", style: .default){ _ in
+                            self.performSegue(withIdentifier: "unwindFromCartToOrder", sender: self)
+                        }
+                        
+                        alertView.addAction(goToOrders)
+                        self.placeOrderButton.isEnabled = true
+                        self.present(alertView, animated: true, completion: nil)
+                    }
+                    else if intentStatus == "requires_action" || intentStatus == "requires_source_action" {
+                        let clientSecret = json["client_secret"].string ?? ""
+                        let paymentHandler = STPPaymentHandler.shared()
+                        paymentHandler.handleNextAction(forPayment: clientSecret, authenticationContext: self, returnURL: nil) { status, paymentIntent, handleActionError in
+                            switch (status) {
+                            case .failed:
+                                Helper.alert(self, title: "Payment failed", message: handleActionError?.localizedDescription ?? "")
+                                self.placeOrderButton.isEnabled = true
+                                break
+                            case .canceled:
+                                Helper.alert(self, message: "Payment was canceled")
+                                self.placeOrderButton.isEnabled = true
+                                break
+                            case .succeeded:
+                                // requires reconfirmation with server
+                                if let paymentIntent = paymentIntent, paymentIntent.status == STPPaymentIntentStatus.requiresConfirmation {
+                                    API.retryPayment(paymentIntent.stripeId){ json in
+                                        if json["status"] == "success" {
+                                            let intentStatus = json["intent_status"].string ?? ""
+                                            
+                                            if intentStatus == "card_error" || intentStatus == "requires_payment_method" {
+                                                let paymentError = json["error"].string ?? ""
+                                                self.placeOrderButton.isEnabled = true
+                                                Helper.alert(self, title: "Payment failed", message: paymentError)
+                                            }
+                                            else if intentStatus == "succeeded"{
+                                                Cart.shared.reset()
+                                                self.toggleViews()
+                                                
+                                                let alertView = UIAlertController(title: "Success",
+                                                                                  message: "Your order has been placed.",
+                                                                                  preferredStyle: .alert)
+                                                
+                                                let goToOrders = UIAlertAction(title: "Go to orders", style: .default){ _ in
+                                                    self.performSegue(withIdentifier: "unwindFromCartToOrder", sender: self)
+                                                }
+                                                alertView.addAction(goToOrders)
+                                                self.placeOrderButton.isEnabled = true
+                                                self.present(alertView, animated: true, completion: nil)
+                                            }
+                                        }
+                                        else {
+                                            Helper.alert(self, message: "Failed to place order. Please try again.")
+                                            self.placeOrderButton.isEnabled = true
+                                        }
+                                    }
+                                }
+                                else{
+                                    Helper.alert(self, message: "Failed to place order. Please try again")
+                                    self.placeOrderButton.isEnabled = true
+                                }
+                                break
+                            @unknown default:
+                                fatalError()
+                                break
                             }
-                            alertView.addAction(goToOrders)
-                            self.present(alertView, animated: true, completion: nil)
-                            break
-                        @unknown default:
-                            Helper.alert(self, title: "Payment failed", message: "Please try again.")
-                            break
                         }
                     }
                 }
-                else {
+                else{
                     Helper.alert(self, message: "Failed to place order. Please try again.")
+                    self.placeOrderButton.isEnabled = true
                 }
             }
         }
+        
     }
     
     @IBAction func selectPayment(_ sender: Any) {

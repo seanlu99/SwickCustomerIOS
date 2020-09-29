@@ -11,7 +11,7 @@ import UIKit
 
 // Helper methods
 class Helper {
-    
+
     // Load imageString image into imageView
     static func loadImage(_ imageView: UIImageView,_ imageString: String) {
         guard let imageUrl = URL(string: imageString) else {
@@ -25,26 +25,26 @@ class Helper {
             })
         }.resume()
     }
-    
+
     // Format double as price
     static func formatPrice(_ price: Double) -> String {
         return String(format: "$%.2f", price)
     }
-    
+
     // Convert string to date
     static func convertStringToDate(_ str: String) -> Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mmZ"
         return formatter.date(from: str) ?? Date()
     }
-    
+
     // Convert date to string
     static func convertDateToString(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd/yy h:mma"
         return formatter.string(from: date)
     }
-    
+
     // Convert hex integer to UIColor
     static func hexColor(_ hex: Int) -> UIColor {
         return UIColor(
@@ -54,14 +54,14 @@ class Helper {
             alpha: CGFloat(1.0)
         )
     }
-    
+
     // Test if email is valid
     static func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
-    
+
     // Show alert
     static func alert(_ view: UIViewController,
                         title: String = "Error",
@@ -75,20 +75,12 @@ class Helper {
         alertView.addAction(okAction)
         view.present(alertView, animated: true, completion: nil)
     }
-    
-    // Switch root view to tab bar controller
-    static func switchToTabBar() {
+
+    // Switch root view
+    static func switchRootView(_ identifier: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let tabBarVC = storyboard.instantiateViewController(withIdentifier: "TabBarVC") as! UITabBarController
+        let newRootVC = storyboard.instantiateViewController(withIdentifier: identifier)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = tabBarVC
-    }
-    
-    // Switch root view to login navigation controller
-    static func switchToLogin() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let loginNC = storyboard.instantiateViewController(withIdentifier: "LoginNC") as! UINavigationController
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = loginNC
+        appDelegate.window?.rootViewController = newRootVC
     }
 }

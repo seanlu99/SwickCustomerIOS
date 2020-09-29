@@ -43,12 +43,7 @@ class PaymentMethodsVC: UIViewController {
             cardDetailsVC.card = cards[(tableView.indexPathForSelectedRow?.row) ?? 0]
         }
     }
- 
-    // Button to add a new card to the account
-    @IBAction func addCard(_ sender: UIButton) {
-        performSegue(withIdentifier: "PaymentMethodsToAddCard", sender: self)
-    }
-    
+
     @IBAction func unwindToPaymentMethods( _ seg: UIStoryboardSegue) {
         getCards()
     }
@@ -76,11 +71,14 @@ extension PaymentMethodsVC: UITableViewDelegate, UITableViewDataSource {
     
     // On cell click
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if previousView == "CartVC" {
             self.performSegue(withIdentifier: "unwindToCart", sender: self)
         }
-        if previousView == "AccountVC" {
+        if previousView == "SettingsVC" {
+            // Make grey row selection disappear
             self.performSegue(withIdentifier: "PaymentMethodsToCardDetails", sender: self)
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
 }

@@ -30,6 +30,7 @@ class OrderDetailsVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        // TODO: Only need to do on viewDidLoad() right?
         loadOrderDetails()
     }
     

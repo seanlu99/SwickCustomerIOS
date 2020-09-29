@@ -104,4 +104,14 @@ class API {
         let path = "api/server/get_info/"
         authRequest(path, completion: completion)
     }
+    
+    // Update user info
+    static func updateUserInfo(_ name: String, _ email: String, completion: @escaping (JSON) -> Void) {
+        let path = "api/update_info/"
+        let params = [
+            "name": name,
+            "email": email
+        ]
+        authRequest(path, method: .post, parameters: params, completion: completion)
+    }
 }

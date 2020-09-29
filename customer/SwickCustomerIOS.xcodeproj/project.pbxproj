@@ -21,7 +21,7 @@
 		1495C750246BDA9F00F30ECB /* OrderDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C74F246BDA9F00F30ECB /* OrderDetailsVC.swift */; };
 		1495C752246C770600F30ECB /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C751246C770600F30ECB /* LoginVC.swift */; };
 		1495C75A246C9BE900F30ECB /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C759246C9BE900F30ECB /* Helper.swift */; };
-		1495C75F246CAB6600F30ECB /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C75E246CAB6600F30ECB /* AccountVC.swift */; };
+		1495C75F246CAB6600F30ECB /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C75E246CAB6600F30ECB /* SettingsVC.swift */; };
 		1495C761246CB2C200F30ECB /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C760246CB2C200F30ECB /* API.swift */; };
 		1495C763246CB34C00F30ECB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C762246CB34C00F30ECB /* Constants.swift */; };
 		1495C765246DD3C600F30ECB /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495C764246DD3C600F30ECB /* Restaurant.swift */; };
@@ -39,6 +39,8 @@
 		14AA78422484868700145D40 /* CategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA78412484868700145D40 /* CategoryVC.swift */; };
 		14AA7844248486A200145D40 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA7843248486A200145D40 /* CategoryCell.swift */; };
 		14AA78482484C59900145D40 /* ScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA78472484C59900145D40 /* ScanVC.swift */; };
+		14E55D50251BF29500CCC29A /* AccountDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E55D4F251BF29500CCC29A /* AccountDetailsVC.swift */; };
+		14E55D54251C056100CCC29A /* NameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E55D53251C056100CCC29A /* NameVC.swift */; };
 		493DED219093BDB8CB940845 /* Pods_SwickCustomerIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971283499F2F6CCB9D24A97D /* Pods_SwickCustomerIOS.framework */; };
 		F285215B250EF90C0035F180 /* PaymentMethodsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F285215A250EF90C0035F180 /* PaymentMethodsVC.swift */; };
 		F285215D250EFC370035F180 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F285215C250EFC370035F180 /* CardCell.swift */; };
@@ -65,7 +67,7 @@
 		1495C74F246BDA9F00F30ECB /* OrderDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsVC.swift; sourceTree = "<group>"; };
 		1495C751246C770600F30ECB /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		1495C759246C9BE900F30ECB /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
-		1495C75E246CAB6600F30ECB /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
+		1495C75E246CAB6600F30ECB /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		1495C760246CB2C200F30ECB /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		1495C762246CB34C00F30ECB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1495C764246DD3C600F30ECB /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
@@ -83,6 +85,8 @@
 		14AA78412484868700145D40 /* CategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryVC.swift; sourceTree = "<group>"; };
 		14AA7843248486A200145D40 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		14AA78472484C59900145D40 /* ScanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanVC.swift; sourceTree = "<group>"; };
+		14E55D4F251BF29500CCC29A /* AccountDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsVC.swift; sourceTree = "<group>"; };
+		14E55D53251C056100CCC29A /* NameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameVC.swift; sourceTree = "<group>"; };
 		95E5BDAC5BCC78F8F1824B61 /* Pods-SwickCustomerIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwickCustomerIOS.debug.xcconfig"; path = "Target Support Files/Pods-SwickCustomerIOS/Pods-SwickCustomerIOS.debug.xcconfig"; sourceTree = "<group>"; };
 		971283499F2F6CCB9D24A97D /* Pods_SwickCustomerIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwickCustomerIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6DD97C655BA4FE3422DDED7 /* Pods-SwickCustomerIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwickCustomerIOS.release.xcconfig"; path = "Target Support Files/Pods-SwickCustomerIOS/Pods-SwickCustomerIOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 				1495C751246C770600F30ECB /* LoginVC.swift */,
 				147BFFEA250AC9D2006985EF /* LoginEmailVC.swift */,
 				147BFFEC250AC9E3006985EF /* LoginCodeVC.swift */,
+				14E55D53251C056100CCC29A /* NameVC.swift */,
 				F2B4BE3D250045D500B47615 /* TabBarVC.swift */,
 				1495C73E246B935800F30ECB /* RestaurantVC.swift */,
 				14AA78412484868700145D40 /* CategoryVC.swift */,
@@ -155,7 +160,8 @@
 				1495C747246BC37D00F30ECB /* CartVC.swift */,
 				1495C74D246BDA0200F30ECB /* OrderVC.swift */,
 				1495C74F246BDA9F00F30ECB /* OrderDetailsVC.swift */,
-				1495C75E246CAB6600F30ECB /* AccountVC.swift */,
+				1495C75E246CAB6600F30ECB /* SettingsVC.swift */,
+				14E55D4F251BF29500CCC29A /* AccountDetailsVC.swift */,
 				F285215A250EF90C0035F180 /* PaymentMethodsVC.swift */,
 				F2852164251293E70035F180 /* CardDetailsVC.swift */,
 				F28521602511A6370035F180 /* AddCardVC.swift */,
@@ -335,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1495C76A246DEEA000F30ECB /* RestaurantCell.swift in Sources */,
+				14E55D54251C056100CCC29A /* NameVC.swift in Sources */,
 				1495C776246E77DC00F30ECB /* CartCell.swift in Sources */,
 				1495C778246F5C5200F30ECB /* Order.swift in Sources */,
 				F285215D250EFC370035F180 /* CardCell.swift in Sources */,
@@ -350,6 +357,7 @@
 				1495C748246BC37D00F30ECB /* CartVC.swift in Sources */,
 				1495C765246DD3C600F30ECB /* Restaurant.swift in Sources */,
 				1495C763246CB34C00F30ECB /* Constants.swift in Sources */,
+				14E55D50251BF29500CCC29A /* AccountDetailsVC.swift in Sources */,
 				1495C750246BDA9F00F30ECB /* OrderDetailsVC.swift in Sources */,
 				F2B4BE3E250045D500B47615 /* TabBarVC.swift in Sources */,
 				F285215B250EF90C0035F180 /* PaymentMethodsVC.swift in Sources */,
@@ -358,7 +366,7 @@
 				147BFFED250AC9E3006985EF /* LoginCodeVC.swift in Sources */,
 				14AA7838247B2D4100145D40 /* CustomizationCell.swift in Sources */,
 				1495C752246C770600F30ECB /* LoginVC.swift in Sources */,
-				1495C75F246CAB6600F30ECB /* AccountVC.swift in Sources */,
+				1495C75F246CAB6600F30ECB /* SettingsVC.swift in Sources */,
 				1495C73F246B935800F30ECB /* RestaurantVC.swift in Sources */,
 				F2852165251293E70035F180 /* CardDetailsVC.swift in Sources */,
 				1495C77A246F654200F30ECB /* OrderCell.swift in Sources */,

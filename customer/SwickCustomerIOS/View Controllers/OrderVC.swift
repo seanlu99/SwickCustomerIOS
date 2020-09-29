@@ -78,4 +78,9 @@ class OrderVC: UITableViewController {
         cell.statusLabel.text = order.status
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Make grey row selection disappear
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
