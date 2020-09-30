@@ -48,11 +48,12 @@ class Helper {
         return emailPred.evaluate(with: email)
     }
     
-    // Show error alert
-    static func alertError(_ view: UIViewController,
-                           _ message: String = "Bad request. Please try again.") {
+    // Show alert
+    static func alert(_ view: UIViewController,
+                        title: String = "Error",
+                        message: String = "Bad request. Please try again.") {
         let alertView = UIAlertController(
-            title: "Error",
+            title: title,
             message: message,
             preferredStyle: .alert
         )
@@ -67,5 +68,21 @@ class Helper {
         let tabBarVC = storyboard.instantiateViewController(withIdentifier: identifier)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.window?.rootViewController = tabBarVC
+    }
+    
+    // Return customizations as a formatted string
+    static func buildCustomizationsString(_ customizations: [OrderItemCustomization]) -> String{
+        var str = ""
+        for cust in customizations {
+            str += cust.name + "\n"
+            for opt in cust.options {
+                str += "- " + opt + "\n"
+            }
+        }
+        // Remove last new line
+        if str != "" {
+            str.remove(at: str.index(before: str.endIndex))
+        }
+        return str
     }
 }

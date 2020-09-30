@@ -11,9 +11,8 @@ import UIKit
 class OrderCell: UITableViewCell {
     
     @IBOutlet weak var customerNameLabel: UILabel!
-    @IBOutlet weak var tableLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var checkbox: Checkbox!
+    @IBOutlet weak var statusLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

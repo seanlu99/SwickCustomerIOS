@@ -12,37 +12,28 @@ import SwiftyJSON
 class Order {
     var id: Int
     var restaurantName: String
-    var status: String
     var time: Date
+    var status: String
     
     init(json: JSON) {
         self.id = json["id"].int ?? -1
-        self.restaurantName = json["restaurant"]["name"].string ?? ""
-        self.status = json["status"].string ?? ""
+        self.restaurantName = json["restaurant"].string ?? ""
         self.time = Helper.convertStringToDate(json["order_time"].string ?? "")
+        self.status = json["status"].string ?? ""
     }
 }
 
 class OrderDetails {
-    var status: String
-    var serverName: String
     var total: Double
-    var table: String
     var items = [OrderItem]()
     
     init() {
-        status = ""
-        serverName = ""
         total = 0
-        table = ""
     }
     
     init(json: JSON) {
-        self.status = json["status"].string ?? ""
-        self.serverName = json["server"]["name"].string ?? ""
         let t = json["total"].string ?? ""
         self.total = Double(t) ?? 0
-        self.table = String(describing: json["table"].int ?? 0)
         
         // Extract order items from json
         let itemsList = json["order_item"].array ?? []
@@ -57,6 +48,7 @@ class OrderItem {
     var mealName: String
     var quantity: String
     var total: Double
+    var status: String
     var customizations: [OrderItemCustomization] = []
     
     init(json: JSON) {
@@ -64,6 +56,7 @@ class OrderItem {
         self.quantity = String(describing: json["quantity"].int ?? 0)
         let t = json["total"].string ?? ""
         self.total = Double(t) ?? 0
+        self.status = json["status"].string ?? ""
         
         // Extract customizations from json
         let customizationList = json["order_item_cust"].array ?? []
@@ -71,6 +64,26 @@ class OrderItem {
             let custItem = OrderItemCustomization(json: cust)
             self.customizations.append(custItem)
         }
+    }
+    
+    // Return customizations as a formatted string
+    func getCustomizationString() -> String {
+        var str = ""
+        for cust in customizations {
+            str += cust.name + "\n"
+            for opt in cust.options {
+                str += "- " + opt + "\n"
+            }
+        }
+        // If customizations present, remove last new line
+        if str != "" {
+            str.remove(at: str.index(before: str.endIndex))
+        }
+        // Otherwise use a blank line
+        else {
+            str = " "
+        }
+        return str
     }
 }
 

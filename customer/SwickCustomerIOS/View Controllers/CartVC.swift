@@ -230,26 +230,7 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
         cell.nameLabel.text = cartItem.meal.name
         cell.quantityLabel.text = String(cartItem.quantity)
         cell.totalLabel.text = Helper.formatPrice(cartItem.total)
-        
-        // Build customization label and set
-        var custText = ""
-        for cust in cartItem.customizations {
-            var optionsText = ""
-            for opt in cust.options {
-                if opt.isChecked == true {
-                    optionsText += "- " + opt.name + "\n"
-                }
-            }
-            // Only add customization name if at least one option was checked
-            if optionsText != "" {
-                custText += cust.name + "\n" + optionsText
-            }
-        }
-        // Remove last new line
-        if custText != "" {
-            custText.remove(at: custText.index(before: custText.endIndex))
-        }
-        cell.customizationLabel.text = custText
+        cell.customizationLabel.text = cartItem.getCustomizationString()
         
         return cell
     }

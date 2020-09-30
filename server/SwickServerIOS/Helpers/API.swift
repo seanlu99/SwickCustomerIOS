@@ -77,9 +77,21 @@ class API {
         authRequest(path, method: .post, completion: completion)
     }
     
-    // Get orders
-    static func getOrders(_ status: Int, completion: @escaping (JSON) -> Void) {
-        let path = "api/server/get_orders/\(status)/"
+    // Get orders to cook
+    static func getOrderItemsToCook(completion: @escaping (JSON) -> Void) {
+        let path = "api/server/get_order_items_to_cook/"
+        authRequest(path, completion: completion)
+    }
+    
+    // Get orders to send
+    static func getOrderItemsToSend(completion: @escaping (JSON) -> Void) {
+        let path = "api/server/get_order_items_to_send/"
+        authRequest(path, completion: completion)
+    }
+    
+    // Get all orders
+    static func getOrders(completion: @escaping (JSON) -> Void) {
+        let path = "api/server/get_orders/"
         authRequest(path, completion: completion)
     }
     
@@ -89,11 +101,11 @@ class API {
         authRequest(path, completion: completion)
     }
     
-    // Update order status
-    static func updateOrderStatus(_ orderId: Int, _ status: Int, completion: @escaping (JSON) -> Void) {
-        let path = "api/server/update_order_status/"
-        let params = [
-            "order_id": orderId,
+    // Update order item status
+    static func updateOrderItemStatus(_ orderItemId: Int, _ status: String, completion: @escaping (JSON) -> Void) {
+        let path = "api/server/update_order_item_status/"
+        let params: [String: Any] = [
+            "order_item_id": orderItemId,
             "status": status,
         ]
         authRequest(path, method: .post, parameters: params, completion: completion)

@@ -15,8 +15,6 @@ class OrderDetailsVC: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var tableLabel: UILabel!
     @IBOutlet weak var customerLabel: UILabel!
-    @IBOutlet weak var chefLabel: UILabel!
-    @IBOutlet weak var serverLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
@@ -41,22 +39,21 @@ class OrderDetailsVC: UIViewController {
     
     func loadOrderDetails() {
         // Load time into view with object from previous view
-        customerLabel.text = order.customerName
-        tableLabel.text = order.table
+        customerLabel.text = order.customer
+        
         timeLabel.text = Helper.convertDateToString(order.time)
         
         // Load order details from API call
         API.getOrderDetails(order.id) { json in
             if (json["status"] == "success") {
                 self.orderDetails = OrderDetails(json: json["order_details"])
-                self.chefLabel.text = self.orderDetails.chefName
-                self.serverLabel.text = self.orderDetails.serverName
+                self.tableLabel.text = self.orderDetails.table
                 self.totalLabel.text = Helper.formatPrice(self.orderDetails.total)
                 // Reload table view after getting order details data from server
                 self.tableView.reloadData()
             }
             else {
-                Helper.alertError(self, "Failed to get order details. Please click refresh to try again.")
+                Helper.alert(self, message: "Failed to get order details. Please click refresh to try again.")
             }
         }
     }
@@ -83,20 +80,14 @@ extension OrderDetailsVC: UITableViewDelegate, UITableViewDataSource {
         cell.mealNameLabel.text = orderItem.mealName
         cell.quantityLabel.text = orderItem.quantity
         cell.totalLabel.text = Helper.formatPrice(orderItem.total)
+        cell.statusLabel.text = orderItem.status
         
-        // Build customization label and set
-        var custText = ""
-        for cust in orderItem.customizations {
-            custText += cust.name + "\n"
-            for opt in cust.options {
-                custText += "- " + opt + "\n"
-            }
+        var custString = Helper.buildCustomizationsString(orderItem.customizations)
+        // Use a blank line if customization string is empty
+        if custString == "" {
+            custString = " "
         }
-        // Remove last new line
-        if custText != "" {
-            custText.remove(at: custText.index(before: custText.endIndex))
-        }
-        cell.customizationLabel.text = custText
+        cell.customizationLabel.text = custString
         
         return cell
     }

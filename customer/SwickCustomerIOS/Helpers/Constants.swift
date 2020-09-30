@@ -9,7 +9,10 @@
 import Foundation
 
 // Set true for development environment, false for production environment
-let DEVELOPMENT = false
+let DEVELOPMENT = true
+
+// If in development environement, set the following string for QR code scanning override
+let SCANNED_STRING = "swick-1-1"
 
 // Backend URL
 let BACKEND_URL = DEVELOPMENT ? "http://localhost:8000" : "https://swickapp.herokuapp.com"

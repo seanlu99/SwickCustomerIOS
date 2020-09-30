@@ -9,7 +9,7 @@
 import Foundation
 
 // Set true for development environment, false for production environment
-let DEVELOPMENT = false
+let DEVELOPMENT = true
 
 // Backend URL
 let BACKEND_URL = DEVELOPMENT ? "http://localhost:8000" : "https://swickapp.herokuapp.com"

@@ -32,7 +32,7 @@ extension NameVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let name = textField.text ?? ""
         if name == "" {
-            Helper.alertError(self, "Please enter a name.")
+            Helper.alert(self, message: "Please enter a name.")
             return true
         }
         API.updateUserInfo(name, "") { json in
@@ -42,7 +42,7 @@ extension NameVC: UITextFieldDelegate {
                 Helper.switchRootView("TabBarVC")
             }
             else {
-                Helper.alertError(self)
+                Helper.alert(self)
             }
         }
         return true

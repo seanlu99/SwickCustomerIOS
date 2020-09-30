@@ -10,9 +10,6 @@ import UIKit
 import Stripe
 
 class AddCardVC: UIViewController {
-    let semaphore = DispatchSemaphore(value: 1)
-
-    
     lazy var cardTextField: STPPaymentCardTextField = {
         let cardTextField = STPPaymentCardTextField()
         return cardTextField
