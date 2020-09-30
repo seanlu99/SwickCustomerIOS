@@ -11,33 +11,30 @@ import SwiftyJSON
 
 class Order {
     var id: Int
-    var customerName: String
-    var table: String
+    var customer: String
     var time: Date
+    var status: String
     
     init(json: JSON) {
         self.id = json["id"].int ?? -1
-        self.customerName = json["customer"]["name"].string ?? ""
-        self.table = String(describing: json["table"].int ?? 0)
+        self.customer = json["customer"].string ?? ""
         self.time = Helper.convertStringToDate(json["order_time"].string ?? "")
+        self.status = json["status"].string ?? ""
     }
 }
 
 class OrderDetails {
-    var chefName: String
-    var serverName: String
+    var table: String
     var total: Double
     var items = [OrderItem]()
     
     init() {
-        chefName = ""
-        serverName = ""
+        table = ""
         total = 0
     }
     
     init(json: JSON) {
-        self.chefName = json["chef"]["name"].string ?? ""
-        self.serverName = json["server"]["name"].string ?? ""
+        self.table = String(describing: json["table"].int ?? 0)
         let t = json["total"].string ?? ""
         self.total = Double(t) ?? 0
         
@@ -51,16 +48,24 @@ class OrderDetails {
 }
 
 class OrderItem {
+    var id: Int
     var mealName: String
     var quantity: String
     var total: Double
+    var status: String
     var customizations: [OrderItemCustomization] = []
+    // Order fields
+    var orderId: Int
+    var table: String
+    var customer: String
     
     init(json: JSON) {
+        self.id = json["id"].int ?? -1
         self.mealName = json["meal_name"].string ?? ""
         self.quantity = String(describing: json["quantity"].int ?? 0)
         let t = json["total"].string ?? ""
         self.total = Double(t) ?? 0
+        self.status = json["status"].string ?? ""
         
         // Extract customizations from json
         let customizationList = json["order_item_cust"].array ?? []
@@ -68,6 +73,10 @@ class OrderItem {
             let custItem = OrderItemCustomization(json: cust)
             self.customizations.append(custItem)
         }
+        
+        self.orderId = json["order_id"].int ?? -1
+        self.table = String(describing: json["table"].int ?? 0)
+        self.customer = json["customer"].string ?? ""
     }
 }
 

@@ -32,7 +32,7 @@ class LoginCodeVC: UIViewController {
             let token = json["token"].string
             // If token unsuccessfully retrieved
             if token == nil {
-                Helper.alertError(self, "Invalid verfication code. Please try again.")
+                Helper.alert(self, message: "Invalid verfication code. Please try again.")
             }
             // If token successfully retrieved
             else {

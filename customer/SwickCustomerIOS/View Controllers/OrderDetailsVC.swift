@@ -10,10 +10,7 @@ import UIKit
 
 class OrderDetailsVC: UIViewController {
     
-    @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var tableLabel: UILabel!
-    @IBOutlet weak var serverLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
@@ -30,7 +27,6 @@ class OrderDetailsVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        // TODO: Only need to do on viewDidLoad() right?
         loadOrderDetails()
     }
     
@@ -47,9 +43,6 @@ class OrderDetailsVC: UIViewController {
         API.getOrderDetails(order.id) { json in
             if (json["status"] == "success") {
                 self.orderDetails = OrderDetails(json: json["order_details"])
-                self.statusLabel.text = self.orderDetails.status
-                self.tableLabel.text = self.orderDetails.table
-                self.serverLabel.text = self.orderDetails.serverName
                 self.totalLabel.text = Helper.formatPrice(self.orderDetails.total)
                 // Reload table view after getting order details data from server
                 self.tableView.reloadData()
@@ -79,23 +72,11 @@ extension OrderDetailsVC: UITableViewDelegate, UITableViewDataSource {
         let orderItem = orderDetails.items[indexPath.row]
         
         // Set labels
+        cell.statusLabel.text = orderItem.status
         cell.mealNameLabel.text = orderItem.mealName
         cell.quantityLabel.text = orderItem.quantity
         cell.totalLabel.text = Helper.formatPrice(orderItem.total)
-        
-        // Build customization label and set
-        var custText = ""
-        for cust in orderItem.customizations {
-            custText += cust.name + "\n"
-            for opt in cust.options {
-                custText += "- " + opt + "\n"
-            }
-        }
-        // Remove last new line
-        if custText != "" {
-            custText.remove(at: custText.index(before: custText.endIndex))
-        }
-        cell.customizationLabel.text = custText
+        cell.customizationLabel.text = orderItem.getCustomizationString()
         
         return cell
     }

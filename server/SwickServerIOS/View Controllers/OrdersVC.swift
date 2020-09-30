@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OrderVC: UIViewController {
+class OrdersVC: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     // Label for no restaurant set
@@ -18,17 +18,6 @@ class OrderVC: UIViewController {
     var orders = [Order]()
     
     override func viewDidLoad() {
-        // Set title based on navigation controller
-        if (self.navigationController is CookNC) {
-            self.title = "To Cook"
-        }
-        else if (self.navigationController is SendNC) {
-            self.title = "To Send"
-        }
-        else {
-            self.title = "Done"
-        }
-        
         // Create no restaurant label
         noRestaurantLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 40))
         noRestaurantLabel.center = self.view.center
@@ -52,16 +41,8 @@ class OrderVC: UIViewController {
     
     // Load restaurant data from API call to table view
     func loadOrders() {
-        // Get orders based on navigation controller/status
-        var status = 3
-        if (self.navigationController is CookNC) {
-            status = 1
-        }
-        else if (self.navigationController is SendNC) {
-            status = 2
-        }
         
-        API.getOrders(status) { json in
+        API.getOrders { json in
             if (json["status"] == "success") {
                 self.orders = []
                 // orderList = array of JSON orders
@@ -85,28 +66,7 @@ class OrderVC: UIViewController {
                 self.noRestaurantLabel.isHidden = false
             }
             else {
-                Helper.alertError(self, "Failed to get orders. Please click refresh to try again.")
-            }
-        }
-    }
-    
-    @IBAction func checkboxClicked(_ sender: Checkbox) {
-        let orderId = orders[sender.row ?? 0].id
-        
-        // Change order status based on navigation controller
-        var status = 3
-        if (self.navigationController is CookNC) {
-            status = 2
-        }
-        
-        API.updateOrderStatus(orderId, status) { json in
-            if (json["status"] == "success") {
-                // Reload table view after updating order
-                self.loadOrders()
-                self.tableView.reloadData()
-            }
-            else {
-                Helper.alertError(self, "Failed to update order. Please restart app and try again.")
+                Helper.alert(self, message: "Failed to get orders. Please click refresh to try again.")
             }
         }
     }
@@ -120,7 +80,7 @@ class OrderVC: UIViewController {
     }
 }
 
-extension OrderVC: UITableViewDelegate, UITableViewDataSource {
+extension OrdersVC: UITableViewDelegate, UITableViewDataSource {
     
     // Set number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -136,22 +96,9 @@ extension OrderVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrderCell", for: indexPath) as! OrderCell
         let order = orders[indexPath.row]
-        cell.customerNameLabel.text = order.customerName
-        cell.tableLabel.text = order.table
+        cell.customerNameLabel.text = order.customer
         cell.timeLabel.text = Helper.convertDateToString(order.time)
-        cell.checkbox.row = indexPath.row
-        
-        
-        // Display checkbox based on navigation controller
-        if (self.navigationController is CookNC) {
-            cell.checkbox.displayCook()
-        }
-        else if (self.navigationController is SendNC) {
-            cell.checkbox.displaySend()
-        }
-        else {
-            cell.checkbox.isHidden = true
-        }
+        cell.statusLabel.text = order.status
         
         return cell
     }
