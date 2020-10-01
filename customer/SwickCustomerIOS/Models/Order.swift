@@ -11,27 +11,27 @@ import SwiftyJSON
 
 class Order {
     var id: Int
-    var restaurantName: String
+    var restaurant: String
     var time: Date
     var status: String
     
     init(json: JSON) {
         self.id = json["id"].int ?? -1
-        self.restaurantName = json["restaurant"].string ?? ""
+        self.restaurant = json["restaurant"].string ?? ""
         self.time = Helper.convertStringToDate(json["order_time"].string ?? "")
         self.status = json["status"].string ?? ""
     }
 }
 
 class OrderDetails {
+    var restaurant: String
+    var time: Date
     var total: Double
     var items = [OrderItem]()
     
-    init() {
-        total = 0
-    }
-    
     init(json: JSON) {
+        self.restaurant = json["restaurant"].string ?? ""
+        self.time = Helper.convertStringToDate(json["order_time"].string ?? "")
         let t = json["total"].string ?? ""
         self.total = Double(t) ?? 0
         

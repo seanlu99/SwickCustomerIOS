@@ -14,15 +14,13 @@ class OrderDetailsVC: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    // Order clicked on in previous view
-    var order: Order!
+    // ID of order clicked on in previous view
+    var orderId: Int!
     // Order details from API call
-    var orderDetails = OrderDetails()
+    var orderDetails = OrderDetails(json: [:])
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Set navigation bar title to restaurant name
-        self.title = order.restaurantName
         loadOrderDetails()
     }
     
@@ -36,13 +34,13 @@ class OrderDetailsVC: UIViewController {
     }
     
     func loadOrderDetails() {
-        // Load time into view with object from previous view
-        timeLabel.text = Helper.convertDateToString(order.time)
-        
         // Load order details from API call
-        API.getOrderDetails(order.id) { json in
+        API.getOrderDetails(orderId) { json in
             if (json["status"] == "success") {
                 self.orderDetails = OrderDetails(json: json["order_details"])
+                // Set navigation bar title to restaurant name
+                self.title = self.orderDetails.restaurant
+                self.timeLabel.text = Helper.convertDateToString(self.orderDetails.time)
                 self.totalLabel.text = Helper.formatPrice(self.orderDetails.total)
                 // Reload table view after getting order details data from server
                 self.tableView.reloadData()

@@ -70,8 +70,18 @@ class Helper {
         appDelegate.window?.rootViewController = tabBarVC
     }
     
+    // Build no restaurant label and add to given view
+    static func addNoRestaurantLabel(_ view: UIView, _ label: UILabel) {
+        label.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 40)
+        label.center = view.center
+        label.textAlignment = NSTextAlignment.center
+        label.text = "Your restaurant must add you as a server"
+        label.isHidden = true
+        view.addSubview(label)
+    }
+    
     // Return customizations as a formatted string
-    static func buildCustomizationsString(_ customizations: [OrderItemCustomization]) -> String{
+    static func buildCustomizationsString(_ customizations: [OrderItemCustomization]) -> String {
         var str = ""
         for cust in customizations {
             str += cust.name + "\n"

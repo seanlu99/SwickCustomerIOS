@@ -12,21 +12,14 @@ class OrdersVC: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     // Label for no restaurant set
-    var noRestaurantLabel = UILabel()
+    let noRestaurantLabel = UILabel()
     
     // Array of all orders
     var orders = [Order]()
     
     override func viewDidLoad() {
-        // Create no restaurant label
-        noRestaurantLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 40))
-        noRestaurantLabel.center = self.view.center
-        noRestaurantLabel.textAlignment = NSTextAlignment.center
-        noRestaurantLabel.text = "Your restaurant must add you as a server"
-        noRestaurantLabel.isHidden = true
-        self.view.addSubview(noRestaurantLabel)
-        
         super.viewDidLoad()
+        Helper.addNoRestaurantLabel(self.view, noRestaurantLabel)
         loadOrders()
     }
     
@@ -71,11 +64,11 @@ class OrdersVC: UIViewController {
         }
     }
     
-    // Send order id to order details VC when an order is clicked on
+    // Send order to order details VC when an order is clicked on
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "OrderToOrderDetails" {
             let orderDetailsVC = segue.destination as! OrderDetailsVC
-            orderDetailsVC.order = orders[(tableView.indexPathForSelectedRow?.row) ?? 0]
+            orderDetailsVC.orderId = orders[(tableView.indexPathForSelectedRow?.row) ?? 0].id
         }
     }
 }

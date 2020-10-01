@@ -11,12 +11,15 @@ import UIKit
 class ToCookVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    // Label for no restaurant set
+    let noRestaurantLabel = UILabel()
     
     // Array of all order items
     var items = [OrderItem]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        Helper.addNoRestaurantLabel(self.view, noRestaurantLabel)
         loadOrderItems()
     }
     
@@ -57,10 +60,27 @@ class ToCookVC: UIViewController {
                 }
                 // Reload table view after getting order data from server
                 self.tableView.reloadData()
+                
+                // Display table view and hide no restaurant label
+                self.tableView.isHidden = false
+                self.noRestaurantLabel.isHidden = true
+            }
+            else if (json["status"] == "restaurant_not_set") {
+                // Hide table view and display no restaurant label
+                self.tableView.isHidden = true
+                self.noRestaurantLabel.isHidden = false
             }
             else {
                 Helper.alert(self, message: "Failed to get orders. Please click refresh to try again.")
             }
+        }
+    }
+    
+    // Retrieve and send order to order details VC when "see full order" action is clicked
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ToCookToOrderDetails" {
+            let orderDetailsVC = segue.destination as! OrderDetailsVC
+            orderDetailsVC.orderId = items[(tableView.indexPathForSelectedRow?.row) ?? 0].orderId
         }
     }
 }
@@ -89,8 +109,15 @@ extension ToCookVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    // When cell is clicked
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Make grey row selection disappear
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        // Present options
+        let orderItemId = items[indexPath.row].id
+        OrderOptions.presentCookAlert(self, orderItemId, true) {
+            self.loadOrderItems()
+        }
     }
 }

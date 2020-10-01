@@ -24,17 +24,16 @@ class Order {
 }
 
 class OrderDetails {
+    var customer: String
     var table: String
+    var time: Date
     var total: Double
     var items = [OrderItem]()
     
-    init() {
-        table = ""
-        total = 0
-    }
-    
     init(json: JSON) {
+        self.customer = json["customer"].string ?? ""
         self.table = String(describing: json["table"].int ?? 0)
+        self.time = Helper.convertStringToDate(json["order_time"].string ?? "")
         let t = json["total"].string ?? ""
         self.total = Double(t) ?? 0
         

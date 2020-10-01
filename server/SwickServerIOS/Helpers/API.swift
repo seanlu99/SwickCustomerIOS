@@ -77,6 +77,24 @@ class API {
         authRequest(path, method: .post, completion: completion)
     }
     
+    // Get all orders
+    static func getOrders(completion: @escaping (JSON) -> Void) {
+        let path = "api/server/get_orders/"
+        authRequest(path, completion: completion)
+    }
+    
+    // Get all order
+    static func getOrder(_ orderId: Int, completion: @escaping (JSON) -> Void) {
+        let path = "api/server/get_order/\(orderId)/"
+        authRequest(path, completion: completion)
+    }
+    
+    // Get order details
+    static func getOrderDetails(_ orderId: Int, completion: @escaping (JSON) -> Void) {
+        let path = "api/server/get_order_details/\(orderId)/"
+        authRequest(path, completion: completion)
+    }
+    
     // Get orders to cook
     static func getOrderItemsToCook(completion: @escaping (JSON) -> Void) {
         let path = "api/server/get_order_items_to_cook/"
@@ -86,18 +104,6 @@ class API {
     // Get orders to send
     static func getOrderItemsToSend(completion: @escaping (JSON) -> Void) {
         let path = "api/server/get_order_items_to_send/"
-        authRequest(path, completion: completion)
-    }
-    
-    // Get all orders
-    static func getOrders(completion: @escaping (JSON) -> Void) {
-        let path = "api/server/get_orders/"
-        authRequest(path, completion: completion)
-    }
-    
-    // Get order details
-    static func getOrderDetails(_ orderId: Int, completion: @escaping (JSON) -> Void) {
-        let path = "api/server/get_order_details/\(orderId)/"
         authRequest(path, completion: completion)
     }
     
