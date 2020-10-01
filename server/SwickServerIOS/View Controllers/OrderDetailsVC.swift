@@ -18,10 +18,10 @@ class OrderDetailsVC: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    // Order clicked on in previous view
-    var order: Order!
+    // ID of order clicked on in previous view
+    var orderId: Int!
     // Order details from API call
-    var orderDetails = OrderDetails()
+    var orderDetails = OrderDetails(json: [:])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,16 +38,13 @@ class OrderDetailsVC: UIViewController {
     }
     
     func loadOrderDetails() {
-        // Load time into view with object from previous view
-        customerLabel.text = order.customer
-        
-        timeLabel.text = Helper.convertDateToString(order.time)
-        
         // Load order details from API call
-        API.getOrderDetails(order.id) { json in
+        API.getOrderDetails(orderId) { json in
             if (json["status"] == "success") {
                 self.orderDetails = OrderDetails(json: json["order_details"])
+                self.customerLabel.text = self.orderDetails.customer
                 self.tableLabel.text = self.orderDetails.table
+                self.timeLabel.text = Helper.convertDateToString(self.orderDetails.time)
                 self.totalLabel.text = Helper.formatPrice(self.orderDetails.total)
                 // Reload table view after getting order details data from server
                 self.tableView.reloadData()
@@ -90,5 +87,30 @@ extension OrderDetailsVC: UITableViewDelegate, UITableViewDataSource {
         cell.customizationLabel.text = custString
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Make grey row selection disappear
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        // Present options based on order item status
+        let orderItem = orderDetails.items[indexPath.row]
+        let orderItemId = orderItem.id
+        let status = orderItem.status
+        if status == "Cooking" {
+            OrderOptions.presentCookAlert(self, orderItemId) {
+                self.loadOrderDetails()
+            }
+        }
+        else if status == "Sending" {
+            OrderOptions.presentSendAlert(self, orderItemId) {
+                self.loadOrderDetails()
+            }
+        }
+        else if status == "Complete" {
+            OrderOptions.presentCompleteAlert(self, orderItemId) {
+                self.loadOrderDetails()
+            }
+        }
     }
 }

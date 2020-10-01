@@ -15,6 +15,7 @@
 		14E55D5A2524025600CCC29A /* ToCookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E55D592524025600CCC29A /* ToCookCell.swift */; };
 		14E55D5C2524DF0500CCC29A /* ToSendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E55D5B2524DF0500CCC29A /* ToSendVC.swift */; };
 		14E55D5E2524DF5900CCC29A /* ToSendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E55D5D2524DF5900CCC29A /* ToSendCell.swift */; };
+		14E55D6025254D7E00CCC29A /* OrderOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E55D5F25254D7E00CCC29A /* OrderOptions.swift */; };
 		14F5853124E4DD9100DAD96D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5853024E4DD9100DAD96D /* AppDelegate.swift */; };
 		14F5853824E4DD9100DAD96D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14F5853624E4DD9100DAD96D /* Main.storyboard */; };
 		14F5853A24E4DD9300DAD96D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14F5853924E4DD9300DAD96D /* Assets.xcassets */; };
@@ -29,7 +30,6 @@
 		14F5855C24E5C27500DAD96D /* OrderDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5855B24E5C27500DAD96D /* OrderDetailsVC.swift */; };
 		14F5855F24E5C2C500DAD96D /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5855E24E5C2C500DAD96D /* Order.swift */; };
 		14F5856124E6094100DAD96D /* OrderDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5856024E6094100DAD96D /* OrderDetailsCell.swift */; };
-		14F5856B24E7503200DAD96D /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5856A24E7503200DAD96D /* Checkbox.swift */; };
 		5867DA4C24B14A719AEC1310 /* Pods_SwickServerIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 076E0DB4397FA8B7A7D7B8AD /* Pods_SwickServerIOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +43,7 @@
 		14E55D592524025600CCC29A /* ToCookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToCookCell.swift; sourceTree = "<group>"; };
 		14E55D5B2524DF0500CCC29A /* ToSendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToSendVC.swift; sourceTree = "<group>"; };
 		14E55D5D2524DF5900CCC29A /* ToSendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToSendCell.swift; sourceTree = "<group>"; };
+		14E55D5F25254D7E00CCC29A /* OrderOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderOptions.swift; sourceTree = "<group>"; };
 		14F5852D24E4DD9100DAD96D /* SwickServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwickServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14F5853024E4DD9100DAD96D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14F5853724E4DD9100DAD96D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -59,7 +60,6 @@
 		14F5855B24E5C27500DAD96D /* OrderDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsVC.swift; sourceTree = "<group>"; };
 		14F5855E24E5C2C500DAD96D /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		14F5856024E6094100DAD96D /* OrderDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsCell.swift; sourceTree = "<group>"; };
-		14F5856A24E7503200DAD96D /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		43A439B29A497B9B5B1E603C /* Pods-SwickServerIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwickServerIOS.debug.xcconfig"; path = "Target Support Files/Pods-SwickServerIOS/Pods-SwickServerIOS.debug.xcconfig"; sourceTree = "<group>"; };
 		AA574FDCAD24252756AEA8AE /* Pods-SwickServerIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwickServerIOS.release.xcconfig"; path = "Target Support Files/Pods-SwickServerIOS/Pods-SwickServerIOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -131,9 +131,9 @@
 			isa = PBXGroup;
 			children = (
 				14F5854A24E4E2A900DAD96D /* Helper.swift */,
+				14E55D5F25254D7E00CCC29A /* OrderOptions.swift */,
 				14F5854824E4E28700DAD96D /* API.swift */,
 				14F5854C24E4E30D00DAD96D /* Constants.swift */,
-				14F5856A24E7503200DAD96D /* Checkbox.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -302,13 +302,13 @@
 				14F5854F24E4E4E600DAD96D /* SettingsVC.swift in Sources */,
 				147BFFEF250B65EB006985EF /* LoginEmailVC.swift in Sources */,
 				14F5855C24E5C27500DAD96D /* OrderDetailsVC.swift in Sources */,
+				14E55D6025254D7E00CCC29A /* OrderOptions.swift in Sources */,
 				14F5855F24E5C2C500DAD96D /* Order.swift in Sources */,
 				14F5853124E4DD9100DAD96D /* AppDelegate.swift in Sources */,
 				14F5854624E4E24100DAD96D /* LoginVC.swift in Sources */,
 				14E55D5C2524DF0500CCC29A /* ToSendVC.swift in Sources */,
 				14E55D582524023900CCC29A /* ToCookVC.swift in Sources */,
 				14F5854D24E4E30D00DAD96D /* Constants.swift in Sources */,
-				14F5856B24E7503200DAD96D /* Checkbox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

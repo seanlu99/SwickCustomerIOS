@@ -53,7 +53,7 @@ class OrderVC: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "OrderToOrderDetails" {
             let orderDetailsVC = segue.destination as! OrderDetailsVC
-            orderDetailsVC.order = orders[(tableView.indexPathForSelectedRow?.row) ?? 0]
+            orderDetailsVC.orderId = orders[(tableView.indexPathForSelectedRow?.row) ?? 0].id
         }
     }
     
@@ -73,7 +73,7 @@ class OrderVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrderCell", for: indexPath) as! OrderCell
         let order = orders[indexPath.row]
-        cell.restaurantNameLabel.text = order.restaurantName
+        cell.restaurantNameLabel.text = order.restaurant
         cell.timeLabel.text = Helper.convertDateToString(order.time)
         cell.statusLabel.text = order.status
         return cell
