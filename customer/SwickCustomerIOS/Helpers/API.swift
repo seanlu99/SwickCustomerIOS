@@ -106,6 +106,22 @@ class API {
         let path = "api/customer/get_meal/\(mealId)/"
         request(path, completion: completion)
     }
+    
+    // Get request options
+    static func getRequestOptions(_ restaurantId: Int, completion: @escaping (JSON) -> Void) {
+        let path = "api/customer/get_request_options/\(restaurantId)/"
+        request(path, completion: completion)
+    }
+    
+    // Make request
+    static func makeRequest(_ requestOptionId: Int, table: Int, completion: @escaping (JSON) -> Void) {
+        let path = "api/customer/make_request/"
+        let params = [
+            "request_option_id": requestOptionId,
+            "table": table
+        ]
+        authRequest(path, method: .post, parameters: params, completion: completion)
+    }
 
     // Place order
     static func placeOrder(_ restaurantId: Int, _ table: Int, _ methodId: String, completion: @escaping (JSON) -> Void) {

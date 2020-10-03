@@ -32,7 +32,7 @@ class OrderOptions {
     // Create options alert with given actions
     static func createAlert(_ actions: [UIAlertAction]) -> UIAlertController {
         let alertView = UIAlertController(
-            title: "Options",
+            title: "Order options",
             message: nil,
             preferredStyle: .alert
         )

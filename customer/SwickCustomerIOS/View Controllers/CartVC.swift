@@ -18,21 +18,20 @@ class CartVC: UIViewController {
     @IBOutlet weak var placeOrderButton: UIButton!
     @IBOutlet weak var selectPaymentButton: UIButton!
     
-    let activityIndicator = UIActivityIndicatorView()
+    let requestAlert = UIAlertController(title: "Request", message: nil, preferredStyle: .alert)
     
     // Restaurant scanned in previous view
     var restaurant: Restaurant!
     // Table scanned in previous view
     var table: Int!
+    // List of request options
+    var requestOptions = [RequestOption]()
     // Selected payment method
     var card: Card!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Enable dynamic table view cell height
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 60
-        
+        createRequestAlert()
         toggleViews()
     }
     
@@ -62,8 +61,41 @@ class CartVC: UIViewController {
         }
     }
     
+    // Load request options and add actions to alert
+    func createRequestAlert() {
+        API.getRequestOptions(restaurant.id) { json in
+            if (json["status"] == "success") {
+                self.requestOptions = []
+                // optionsList = array of JSON request options
+                let optionsList = json["request_options"].array ?? []
+                // option = a JSON request option
+                for option in optionsList {
+                    let r = RequestOption(json: option)
+                    self.requestOptions.append(r)
+                }
+                
+                // Add actions to request alert
+                for r in self.requestOptions {
+                    let newAction = UIAlertAction(title: r.name, style: .default) { _ in
+                        API.makeRequest(r.id, table: self.table) { json in
+                            if (json["status"] == "request_in_progress") {
+                                Helper.alert(self, message: "Request already sent")
+                            }
+                            else if (json["status"] != "success") {
+                                Helper.alert(self)
+                            }
+                        }
+                    }
+                    self.requestAlert.addAction(newAction)
+                }
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+                self.requestAlert.addAction(cancelAction)
+            }
+        }
+    }
+    
     // Format payment button to show either "select payment" or card
-    func formatPaymentButton(){
+    func formatPaymentButton() {
         var brandImage: UIImage?
         var cardInfo: String?
          
@@ -72,24 +104,10 @@ class CartVC: UIViewController {
             cardInfo = "  \(c.brand) \(c.last4)".capitalized
         }
         else {
-            cardInfo = "SELECT PAYMENT"
+            cardInfo = "Select payment"
         }
         selectPaymentButton.setTitle(cardInfo, for: .normal)
         selectPaymentButton.setImage(brandImage?.withRenderingMode(.alwaysOriginal), for: .normal)
-    }
-    
-    // Send restaurant object to categories VC and set cameFromCart flag
-    // to true when "Add items to cart" button is clicked
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "CartToCategory" {
-            let categoryVC = segue.destination as! CategoryVC
-            categoryVC.restaurant = restaurant
-            categoryVC.cameFromCart = true
-        }
-        if segue.identifier == "CartToPaymentMethods" {
-            let paymentMethodsVC = segue.destination as! PaymentMethodsVC
-            paymentMethodsVC.previousView = "CartVC"
-        }
     }
     
     @IBAction func leaveRestaurant(_ sender: UIBarButtonItem) {
@@ -102,6 +120,14 @@ class CartVC: UIViewController {
         alert.addAction(okAction)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func requestButtonClicked(_ sender: Any) {
+        self.present(requestAlert, animated: true)
+    }
+    
+    @IBAction func selectPayment(_ sender: Any) {
+        performSegue(withIdentifier: "CartToPaymentMethods", sender: self)
     }
     
     @IBAction func placeOrder(_ sender: Any) {
@@ -203,10 +229,21 @@ class CartVC: UIViewController {
         
     }
     
-    @IBAction func selectPayment(_ sender: Any) {
-        performSegue(withIdentifier: "CartToPaymentMethods", sender: self)
-    }
     @IBAction func unwindToCart( _ seg: UIStoryboardSegue) { }
+    
+    // Send restaurant object to categories VC and set cameFromCart flag
+    // to true when "Add items to cart" button is clicked
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CartToCategory" {
+            let categoryVC = segue.destination as! CategoryVC
+            categoryVC.restaurant = restaurant
+            categoryVC.cameFromCart = true
+        }
+        if segue.identifier == "CartToPaymentMethods" {
+            let paymentMethodsVC = segue.destination as! PaymentMethodsVC
+            paymentMethodsVC.previousView = "CartVC"
+        }
+    }
 }
 
 extension CartVC: UITableViewDelegate, UITableViewDataSource {
