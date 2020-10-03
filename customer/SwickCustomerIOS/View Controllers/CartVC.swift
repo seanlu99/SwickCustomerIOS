@@ -220,7 +220,14 @@ class CartVC: UIViewController {
                         }
                     }
                 }
-                else{
+                // Check if any of selected meals have been disabled
+                else if (json["status"] == "meal_disabled") {
+                    let disabled_meal = json["meal_name"].string ?? ""
+                    let alertMessage = disabled_meal + " has been disabled by the restaurant. Please remove it from your cart and try again."
+                    Helper.alert(self, message: alertMessage)
+                    self.placeOrderButton.isEnabled = true
+                }
+                else {
                     Helper.alert(self, message: "Failed to place order. Please try again.")
                     self.placeOrderButton.isEnabled = true
                 }

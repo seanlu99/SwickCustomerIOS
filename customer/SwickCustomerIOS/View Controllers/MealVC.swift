@@ -56,6 +56,19 @@ class MealVC: UIViewController {
                 // Reload table view after getting meal data from server
                 self.tableView.reloadData()
             }
+            // Check if meal has been disabled
+            else if (json["status"] == "meal_disabled") {
+                let alertView = UIAlertController(
+                    title: "Error",
+                    message: "Meal has been disabled by restaurant",
+                    preferredStyle: .alert
+                )
+                let returnAction = UIAlertAction(title: "Return to menu", style: .default) { _ in
+                    self.performSegue(withIdentifier: "unwindFromMealToMenu", sender: self)
+                }
+                alertView.addAction(returnAction)
+                self.present(alertView, animated: true)
+            }
             else {
                 Helper.alert(self, message: "Failed to get meal. Please restart app and try again.")
             }
