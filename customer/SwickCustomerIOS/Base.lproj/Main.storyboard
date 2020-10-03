@@ -444,6 +444,11 @@
                                 <action selector="leaveRestaurant:" destination="5bS-NI-N8V" id="qhQ-4G-hi9"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Request" id="fjy-Px-V5Z">
+                            <connections>
+                                <action selector="requestButtonClicked:" destination="5bS-NI-N8V" id="FE1-eK-QDe"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="emptyLabel" destination="fbo-WB-v7J" id="F7G-XF-CcV"/>
@@ -1752,7 +1757,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Mtb-UT-5fv"/>
+        <segue reference="cKw-xy-tMa"/>
         <segue reference="DHK-HO-fuY"/>
     </inferredMetricsTieBreakers>
     <resources>

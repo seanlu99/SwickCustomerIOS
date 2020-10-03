@@ -14,63 +14,85 @@ class ToSendVC: UIViewController {
     // Label for no restaurant set
     let noRestaurantLabel = UILabel()
     
-    // Array of all order items
-    var items = [OrderItem]()
+    // Array of all order/request items
+    var items = [Any]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         Helper.addNoRestaurantLabel(self.view, noRestaurantLabel)
-        loadOrderItems()
+        loadItems()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        loadOrderItems()
+        loadItems()
     }
     
     @IBAction func refresh(_ sender: Any) {
-        loadOrderItems()
+        loadItems()
     }
     
     @IBAction func sendButtonClicked(_ sender: UIButton) {
-        let orderItemId = items[sender.tag].id
-        API.updateOrderItemStatus(orderItemId, "COMPLETE") { json in
-            if (json["status"] == "success") {
-                // Reload table view after updating order
-                self.loadOrderItems()
-                self.tableView.reloadData()
+        let item = items[sender.tag]
+        // Update order item status if cell contains order item
+        if item is OrderItem {
+            let orderItem = item as! OrderItem
+            API.updateOrderItemStatus(orderItem.id, "COMPLETE") { json in
+                if (json["status"] == "success") {
+                    // Reload table view after updating order
+                    self.loadItems()
+                }
+                else {
+                    Helper.alert(self, message: "Failed to update order. Please restart app and try again.")
+                }
             }
-            else {
-                Helper.alert(self, message: "Failed to update order. Please restart app and try again.")
-            }
+        }
+        // Delete request if cell contains request
+        else if item is Request {
+            let request = item as! Request
+            deleteRequest(request.id)
         }
     }
     // Load restaurant data from API call to table view
-    func loadOrderItems() {
-        API.getOrderItemsToSend { json in
-            if (json["status"] == "success") {
+    func loadItems() {
+        API.getItemsToSend { json in
+            if (json["status"] == "restaurant_not_set") {
+                // Hide table view and display no restaurant label
+                self.tableView.isHidden = true
+                self.noRestaurantLabel.isHidden = false
+            }
+            else {
                 self.items = []
-                // itemsList = array of JSON order items
-                let itemsList = json["order_items"].array ?? []
-                // item = a JSON order item
+                // itemsList = array of JSON items
+                let itemsList = json.array ?? []
+                // item = a JSON item
                 for item in itemsList {
-                    // i = order item object
-                    let i = OrderItem(json: item)
-                    self.items.append(i)
+                    // Create order item
+                    if item["type"] == "OrderItem" {
+                        self.items.append(OrderItem(json: item))
+                    }
+                    // Create request
+                    else if item["type"] == "Request" {
+                        self.items.append(Request(json: item))
+                    }
                 }
-                // Reload table view after getting order data from server
+                // Reload table view after getting data from server
                 self.tableView.reloadData()
                 
                 // Display table view and hide no restaurant label
                 self.tableView.isHidden = false
                 self.noRestaurantLabel.isHidden = true
             }
-            else if (json["status"] == "restaurant_not_set") {
-                // Hide table view and display no restaurant label
-                self.tableView.isHidden = true
-                self.noRestaurantLabel.isHidden = false
+        }
+    }
+    
+    // Delete request
+    func deleteRequest(_ id: Int) {
+        API.deleteRequest(id) { json in
+            if (json["status"] == "success") {
+                self.loadItems()
             }
             else {
-                Helper.alert(self, message: "Failed to get orders. Please click refresh to try again.")
+                Helper.alert(self)
             }
         }
     }
@@ -79,7 +101,8 @@ class ToSendVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ToSendToOrderDetails" {
             let orderDetailsVC = segue.destination as! OrderDetailsVC
-            orderDetailsVC.orderId = items[(tableView.indexPathForSelectedRow?.row) ?? 0].orderId
+            let orderItem = items[(tableView.indexPathForSelectedRow?.row) ?? 0] as! OrderItem
+            orderDetailsVC.orderId = orderItem.orderId
         }
     }
 }
@@ -99,9 +122,22 @@ extension ToSendVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToSendCell", for: indexPath) as! ToSendCell
         let item = items[indexPath.row]
-        cell.tableLabel.text = item.table
-        cell.customerLabel.text = item.customer
-        cell.mealNameLabel.text = item.mealName
+        // If cell contains an order item
+        if item is OrderItem {
+            let orderItem = item as! OrderItem
+            cell.tableLabel.text = orderItem.table
+            cell.customerLabel.text = orderItem.customer
+            cell.mealNameLabel.text = orderItem.mealName
+        }
+        // If cell contains a request
+        else if item is Request {
+            let request = item as! Request
+            cell.tableLabel.text = request.table
+            cell.customerLabel.text = request.customer
+            cell.mealNameLabel.text = request.requestName
+        }
+        // Save row in button
+        cell.sendButton.tag = indexPath.row
         return cell
     }
     
@@ -109,10 +145,29 @@ extension ToSendVC: UITableViewDelegate, UITableViewDataSource {
         // Make grey row selection disappear
         tableView.deselectRow(at: indexPath, animated: true)
         
-        // Present options
-        let orderItemId = items[indexPath.row].id
-        OrderOptions.presentSendAlert(self, orderItemId, true) {
-            self.loadOrderItems()
+        let item = items[indexPath.row]
+        // Present order options for order item
+        if item is OrderItem {
+            let orderItem = item as! OrderItem
+            OrderOptions.presentSendAlert(self, orderItem.id, true) {
+                self.loadItems()
+            }
+        }
+        // Present request options for request
+        else if item is Request {
+            let request = item as! Request
+            let alertView = UIAlertController(
+                title: "Request options",
+                message: nil,
+                preferredStyle: .alert
+            )
+            let sendAction = UIAlertAction(title: "Finish sending", style: .default) { _ in
+                self.deleteRequest(request.id)
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            alertView.addAction(sendAction)
+            alertView.addAction(cancelAction)
+            self.present(alertView, animated: true)
         }
     }
 }

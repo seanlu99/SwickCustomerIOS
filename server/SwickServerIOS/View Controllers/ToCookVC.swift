@@ -37,7 +37,6 @@ class ToCookVC: UIViewController {
             if (json["status"] == "success") {
                 // Reload table view after updating order
                 self.loadOrderItems()
-                self.tableView.reloadData()
             }
             else {
                 Helper.alert(self, message: "Failed to update order. Please restart app and try again.")

@@ -16,6 +16,7 @@
 		14E55D5C2524DF0500CCC29A /* ToSendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E55D5B2524DF0500CCC29A /* ToSendVC.swift */; };
 		14E55D5E2524DF5900CCC29A /* ToSendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E55D5D2524DF5900CCC29A /* ToSendCell.swift */; };
 		14E55D6025254D7E00CCC29A /* OrderOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E55D5F25254D7E00CCC29A /* OrderOptions.swift */; };
+		14E55D622527D43D00CCC29A /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E55D612527D43D00CCC29A /* Request.swift */; };
 		14F5853124E4DD9100DAD96D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5853024E4DD9100DAD96D /* AppDelegate.swift */; };
 		14F5853824E4DD9100DAD96D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14F5853624E4DD9100DAD96D /* Main.storyboard */; };
 		14F5853A24E4DD9300DAD96D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14F5853924E4DD9300DAD96D /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 		14E55D5B2524DF0500CCC29A /* ToSendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToSendVC.swift; sourceTree = "<group>"; };
 		14E55D5D2524DF5900CCC29A /* ToSendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToSendCell.swift; sourceTree = "<group>"; };
 		14E55D5F25254D7E00CCC29A /* OrderOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderOptions.swift; sourceTree = "<group>"; };
+		14E55D612527D43D00CCC29A /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		14F5852D24E4DD9100DAD96D /* SwickServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwickServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14F5853024E4DD9100DAD96D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14F5853724E4DD9100DAD96D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				14F5855E24E5C2C500DAD96D /* Order.swift */,
+				14E55D612527D43D00CCC29A /* Request.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				14E55D52251BFDB600CCC29A /* AccountDetailsVC.swift in Sources */,
 				14F5854924E4E28700DAD96D /* API.swift in Sources */,
 				14E55D56251C115200CCC29A /* NameVC.swift in Sources */,
+				14E55D622527D43D00CCC29A /* Request.swift in Sources */,
 				14E55D5E2524DF5900CCC29A /* ToSendCell.swift in Sources */,
 				14E55D5A2524025600CCC29A /* ToCookCell.swift in Sources */,
 				14F5855524E5B65E00DAD96D /* OrdersVC.swift in Sources */,

@@ -102,8 +102,8 @@ class API {
     }
     
     // Get orders to send
-    static func getOrderItemsToSend(completion: @escaping (JSON) -> Void) {
-        let path = "api/server/get_order_items_to_send/"
+    static func getItemsToSend(completion: @escaping (JSON) -> Void) {
+        let path = "api/server/get_items_to_send/"
         authRequest(path, completion: completion)
     }
     
@@ -113,6 +113,15 @@ class API {
         let params: [String: Any] = [
             "order_item_id": orderItemId,
             "status": status,
+        ]
+        authRequest(path, method: .post, parameters: params, completion: completion)
+    }
+    
+    // Delete request
+    static func deleteRequest(_ id: Int, completion: @escaping (JSON) -> Void) {
+        let path = "api/server/delete_request/"
+        let params: [String: Any] = [
+            "id": id
         ]
         authRequest(path, method: .post, parameters: params, completion: completion)
     }
