@@ -16,7 +16,7 @@ class MenuVC: UIViewController {
     // Restaurant clicked on two views ago
     var restaurant: Restaurant!
     // Category clicked on in previous view
-    var category: String!
+    var category: Category!
     // If this view was derived from cart VC
     var cameFromCart = false
     // Array of all meals
@@ -27,7 +27,7 @@ class MenuVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set navigation bar title to restaurant name
-        self.title = category
+        self.title = category.name
         // Hide cart button if view derived from home
         if (!cameFromCart) {
             self.navigationItem.rightBarButtonItem = nil
@@ -37,7 +37,7 @@ class MenuVC: UIViewController {
     
     // Load restaurant data from API call to table view
     func loadMeals() {
-        API.getMenu(restaurant.id, category) { json in
+        API.getMenu(restaurant.id, category.id) { json in
             if (json["status"] == "success") {
                 self.menu = []
                 // mealList = array of JSON meals

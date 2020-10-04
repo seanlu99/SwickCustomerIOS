@@ -18,9 +18,9 @@ class CategoryVC: UIViewController {
     // If the previous view was cart
     var cameFromCart = false
     // Array of all categories
-    var categories = [String]()
+    var categories = [Category]()
     // Array of searched categories
-    var searchedCategories = [String]()
+    var searchedCategories = [Category]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +37,12 @@ class CategoryVC: UIViewController {
     func loadCategories() {
         API.getCategories(restaurant.id) { json in
             if (json["status"] == "success") {
-                self.categories = ["All"]
-                // mealList = array of JSON meal
-                let mealList = json["categories"].array ?? []
-                // meal = a JSON meal
-                for meal in mealList {
-                    let c = meal["category"].string ?? ""
+                self.categories = [Category(0, "All")]
+                // categoryList = array of JSON categories
+                let categoryList = json["categories"].array ?? []
+                // category = a JSON category
+                for category in categoryList {
+                    let c = Category(json: category)
                     self.categories.append(c)
                 }
                 // Reload table view after getting category data from server
@@ -78,9 +78,9 @@ extension CategoryVC: UISearchBarDelegate {
     
     // Update searched categories array when text is changed in search bar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchedCategories = self.categories.filter({ (c: String) -> Bool in
+        searchedCategories = self.categories.filter({ (c: Category) -> Bool in
             // Compare categories with search text
-            return c.lowercased().range(of: searchText.lowercased()) != nil
+            return c.name.lowercased().range(of: searchText.lowercased()) != nil
         })
         
         // Reload table view after search
@@ -113,7 +113,7 @@ extension CategoryVC: UITableViewDelegate, UITableViewDataSource {
     // Properties for each cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
-        let category: String
+        let category: Category
             
         // If search bar is being used
         if searchBar.text != "" {
@@ -123,7 +123,7 @@ extension CategoryVC: UITableViewDelegate, UITableViewDataSource {
         else {
             category = categories[indexPath.row]
         }
-        cell.name.text = category
+        cell.name.text = category.name
         
         return cell
     }

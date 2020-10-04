@@ -96,8 +96,8 @@ class API {
     }
 
     // Get menu
-    static func getMenu(_ restaurantId: Int, _ category: String, completion: @escaping (JSON) -> Void) {
-        let path = "api/customer/get_menu/\(restaurantId)/\(category)/"
+    static func getMenu(_ restaurantId: Int, _ categoryId: Int, completion: @escaping (JSON) -> Void) {
+        let path = "api/customer/get_menu/\(restaurantId)/\(categoryId)/"
         request(path, completion: completion)
     }
 
