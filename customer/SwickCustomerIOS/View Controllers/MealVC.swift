@@ -22,11 +22,11 @@ class MealVC: UIViewController {
     // Array of all customizations
     var customizations = [Customization]()
     // Meal price with customizations
-    var adjustedPrice: Double = 0
+    var adjustedPrice: Decimal = 0
     // Initial quantity
     var quantity = 1
     // Adjusted price * quantity
-    var total: Double = 0
+    var total: Decimal = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +77,7 @@ class MealVC: UIViewController {
     
     // Update total and total label
     func updateTotal() {
-        total = adjustedPrice * Double(quantity)
+        total = adjustedPrice * Decimal(quantity)
         totalLabel.text = Helper.formatPrice(total)
     }
     

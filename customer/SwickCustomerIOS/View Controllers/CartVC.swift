@@ -10,13 +10,19 @@ import UIKit
 import Stripe
 
 class CartVC: UIViewController {
+
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var pricesView: UIStackView!
+    
+    @IBOutlet weak var subtotalPriceLabel: UILabel!
+    @IBOutlet weak var taxPriceLabel: UILabel!
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var emptyLabel: UILabel!
+    
     @IBOutlet weak var placeOrderButton: UIButton!
     @IBOutlet weak var selectPaymentButton: UIButton!
+    @IBOutlet weak var pricesViewHeightConstraint: NSLayoutConstraint!
     
     let requestAlert = UIAlertController(title: "Request", message: nil, preferredStyle: .alert)
     
@@ -44,17 +50,25 @@ class CartVC: UIViewController {
         tableView.reloadData()
         // If there are no meals in cart
         if Cart.shared.items.count == 0 {
-            totalLabel.isHidden = true
-            totalPriceLabel.isHidden = true
+            // set prices view height for empty cart label
+            pricesViewHeightConstraint.constant = 60
+            // hide views
+            pricesView.isHidden = true
             placeOrderButton.isHidden = true
             selectPaymentButton.isHidden = true
             emptyLabel.isHidden = false
         }
         // If there are meals in cart
         else {
-            totalLabel.isHidden = false
-            totalPriceLabel.isHidden = false
-            totalPriceLabel.text = Cart.shared.getTotal()
+            // recalculate new cart totals
+            Cart.shared.recalculateCart()
+            totalPriceLabel.text = Helper.formatPrice(Cart.shared.total)
+            subtotalPriceLabel.text = Helper.formatPrice(Cart.shared.subtotal)
+            taxPriceLabel.text = Helper.formatPrice(Cart.shared.tax)
+            // set prices view height for subviews
+            pricesViewHeightConstraint.constant = 150
+            // unhide views
+            pricesView.isHidden = false
             placeOrderButton.isHidden = false
             selectPaymentButton.isHidden = false
             emptyLabel.isHidden = true 

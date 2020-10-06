@@ -24,16 +24,24 @@ class Order {
 }
 
 class OrderDetails {
+
     var restaurant: String
     var time: Date
-    var total: Double
+    var subtotal: Decimal
+    var tax: Decimal
+    var total: Decimal
     var items = [OrderItem]()
     
     init(json: JSON) {
+        let subtotalStr = json["subtotal"].string ?? ""
+        let taxStr = json["tax"].string ?? ""
+        let totalStr = json["total"].string ?? ""
+
         self.restaurant = json["restaurant"].string ?? ""
         self.time = Helper.convertStringToDate(json["order_time"].string ?? "")
-        let t = json["total"].string ?? ""
-        self.total = Double(t) ?? 0
+        self.subtotal = Decimal(string: subtotalStr) ?? 0
+        self.tax = Decimal(string: taxStr) ?? 0
+        self.total = Decimal(string: totalStr) ?? 0
         
         // Extract order items from json
         let itemsList = json["order_item"].array ?? []
@@ -47,7 +55,7 @@ class OrderDetails {
 class OrderItem {
     var mealName: String
     var quantity: String
-    var total: Double
+    var total: Decimal
     var status: String
     var customizations: [OrderItemCustomization] = []
     
@@ -55,7 +63,7 @@ class OrderItem {
         self.mealName = json["meal_name"].string ?? ""
         self.quantity = String(describing: json["quantity"].int ?? 0)
         let t = json["total"].string ?? ""
-        self.total = Double(t) ?? 0
+        self.total = Decimal(string: t) ?? 0 //Convert back
         self.status = json["status"].string ?? ""
         
         // Extract customizations from json
