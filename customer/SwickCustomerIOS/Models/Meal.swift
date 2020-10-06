@@ -13,15 +13,19 @@ class Meal {
     var id: Int
     var name: String
     var description: String
-    var price: Double
+    var price: Decimal
+    var tax: Decimal
     var image: String
     
     init(json: JSON) {
+        let price_str = json["price"].string ?? ""
+        let tax_str = json["tax"].string ?? ""
+        
         self.id = json["id"].int ?? -1
         self.name = json["name"].string ?? ""
         self.description = json["description"].string ?? ""
-        let p = json["price"].string ?? ""
-        self.price = Double(p) ?? 0
+        self.price = Decimal(string: price_str) ?? 0
+        self.tax = Decimal(string: tax_str) ?? 0
         self.image = json["image"].string ?? ""
     }
 }

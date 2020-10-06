@@ -11,14 +11,21 @@ import Foundation
 class Cart {
     static let shared = Cart()
     var items = [CartItem]()
+    var subtotal: Decimal = 0
+    var tax: Decimal = 0
+    var total: Decimal = 0
     
-    // Get total of cart
-    func getTotal() -> String {
-        var total: Double = 0
+    func recalculateCart(){
+        var temp_subtotal: Decimal = 0
+        var temp_tax: Decimal = 0
+        
         for item in items {
-            total += item.total
+            temp_subtotal += item.total
+            temp_tax += item.total * item.meal.tax/100
         }
-        return Helper.formatPrice(total)
+        tax = temp_tax
+        subtotal = temp_subtotal
+        total = tax + subtotal
     }
     
     // Reset cart
@@ -30,10 +37,10 @@ class Cart {
 class CartItem {
     var meal: Meal
     var quantity: Int
-    var total: Double
+    var total: Decimal
     var customizations: [Customization]
     
-    init(_ meal: Meal, _ quantity: Int, _ total: Double, _ customizations: [Customization]) {
+    init(_ meal: Meal, _ quantity: Int, _ total: Decimal, _ customizations: [Customization]) {
         self.meal = meal
         self.quantity = quantity
         self.total = total

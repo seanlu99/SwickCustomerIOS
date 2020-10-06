@@ -12,9 +12,15 @@ import UIKit
 // Helper methods
 class Helper {
     
-    // Format double as price
-    static func formatPrice(_ price: Double) -> String {
-        return String(format: "$%.2f", price)
+    // Format decimal as price
+    static func formatPrice(_ price: Decimal) -> String {
+        var roundedTax: Decimal = Decimal()
+        var price = price
+        NSDecimalRound(&roundedTax, &price, 2, .plain)
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        return "\(formatter.string(from: price as NSDecimalNumber) ?? "")"
     }
     
     // Convert string to date

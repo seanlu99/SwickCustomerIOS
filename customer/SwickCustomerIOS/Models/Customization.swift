@@ -25,7 +25,7 @@ class Customization {
         for (opt, addition) in zip(optionsList, additionsList) {
             let o = opt.string ?? ""
             let add = addition.string ?? ""
-            let a = Double(add) ?? 0
+            let a = Decimal(string: add) ?? 0
             options.append(Option(o, a))
         }
         self.min = json["min"].int ?? 0
@@ -35,10 +35,10 @@ class Customization {
 
 class Option {
     var name: String
-    var priceAddition: Double
+    var priceAddition: Decimal
     var isChecked: Bool
     
-    init(_ name: String, _ addition: Double) {
+    init(_ name: String, _ addition: Decimal) {
         self.name = name
         self.priceAddition = addition
         self.isChecked = false

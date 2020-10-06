@@ -20,14 +20,12 @@ class ScanVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var table: Int?
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
+        super.viewDidLoad()        
         // If in development environment, override QR code scanning
         if DEVELOPMENT {
             found(code: SCANNED_STRING)
             return
         }
-
         view.backgroundColor = UIColor.black
         captureSession = AVCaptureSession()
         

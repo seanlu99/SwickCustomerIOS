@@ -11,6 +11,8 @@ import UIKit
 class OrderDetailsVC: UIViewController {
     
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var subtotalLabel: UILabel!
+    @IBOutlet weak var taxLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
@@ -41,6 +43,8 @@ class OrderDetailsVC: UIViewController {
                 // Set navigation bar title to restaurant name
                 self.title = self.orderDetails.restaurant
                 self.timeLabel.text = Helper.convertDateToString(self.orderDetails.time)
+                self.subtotalLabel.text = Helper.formatPrice(self.orderDetails.subtotal)
+                self.taxLabel.text = Helper.formatPrice(self.orderDetails.tax)
                 self.totalLabel.text = Helper.formatPrice(self.orderDetails.total)
                 // Reload table view after getting order details data from server
                 self.tableView.reloadData()
