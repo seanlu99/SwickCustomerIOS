@@ -27,13 +27,15 @@ class Helper {
     static func convertStringToDate(_ str: String) -> Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mmZ"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
         return formatter.date(from: str) ?? Date()
     }
-    
+
     // Convert date to string
     static func convertDateToString(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd/yy h:mma"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
         return formatter.string(from: date)
     }
     
