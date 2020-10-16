@@ -23,10 +23,7 @@ struct LoginCodeView: View {
             // If token successfully retrieved
             else {
                 UserDefaults.standard.set(token, forKey: "token")
-                // Create acocunt on backend and switch to tab view
-                API.createAccount { _ in
-                    user.loggedIn = true
-                }
+                user.hasToken = true
             }
         }
     }

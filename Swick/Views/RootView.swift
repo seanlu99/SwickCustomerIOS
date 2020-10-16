@@ -9,33 +9,30 @@ import SwiftUI
 
 struct RootView: View {
     @EnvironmentObject var user: UserData
-    @State var tabIndex = 0
+    @State var showSetNameSheet = false
+    
+    func login() {
+        API.login() { json in
+            if json["status"] == "name_not_set" {
+                showSetNameSheet = true
+            }
+            // If token invalid, remove token
+            else if json["status"] != "success" {
+                UserDefaults.standard.removeObject(forKey: "token")
+                user.hasToken = false
+            }
+        }
+    }
     
     var body: some View {
-        if user.loggedIn {
-            #if CUSTOMER
-            UIKitTabView(selectedIndex: $tabIndex) {
-                HomeView()
-                    .tab(title: "Home", image: "house.fill")
-                ScanView(tabIndex: $tabIndex)
-                    .tab(title: "Cart", image: "cart.fill")
-                OrdersView()
-                    .tab(title: "Orders", image: "tray.full.fill")
-                SettingsView()
-                    .tab(title: "Settings", image: "gear")
-            }
-            #else
-            UIKitTabView {
-                ToCookView()
-                    .tab(title: "To cook", image: "flame.fill")
-                ToSendView()
-                    .tab(title: "To send", image: "arrowshape.turn.up.right.fill")
-                OrdersView()
-                    .tab(title: "All", image: "tray.full.fill")
-                SettingsView()
-                    .tab(title: "Settings", image: "gear")
-            }
-            #endif
+        if user.hasToken {
+            RootTabView()
+                .onAppear(perform: login)
+                // Show undismissable set name sheet if name not set
+                .sheet(isPresented: $showSetNameSheet) {
+                    SetNameView()
+                        .allowAutoDismiss { false }
+                }
         }
         else {
             LoginView()

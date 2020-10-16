@@ -12,7 +12,7 @@ struct SettingsView: View {
     
     func logout() {
         UserDefaults.standard.removeObject(forKey: "token")
-        user.loggedIn = false
+        user.hasToken = false
     }
     
     var body: some View {

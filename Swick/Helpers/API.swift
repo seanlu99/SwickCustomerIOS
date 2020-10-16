@@ -83,8 +83,8 @@ class API {
     // ##### CUSTOMER API #####
     #if CUSTOMER
     
-    static func createAccount(completion: @escaping (JSON) -> Void) {
-        let path = "api/customer/create_account/"
+    static func login(completion: @escaping (JSON) -> Void) {
+        let path = "api/customer/login/"
         authRequest(path, method: .post, completion: completion)
     }
     
@@ -219,8 +219,8 @@ class API {
     // ##### SERVER API #####
     #else
     
-    static func createAccount(completion: @escaping (JSON) -> Void) {
-        let path = "api/server/create_account/"
+    static func login(completion: @escaping (JSON) -> Void) {
+        let path = "api/server/login/"
         authRequest(path, method: .post, completion: completion)
     }
     

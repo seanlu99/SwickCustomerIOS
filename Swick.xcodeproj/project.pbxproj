@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		14308708253826A00059D6A5 /* OrderItemOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14308707253826A00059D6A5 /* OrderItemOptions.swift */; };
+		144E0AFE2539530800C202C1 /* SetNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0AFD2539530800C202C1 /* SetNameView.swift */; };
+		144E0AFF2539530800C202C1 /* SetNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0AFD2539530800C202C1 /* SetNameView.swift */; };
+		144E0B03253954EF00C202C1 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0B02253954EF00C202C1 /* RootTabView.swift */; };
+		144E0B04253954EF00C202C1 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0B02253954EF00C202C1 /* RootTabView.swift */; };
+		144E0B20253970EB00C202C1 /* ModalHackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0B1F253970EB00C202C1 /* ModalHackView.swift */; };
+		144E0B21253970EB00C202C1 /* ModalHackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0B1F253970EB00C202C1 /* ModalHackView.swift */; };
 		147F06A42537C305002FF616 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06A32537C305002FF616 /* AppDelegate.swift */; };
 		147F06A62537C305002FF616 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06A52537C305002FF616 /* SceneDelegate.swift */; };
 		147F06AD2537C30B002FF616 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 147F06AC2537C30B002FF616 /* Preview Assets.xcassets */; };
@@ -118,6 +124,9 @@
 /* Begin PBXFileReference section */
 		12E98DFDC54FAF43FE97FAFB /* Pods_Server.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Server.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		14308707253826A00059D6A5 /* OrderItemOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemOptions.swift; sourceTree = "<group>"; };
+		144E0AFD2539530800C202C1 /* SetNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameView.swift; sourceTree = "<group>"; };
+		144E0B02253954EF00C202C1 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
+		144E0B1F253970EB00C202C1 /* ModalHackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalHackView.swift; sourceTree = "<group>"; };
 		147F06A02537C305002FF616 /* Customer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Customer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		147F06A32537C305002FF616 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		147F06A52537C305002FF616 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -218,6 +227,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		144E0B1025395AB100C202C1 /* TabView */ = {
+			isa = PBXGroup;
+			children = (
+				144E0B02253954EF00C202C1 /* RootTabView.swift */,
+				144E0AFD2539530800C202C1 /* SetNameView.swift */,
+			);
+			path = TabView;
+			sourceTree = "<group>";
+		};
 		147F06972537C304002FF616 = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +303,7 @@
 			children = (
 				147F06F82537C48D002FF616 /* ContentView.swift */,
 				147F06EF2537C48D002FF616 /* RootView.swift */,
+				144E0B1025395AB100C202C1 /* TabView */,
 				147F06F92537C48D002FF616 /* Login */,
 				147F06E62537C48D002FF616 /* Restaurant */,
 				147F06F02537C48D002FF616 /* Cart */,
@@ -357,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				147F06F62537C48D002FF616 /* UIKitTabView.swift */,
+				144E0B1F253970EB00C202C1 /* ModalHackView.swift */,
 				147F06F72537C48D002FF616 /* SetupRepresentable.swift */,
 				147F06F52537C48D002FF616 /* PaymentRepresentable.swift */,
 				147F06F42537C48D002FF616 /* StripePaymentCardTextField.swift */,
@@ -629,6 +649,7 @@
 				147F077C2537C99C002FF616 /* RequestOption.swift in Sources */,
 				147F07862537C9B3002FF616 /* API.swift in Sources */,
 				147F07472537C92D002FF616 /* CartView.swift in Sources */,
+				144E0B20253970EB00C202C1 /* ModalHackView.swift in Sources */,
 				147F07722537C985002FF616 /* UserData.swift in Sources */,
 				147F075D2537C955002FF616 /* ThumbnailImage.swift in Sources */,
 				147F07782537C996002FF616 /* Customization.swift in Sources */,
@@ -647,6 +668,7 @@
 				147F077E2537C9A0002FF616 /* OrderItem.swift in Sources */,
 				147F07402537C922002FF616 /* CustomizationSection.swift in Sources */,
 				147F06A42537C305002FF616 /* AppDelegate.swift in Sources */,
+				144E0AFE2539530800C202C1 /* SetNameView.swift in Sources */,
 				147F077F2537C9A3002FF616 /* Card.swift in Sources */,
 				147F073F2537C91F002FF616 /* MealDetailsView.swift in Sources */,
 				147F07462537C92B002FF616 /* ScanView.swift in Sources */,
@@ -659,6 +681,7 @@
 				147F075E2537C957002FF616 /* BlueText.swift in Sources */,
 				147F07362537C915002FF616 /* HomeView.swift in Sources */,
 				147F07642537C965002FF616 /* ItemRow.swift in Sources */,
+				144E0B03253954EF00C202C1 /* RootTabView.swift in Sources */,
 				147F074C2537C936002FF616 /* OrderDetailsView.swift in Sources */,
 				147F072D2537C8FD002FF616 /* LoginView.swift in Sources */,
 				147F07392537C917002FF616 /* RestaurantRow.swift in Sources */,
@@ -701,10 +724,12 @@
 				147F07FB2537EABE002FF616 /* ItemRow.swift in Sources */,
 				147F07FE2537EAC1002FF616 /* CustomizationsView.swift in Sources */,
 				147F07C12537D873002FF616 /* BlueButton.swift in Sources */,
+				144E0B21253970EB00C202C1 /* ModalHackView.swift in Sources */,
 				147F07F52537EAB8002FF616 /* TotalsView.swift in Sources */,
 				147F079B2537D01C002FF616 /* AppDelegate.swift in Sources */,
 				147F07CA2537DA4A002FF616 /* SettingsView.swift in Sources */,
 				147F07EF2537E9E2002FF616 /* OrderItem.swift in Sources */,
+				144E0B04253954EF00C202C1 /* RootTabView.swift in Sources */,
 				147F07A42537D1B2002FF616 /* ContentView.swift in Sources */,
 				14308708253826A00059D6A5 /* OrderItemOptions.swift in Sources */,
 				147F07C42537D87A002FF616 /* RoundTextField.swift in Sources */,
@@ -714,6 +739,7 @@
 				147F07C72537D891002FF616 /* BlueText.swift in Sources */,
 				147F07A72537D1B8002FF616 /* RootView.swift in Sources */,
 				147F07EC2537E9D4002FF616 /* OrderDetailsView.swift in Sources */,
+				144E0AFF2539530800C202C1 /* SetNameView.swift in Sources */,
 				14F4835325390761001FC039 /* ToCookView.swift in Sources */,
 				147F07BC2537D231002FF616 /* Helper.swift in Sources */,
 			);

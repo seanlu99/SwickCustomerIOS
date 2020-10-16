@@ -8,7 +8,7 @@
 import SwiftUI
 
 final class UserData: ObservableObject {
-    @Published var loggedIn = false
+    @Published var hasToken = false
     #if CUSTOMER
     @Published var cart = [CartItem]()
     #endif

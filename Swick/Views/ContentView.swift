@@ -10,13 +10,13 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var user: UserData
     
-    func checkIfLoggedIn() {
-        user.loggedIn = UserDefaults.standard.string(forKey: "token") != nil
+    func checkIfTokenSet() {
+        user.hasToken = UserDefaults.standard.string(forKey: "token") != nil
     }
     
     var body: some View {
         RootView()
-            .onAppear(perform: checkIfLoggedIn)
+            .onAppear(perform: checkIfTokenSet)
     }
 }
 

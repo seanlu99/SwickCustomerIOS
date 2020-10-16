@@ -10,10 +10,10 @@ import SwiftUI
 
 struct CartView: View {
     enum AlertState { case success, error, leave }
-
+    
     @EnvironmentObject var user: UserData
-    @Environment(\.presentationMode) var presentationMode
-
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @State var requestOptions = [RequestOption]()
     @State var card: Card? = nil
     @State var attemptOrder = false
@@ -224,11 +224,16 @@ struct CartView: View {
                 )
                 
             case .leave:
-                return Alert(title: Text("Leave restaurant?"),
-                             message: Text("Cart will be cleared"),
-                             primaryButton: .default(Text("Ok"), action: {
-                                self.presentationMode.wrappedValue.dismiss()}),
-                             secondaryButton: .cancel())
+                return Alert(
+                    title: Text("Leave restaurant?"),
+                    message: Text("Cart will be cleared"),
+                    primaryButton: .default(
+                        Text("Ok"),
+                        action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+                    ),
+                    secondaryButton: .cancel())
             }
         }
         // Wrapper view around payment caller view controller
