@@ -1,0 +1,24 @@
+//
+//  Customization.swift
+//  Swick
+//
+//  Created by Sean Lu on 10/7/20.
+//
+
+import Foundation
+
+struct Customization: Identifiable {
+    var id: Int
+    var name: String
+    var min: Int?
+    var max: Int?
+    var numChecked = 0
+    var options = [Option]()
+}
+
+struct Option: Identifiable {
+    var id: Int
+    var name: String
+    var priceAddition: Decimal?
+    var isChecked: Bool = true
+}

@@ -3,5 +3,4 @@ Pods/
 *.xcuserstate
 xcuserdata/
 project.xcworkspace/
-SwickCustomerIOS.xcworkspace
-SwickServerIOS.xcworkspace
+Swick.xcworkspace
