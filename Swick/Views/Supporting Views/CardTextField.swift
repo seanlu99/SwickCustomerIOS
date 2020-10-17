@@ -9,6 +9,7 @@ import SwiftUI
 import Stripe
 
 struct CardTextField: View {
+    // Properties
     @Binding var cardParams: STPPaymentMethodCardParams
     @Binding var isValid: Bool
     

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RectangleImage: View {
+    // Properties
     var url: String
     var width = UIScreen.width - 40
     

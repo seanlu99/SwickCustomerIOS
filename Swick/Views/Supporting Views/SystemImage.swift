@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SystemImage: View {
-    
+    // Properties
     var name: String
     var width: CGFloat = 40.0
     var height: CGFloat = 40.0

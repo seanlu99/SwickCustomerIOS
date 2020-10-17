@@ -10,6 +10,7 @@ import Combine
 import Foundation
 
 class ImageLoader: ObservableObject {
+    // Properties
     @Published var image: UIImage?
     private let url: URL
 

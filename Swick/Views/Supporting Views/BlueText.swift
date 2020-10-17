@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BlueText: View {
+    // Properties
     var text: String
     
     var body: some View {

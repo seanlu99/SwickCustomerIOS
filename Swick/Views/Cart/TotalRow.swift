@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TotalRow: View {
+    // Properties
     var text: String
     var total: Decimal
     

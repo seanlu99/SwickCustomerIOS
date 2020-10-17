@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct SetNameView: View {
+    // Initial
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    // Alerts
+    @State var showAlert = false
+    // Properties
     @State var name: String = ""
-    @State var showErrorAlert = false
     
     func updateName() {
         if name == "" {
-            showErrorAlert = true
+            showAlert = true
         }
         API.updateUserInfo(name, "") { json in
             if (json["status"] == "success") {
@@ -39,7 +42,7 @@ struct SetNameView: View {
             Spacer()
         }
         .padding()
-        .alert(isPresented: $showErrorAlert, content: {
+        .alert(isPresented: $showAlert, content: {
             Alert(
                 title: Text("Error"),
                 message: Text("Please enter a name.")

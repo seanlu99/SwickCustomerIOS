@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SettingsRow: View {
+    // Properties
     var imageName: String
     var text: String
     

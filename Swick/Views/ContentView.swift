@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    // Initial
     @EnvironmentObject var user: UserData
     
     func checkIfTokenSet() {

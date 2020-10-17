@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct MealDetailsView: View {
+    // Initial
     @EnvironmentObject var user: UserData
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var viewDidLoad = false
+    // Alerts
+    @State var showAlert = false
+    // Properties
     @State var customizations = [Customization]()
-    // Meal price with customization price additions
-    @State var price: Decimal = 0
+    @State var price: Decimal = 0 // including price additions
     @State var quantity = 1
-    @State var showMinNotSelectedAlert = false
     var meal: Meal
     
     func loadMeal() {
@@ -98,7 +100,7 @@ struct MealDetailsView: View {
         
         // If minimum customizations not selected
         else {
-            showMinNotSelectedAlert = true
+            showAlert = true
         }
     }
     
@@ -161,7 +163,7 @@ struct MealDetailsView: View {
         }
         .buttonStyle(PlainButtonStyle())
         .navigationBarTitle(Text(meal.name))
-        .alert(isPresented: $showMinNotSelectedAlert) {
+        .alert(isPresented: $showAlert) {
             Alert(
                 title: Text("Error"),
                 message: Text("Please select minimum number of options for each customization")

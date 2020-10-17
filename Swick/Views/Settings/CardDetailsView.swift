@@ -9,13 +9,16 @@ import SwiftUI
 import Stripe.STPImageLibrary
 
 struct CardDetailsView: View {
+    // Initial
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State var attemptDelete = false
+    // Alerts
     @State var showAlert = false
     @State var alertMessage = ""
+    // Properties
+    @State var attemptDelete = false
     var card: Card
     var cardImage: UIImage
-
+    
     init(card: Card) {
         self.card = card
         self.cardImage = STPImageLibrary.brandImage(for: STPCard.brand(from: card.brand))

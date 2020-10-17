@@ -9,40 +9,44 @@ import SwiftUI
 
 
 struct CartView: View {
-    enum AlertState { case success, error, leave }
     
+    // Initial
     @EnvironmentObject var user: UserData
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
-    @State var requestOptions = [RequestOption]()
-    @State var card: Card? = nil
-    @State var attemptOrder = false
-    @State var params: PlaceOrderParamsWrapper?
+    @State var viewDidLoad = false
+    @Binding var tabIndex: Int
     // Popups
     @State var showRequestActionSheet = false
     @State var showMenu = false
     @State var showPaymentMethods = false
     // Alerts
-    @State var showAlert = false
+    enum AlertState { case success, error, leave }
     @State var alertState = AlertState.error
-    @State var errorAlertMessage = ""
-    // Selected tab index
-    @Binding var tabIndex: Int
+    @State var showAlert = false
+    @State var alertMessage = ""
+    // Properties
+    @State var requestOptions = [RequestOption]()
+    @State var card: Card? = nil
+    @State var attemptOrder = false
+    @State var params: PlaceOrderParamsWrapper?
     
     var restaurant: Restaurant
     var table: Int
     
     func loadRequestOptions() {
-        API.getRequestOptions(restaurant.id) { json in
-            if (json["status"] == "success") {
-                self.requestOptions = []
-                let optionsList = json["request_options"].array ?? []
-                for option in optionsList {
-                    let r = RequestOption(
-                        id: option["id"].int ?? 0,
-                        name: option["name"].string ?? ""
-                    )
-                    self.requestOptions.append(r)
+        if !viewDidLoad {
+            viewDidLoad = true
+            API.getRequestOptions(restaurant.id) { json in
+                if (json["status"] == "success") {
+                    self.requestOptions = []
+                    let optionsList = json["request_options"].array ?? []
+                    for option in optionsList {
+                        let r = RequestOption(
+                            id: option["id"].int ?? 0,
+                            name: option["name"].string ?? ""
+                        )
+                        self.requestOptions.append(r)
+                    }
                 }
             }
         }
@@ -53,7 +57,7 @@ struct CartView: View {
             Alert.Button.default(Text(option.name)) {
                 API.makeRequest(option.id, table: table) { json in
                     if (json["status"] == "request_in_progress") {
-                        errorAlertMessage = "Request already sent"
+                        alertMessage = "Request already sent"
                         alertState = .error
                         showAlert = true
                     }
@@ -96,7 +100,7 @@ struct CartView: View {
             attemptOrder = true
         }
         else {
-            errorAlertMessage = "Please select a card"
+            alertMessage = "Please select a card"
         }
     }
     
@@ -107,7 +111,7 @@ struct CartView: View {
             alertState = .success
         }
         else {
-            errorAlertMessage = message
+            alertMessage = message
             alertState = .error
         }
         showAlert = true
@@ -220,7 +224,7 @@ struct CartView: View {
             case .error:
                 return Alert(
                     title: Text("Error"),
-                    message: Text(errorAlertMessage)
+                    message: Text(alertMessage)
                 )
                 
             case .leave:

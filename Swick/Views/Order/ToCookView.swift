@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ToCookView: View {
+    // Properties
     @State var items = [OrderItem]()
     
     func loadOrderItems() {

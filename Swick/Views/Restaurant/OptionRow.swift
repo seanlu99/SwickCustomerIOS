@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OptionRow: View {
+    // Properties
     @Binding var customization: Customization
     @Binding var option: Option
     @Binding var price: Decimal

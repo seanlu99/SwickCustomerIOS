@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CustomizationSection: View {
+    // Properties
     @Binding var customization: Customization
     @Binding var price: Decimal
     

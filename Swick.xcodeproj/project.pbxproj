@@ -329,10 +329,10 @@
 				147F06DB2537C48D002FF616 /* OrderDetailsView.swift */,
 				144E0B2D253A246100C202C1 /* OrderItemsSection.swift */,
 				144E0B28253A207A00C202C1 /* OrderItemRow.swift */,
-				14F483432539074B001FC039 /* ToCookRow.swift */,
 				14F483452539074C001FC039 /* ToCookView.swift */,
-				14F483422539074B001FC039 /* ToSendRow.swift */,
+				14F483432539074B001FC039 /* ToCookRow.swift */,
 				14F483442539074C001FC039 /* ToSendView.swift */,
+				14F483422539074B001FC039 /* ToSendRow.swift */,
 			);
 			path = Order;
 			sourceTree = "<group>";

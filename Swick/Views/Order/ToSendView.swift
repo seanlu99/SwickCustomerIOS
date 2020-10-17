@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ToSendView: View {
+    // Properties
     @State var items = [OrderItemOrRequest]()
     
     func loadItems() {

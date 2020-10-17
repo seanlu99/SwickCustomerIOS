@@ -9,29 +9,35 @@ import SwiftUI
 import Introspect
 
 struct MealsView: View {
+    // Initial
+    @State var viewDidLoad = false
+    // Properties
+    @State var tableView: UITableView?
     @State var meals = [Meal]()
     var restaurantId: Int
     var category: Category
     var cameFromCart: Bool
-    @State var tableView: UITableView?
     
     func loadMeals() {
-        API.getMeals(restaurantId, category.id) { json in
-            if (json["status"] == "success") {
-                meals = []
-                let mealList = json["meals"].array ?? []
-                for meal in mealList {
-                    let price_str = meal["price"].string ?? ""
-                    let tax_str = meal["tax"].string ?? ""
-                    let m = Meal(
-                        id: meal["id"].int ?? 0,
-                        name: meal["name"].string ?? "",
-                        description: meal["description"].string ?? "",
-                        price: Decimal(string: price_str) ?? 0,
-                        tax: Decimal(string: tax_str) ?? 0,
-                        imageUrl: meal["image"].string ?? ""
-                    )
-                    meals.append(m)
+        if !viewDidLoad {
+            viewDidLoad = true
+            API.getMeals(restaurantId, category.id) { json in
+                if (json["status"] == "success") {
+                    meals = []
+                    let mealList = json["meals"].array ?? []
+                    for meal in mealList {
+                        let price_str = meal["price"].string ?? ""
+                        let tax_str = meal["tax"].string ?? ""
+                        let m = Meal(
+                            id: meal["id"].int ?? 0,
+                            name: meal["name"].string ?? "",
+                            description: meal["description"].string ?? "",
+                            price: Decimal(string: price_str) ?? 0,
+                            tax: Decimal(string: tax_str) ?? 0,
+                            imageUrl: meal["image"].string ?? ""
+                        )
+                        meals.append(m)
+                    }
                 }
             }
         }

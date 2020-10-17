@@ -7,7 +7,9 @@
 import SwiftUI
 
 struct PaymentMethodsView: View {
+    // Initial
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    // Properties
     @State var cards = [Card]()
     @Binding var selectedCard: Card?
     var cameFromCart: Bool = false
@@ -45,11 +47,11 @@ struct PaymentMethodsView: View {
                 else {
                     Button(
                         action: {
-                           selectedCard = c
-                           presentationMode.wrappedValue.dismiss()
+                            selectedCard = c
+                            presentationMode.wrappedValue.dismiss()
                         }
                     ) {
-                    CardRow(c)
+                        CardRow(c)
                     }
                 }
             }

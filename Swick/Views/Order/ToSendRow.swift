@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct ToSendRow: View {
+    // Popups
     @State var showOrderItemOptionsActionSheet = false
     @State var showRequestOptionsActionSheet = false
     @State var showOrderDetails: Bool = false
+    // Properties
     var reloadItems: () -> ()
     var item: OrderItemOrRequest
     

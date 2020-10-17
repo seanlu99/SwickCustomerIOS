@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RestaurantRow: View {
+    // Properties
     var restaurant: Restaurant
     
     var body: some View {

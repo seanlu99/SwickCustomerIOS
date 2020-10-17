@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MealRow: View {
+    // Properties
     var meal: Meal
     
     var body: some View {

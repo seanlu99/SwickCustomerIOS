@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OrderItemsSection: View {
+    // Properties
     var header: String
     var items: [OrderItem]
     var reloadItems: () -> ()

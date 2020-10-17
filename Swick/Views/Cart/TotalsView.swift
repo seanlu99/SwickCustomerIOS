@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TotalsView: View {
+    // Properties
     var subtotal: Decimal
     var tax: Decimal
     var tip: Decimal?

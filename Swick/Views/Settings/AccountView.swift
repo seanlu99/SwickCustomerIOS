@@ -8,22 +8,29 @@
 import SwiftUI
 
 struct AccountView: View {
-    @State var name = ""
-    @State var email = ""
+    // Initial
+    @State var viewDidLoad = false
+    // Alerts
     @State var showAlert = false
     @State var alertMessage = ""
+    // Properties
+    @State var name = ""
+    @State var email = ""
     #if SERVER
     @State var restaurantName = ""
     #endif
     
     func loadUserInfo() {
-        API.getUserInfo{ json in
-            if json["status"] == "success" {
-                name = json["name"].string ?? ""
-                email = json["email"].string ?? ""
-                #if SERVER
-                restaurantName = json["restaurant_name"].string ?? ""
-                #endif
+        if !viewDidLoad {
+            viewDidLoad = true
+            API.getUserInfo{ json in
+                if json["status"] == "success" {
+                    name = json["name"].string ?? ""
+                    email = json["email"].string ?? ""
+                    #if SERVER
+                    restaurantName = json["restaurant_name"].string ?? ""
+                    #endif
+                }
             }
         }
     }

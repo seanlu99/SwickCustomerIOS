@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RootTabView: View {
+    // Initial
     @State var tabIndex = 0
     
     var body: some View {

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AccountRow: View {
+    // Properties
     @Binding var text: String
     var fieldName: String
     var placeholder: String

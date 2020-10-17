@@ -10,13 +10,16 @@ import Stripe
 import UIKit
 
 struct AddCardView: View {
+    // Initial
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    // Alerts
+    @State var showAlert = false
+    // Properties
     @State var cardParams = STPPaymentMethodCardParams()
     @State var isValid = false
     @State var attemptSetup = false
     @State var params: CardParamsWrapper?
     @State var alertMessage = ""
-    @State var showAlert = false
     
     func handleResponse(_ successful: Bool,_ message: String){
         if successful {

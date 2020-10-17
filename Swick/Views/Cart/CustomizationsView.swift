@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CustomizationsView: View {
+    // Properties
     var customizations: [Customization]
     
     var body: some View {

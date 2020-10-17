@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ThumbnailImage: View {
+    // Properties
     var url: String
     
     var body: some View {

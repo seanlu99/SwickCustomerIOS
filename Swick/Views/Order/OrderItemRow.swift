@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct OrderItemRow: View {
+    // Popups
     @State var showOptionsActionSheet = false
+    // Properties
     var item: OrderItem
     var reloadItems: () -> ()
     

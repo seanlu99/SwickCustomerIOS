@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct LoginEmailView: View {
-    @State var email: String = ""
+    // Popups
     @State var showCodeView = false
+    // Alerts
     @State var showAlert = false
     @State var alertMessage = ""
+    // Properties
+    @State var email: String = ""
     
     func sendPressed() {
         if !Helper.isValidEmail(email) {

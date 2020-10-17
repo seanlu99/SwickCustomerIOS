@@ -10,7 +10,14 @@ import CarBode
 import AVFoundation
 
 struct ScanView: View {
+    // Initial
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Binding var tabIndex: Int
+    // Popups
+    @State var showCartView = false
+    // Alerts
+    @State var showAlert = false
+    // Properties
     @State var isScanning = true
     @State var scannedRestaurant = Restaurant(
         id: 0,
@@ -19,10 +26,7 @@ struct ScanView: View {
         imageUrl: ""
     )
     @State var scannedTable: Int = 0
-    @State var showCartView = false
-    @State var showInvalidAlert = false
-    @Binding var tabIndex: Int
-    
+   
     func loadRestaurant(_ restaurantId: Int, _ table: Int) {
         API.getRestaurant(restaurantId) { json in
             if (json["status"] == "success") {
@@ -37,7 +41,7 @@ struct ScanView: View {
                 showCartView = true
             }
             else if (json["status"] == "restaurant_does_not_exist") {
-                showInvalidAlert = true
+                showAlert = true
             }
         }
     }
@@ -57,7 +61,7 @@ struct ScanView: View {
                         let scannedString = $0.value
                         let scannedArray = scannedString.components(separatedBy: "-")
                         if scannedArray.count != 3 {
-                            showInvalidAlert = true
+                            showAlert = true
                             return
                         }
                         let swickString = scannedArray[0]
@@ -66,7 +70,7 @@ struct ScanView: View {
                         if swickString != "swick"
                             || restaurantId == nil
                             || table == nil {
-                            showInvalidAlert = true
+                            showAlert = true
                             return
                         }
                         loadRestaurant(restaurantId!, table!)
@@ -86,7 +90,7 @@ struct ScanView: View {
                     isActive: $showCartView
                 ) { }
             )
-            .alert(isPresented: $showInvalidAlert) {
+            .alert(isPresented: $showAlert) {
                 let okButton = Alert.Button.default(Text("Ok")) {
                     isScanning = true
                 }

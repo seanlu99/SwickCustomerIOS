@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct WhiteButton: View {
+    // Properties
     var text: String
     var action: () -> Void
     

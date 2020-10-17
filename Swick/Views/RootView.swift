@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct RootView: View {
+    // Initial
     @EnvironmentObject var user: UserData
+    // Popups
     @State var showSetNameSheet = false
     
     func login() {

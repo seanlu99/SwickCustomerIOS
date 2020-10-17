@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
+    // Initial
     @EnvironmentObject var user: UserData
     
     func logout() {

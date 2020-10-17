@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct LoginCodeView: View {
+    // Initial
     @EnvironmentObject var user: UserData
+    // Alerts
+    @State var showAlert = false
+    // Properties
     @State var code: String = ""
-    @State var showInvalidAlert = false
     var email: String
     
     func enterPressed() {
@@ -18,7 +21,7 @@ struct LoginCodeView: View {
             let token = json["token"].string
             // If token unsuccessfully retrieved
             if token == nil {
-                showInvalidAlert = true
+                showAlert = true
             }
             // If token successfully retrieved
             else {
@@ -41,7 +44,7 @@ struct LoginCodeView: View {
         }
         .padding()
         .background(Color("LightBlue").edgesIgnoringSafeArea(.all))
-        .alert(isPresented: $showInvalidAlert) {
+        .alert(isPresented: $showAlert) {
             return Alert(
                 title: Text("Error"),
                 message: Text("Invalid verfication code. Please try again.")

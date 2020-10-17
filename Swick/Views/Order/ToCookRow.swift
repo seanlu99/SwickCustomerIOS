@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct ToCookRow: View {
+    // Popups
     @State var showOptionsActionSheet = false
     @State var showOrderDetails: Bool = false
+    // Properties
     var reloadOrderItems: () -> ()
     var item: OrderItem
     

@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftyJSON
 
 struct OrderDetailsView: View {
+    // Properties
     @State var cookingOrderItems = [OrderItem]()
     @State var sendingOrderItems = [OrderItem]()
     @State var completeOrderItems = [OrderItem]()

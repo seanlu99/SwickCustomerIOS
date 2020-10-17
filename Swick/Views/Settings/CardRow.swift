@@ -9,6 +9,7 @@ import SwiftUI
 import Stripe.STPImageLibrary
 
 struct CardRow: View {
+    // Properties
     var cardImage: UIImage
     var card: Card
     
@@ -25,7 +26,8 @@ struct CardRow: View {
                 .frame(width:45, height: 30)
             Text("\(card.brand.capitalized) \(card.last4)")
             Spacer()
-        }.padding(.vertical)
+        }
+        .padding(.vertical)
     }
 }
 

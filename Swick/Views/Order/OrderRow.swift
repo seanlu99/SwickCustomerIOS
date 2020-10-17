@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OrderRow: View {
+    // Properties
     var order: Order
     
     var body: some View {

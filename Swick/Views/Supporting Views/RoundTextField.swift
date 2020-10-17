@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RoundTextField: View {
+    // Properties
     @Binding var text: String
     var placeholder: String
     var isEmail = false

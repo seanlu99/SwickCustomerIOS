@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OrdersView: View {
+    // Properties
     @State var orders = [Order]()
     
     func loadOrders() {

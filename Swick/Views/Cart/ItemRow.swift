@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ItemRow: View {
+    // Properties
     var quantity: Int
     var mealName: String
     var total: Decimal?
