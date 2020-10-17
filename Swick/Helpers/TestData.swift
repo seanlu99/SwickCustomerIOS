@@ -23,29 +23,21 @@ let testOption2 = Option(
 let testCustomization1 = Customization(
     id: 1,
     name: "Size",
-    min: 1,
-    max: 1,
-    numChecked: 2,
     options: [testOption1, testOption2]
 )
 let testOption3 = Option(
     id: 3,
     name: "Lettuce",
-    priceAddition: 0,
-    isChecked: false
+    priceAddition: 0
 )
 let testOption4 = Option(
     id: 4,
     name: "Tomatoes",
-    priceAddition: 0.50,
-    isChecked: false
+    priceAddition: 0.50
 )
 let testCustomization2 = Customization(
     id: 2,
     name: "Toppings",
-    min: 0,
-    max: 2,
-    numChecked: 0,
     options: [testOption3, testOption4]
 )
 let testCustomizations = [testCustomization1, testCustomization2]

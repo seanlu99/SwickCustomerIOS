@@ -24,8 +24,11 @@ struct ItemRow: View {
                 Text(mealName)
                     .font(.title)
                     .lineLimit(1)
-                // Only show customizations if they are checked
-                if customizations.contains(where: {$0.numChecked > 0}) {
+                // Only show customizations if they are not checkable
+                // Or are checkable and have at least 1 option checked
+                if customizations.contains(
+                    where: {!$0.isCheckable || $0.numChecked > 0}
+                ) {
                     CustomizationsView(customizations: customizations)
                 }
             }

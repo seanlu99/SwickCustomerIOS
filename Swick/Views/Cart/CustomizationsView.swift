@@ -11,22 +11,17 @@ struct CustomizationsView: View {
     var customizations: [Customization]
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             ForEach(customizations) { c in
-                VStack(alignment: .leading) {
-                    // Only display customization if at least 1 option is checked
-                    if c.numChecked > 0 {
-                        Text(c.name)
-                    }
-                    ForEach(c.options, id: \.name) { o in
-                        // Only display checked options
-                        if o.isChecked {
+                Text(c.name)
+                ForEach(c.options, id: \.name) { o in
+                    // Only show option if customization is not checkable
+                    // Or is checkable and option is checked
+                    if !c.isCheckable || o.isChecked {
                         Text("- " + o.name)
                             .font(.subheadline)
-                        }
                     }
                 }
-                .lineLimit(1)
             }
         }
         .foregroundColor(/*@START_MENU_TOKEN@*/.gray/*@END_MENU_TOKEN@*/)

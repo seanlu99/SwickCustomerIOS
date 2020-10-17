@@ -226,7 +226,7 @@ struct CartView: View {
             case .leave:
                 return Alert(
                     title: Text("Leave restaurant?"),
-                    message: Text("Cart will be cleared"),
+                    message: Text("Your cart will be cleared"),
                     primaryButton: .default(
                         Text("Ok"),
                         action: {

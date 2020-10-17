@@ -14,6 +14,10 @@
 		144E0B04253954EF00C202C1 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0B02253954EF00C202C1 /* RootTabView.swift */; };
 		144E0B20253970EB00C202C1 /* ModalHackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0B1F253970EB00C202C1 /* ModalHackView.swift */; };
 		144E0B21253970EB00C202C1 /* ModalHackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0B1F253970EB00C202C1 /* ModalHackView.swift */; };
+		144E0B29253A207B00C202C1 /* OrderItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0B28253A207A00C202C1 /* OrderItemRow.swift */; };
+		144E0B2A253A207B00C202C1 /* OrderItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0B28253A207A00C202C1 /* OrderItemRow.swift */; };
+		144E0B2E253A246100C202C1 /* OrderItemsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0B2D253A246100C202C1 /* OrderItemsSection.swift */; };
+		144E0B2F253A246100C202C1 /* OrderItemsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0B2D253A246100C202C1 /* OrderItemsSection.swift */; };
 		147F06A42537C305002FF616 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06A32537C305002FF616 /* AppDelegate.swift */; };
 		147F06A62537C305002FF616 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06A52537C305002FF616 /* SceneDelegate.swift */; };
 		147F06AD2537C30B002FF616 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 147F06AC2537C30B002FF616 /* Preview Assets.xcassets */; };
@@ -127,6 +131,8 @@
 		144E0AFD2539530800C202C1 /* SetNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameView.swift; sourceTree = "<group>"; };
 		144E0B02253954EF00C202C1 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
 		144E0B1F253970EB00C202C1 /* ModalHackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalHackView.swift; sourceTree = "<group>"; };
+		144E0B28253A207A00C202C1 /* OrderItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemRow.swift; sourceTree = "<group>"; };
+		144E0B2D253A246100C202C1 /* OrderItemsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemsSection.swift; sourceTree = "<group>"; };
 		147F06A02537C305002FF616 /* Customer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Customer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		147F06A32537C305002FF616 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		147F06A52537C305002FF616 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -321,6 +327,8 @@
 				147F06DC2537C48D002FF616 /* OrdersView.swift */,
 				147F06DA2537C48D002FF616 /* OrderRow.swift */,
 				147F06DB2537C48D002FF616 /* OrderDetailsView.swift */,
+				144E0B2D253A246100C202C1 /* OrderItemsSection.swift */,
+				144E0B28253A207A00C202C1 /* OrderItemRow.swift */,
 				14F483432539074B001FC039 /* ToCookRow.swift */,
 				14F483452539074C001FC039 /* ToCookView.swift */,
 				14F483422539074B001FC039 /* ToSendRow.swift */,
@@ -674,12 +682,14 @@
 				147F07462537C92B002FF616 /* ScanView.swift in Sources */,
 				147F07752537C98D002FF616 /* Meal.swift in Sources */,
 				147F07692537C970002FF616 /* TotalRow.swift in Sources */,
+				144E0B2E253A246100C202C1 /* OrderItemsSection.swift in Sources */,
 				147F076C2537C977002FF616 /* UIKitTabView.swift in Sources */,
 				147F07602537C95B002FF616 /* WhiteText.swift in Sources */,
 				147F07822537C9AC002FF616 /* Constants.swift in Sources */,
 				147F06A62537C305002FF616 /* SceneDelegate.swift in Sources */,
 				147F075E2537C957002FF616 /* BlueText.swift in Sources */,
 				147F07362537C915002FF616 /* HomeView.swift in Sources */,
+				144E0B29253A207B00C202C1 /* OrderItemRow.swift in Sources */,
 				147F07642537C965002FF616 /* ItemRow.swift in Sources */,
 				144E0B03253954EF00C202C1 /* RootTabView.swift in Sources */,
 				147F074C2537C936002FF616 /* OrderDetailsView.swift in Sources */,
@@ -702,6 +712,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				144E0B2A253A207B00C202C1 /* OrderItemRow.swift in Sources */,
 				147F07A12537D0A0002FF616 /* UserData.swift in Sources */,
 				147F07F82537EABA002FF616 /* TotalRow.swift in Sources */,
 				147F07B92537D22C002FF616 /* Constants.swift in Sources */,
@@ -709,6 +720,7 @@
 				147F07B32537D206002FF616 /* LoginCodeView.swift in Sources */,
 				14F48371253907CD001FC039 /* SystemImage.swift in Sources */,
 				147F07CD2537DA6A002FF616 /* AccountView.swift in Sources */,
+				144E0B2F253A246100C202C1 /* OrderItemsSection.swift in Sources */,
 				147F080A2537EB72002FF616 /* Customization.swift in Sources */,
 				147F07EB2537E9D2002FF616 /* OrderRow.swift in Sources */,
 				147F07AD2537D1F9002FF616 /* LoginView.swift in Sources */,

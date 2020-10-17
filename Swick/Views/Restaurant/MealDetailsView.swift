@@ -10,6 +10,7 @@ import SwiftUI
 struct MealDetailsView: View {
     @EnvironmentObject var user: UserData
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State var viewDidLoad = false
     @State var customizations = [Customization]()
     // Meal price with customization price additions
     @State var price: Decimal = 0
@@ -18,37 +19,40 @@ struct MealDetailsView: View {
     var meal: Meal
     
     func loadMeal() {
-        // Initialize price
-        price = meal.price
-        API.getMeal(meal.id) { json in
-            if (json["status"] == "success") {
-                customizations = []
-                let customizationList = json["customizations"].array ?? []
-                // Build customizations array
-                for customization in customizationList {
-                    var cust = Customization(
-                        id: customization["id"].int ?? 0,
-                        name:  customization["name"].string ?? "",
-                        min: customization["min"].int ?? 0,
-                        max: customization["max"].int ?? 0
-                    )
-                    // Build options array
-                    let optionsList = customization["options"].array ?? []
-                    let additionsList = customization["price_additions"].array ?? []
-                    for (i, opt) in optionsList.enumerated() {
-                        let o = opt.string ?? ""
-                        let add = additionsList[i].string ?? ""
-                        let a = Decimal(string: add) ?? 0
-                        cust.options.append(
-                            Option(
-                                id: i,
-                                name: o,
-                                priceAddition: a,
-                                isChecked: false
-                            )
+        if !viewDidLoad {
+            viewDidLoad = true
+            // Initialize price
+            price = meal.price
+            API.getMeal(meal.id) { json in
+                if (json["status"] == "success") {
+                    customizations = []
+                    let customizationList = json["customizations"].array ?? []
+                    // Build customizations array
+                    for customization in customizationList {
+                        var cust = Customization(
+                            id: customization["id"].int ?? 0,
+                            name:  customization["name"].string ?? "",
+                            isCheckable: true,
+                            min: customization["min"].int ?? 0,
+                            max: customization["max"].int ?? 0
                         )
+                        // Build options array
+                        let optionsList = customization["options"].array ?? []
+                        let additionsList = customization["price_additions"].array ?? []
+                        for (i, opt) in optionsList.enumerated() {
+                            let o = opt.string ?? ""
+                            let add = additionsList[i].string ?? ""
+                            let a = Decimal(string: add) ?? 0
+                            cust.options.append(
+                                Option(
+                                    id: i,
+                                    name: o,
+                                    priceAddition: a
+                                )
+                            )
+                        }
+                        customizations.append(cust)
                     }
-                    customizations.append(cust)
                 }
             }
         }
@@ -145,6 +149,7 @@ struct MealDetailsView: View {
                             .foregroundColor(.white)
                             .padding(.trailing, 15.0)
                             .frame(width: geo.size.width, height: geo.size.height, alignment: .trailing)
+                            // onAppear moved here because price was not being initialized in iOS 13
                             .onAppear(perform: loadMeal)
                     }
                 }

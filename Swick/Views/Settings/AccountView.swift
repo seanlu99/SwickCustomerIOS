@@ -66,7 +66,7 @@ struct AccountView: View {
                 isEmail: true
             )
             #if SERVER
-            VStack() {
+            VStack(alignment: .leading) {
                 Text("Restaurant name")
                     .fontWeight(.semibold)
                     .padding(.bottom, 1.0)

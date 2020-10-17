@@ -6,25 +6,23 @@
 //
 
 import SwiftUI
+import SwiftyJSON
 
 struct OrderDetailsView: View {
-    @State var orderItems = [OrderItem]()
-    @State var showOptionsActionSheet = false
+    @State var cookingOrderItems = [OrderItem]()
+    @State var sendingOrderItems = [OrderItem]()
+    @State var completeOrderItems = [OrderItem]()
     #if CUSTOMER
     @State var order: Order = Order(id: 0, time: Date(), restaurantName: "")
     #else
     @State var order: Order = Order(id: 0, time: Date(), customerName: "")
-    @State var orderItemIdPressed = 0
-    @State var orderItemStatusPressed = ""
-    // Dummy state
-    @State var showOrderDetails = false
     #endif
     var orderId: Int
     
     func loadOrderDetails() {
         API.getOrderDetails(orderId) { json in
             if (json["status"] == "success") {
-                // Add to order
+                // Build order
                 let details = json["order_details"]
                 let subtotalStr = details["subtotal"].string ?? ""
                 let taxStr = details["tax"].string ?? ""
@@ -40,35 +38,44 @@ struct OrderDetailsView: View {
                 order.table = String(describing: details["table"].int ?? 0)
                 #endif
                 
-                // Build order items array
-                orderItems = []
-                let itemsList = details["order_item"].array ?? []
-                for item in itemsList {
-                    let t = item["total"].string ?? ""
-                    let customizations = Helper.convertCustomizationsJson(item["order_item_cust"].array ?? [])
-                    #if CUSTOMER
-                    let orderItem = OrderItem(
-                        id: item["id"].int ?? 0,
-                        mealName: item["meal_name"].string ?? "",
-                        quantity: item["quantity"].int ?? 0,
-                        total: Decimal(string: t) ?? 0,
-                        status:  item["status"].string ?? "",
-                        customizations: customizations
-                    )
-                    #else
-                    let orderItem = OrderItem(
-                        id: item["id"].int ?? 0,
-                        mealName: item["meal_name"].string ?? "",
-                        quantity: item["quantity"].int ?? 0,
-                        total: Decimal(string: t) ?? 0,
-                        status:  item["status"].string ?? "",
-                        customizations: customizations
-                    )
-                    #endif
-                    orderItems.append(orderItem)
-                }
+                // Build order items arrays
+                let cookingItemsJson = details["cooking_order_items"].array ?? []
+                cookingOrderItems = convertOrderItemsJson(cookingItemsJson)
+                let sendingItemsJson = details["sending_order_items"].array ?? []
+                sendingOrderItems = convertOrderItemsJson(sendingItemsJson)
+                let completeItemsJson = details["complete_order_items"].array ?? []
+                completeOrderItems = convertOrderItemsJson(completeItemsJson)
             }
         }
+    }
+    
+    func convertOrderItemsJson(_ json: [JSON]) -> [OrderItem] {
+        var orderItems = [OrderItem]()
+        for item in json {
+            let t = item["total"].string ?? ""
+            let customizations = Helper.convertCustomizationsJson(item["order_item_cust"].array ?? [])
+            #if CUSTOMER
+            let orderItem = OrderItem(
+                id: item["id"].int ?? 0,
+                mealName: item["meal_name"].string ?? "",
+                quantity: item["quantity"].int ?? 0,
+                total: Decimal(string: t) ?? 0,
+                status:  item["status"].string ?? "",
+                customizations: customizations
+            )
+            #else
+            let orderItem = OrderItem(
+                id: item["id"].int ?? 0,
+                mealName: item["meal_name"].string ?? "",
+                quantity: item["quantity"].int ?? 0,
+                total: Decimal(string: t) ?? 0,
+                status:  item["status"].string ?? "",
+                customizations: customizations
+            )
+            #endif
+            orderItems.append(orderItem)
+        }
+        return orderItems
     }
     
     func getNavigationBarTitle() -> Text {
@@ -83,29 +90,36 @@ struct OrderDetailsView: View {
         List {
             VStack(alignment: .leading, spacing: 10.0) {
                 #if SERVER
+                // Order table
                 Text("Table #" + (order.table ?? ""))
                 #endif
                 // Order time
                 Text("Order placed at " +  Helper.convertDateToString(order.time))
             }
             .padding(.vertical, 10.0)
-            // Items list
-            ForEach(orderItems) { item in
-                ItemRow(
-                    quantity: item.quantity ?? 0,
-                    mealName: item.mealName,
-                    total: item.total,
-                    customizations: item.customizations
+            // Cooking order items list
+            if !cookingOrderItems.isEmpty {
+                OrderItemsSection(
+                    header: "COOKING",
+                    items: cookingOrderItems,
+                    reloadItems: loadOrderDetails
                 )
-                .padding(.vertical)
-                .contentShape(Rectangle())
-                .onTapGesture(perform: {
-                    #if SERVER
-                    showOptionsActionSheet = true
-                    orderItemIdPressed = item.id
-                    orderItemStatusPressed = item.status ?? ""
-                    #endif
-                })
+            }
+            // Sending order items list
+            if !sendingOrderItems.isEmpty {
+                OrderItemsSection (
+                    header: "SENDING",
+                    items: sendingOrderItems,
+                    reloadItems: loadOrderDetails
+                )
+            }
+            // Complete order items list
+            if !completeOrderItems.isEmpty {
+                OrderItemsSection (
+                    header: "COMPLETE",
+                    items: completeOrderItems,
+                    reloadItems: loadOrderDetails
+                )
             }
             // Totals
             TotalsView(
@@ -117,26 +131,15 @@ struct OrderDetailsView: View {
         }
         .navigationBarTitle(getNavigationBarTitle())
         .onAppear(perform: loadOrderDetails)
-        .actionSheet(isPresented: $showOptionsActionSheet) {
-            #if SERVER
-            return OrderItemOptions(
-                showOrderDetails: $showOrderDetails,
-                orderItemId: orderItemIdPressed,
-                status: orderItemStatusPressed,
-                reloadItems: loadOrderDetails
-            )
-            .createActionSheet()
-            #else
-            return ActionSheet(title: Text(""))
-            #endif
-        }
     }
 }
 
 struct OrderDetails_Previews: PreviewProvider {
     static var previews: some View {
         OrderDetailsView(
-            orderItems: testOrderItems,
+            cookingOrderItems: testOrderItems,
+            sendingOrderItems: testOrderItems,
+            completeOrderItems: [],
             order: testOrder1,
             orderId: 1
         )
