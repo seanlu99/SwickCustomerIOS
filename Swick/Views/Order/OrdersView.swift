@@ -15,24 +15,9 @@ struct OrdersView: View {
         API.getOrders { json in
             if (json["status"] == "success") {
                 orders = []
-                let orderList = json["orders"].array ?? []
-                for order in orderList {
-                    #if CUSTOMER
-                    let o = Order(
-                        id: order["id"].int ?? 0,
-                        time: Helper.convertStringToDate(order["order_time"].string ?? ""),
-                        status: order["status"].string ?? "",
-                        restaurantName: order["restaurant_name"].string ?? ""
-                    )
-                    #else
-                    let o = Order(
-                        id: order["id"].int ?? 0,
-                        time: Helper.convertStringToDate(order["order_time"].string ?? ""),
-                        status: order["status"].string ?? "",
-                        customerName: order["customer_name"].string ?? ""
-                    )
-                    #endif
-                    orders.append(o)
+                let orderJsonList = json["orders"].array ?? []
+                for orderJson in orderJsonList {
+                    orders.append(Order(orderJson))
                 }
             }
         }

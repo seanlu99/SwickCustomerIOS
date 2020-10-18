@@ -21,13 +21,9 @@ struct CategoriesView: View {
             API.getCategories(restaurant.id) { json in
                 if (json["status"] == "success") {
                     categories = [Category(id: 0, name: "All")]
-                    let categoryList = json["categories"].array ?? []
-                    for category in categoryList {
-                        let c = Category(
-                            id: category["id"].int ?? 0,
-                            name: category["name"].string ?? ""
-                        )
-                        categories.append(c)
+                    let categoryJsonList = json["categories"].array ?? []
+                    for categoryJson in categoryJsonList {
+                        categories.append(Category(categoryJson))
                     }
                 }
             }

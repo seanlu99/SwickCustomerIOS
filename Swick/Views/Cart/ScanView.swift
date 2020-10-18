@@ -19,24 +19,14 @@ struct ScanView: View {
     @State var showAlert = false
     // Properties
     @State var isScanning = true
-    @State var scannedRestaurant = Restaurant(
-        id: 0,
-        name: "",
-        address: "",
-        imageUrl: ""
-    )
+    @State var scannedRestaurant = Restaurant()
     @State var scannedTable: Int = 0
    
     func loadRestaurant(_ restaurantId: Int, _ table: Int) {
         API.getRestaurant(restaurantId) { json in
             if (json["status"] == "success") {
-                let rest = json["restaurant"]
-                scannedRestaurant = Restaurant(
-                    id: rest["id"].int ?? 0,
-                    name: rest["name"].string ?? "",
-                    address: rest["address"].string ?? "",
-                    imageUrl: (rest["image"].string ?? "")
-                )
+                let restJson = json["restaurant"]
+                scannedRestaurant = Restaurant(restJson)
                 scannedTable = table
                 showCartView = true
             }

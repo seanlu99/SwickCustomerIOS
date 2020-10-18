@@ -11,5 +11,7 @@ final class UserData: ObservableObject {
     @Published var hasToken = false
     #if CUSTOMER
     @Published var cart = [CartItem]()
+    // Used for assigning cart item IDs to ensure no duplicate IDs
+    @Published var cartCounter = 0
     #endif
 }

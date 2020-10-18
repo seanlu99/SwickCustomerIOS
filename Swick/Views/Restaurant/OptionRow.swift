@@ -16,17 +16,17 @@ struct OptionRow: View {
     func checkboxPressed() {
         // Check
         if option.isChecked == false {
-            if customization.numChecked < customization.max ?? 0 {
+            if customization.numChecked < customization.max {
                 option.isChecked = true
                 customization.numChecked += 1
-                price += option.priceAddition ?? 0
+                price += option.priceAddition
             }
         }
         // Uncheck
         else {
             option.isChecked = false
             customization.numChecked -= 1
-            price -= option.priceAddition ?? 0
+            price -= option.priceAddition
         }
     }
     
@@ -35,7 +35,7 @@ struct OptionRow: View {
             // Name and price
             VStack(alignment: .leading, spacing: 10.0) {
                 Text(option.name)
-                Text(Helper.formatPrice(option.priceAddition ?? 0))
+                Text(Helper.formatPrice(option.priceAddition))
             }
             Spacer()
             // Checkbox

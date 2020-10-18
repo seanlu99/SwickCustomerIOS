@@ -45,6 +45,8 @@ let testCustomizations = [testCustomization1, testCustomization2]
 // ##### CUSTOMER TEST DATA #####
 #if CUSTOMER
 
+import SwiftyJSON
+
 // Restaurant
 let testRestaurant1 = Restaurant(
     id: 1,
@@ -185,7 +187,6 @@ let testOrderItem1 = OrderItem(
     total: 13.00,
     status: "Cooking",
     customizations: testCustomizations,
-    customerName: "John Smith",
     table: "1"
 )
 let testOrderItem2 = OrderItem(
@@ -195,7 +196,6 @@ let testOrderItem2 = OrderItem(
     total: 3.50,
     status: "Cooking",
     customizations: testCustomizations,
-    customerName: "Bob Builder",
     table: "2"
 )
 let testOrderItems = [testOrderItem1, testOrderItem2]

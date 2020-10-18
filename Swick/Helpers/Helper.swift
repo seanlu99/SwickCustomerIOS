@@ -44,27 +44,4 @@ class Helper {
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
-    
-    // Convert customizations JSON array to array
-    static func convertCustomizationsJson(_ json: [JSON]) -> [Customization] {
-        // Build customizations array
-        var customizations = [Customization]()
-        for cust in json {
-            var c = Customization(
-                id: cust["id"].int ?? 0,
-                name:  cust["customization_name"].string ?? ""
-            )
-            // Build options array
-            let optionsList = cust["options"].array ?? []
-            for (i, opt) in optionsList.enumerated() {
-                let o = Option(
-                    id: i,
-                    name: opt.string ?? ""
-                )
-                c.options.append(o)
-            }
-            customizations.append(c)
-        }
-        return customizations
-    }
 }

@@ -18,18 +18,10 @@ struct PaymentMethodsView: View {
         API.getUserCards{ json in
             if (json["status"] == "success") {
                 self.cards = []
-                let cardList = json["cards"].array ?? []
-                for c in cardList {
-                    let card = Card(
-                        id: c["payment_method_id"].string ?? "",
-                        brand: c["brand"].string ?? "",
-                        expMonth: c["exp_month"].int ?? 1,
-                        expYear: c["exp_year"].int ?? 1,
-                        last4: c["last4"].string ?? ""
-                    )
-                    self.cards.append(card)
+                let cardJsonList = json["cards"].array ?? []
+                for cardJson in cardJsonList {
+                    cards.append(Card(cardJson))
                 }
-                
             }
         }
     }

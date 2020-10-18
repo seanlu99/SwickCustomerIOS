@@ -16,7 +16,7 @@ struct OrderItemRow: View {
     
     var body: some View {
         ItemRow(
-            quantity: item.quantity ?? 0,
+            quantity: item.quantity,
             mealName: item.mealName,
             total: item.total,
             customizations: item.customizations
@@ -33,7 +33,7 @@ struct OrderItemRow: View {
             return OrderItemOptions(
                 showOrderDetails: .constant(false),
                 orderItemId: item.id,
-                status: item.status ?? "",
+                status: item.status,
                 reloadItems: reloadItems
             )
             .createActionSheet()

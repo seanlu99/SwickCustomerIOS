@@ -18,9 +18,9 @@ struct CustomizationSection: View {
                 VStack(alignment: .leading, spacing: 5.0) {
                     Text(customization.name)
                     Text("min: "
-                            + String(customization.min ?? 0)
+                            + String(customization.min)
                             + ", max: "
-                            + String(customization.max ?? 0)
+                            + String(customization.max)
                     )
                 }
         ) {

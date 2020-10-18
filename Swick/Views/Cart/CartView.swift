@@ -29,7 +29,6 @@ struct CartView: View {
     @State var card: Card? = nil
     @State var attemptOrder = false
     @State var params: PlaceOrderParamsWrapper?
-    
     var restaurant: Restaurant
     var table: Int
     
@@ -39,13 +38,9 @@ struct CartView: View {
             API.getRequestOptions(restaurant.id) { json in
                 if (json["status"] == "success") {
                     self.requestOptions = []
-                    let optionsList = json["request_options"].array ?? []
-                    for option in optionsList {
-                        let r = RequestOption(
-                            id: option["id"].int ?? 0,
-                            name: option["name"].string ?? ""
-                        )
-                        self.requestOptions.append(r)
+                    let optionJsonList = json["request_options"].array ?? []
+                    for optionJson in optionJsonList {
+                        self.requestOptions.append(RequestOption(optionJson))
                     }
                 }
             }

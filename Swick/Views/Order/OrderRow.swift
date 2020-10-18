@@ -22,7 +22,7 @@ struct OrderRow: View {
                     .font(.title)
                 #endif
                 Spacer()
-                Text(order.status ?? "")
+                Text(order.status)
             }
             Text(Helper.convertDateToString(order.time))
                 .font(.subheadline)

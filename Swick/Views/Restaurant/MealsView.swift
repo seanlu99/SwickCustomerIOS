@@ -24,27 +24,17 @@ struct MealsView: View {
             API.getMeals(restaurantId, category.id) { json in
                 if (json["status"] == "success") {
                     meals = []
-                    let mealList = json["meals"].array ?? []
-                    for meal in mealList {
-                        let price_str = meal["price"].string ?? ""
-                        let tax_str = meal["tax"].string ?? ""
-                        let m = Meal(
-                            id: meal["id"].int ?? 0,
-                            name: meal["name"].string ?? "",
-                            description: meal["description"].string ?? "",
-                            price: Decimal(string: price_str) ?? 0,
-                            tax: Decimal(string: tax_str) ?? 0,
-                            imageUrl: meal["image"].string ?? ""
-                        )
-                        meals.append(m)
+                    let mealJsonList = json["meals"].array ?? []
+                    for mealJson in mealJsonList {
+                        meals.append(Meal(mealJson))
                     }
                 }
             }
         }
     }
     
+    // This is a iOS14 hack that prevents clicked cell background view to remain highlighted when we come back to the screen
     func clearTableViewSelection() {
-        // This is a iOS14 hack that prevents clicked cell background view to remain highlighted when we come back to the screen
         if #available(iOS 14, *){
             DispatchQueue.main.async {
                 if let selectedIndexPath = self.tableView?.indexPathForSelectedRow {

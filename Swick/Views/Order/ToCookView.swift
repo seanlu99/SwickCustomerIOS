@@ -15,18 +15,9 @@ struct ToCookView: View {
         API.getOrderItemsToCook { json in
             if (json["status"] == "success") {
                 items = []
-                let itemsList = json["order_items"].array ?? []
-                for item in itemsList {
-                    let customizations = Helper.convertCustomizationsJson(item["order_item_cust"].array ?? [])
-                    let orderItem = OrderItem(
-                        id: item["id"].int ?? 0,
-                        mealName: item["meal_name"].string ?? "",
-                        quantity: item["quantity"].int ?? 0,
-                        customizations: customizations,
-                        orderId: item["order_id"].int ?? 0,
-                        table: String(describing: item["table"].int ?? 0)
-                    )
-                    items.append(orderItem)
+                let itemJsonList = json["order_items"].array ?? []
+                for itemJson in itemJsonList {
+                    items.append(OrderItem(itemJson))
                 }
             }
         }

@@ -26,10 +26,10 @@ struct ToCookRow: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 10.0) {
-                Text("Table #" + (item.table ?? ""))
+                Text("Table #" + (item.table))
                     .font(.title)
                 ItemRow(
-                    quantity: item.quantity ?? 0,
+                    quantity: item.quantity,
                     mealName: item.mealName,
                     customizations: item.customizations
                 )
@@ -61,7 +61,7 @@ struct ToCookRow: View {
         .background(
             // Navigation link to order details
             NavigationLink(
-                destination: OrderDetailsView(orderId: item.orderId ?? 0),
+                destination: OrderDetailsView(orderId: item.orderId),
                 isActive: $showOrderDetails
             ) { }
             

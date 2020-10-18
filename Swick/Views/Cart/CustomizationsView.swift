@@ -15,7 +15,7 @@ struct CustomizationsView: View {
         VStack(alignment: .leading) {
             ForEach(customizations) { c in
                 Text(c.name)
-                ForEach(c.options, id: \.name) { o in
+                ForEach(c.options) { o in
                     // Only show option if customization is not checkable
                     // Or is checkable and option is checked
                     if !c.isCheckable || o.isChecked {

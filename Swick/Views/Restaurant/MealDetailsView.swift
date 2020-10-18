@@ -28,32 +28,12 @@ struct MealDetailsView: View {
             API.getMeal(meal.id) { json in
                 if (json["status"] == "success") {
                     customizations = []
-                    let customizationList = json["customizations"].array ?? []
+                    let customizationJsonList = json["customizations"].array ?? []
                     // Build customizations array
-                    for customization in customizationList {
-                        var cust = Customization(
-                            id: customization["id"].int ?? 0,
-                            name:  customization["name"].string ?? "",
-                            isCheckable: true,
-                            min: customization["min"].int ?? 0,
-                            max: customization["max"].int ?? 0
+                    for customizationJson in customizationJsonList {
+                        customizations.append(
+                            Customization(customizationJson, isCheckable: true)
                         )
-                        // Build options array
-                        let optionsList = customization["options"].array ?? []
-                        let additionsList = customization["price_additions"].array ?? []
-                        for (i, opt) in optionsList.enumerated() {
-                            let o = opt.string ?? ""
-                            let add = additionsList[i].string ?? ""
-                            let a = Decimal(string: add) ?? 0
-                            cust.options.append(
-                                Option(
-                                    id: i,
-                                    name: o,
-                                    priceAddition: a
-                                )
-                            )
-                        }
-                        customizations.append(cust)
                     }
                 }
             }
@@ -79,7 +59,7 @@ struct MealDetailsView: View {
     func addToCart() {
         var minimumSelected = true
         for cust in customizations {
-            if cust.numChecked < cust.min ?? 0 {
+            if cust.numChecked < cust.min {
                 minimumSelected = false
                 break
             }
@@ -88,13 +68,14 @@ struct MealDetailsView: View {
         // If minimum customizations selected
         if minimumSelected {
             let cartItem = CartItem(
-                id: user.cart.count,
+                id: user.cartCounter,
                 meal: meal,
                 quantity: quantity,
                 total: getTotal(),
                 customizations: customizations
             )
             user.cart.append(cartItem)
+            user.cartCounter += 1
             self.presentationMode.wrappedValue.dismiss()
         }
         

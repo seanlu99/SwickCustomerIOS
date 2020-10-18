@@ -19,15 +19,9 @@ struct HomeView: View {
             API.getRestaurants{ json in
                 if (json["status"] == "success") {
                     restaurants = []
-                    let restList = json["restaurants"].array ?? []
-                    for rest in restList {
-                        let restaurant = Restaurant(
-                            id: rest["id"].int ?? 0,
-                            name: rest["name"].string ?? "",
-                            address: rest["address"].string ?? "",
-                            imageUrl: (rest["image"].string ?? "")
-                        )
-                        restaurants.append(restaurant)
+                    let restJsonList = json["restaurants"].array ?? []
+                    for restJson in restJsonList {
+                        restaurants.append(Restaurant(restJson))
                     }
                 }
             }
