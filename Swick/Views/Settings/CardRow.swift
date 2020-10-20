@@ -25,6 +25,7 @@ struct CardRow: View {
                 .resizable()
                 .frame(width:45, height: 30)
             Text("\(card.brand.capitalized) \(card.last4)")
+                .font(SFont.body)
             Spacer()
         }
         .padding(.vertical)

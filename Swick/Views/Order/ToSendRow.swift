@@ -61,6 +61,7 @@ struct ToSendRow: View {
                     Text(item.customerName)
                     Text(item.name)
                 }
+                .font(SFont.header)
                 Spacer()
                 SystemImage(
                     name: "arrowshape.turn.up.right.fill"

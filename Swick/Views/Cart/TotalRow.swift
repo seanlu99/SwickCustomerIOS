@@ -18,6 +18,7 @@ struct TotalRow: View {
             Spacer()
             Text(Helper.formatPrice(total))
         }
+        .font(SFont.body)
         .padding(.vertical, 5.0)
     }
 }

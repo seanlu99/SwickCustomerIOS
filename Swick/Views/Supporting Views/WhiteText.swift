@@ -15,6 +15,8 @@ struct WhiteText: View {
         HStack {
             Spacer()
             Text(text)
+                .font(SFont.body)
+                .fontWeight(.medium)
                 .foregroundColor(Color("DarkBlue"))
                 .padding(.vertical, 20)
             Spacer()

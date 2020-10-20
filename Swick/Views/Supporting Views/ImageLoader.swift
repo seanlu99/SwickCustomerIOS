@@ -57,6 +57,7 @@ struct AsyncImage: View {
                     .resizable()
             } else {
                 Text("Loading...")
+                    .font(SFont.body)
             }
         }
     }

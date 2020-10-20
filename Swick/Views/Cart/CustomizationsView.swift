@@ -15,12 +15,13 @@ struct CustomizationsView: View {
         VStack(alignment: .leading) {
             ForEach(customizations) { c in
                 Text(c.name)
+                    .font(SFont.body)
                 ForEach(c.options) { o in
                     // Only show option if customization is not checkable
                     // Or is checkable and option is checked
                     if !c.isCheckable || o.isChecked {
                         Text("- " + o.name)
-                            .font(.subheadline)
+                            .font(SFont.body)
                     }
                 }
             }

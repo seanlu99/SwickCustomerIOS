@@ -92,6 +92,7 @@ struct MealDetailsView: View {
             // Meal description
             HStack {
                 Text(meal.description)
+                    .font(SFont.body)
                     .padding(.vertical)
                 Spacer()
             }
@@ -110,7 +111,7 @@ struct MealDetailsView: View {
                 }
                 // Quantity
                 Text(String(quantity))
-                    .font(.title)
+                    .font(SFont.title)
                     .padding(.horizontal)
                 // Delete button
                 Button(action: addQuantity) {
@@ -123,12 +124,13 @@ struct MealDetailsView: View {
             Button(action: addToCart) {
                 ZStack(alignment: .center) {
                     Text("ADD TO CART")
+                        .font(SFont.body)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                     GeometryReader { geo in
                         // Total
                         Text(Helper.formatPrice(getTotal()))
-                            .font(.subheadline)
+                            .font(SFont.body)
                             .foregroundColor(.white)
                             .padding(.trailing, 15.0)
                             .frame(width: geo.size.width, height: geo.size.height, alignment: .trailing)

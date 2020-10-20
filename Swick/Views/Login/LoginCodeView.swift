@@ -33,9 +33,11 @@ struct LoginCodeView: View {
     
     var body: some View {
         VStack(spacing: 20.0) {
-            Text("Enter verfification code")
-                .font(.title)
+            Text("Enter verification code")
+                .font(SFont.title)
+                .foregroundColor(.white)
             TextField("", text: $code)
+                .font(SFont.body)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.numberPad)
             .padding(.bottom, 15.0)
@@ -43,7 +45,7 @@ struct LoginCodeView: View {
             Spacer()
         }
         .padding()
-        .background(Color("LightBlue").edgesIgnoringSafeArea(.all))
+        .background(SFont.gradient.edgesIgnoringSafeArea(.all))
         .alert(isPresented: $showAlert) {
             return Alert(
                 title: Text("Error"),

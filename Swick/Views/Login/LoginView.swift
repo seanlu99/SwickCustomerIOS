@@ -13,15 +13,18 @@ struct LoginView: View {
         NavigationView {
             VStack(spacing: 20.0) {
                 #if CUSTOMER
-                Text("SWICK")
-                    .font(.largeTitle)
-                    .fontWeight(.thin)
+                Text("swick")
+                    .font(SFont.logo)
                 #else
-                Text("SWICK SERVER")
-                    .font(.largeTitle)
-                    .fontWeight(.thin)
+                VStack {
+                    Text("swick")
+                        .font(SFont.logo)
+                    Text("server")
+                        .font(SFont.logo)
+                }
                 #endif
                 Text("Food served quick")
+                    .font(SFont.body)
                 Spacer()
                 NavigationLink(
                     destination: LoginEmailView()
@@ -30,7 +33,8 @@ struct LoginView: View {
                 }
             }
             .padding()
-            .background(Color("LightBlue").edgesIgnoringSafeArea(.all))
+            .foregroundColor(.white)
+            .background(SFont.gradient.edgesIgnoringSafeArea(.all))
         }
     }
 }

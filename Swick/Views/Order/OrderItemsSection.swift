@@ -17,7 +17,7 @@ struct OrderItemsSection: View {
         Section(
             header:
                 Text(header)
-                .padding(.vertical, 15.0)
+                .padding(.vertical, 10.0)
         ) {
             ForEach(items) { item in
                 OrderItemRow(

@@ -12,20 +12,21 @@ struct OrderRow: View {
     var order: Order
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 11.0) {
+        VStack(alignment: .leading, spacing: 10.0) {
             HStack {
                 #if CUSTOMER
                 Text(order.restaurantName)
-                    .font(.title)
+                    .font(SFont.header)
                 #else
                 Text(order.customerName)
-                    .font(.title)
+                    .font(SFont.header)
                 #endif
                 Spacer()
                 Text(order.status)
+                    .font(SFont.body)
             }
             Text(Helper.convertDateToString(order.time))
-                .font(.subheadline)
+                .font(SFont.body)
         }
         .padding(.vertical)
     }

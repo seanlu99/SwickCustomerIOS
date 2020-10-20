@@ -75,9 +75,11 @@ struct AccountView: View {
             #if SERVER
             VStack(alignment: .leading) {
                 Text("Restaurant name")
-                    .fontWeight(.semibold)
+                    .font(SFont.body)
+                    .fontWeight(.bold)
                     .padding(.bottom, 1.0)
                 Text(restaurantName)
+                    .font(SFont.body)
             }
             #endif
             BlueButton(text: "UPDATE", action: updateUserInfo)

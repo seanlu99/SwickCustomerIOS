@@ -18,6 +18,20 @@
 		144E0B2A253A207B00C202C1 /* OrderItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0B28253A207A00C202C1 /* OrderItemRow.swift */; };
 		144E0B2E253A246100C202C1 /* OrderItemsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0B2D253A246100C202C1 /* OrderItemsSection.swift */; };
 		144E0B2F253A246100C202C1 /* OrderItemsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0B2D253A246100C202C1 /* OrderItemsSection.swift */; };
+		14569741253E26FB000E8F17 /* SFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14569740253E26FA000E8F17 /* SFont.swift */; };
+		14569742253E26FB000E8F17 /* SFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14569740253E26FA000E8F17 /* SFont.swift */; };
+		14569774253E75AF000E8F17 /* SIL Open Font License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1456976F253E75AF000E8F17 /* SIL Open Font License.txt */; };
+		14569775253E75AF000E8F17 /* SIL Open Font License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1456976F253E75AF000E8F17 /* SIL Open Font License.txt */; };
+		14569781253E75BF000E8F17 /* forma.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14569780253E75BF000E8F17 /* forma.ttf */; };
+		14569782253E75BF000E8F17 /* forma.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14569780253E75BF000E8F17 /* forma.ttf */; };
+		145697AB253E8B1B000E8F17 /* orkney-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 145697A7253E8B1B000E8F17 /* orkney-medium.otf */; };
+		145697AC253E8B1B000E8F17 /* orkney-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 145697A7253E8B1B000E8F17 /* orkney-medium.otf */; };
+		145697AD253E8B1B000E8F17 /* orkney-light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 145697A8253E8B1B000E8F17 /* orkney-light.otf */; };
+		145697AE253E8B1B000E8F17 /* orkney-light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 145697A8253E8B1B000E8F17 /* orkney-light.otf */; };
+		145697AF253E8B1B000E8F17 /* orkney-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 145697A9253E8B1B000E8F17 /* orkney-regular.otf */; };
+		145697B0253E8B1B000E8F17 /* orkney-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 145697A9253E8B1B000E8F17 /* orkney-regular.otf */; };
+		145697B1253E8B1B000E8F17 /* orkney-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 145697AA253E8B1B000E8F17 /* orkney-bold.otf */; };
+		145697B2253E8B1B000E8F17 /* orkney-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 145697AA253E8B1B000E8F17 /* orkney-bold.otf */; };
 		147F06A42537C305002FF616 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06A32537C305002FF616 /* AppDelegate.swift */; };
 		147F06A62537C305002FF616 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06A52537C305002FF616 /* SceneDelegate.swift */; };
 		147F06AD2537C30B002FF616 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 147F06AC2537C30B002FF616 /* Preview Assets.xcassets */; };
@@ -133,6 +147,13 @@
 		144E0B1F253970EB00C202C1 /* ModalHackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalHackView.swift; sourceTree = "<group>"; };
 		144E0B28253A207A00C202C1 /* OrderItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemRow.swift; sourceTree = "<group>"; };
 		144E0B2D253A246100C202C1 /* OrderItemsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemsSection.swift; sourceTree = "<group>"; };
+		14569740253E26FA000E8F17 /* SFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFont.swift; sourceTree = "<group>"; };
+		1456976F253E75AF000E8F17 /* SIL Open Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SIL Open Font License.txt"; sourceTree = "<group>"; };
+		14569780253E75BF000E8F17 /* forma.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = forma.ttf; sourceTree = "<group>"; };
+		145697A7253E8B1B000E8F17 /* orkney-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "orkney-medium.otf"; sourceTree = "<group>"; };
+		145697A8253E8B1B000E8F17 /* orkney-light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "orkney-light.otf"; sourceTree = "<group>"; };
+		145697A9253E8B1B000E8F17 /* orkney-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "orkney-regular.otf"; sourceTree = "<group>"; };
+		145697AA253E8B1B000E8F17 /* orkney-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "orkney-bold.otf"; sourceTree = "<group>"; };
 		147F06A02537C305002FF616 /* Customer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Customer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		147F06A32537C305002FF616 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		147F06A52537C305002FF616 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -242,6 +263,28 @@
 			path = TabView;
 			sourceTree = "<group>";
 		};
+		14569749253E351B000E8F17 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				14569740253E26FA000E8F17 /* SFont.swift */,
+				1456976E253E75AF000E8F17 /* orkney */,
+				14569780253E75BF000E8F17 /* forma.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		1456976E253E75AF000E8F17 /* orkney */ = {
+			isa = PBXGroup;
+			children = (
+				145697A8253E8B1B000E8F17 /* orkney-light.otf */,
+				145697A9253E8B1B000E8F17 /* orkney-regular.otf */,
+				145697A7253E8B1B000E8F17 /* orkney-medium.otf */,
+				145697AA253E8B1B000E8F17 /* orkney-bold.otf */,
+				1456976F253E75AF000E8F17 /* SIL Open Font License.txt */,
+			);
+			path = orkney;
+			sourceTree = "<group>";
+		};
 		147F06972537C304002FF616 = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +312,7 @@
 				147F06D82537C48D002FF616 /* Views */,
 				147F06CB2537C48C002FF616 /* Models */,
 				147F070B2537C48D002FF616 /* Helpers */,
+				14569749253E351B000E8F17 /* Font */,
 				147F07162537C4EA002FF616 /* Assets.xcassets */,
 				147F06AE2537C30B002FF616 /* LaunchScreen.storyboard */,
 				147F06B12537C30B002FF616 /* CustomerInfo.plist */,
@@ -425,8 +469,8 @@
 				147F070C2537C48D002FF616 /* Constants.swift */,
 				147F070E2537C48D002FF616 /* API.swift */,
 				147F070F2537C48D002FF616 /* Helper.swift */,
-				14308707253826A00059D6A5 /* OrderItemOptions.swift */,
 				147F070D2537C48D002FF616 /* TestData.swift */,
+				14308707253826A00059D6A5 /* OrderItemOptions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -536,9 +580,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				145697AF253E8B1B000E8F17 /* orkney-regular.otf in Resources */,
 				147F06B02537C30B002FF616 /* LaunchScreen.storyboard in Resources */,
+				14569781253E75BF000E8F17 /* forma.ttf in Resources */,
 				147F082A25380ADB002FF616 /* Assets.xcassets in Resources */,
+				145697AD253E8B1B000E8F17 /* orkney-light.otf in Resources */,
 				147F06AD2537C30B002FF616 /* Preview Assets.xcassets in Resources */,
+				145697B1253E8B1B000E8F17 /* orkney-bold.otf in Resources */,
+				145697AB253E8B1B000E8F17 /* orkney-medium.otf in Resources */,
+				14569774253E75AF000E8F17 /* SIL Open Font License.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,9 +596,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				145697B0253E8B1B000E8F17 /* orkney-regular.otf in Resources */,
 				147F06BF2537C34C002FF616 /* LaunchScreen.storyboard in Resources */,
+				14569782253E75BF000E8F17 /* forma.ttf in Resources */,
 				147F082225380AC5002FF616 /* Assets.xcassets in Resources */,
+				145697AE253E8B1B000E8F17 /* orkney-light.otf in Resources */,
 				147F06C02537C34C002FF616 /* Preview Assets.xcassets in Resources */,
+				145697B2253E8B1B000E8F17 /* orkney-bold.otf in Resources */,
+				145697AC253E8B1B000E8F17 /* orkney-medium.otf in Resources */,
+				14569775253E75AF000E8F17 /* SIL Open Font License.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,6 +724,7 @@
 				147F07562537C947002FF616 /* CardRow.swift in Sources */,
 				147F073E2537C91D002FF616 /* MealRow.swift in Sources */,
 				147F07622537C960002FF616 /* RoundTextField.swift in Sources */,
+				14569741253E26FB000E8F17 /* SFont.swift in Sources */,
 				147F076E2537C97C002FF616 /* PaymentRepresentable.swift in Sources */,
 				147F07532537C940002FF616 /* AccountView.swift in Sources */,
 				147F07742537C98B002FF616 /* Category.swift in Sources */,
@@ -748,6 +805,7 @@
 				147F079E2537D020002FF616 /* SceneDelegate.swift in Sources */,
 				14F4836425390797001FC039 /* OrderItemOrRequest.swift in Sources */,
 				14F4834E2539075E001FC039 /* ToCookRow.swift in Sources */,
+				14569742253E26FB000E8F17 /* SFont.swift in Sources */,
 				147F07C72537D891002FF616 /* BlueText.swift in Sources */,
 				147F07A72537D1B8002FF616 /* RootView.swift in Sources */,
 				147F07EC2537E9D4002FF616 /* OrderDetailsView.swift in Sources */,

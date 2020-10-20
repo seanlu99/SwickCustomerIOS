@@ -30,8 +30,7 @@ struct SetNameView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("Enter your name")
-                .font(.title)
-                .fontWeight(.semibold)
+                .font(SFont.title)
                 .padding(.top, 20.0)
             RoundTextField(
                 text: $name,

@@ -17,13 +17,11 @@ struct ItemRow: View {
     var body: some View {
         HStack(alignment: .top) {
             Text(String(quantity))
-                .font(.title)
-                .frame(width: 30, height: 30)
-                .background(Color("LightGray"))
+                .font(SFont.header)
                 .padding(.trailing, 15.0)
             VStack(alignment: .leading, spacing: 10.0) {
                 Text(mealName)
-                    .font(.title)
+                    .font(SFont.header)
                     .lineLimit(1)
                 // Only show customizations if they are not checkable
                 // Or are checkable and have at least 1 option checked
@@ -36,7 +34,7 @@ struct ItemRow: View {
             if let total = total {
                 Spacer()
                 Text(Helper.formatPrice(total))
-                    .font(.title)
+                    .font(SFont.header)
             }
         }
     }

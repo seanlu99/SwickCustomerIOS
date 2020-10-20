@@ -23,6 +23,7 @@ struct CustomizationSection: View {
                             + String(customization.max)
                     )
                 }
+                .padding(.vertical, 10.0)
         ) {
             ForEach(customization.options.indices, id: \.self) { i in
                 OptionRow(
@@ -30,9 +31,9 @@ struct CustomizationSection: View {
                     option: $customization.options[i],
                     price: $price
                 )
+                .padding(.vertical)
             }
         }
-        .padding(.vertical)
     }
 }
 

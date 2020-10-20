@@ -27,7 +27,7 @@ struct ToCookRow: View {
         HStack {
             VStack(alignment: .leading, spacing: 10.0) {
                 Text("Table #" + (item.table))
-                    .font(.title)
+                    .font(SFont.header)
                 ItemRow(
                     quantity: item.quantity,
                     mealName: item.mealName,

@@ -17,7 +17,8 @@ struct AccountRow: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(fieldName)
-                .fontWeight(.semibold)
+                .font(SFont.body)
+                .fontWeight(.bold)
             RoundTextField(
                 text: $text,
                 placeholder: placeholder,

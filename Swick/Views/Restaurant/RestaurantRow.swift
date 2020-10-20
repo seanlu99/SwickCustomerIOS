@@ -12,12 +12,14 @@ struct RestaurantRow: View {
     var restaurant: Restaurant
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10.0) {
+        VStack(alignment: .leading) {
             RectangleImage(url: restaurant.imageUrl)
+                .padding(.bottom, 10.0)
             Text(restaurant.name)
-                .font(.title)
+                .font(SFont.title)
+                .padding(.bottom, 2.0)
             Text(restaurant.address)
-                .font(.subheadline)
+                .font(SFont.body)
         }
         .padding(.vertical)
     }

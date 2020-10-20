@@ -36,8 +36,11 @@ struct LoginEmailView: View {
     var body: some View {
         VStack(spacing: 20.0) {
             Text("Enter your email")
-                .font(.title)
+                .font(SFont.title)
+                .foregroundColor(.white)
             Text("We'll send you a verification code")
+                .font(SFont.body)
+                .foregroundColor(.white)
             RoundTextField(
                 text: $email,
                 placeholder: "",
@@ -45,11 +48,10 @@ struct LoginEmailView: View {
             )
             .padding(.bottom, 15.0)
             BlueButton(text: "SEND", action: sendPressed)
-            
             Spacer()
         }
         .padding()
-        .background(Color("LightBlue").edgesIgnoringSafeArea(.all))
+        .background(SFont.gradient.edgesIgnoringSafeArea(.all))
         .background(
             // Navigation link to login code view
             NavigationLink(

@@ -8,7 +8,7 @@
 import Alamofire
 import SwiftyJSON
 
-class API {
+struct API {
     
     // ##### SHARED API #####
     

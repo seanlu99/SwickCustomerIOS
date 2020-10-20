@@ -17,19 +17,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="iko-RY-EEi">
-                                <rect key="frame" x="20" y="261" width="374" height="374"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="iko-RY-EEi" secondAttribute="height" multiplier="1:1" id="QX2-Eb-4cr"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gradient" translatesAutoresizingMaskIntoConstraints="NO" id="EMp-Rz-R9l">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="iko-RY-EEi" secondAttribute="trailing" constant="20" id="3ZK-b0-Gre"/>
-                            <constraint firstItem="iko-RY-EEi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Wnc-f2-yox"/>
-                            <constraint firstItem="iko-RY-EEi" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="t13-Gn-pLi"/>
+                            <constraint firstAttribute="trailing" secondItem="EMp-Rz-R9l" secondAttribute="trailing" id="CqU-L3-rPw"/>
+                            <constraint firstItem="EMp-Rz-R9l" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="FI7-4n-9nJ"/>
+                            <constraint firstItem="EMp-Rz-R9l" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Vtq-iy-C9p"/>
+                            <constraint firstAttribute="bottom" secondItem="EMp-Rz-R9l" secondAttribute="bottom" id="ep5-Iz-b7L"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -39,7 +37,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Logo" width="341" height="341"/>
+        <image name="Gradient" width="800" height="560"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

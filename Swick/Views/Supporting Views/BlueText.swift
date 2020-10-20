@@ -13,6 +13,7 @@ struct BlueText: View {
     
     var body: some View {
         Text(text)
+            .font(SFont.body)
             .fontWeight(.bold)
             .foregroundColor(.white)
             .padding(.vertical, 22.5)

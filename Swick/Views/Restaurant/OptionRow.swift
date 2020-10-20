@@ -35,7 +35,9 @@ struct OptionRow: View {
             // Name and price
             VStack(alignment: .leading, spacing: 10.0) {
                 Text(option.name)
+                    .font(SFont.body)
                 Text(Helper.formatPrice(option.priceAddition))
+                    .font(SFont.body)
             }
             Spacer()
             // Checkbox

@@ -65,5 +65,13 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Needed for scanning QR codes</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>orkney-light.otf</string>
+		<string>orkney-regular.otf</string>
+		<string>orkney-medium.otf</string>
+		<string>orkney-bold.otf</string>
+		<string>forma.ttf</string>
+	</array>
 </dict>
 </plist>

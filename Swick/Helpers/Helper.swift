@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftyJSON
 
 // Helper methods
-class Helper {
+struct Helper {
 
     // Format decimal as price
     static func formatPrice(_ price: Decimal) -> String {

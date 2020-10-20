@@ -41,7 +41,7 @@ struct CategoriesView: View {
                     )
                 ) {
                     Text(c.name)
-                        .font(.title)
+                        .font(SFont.header)
                         .padding(.vertical)
                 }
             }

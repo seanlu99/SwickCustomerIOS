@@ -18,7 +18,6 @@ struct OrderDetailsView: View {
     
     func loadOrderDetails() {
         API.getOrderDetails(orderId) { json in
-            print(json)
             if (json["status"] == "success") {
                 // Build order
                 let details = json["order_details"]
@@ -48,9 +47,11 @@ struct OrderDetailsView: View {
                 #if SERVER
                 // Order table
                 Text("Table #" + (order.table))
+                    .font(SFont.body)
                 #endif
                 // Order time
                 Text("Order placed at " +  Helper.convertDateToString(order.time))
+                    .font(SFont.body)
             }
             .padding(.vertical, 10.0)
             // Cooking order items list

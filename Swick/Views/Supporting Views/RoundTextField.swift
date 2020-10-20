@@ -15,6 +15,7 @@ struct RoundTextField: View {
     
     var body: some View {
         TextField(placeholder, text: $text)
+            .font(SFont.body)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .disableAutocorrection(true)
             .autocapitalization(isEmail ? .none : .words)

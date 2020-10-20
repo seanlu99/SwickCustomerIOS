@@ -15,10 +15,12 @@ struct MealRow: View {
         HStack {
             VStack(alignment: .leading, spacing: 10.0) {
                 Text(meal.name)
-                    .font(.title)
+                    .font(SFont.header)
                 Text(meal.description)
+                    .font(SFont.body)
                     .lineLimit(1)
                 Text(Helper.formatPrice(meal.price))
+                    .font(SFont.body)
             }
             Spacer()
             ThumbnailImage(url: meal.imageUrl)

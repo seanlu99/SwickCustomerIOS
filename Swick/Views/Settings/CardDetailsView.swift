@@ -48,9 +48,11 @@ struct CardDetailsView: View {
                 HStack(alignment: .top){
                     VStack(alignment: .leading, spacing: 10){
                         Text(card.brand.capitalized)
-                            .font(.title)
+                            .font(SFont.title)
                         Text("****\(card.last4)")
+                            .font(SFont.body)
                         Text("\(formatExpDate())")
+                            .font(SFont.body)
                     }
                     Spacer()
                     Image(uiImage: cardImage).resizable().frame(width: 55, height: 35)

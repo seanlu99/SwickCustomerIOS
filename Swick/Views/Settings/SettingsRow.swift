@@ -14,10 +14,14 @@ struct SettingsRow: View {
     
     var body: some View {
         HStack {
-            SystemImage(name: imageName)
+            SystemImage(
+                name: imageName,
+                width: 35.0,
+                height: 35.0
+            )
                 .padding(.trailing, 10.0)
             Text(text)
-                .font(.title)
+                .font(SFont.header)
             Spacer()
         }
         .padding(.vertical)

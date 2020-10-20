@@ -11,6 +11,18 @@ struct ContentView: View {
     // Initial
     @EnvironmentObject var user: UserData
     
+    init() {
+        // Set navigation bar font globally
+        UINavigationBar.appearance()
+            .largeTitleTextAttributes = [
+                .font: UIFont(name: "orkney-bold", size: 35)!
+            ]
+        UINavigationBar.appearance()
+            .titleTextAttributes = [
+                .font: UIFont(name: "orkney-bold", size: 18)!
+            ]
+    }
+    
     func checkIfTokenSet() {
         user.hasToken = UserDefaults.standard.string(forKey: "token") != nil
     }

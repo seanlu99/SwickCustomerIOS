@@ -96,6 +96,7 @@ struct CartView: View {
         }
         else {
             alertMessage = "Please select a card"
+            showAlert = true
         }
     }
     
