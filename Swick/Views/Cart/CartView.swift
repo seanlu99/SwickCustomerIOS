@@ -24,11 +24,14 @@ struct CartView: View {
     @State var alertState = AlertState.error
     @State var showAlert = false
     @State var alertMessage = ""
+    @State var showCustomTip = false
     // Properties
     @State var requestOptions = [RequestOption]()
     @State var card: Card? = nil
     @State var attemptOrder = false
-    @State var params: PlaceOrderParamsWrapper?
+    @State var paramsWrapper: PaymentParamsWrapper?
+    @State var tipAmount = ""
+    @State var tipState: TipState = .later
     var restaurant: Restaurant
     var table: Int
     
@@ -85,13 +88,30 @@ struct CartView: View {
         return tax
     }
     
+    func getTip() -> Decimal? {
+        // if non-zero custom tip
+        if tipState == .custom && Decimal(string: tipAmount) != 0 {
+            return Decimal(string: tipAmount)
+        }
+        // if pre-selected tip type
+        if tipState != .later && tipState != .custom {
+            return Decimal(tipState.percent!) / 100 * getSubtotal()
+        }
+        // if .later or 0 custom tip value
+        return nil
+    }
+    
     func getTotal() -> Decimal {
-        return getSubtotal() + getTax()
+        return getSubtotal() + getTax() + (getTip() ?? 0)
     }
     
     func placeOrder() {
-        if let c = card {
-            params = PlaceOrderParamsWrapper(restaurant.id, table, user.cart, c.id)
+        if (getTotal() < 0.50) {
+            alertMessage = "Order total must be at least $0.50"
+            showAlert = true
+        }
+        else if let c = card {
+            paramsWrapper = PaymentParamsWrapper(PlaceOrderParams(restaurant.id, table, user.cart, getTip(), c.id))
             attemptOrder = true
         }
         else {
@@ -104,6 +124,8 @@ struct CartView: View {
     func handleResponse(successful: Bool, message: String) {
         if successful {
             user.cart.removeAll()
+            tipState = .later
+            tipAmount = ""
             alertState = .success
         }
         else {
@@ -135,13 +157,20 @@ struct CartView: View {
                 }
                 .onDelete(perform: deleteItem)
                 // Tip
-                
+                VStack {
+                    HStack {
+                        Text("Add tip ")
+                            .font(SFont.body)
+                        Spacer()
+                    }
+                    TipPicker(showCustomTip: $showCustomTip, tipState: $tipState)
+                }.padding(.vertical)
                 // Totals
                 VStack {
                     TotalsView(
                         subtotal: getSubtotal(),
                         tax: getTax(),
-                        tip: 0,
+                        tip: getTip(),
                         total: getTotal()
                     )
                 }
@@ -230,14 +259,23 @@ struct CartView: View {
                     primaryButton: .default(
                         Text("Ok"),
                         action: {
+                            user.cart.removeAll()
                             self.presentationMode.wrappedValue.dismiss()
                         }
                     ),
                     secondaryButton: .cancel())
             }
         }
+        .textFieldAlert(
+            isShowing: $showCustomTip,
+            text: $tipAmount,
+            title: "Set tip",
+            placeholder: "0",
+            keyboardType: .decimalPad,
+            isPrice: true
+        )
         // Wrapper view around payment caller view controller
-        PaymentCaller(attemptOrder: $attemptOrder, params: $params, onStripeResponse: handleResponse)
+        PaymentCaller(attempt: $attemptOrder, paramsWrapper: $paramsWrapper, onStripeResponse: handleResponse)
             .frame(width: 0, height: 0)
     }
 }

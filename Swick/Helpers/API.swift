@@ -127,7 +127,14 @@ struct API {
         authRequest(path, method: .post, parameters: params, completion: completion)
     }
 
-    static func placeOrder(_ restaurantId: Int, _ table: Int, _ cart: [CartItem], _ paymentMethodId: String, completion: @escaping (JSON) -> Void) {
+    static func placeOrder(
+        _ restaurantId: Int,
+        _ table: Int,
+        _ cart: [CartItem],
+        _ tip: Decimal?,
+        _ paymentMethodId: String,
+        completion: @escaping (JSON) -> Void
+    ) {
         let path = "api/customer/place_order/"
 
         // Build items array
@@ -168,6 +175,7 @@ struct API {
                 "restaurant_id": restaurantId,
                 "table": table,
                 "order_items": itemsString ?? "",
+                "tip" : tip as Any,
                 "payment_method_id": paymentMethodId
             ]
             authRequest(path, method: .post, parameters: params, completion: completion)
@@ -209,8 +217,22 @@ struct API {
         authRequest(path, method: .post, parameters: params, completion: completion)
     }
 
-    static func retryPayment(_ paymentIntentId: String, completion: @escaping (JSON) -> Void){
-        let path = "api/customer/retry_payment/"
+    static func retryOrder(_ paymentIntentId: String, completion: @escaping (JSON) -> Void) {
+        let path = "api/customer/retry_order_payment/"
+        let params =
+            ["payment_intent_id": paymentIntentId]
+        authRequest(path, method: .post, parameters: params, completion: completion)
+    }
+    
+    static func addTip(_ orderId: Int, tip: Decimal , completion: @escaping (JSON) -> Void) {
+        let path = "api/customer/add_tip/"
+        let params =
+            ["order_id": orderId, "tip": tip] as [String : Any]
+        authRequest(path, method: .post, parameters: params, completion: completion)
+    }
+    
+    static func retryTip(_ paymentIntentId: String, completion: @escaping (JSON) -> Void) {
+        let path = "api/customer/retry_tip_payment/"
         let params =
             ["payment_intent_id": paymentIntentId]
         authRequest(path, method: .post, parameters: params, completion: completion)

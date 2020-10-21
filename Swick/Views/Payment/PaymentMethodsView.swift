@@ -9,18 +9,22 @@ import SwiftUI
 struct PaymentMethodsView: View {
     // Initial
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State var viewDidLoad = false
     // Properties
     @State var cards = [Card]()
     @Binding var selectedCard: Card?
     var cameFromCart: Bool = false
     
     func loadCards() {
-        API.getUserCards{ json in
-            if (json["status"] == "success") {
-                self.cards = []
-                let cardJsonList = json["cards"].array ?? []
-                for cardJson in cardJsonList {
-                    cards.append(Card(cardJson))
+        if !viewDidLoad {
+            viewDidLoad = true
+            API.getUserCards{ json in
+                if (json["status"] == "success") {
+                    self.cards = []
+                    let cardJsonList = json["cards"].array ?? []
+                    for cardJson in cardJsonList {
+                        cards.append(Card(cardJson))
+                    }
                 }
             }
         }
@@ -32,6 +36,10 @@ struct PaymentMethodsView: View {
                 if !cameFromCart {
                     NavigationLink(
                         destination: CardDetailsView(card: c)
+                            .onDisappear {
+                                viewDidLoad = false
+                                loadCards()
+                            }
                     ) {
                         CardRow(c)
                     }
@@ -49,6 +57,10 @@ struct PaymentMethodsView: View {
             }
             NavigationLink (
                 destination: AddCardView()
+                    .onDisappear{
+                        viewDidLoad = false
+                        loadCards()
+                    }
             ) {
                 WhiteText(text: "Add payment method")
             }

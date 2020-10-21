@@ -137,6 +137,14 @@
 		14F48371253907CD001FC039 /* SystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F48369253907A5001FC039 /* SystemImage.swift */; };
 		4BDD40A6124080BA80CC8575 /* Pods_Customer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A4898A557C28889C323FCE /* Pods_Customer.framework */; };
 		6D99917F91D2AC91F27BEA4E /* Pods_Server.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12E98DFDC54FAF43FE97FAFB /* Pods_Server.framework */; };
+		F214C166253A506100778B97 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F214C165253A506100778B97 /* TextFieldAlert.swift */; };
+		F245AC45253EA2F300634FC4 /* TipPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F245AC44253EA2F300634FC4 /* TipPicker.swift */; };
+		F245AC49253EA38500634FC4 /* AddTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F245AC48253EA38500634FC4 /* AddTipView.swift */; };
+		F2555AEB25400D8E005A3D54 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F214C165253A506100778B97 /* TextFieldAlert.swift */; };
+		F2555AEE25400DBD005A3D54 /* WhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F07042537C48D002FF616 /* WhiteButton.swift */; };
+		F2555AF425400DE1005A3D54 /* WhiteText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F070A2537C48D002FF616 /* WhiteText.swift */; };
+		F2555B062540E134005A3D54 /* UIKitTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2555B052540E134005A3D54 /* UIKitTextField.swift */; };
+		F2555B072540E134005A3D54 /* UIKitTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2555B052540E134005A3D54 /* UIKitTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -231,6 +239,10 @@
 		88689ED164792C720BE4D4E9 /* Pods-Server.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Server.release.xcconfig"; path = "Target Support Files/Pods-Server/Pods-Server.release.xcconfig"; sourceTree = "<group>"; };
 		8CA30E2F0B92E97B8D61612F /* Pods-Customer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Customer.release.xcconfig"; path = "Target Support Files/Pods-Customer/Pods-Customer.release.xcconfig"; sourceTree = "<group>"; };
 		BD8E6E05876375DBAF19004D /* Pods-Customer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Customer.debug.xcconfig"; path = "Target Support Files/Pods-Customer/Pods-Customer.debug.xcconfig"; sourceTree = "<group>"; };
+		F214C165253A506100778B97 /* TextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlert.swift; sourceTree = "<group>"; };
+		F245AC44253EA2F300634FC4 /* TipPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipPicker.swift; sourceTree = "<group>"; };
+		F245AC48253EA38500634FC4 /* AddTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTipView.swift; sourceTree = "<group>"; };
+		F2555B052540E134005A3D54 /* UIKitTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -359,6 +371,7 @@
 				147F06F02537C48D002FF616 /* Cart */,
 				147F06D92537C48D002FF616 /* Order */,
 				147F06DD2537C48D002FF616 /* Settings */,
+				F2555B0E2540E952005A3D54 /* Payment */,
 				147F06FD2537C48D002FF616 /* Supporting Views */,
 				147F06F32537C48D002FF616 /* UIKit Wrappers */,
 			);
@@ -388,10 +401,6 @@
 				147F06E52537C48D002FF616 /* SettingsRow.swift */,
 				147F06E32537C48D002FF616 /* AccountView.swift */,
 				147F06E12537C48D002FF616 /* AccountRow.swift */,
-				147F06DF2537C48D002FF616 /* PaymentMethodsView.swift */,
-				147F06E22537C48D002FF616 /* CardRow.swift */,
-				147F06E02537C48D002FF616 /* CardDetailsView.swift */,
-				147F06E42537C48D002FF616 /* AddCardView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -432,6 +441,7 @@
 				147F06F72537C48D002FF616 /* SetupRepresentable.swift */,
 				147F06F52537C48D002FF616 /* PaymentRepresentable.swift */,
 				147F06F42537C48D002FF616 /* StripePaymentCardTextField.swift */,
+				F2555B052540E134005A3D54 /* UIKitTextField.swift */,
 			);
 			path = "UIKit Wrappers";
 			sourceTree = "<group>";
@@ -458,7 +468,7 @@
 				147F070A2537C48D002FF616 /* WhiteText.swift */,
 				147F07042537C48D002FF616 /* WhiteButton.swift */,
 				147F07082537C48D002FF616 /* RoundTextField.swift */,
-				147F07092537C48D002FF616 /* CardTextField.swift */,
+				F214C165253A506100778B97 /* TextFieldAlert.swift */,
 			);
 			path = "Supporting Views";
 			sourceTree = "<group>";
@@ -493,6 +503,20 @@
 				12E98DFDC54FAF43FE97FAFB /* Pods_Server.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F2555B0E2540E952005A3D54 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				147F06DF2537C48D002FF616 /* PaymentMethodsView.swift */,
+				147F06E22537C48D002FF616 /* CardRow.swift */,
+				147F06E02537C48D002FF616 /* CardDetailsView.swift */,
+				147F06E42537C48D002FF616 /* AddCardView.swift */,
+				F245AC48253EA38500634FC4 /* AddTipView.swift */,
+				F245AC44253EA2F300634FC4 /* TipPicker.swift */,
+				147F07092537C48D002FF616 /* CardTextField.swift */,
+			);
+			path = Payment;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -722,10 +746,13 @@
 				147F077D2537C99E002FF616 /* Order.swift in Sources */,
 				147F073B2537C91B002FF616 /* MealsView.swift in Sources */,
 				147F07562537C947002FF616 /* CardRow.swift in Sources */,
+				F214C166253A506100778B97 /* TextFieldAlert.swift in Sources */,
 				147F073E2537C91D002FF616 /* MealRow.swift in Sources */,
 				147F07622537C960002FF616 /* RoundTextField.swift in Sources */,
 				14569741253E26FB000E8F17 /* SFont.swift in Sources */,
+				F245AC45253EA2F300634FC4 /* TipPicker.swift in Sources */,
 				147F076E2537C97C002FF616 /* PaymentRepresentable.swift in Sources */,
+				F245AC49253EA38500634FC4 /* AddTipView.swift in Sources */,
 				147F07532537C940002FF616 /* AccountView.swift in Sources */,
 				147F07742537C98B002FF616 /* Category.swift in Sources */,
 				147F076F2537C97E002FF616 /* StripePaymentCardTextField.swift in Sources */,
@@ -762,6 +789,7 @@
 				147F074A2537C931002FF616 /* OrdersView.swift in Sources */,
 				147F07652537C967002FF616 /* CustomizationsView.swift in Sources */,
 				147F07632537C962002FF616 /* CardTextField.swift in Sources */,
+				F2555B062540E134005A3D54 /* UIKitTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -771,6 +799,7 @@
 			files = (
 				144E0B2A253A207B00C202C1 /* OrderItemRow.swift in Sources */,
 				147F07A12537D0A0002FF616 /* UserData.swift in Sources */,
+				F2555AF425400DE1005A3D54 /* WhiteText.swift in Sources */,
 				147F07F82537EABA002FF616 /* TotalRow.swift in Sources */,
 				147F07B92537D22C002FF616 /* Constants.swift in Sources */,
 				147F07D32537DA71002FF616 /* SettingsRow.swift in Sources */,
@@ -782,11 +811,13 @@
 				147F07EB2537E9D2002FF616 /* OrderRow.swift in Sources */,
 				147F07AD2537D1F9002FF616 /* LoginView.swift in Sources */,
 				147F07AA2537D1DD002FF616 /* UIKitTabView.swift in Sources */,
+				F2555AEE25400DBD005A3D54 /* WhiteButton.swift in Sources */,
 				147F07D02537DA6E002FF616 /* AccountRow.swift in Sources */,
 				14F4835D25390766001FC039 /* ToSendView.swift in Sources */,
 				147F08132537EC14002FF616 /* TestData.swift in Sources */,
 				147F07F22537E9E9002FF616 /* Order.swift in Sources */,
 				14F4835825390763001FC039 /* ToSendRow.swift in Sources */,
+				F2555B072540E134005A3D54 /* UIKitTextField.swift in Sources */,
 				147F07B62537D229002FF616 /* API.swift in Sources */,
 				147F07B02537D204002FF616 /* LoginEmailView.swift in Sources */,
 				147F07E82537E9CF002FF616 /* OrdersView.swift in Sources */,
@@ -803,6 +834,7 @@
 				14308708253826A00059D6A5 /* OrderItemOptions.swift in Sources */,
 				147F07C42537D87A002FF616 /* RoundTextField.swift in Sources */,
 				147F079E2537D020002FF616 /* SceneDelegate.swift in Sources */,
+				F2555AEB25400D8E005A3D54 /* TextFieldAlert.swift in Sources */,
 				14F4836425390797001FC039 /* OrderItemOrRequest.swift in Sources */,
 				14F4834E2539075E001FC039 /* ToCookRow.swift in Sources */,
 				14569742253E26FB000E8F17 /* SFont.swift in Sources */,
