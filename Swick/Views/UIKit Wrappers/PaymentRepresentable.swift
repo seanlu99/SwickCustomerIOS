@@ -8,39 +8,72 @@
 import SwiftUI
 import UIKit
 import Stripe
+import SwiftyJSON
 
-class PlaceOrderParamsWrapper : ObservableObject {
+protocol PaymentParams {
+    var cardMethodId: String { get set}
+}
+
+enum PaymentType { case order, tip}
+
+struct PlaceOrderParams : PaymentParams{
     var restaurantId: Int
     var table: Int
     var cart: [CartItem]
+    var tip: Decimal?
     var cardMethodId: String
     
-    init(_ restaurantId: Int, _ table: Int,  _ cart: [CartItem], _ cardMethodId: String){
+    init(_ restaurantId: Int, _ table: Int,  _ cart: [CartItem],_ tip: Decimal?, _ cardMethodId: String) {
         self.restaurantId = restaurantId
         self.table = table
         self.cart = cart
+        self.tip = tip
         self.cardMethodId = cardMethodId
     }
 }
 
+struct AddTipParams : PaymentParams{
+    var orderId: Int
+    var tip: Decimal
+    var cardMethodId: String
+
+    init(_ orderId: Int, _ tip: Decimal, _ cardMethodId: String? = nil) {
+        self.orderId = orderId
+        self.tip = tip
+        self.cardMethodId = cardMethodId ?? ""
+    }
+}
+
+class PaymentParamsWrapper : ObservableObject {
+    var params: PaymentParams
+    
+    init(_ params: PaymentParams){
+        self.params = params
+    }
+}
+
 struct PaymentCaller: UIViewControllerRepresentable {
-    @Binding var attemptOrder: Bool
-    @Binding var params: PlaceOrderParamsWrapper?
+    @Binding var attempt: Bool
+    @Binding var paramsWrapper: PaymentParamsWrapper?
+    
     var onStripeResponse: (Bool, String) -> ()
     
     public typealias UIViewControllerType = PaymentCallerViewController
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<PaymentCaller>) -> PaymentCallerViewController {
-        // TODO: Refactopr view input for StripeRepresentable
-        let viewController = PaymentCallerViewController(params)
+        let viewController = PaymentCallerViewController()
         viewController.delegate = context.coordinator
         return viewController
     }
     
     func updateUIViewController(_ uiViewController: PaymentCallerViewController, context _: UIViewControllerRepresentableContext<PaymentCaller>) {
-        uiViewController.params = params
-        if attemptOrder {
-            uiViewController.placeOrder()
+        if attempt {
+            if let placeOrderParams = paramsWrapper?.params as? PlaceOrderParams {
+                uiViewController.placeOrder(placeOrderParams)
+            }
+            if let addTipParams = paramsWrapper?.params as? AddTipParams {
+                uiViewController.addTip(addTipParams)
+            }
         }
     }
     
@@ -50,7 +83,7 @@ struct PaymentCaller: UIViewControllerRepresentable {
     
     class Coordinator: NSObject, PaymentCallerDelegate {
         func didFinishStripeCall(_ successful: Bool, _ message: String) {
-            parent.attemptOrder = false
+            parent.attempt = false
             parent.onStripeResponse(successful, message)
         }
         
@@ -63,12 +96,10 @@ struct PaymentCaller: UIViewControllerRepresentable {
 }
 
 class PaymentCallerViewController: UIViewController {
-    var params: PlaceOrderParamsWrapper?
     var delegate: PaymentCallerDelegate?
     var blockPayment = false
     
-    init(_ params: PlaceOrderParamsWrapper?){
-        self.params = params
+    init(){
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -76,49 +107,14 @@ class PaymentCallerViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
-    func placeOrder(){
+    func placeOrder(_ params: PlaceOrderParams){
         if blockPayment {
             return
         }
         blockPayment = true
-        API.placeOrder(self.params!.restaurantId, self.params!.table, self.params!.cart, self.params!.cardMethodId) { [self] json in
+        API.placeOrder(params.restaurantId, params.table, params.cart, params.tip, params.cardMethodId) { [self] json in
             if json["status"] == "success" {
-                let intentStatus = json["intent_status"].string ?? ""
-                
-                if intentStatus == "card_error" || intentStatus == "requires_payment_method" {
-                    let paymentError = json["error"].string ?? ""
-                    blockPayment = false
-                    self.delegate?.didFinishStripeCall(false, paymentError)
-                }
-                else if intentStatus == "succeeded" {
-                    blockPayment = false
-                    self.delegate?.didFinishStripeCall(true, "Your order has been placed.")
-                }
-                else if intentStatus == "requires_action" || intentStatus == "requires_source_action" {
-                    let clientSecret = json["client_secret"].string ?? ""
-                    let paymentHandler = STPPaymentHandler.shared()
-                    
-                    paymentHandler.handleNextAction(forPayment: clientSecret, authenticationContext: self, returnURL: nil) { status, paymentIntent, handleActionError in
-                        switch (status) {
-                        case .failed:
-                            blockPayment = false
-                            delegate?.didFinishStripeCall(false , handleActionError?.localizedDescription ?? "")
-                            break
-                        case .canceled:
-                            blockPayment = false
-                            delegate?.didFinishStripeCall(false , handleActionError?.localizedDescription ?? "")
-                            break
-                        case .succeeded:
-                            if let paymentIntent = paymentIntent, paymentIntent.status == STPPaymentIntentStatus.requiresConfirmation {
-                                retryOrder(paymentIntent)
-                            }
-                            break
-                        @unknown default:
-                            fatalError()
-                            break
-                        }
-                    }
-                }
+                handleResponse(json, clientSuccessMessage: "Your order has been placed.", .order)
             }
             // Check if any of selected meals have been disabled
             else if (json["status"] == "meal_disabled") {
@@ -134,21 +130,83 @@ class PaymentCallerViewController: UIViewController {
         }
     }
     
-    
-    func retryOrder(_ paymentIntent: STPPaymentIntent){
-        API.retryPayment(paymentIntent.stripeId){ json in
+    func addTip(_ params : AddTipParams) {
+        if blockPayment {
+            return
+        }
+        blockPayment = true
+        API.addTip(params.orderId, tip: params.tip) { json in
             if json["status"] == "success" {
-                let intentStatus = json["intent_status"].string ?? ""
-                
-                if intentStatus == "card_error" || intentStatus == "requires_payment_method" {
-                    let paymentError = json["error"].string ?? ""
+                self.handleResponse(json, clientSuccessMessage: "You tip has been sent.", .tip)
+            }
+        }
+    }
+
+    func handleResponse (_ json: JSON, clientSuccessMessage: String,_ type: PaymentType) {
+        let intentStatus = json["intent_status"].string ?? ""
+        
+        if intentStatus == "card_error" || intentStatus == "requires_payment_method" {
+            let paymentError = json["error"].string ?? ""
+            blockPayment = false
+            self.delegate?.didFinishStripeCall(false, paymentError)
+        }
+        else if intentStatus == "succeeded" {
+            blockPayment = false
+            self.delegate?.didFinishStripeCall(true, clientSuccessMessage)
+        }
+        else if intentStatus == "requires_action" || intentStatus == "requires_source_action" {
+            let clientSecret = json["client_secret"].string ?? ""
+            let paymentHandler = STPPaymentHandler.shared()
+            
+            paymentHandler.handleNextAction(forPayment: clientSecret, authenticationContext: self, returnURL: nil) { status, paymentIntent, handleActionError in
+                switch (status) {
+                case .failed:
                     self.blockPayment = false
-                    self.delegate?.didFinishStripeCall(false, paymentError)
-                }
-                else if intentStatus == "succeeded"{
+                    self.delegate?.didFinishStripeCall(false , handleActionError?.localizedDescription ?? "")
+                    break
+                case .canceled:
                     self.blockPayment = false
-                    self.delegate?.didFinishStripeCall(true, "Your order has been placed.")
+                    self.delegate?.didFinishStripeCall(false , handleActionError?.localizedDescription ?? "")
+                    break
+                case .succeeded:
+                    if let paymentIntent = paymentIntent, paymentIntent.status == STPPaymentIntentStatus.requiresConfirmation {
+                        
+                        self.retryPayment(paymentIntent, clientSuccessMessage: clientSuccessMessage, type)
+                    }
+                    break
+                @unknown default:
+                    fatalError()
+                    break
                 }
+            }
+        }
+    }
+    
+
+    func retryPayment(_ paymentIntent: STPPaymentIntent, clientSuccessMessage: String,_ type: PaymentType) {
+        if type == .order {
+            API.retryOrder(paymentIntent.stripeId){ json in
+                self.handleRetryResponse(json, clientSuccessMessage)
+            }
+        }
+        else if type == .tip {
+            API.retryTip(paymentIntent.stripeId){ json in
+                self.handleRetryResponse(json, clientSuccessMessage)
+            }
+        }
+    }
+    func handleRetryResponse(_ json: JSON,_ clientSuccessMessage: String) {
+        if json["status"] == "success" {
+            let intentStatus = json["intent_status"].string ?? ""
+            
+            if intentStatus == "card_error" || intentStatus == "requires_payment_method" {
+                let paymentError = json["error"].string ?? ""
+                self.blockPayment = false
+                self.delegate?.didFinishStripeCall(false, paymentError)
+            }
+            else if intentStatus == "succeeded"{
+                self.blockPayment = false
+                self.delegate?.didFinishStripeCall(true, clientSuccessMessage)
             }
         }
     }

@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftyJSON
 
 struct OrderDetailsView: View {
+    // Popups
+    @State var showAddTip = false
     // Properties
     @State var cookingOrderItems = [OrderItem]()
     @State var sendingOrderItems = [OrderItem]()
@@ -82,12 +84,27 @@ struct OrderDetailsView: View {
             TotalsView(
                 subtotal: order.subtotal,
                 tax: order.tax,
-                tip: 0,
+                tip: order.tip,
                 total: order.total
             )
+            #if CUSTOMER
+            // Add tip to order
+            // 72 hour grace period
+            if order.tip == nil && order.time.addingTimeInterval(259200) > Date() {
+                WhiteButton(text: "Add tip") {
+                    showAddTip = true
+                }
+            }
+            #endif
         }
         .navigationBarTitle(getNavigationBarTitle())
         .onAppear(perform: loadOrderDetails)
+        .sheet(isPresented: $showAddTip) {
+            #if CUSTOMER
+            AddTipView(order: $order, subtotal: order.subtotal)
+                .onDisappear(perform: loadOrderDetails)
+            #endif
+        }
     }
 }
 

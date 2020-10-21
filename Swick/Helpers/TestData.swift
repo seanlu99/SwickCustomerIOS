@@ -109,6 +109,7 @@ let testOrder1 = Order(
     status: "Active",
     subtotal: 16.50,
     tax: 0.50,
+    tip: 15,
     total: 17,
     restaurantName: "The Cozy Diner"
 )

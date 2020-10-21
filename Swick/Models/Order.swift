@@ -14,6 +14,7 @@ struct Order: Identifiable {
     var status: String
     var subtotal: Decimal
     var tax: Decimal
+    var tip: Decimal?
     var total: Decimal
     #if CUSTOMER
     var restaurantName: String
@@ -28,6 +29,7 @@ struct Order: Identifiable {
         status = ""
         subtotal = 0
         tax = 0
+        tip = nil
         total = 0
         #if CUSTOMER
         restaurantName = ""
@@ -43,6 +45,7 @@ struct Order: Identifiable {
         status: String = "",
         subtotal: Decimal = 0,
         tax: Decimal = 0,
+        tip: Decimal? = nil,
         total: Decimal = 0,
         restaurantName: String = "",
         customerName: String = "",
@@ -52,6 +55,7 @@ struct Order: Identifiable {
         self.time = time
         self.status = status
         self.subtotal = subtotal
+        self.tip = tip
         self.tax = tax
         self.total = total
         #if CUSTOMER
@@ -68,9 +72,11 @@ struct Order: Identifiable {
         status = json["status"].string ?? ""
         let subtotalString = json["subtotal"].string ?? ""
         let taxString = json["tax"].string ?? ""
+        let tipString = json["tip"].string ?? ""
         let totalString = json["total"].string ?? ""
         subtotal = Decimal(string: subtotalString) ?? 0
         tax = Decimal(string: taxString) ?? 0
+        tip = Decimal(string: tipString)
         total = Decimal(string: totalString) ?? 0
         #if CUSTOMER
         restaurantName = json["restaurant_name"].string ?? ""
