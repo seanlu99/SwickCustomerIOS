@@ -32,11 +32,7 @@ struct HomeView: View {
         NavigationView {
             List {
                 ForEach(restaurants) { r in
-                    NavigationLink(
-                        destination: CategoriesView(restaurant: r)
-                    ) {
-                        RestaurantRow(restaurant: r)
-                    }
+                    RestaurantRow(restaurant: r)
                 }
             }
             .navigationBarTitle(Text("Home"))
