@@ -1,13 +1,13 @@
 //
-//  BlueText.swift
+//  WhiteButtonText.swift
 //  Swick
 //
-//  Created by Sean Lu on 10/13/20.
+//  Created by Sean Lu on 10/21/20.
 //
 
 import SwiftUI
 
-struct BlueText: View {
+struct WhiteButtonText: View {
     // Properties
     var text: String
     
@@ -15,16 +15,16 @@ struct BlueText: View {
         Text(text)
             .font(SFont.body)
             .fontWeight(.bold)
-            .foregroundColor(.white)
+            .foregroundColor(Color("Red"))
             .padding(.vertical, 22.5)
             .frame(maxWidth: .infinity)
-            .background(Color("DarkBlue"))
+            .background(Color.white)
             .cornerRadius(40)
     }
 }
 
-struct BlueText_Previews: PreviewProvider {
+struct WhiteButtonText_Previews: PreviewProvider {
     static var previews: some View {
-        BlueText(text: "PLACE ORDER")
+        WhiteButtonText(text: "GET STARTED")
     }
 }

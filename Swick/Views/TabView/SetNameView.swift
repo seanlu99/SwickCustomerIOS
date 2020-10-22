@@ -31,13 +31,14 @@ struct SetNameView: View {
         VStack(alignment: .leading) {
             Text("Enter your name")
                 .font(SFont.title)
+                .fontWeight(.bold)
                 .padding(.top, 20.0)
             RoundTextField(
                 text: $name,
                 placeholder: ""
             )
             .padding(.bottom, 20.0)
-            BlueButton(text: "ENTER", action: updateName)
+            SecondaryButton(text: "ENTER", action: updateName)
             Spacer()
         }
         .padding()

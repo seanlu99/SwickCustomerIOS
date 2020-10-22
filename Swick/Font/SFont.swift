@@ -16,7 +16,7 @@ struct SFont {
     static let body = Font.custom(fontName, size: 17)
     
     static let gradient = LinearGradient(
-        gradient: Gradient(colors: [Color("Pink"), Color("Blue")]),
+        gradient: Gradient(colors: [Color("Red"), Color("Pink")]),
         startPoint: .leading,
         endPoint: .trailing
     )

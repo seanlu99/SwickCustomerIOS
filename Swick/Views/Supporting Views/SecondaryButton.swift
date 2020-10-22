@@ -1,5 +1,5 @@
 //
-//  WhiteButton.swift
+//  SecondaryButton.swift
 //  Swick
 //
 //  Created by Sean Lu on 10/21/20.
@@ -7,21 +7,21 @@
 
 import SwiftUI
 
-struct WhiteButton: View {
+struct SecondaryButton: View {
     // Properties
     var text: String
     var action: () -> Void
     
     var body: some View {
         Button(action: action) {
-            WhiteButtonText(text: text)
+            SecondaryButtonText(text: text)
         }
         .buttonStyle(PlainButtonStyle())
     }
 }
 
-struct WhiteButton_Previews: PreviewProvider {
+struct SecondaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        WhiteButton(text: "GET STARTED", action: {})
+        SecondaryButton(text: "PLACE ORDER", action: {})
     }
 }

@@ -62,7 +62,7 @@ struct PaymentMethodsView: View {
                         loadCards()
                     }
             ) {
-                WhiteText(text: "Add payment method")
+                RowButtonText(text: "Add card")
             }
         }
         .onAppear(perform: loadCards)

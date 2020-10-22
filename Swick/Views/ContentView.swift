@@ -15,7 +15,7 @@ struct ContentView: View {
         // Set navigation bar font globally
         UINavigationBar.appearance()
             .largeTitleTextAttributes = [
-                .font: UIFont(name: "orkney-bold", size: 35)!
+                .font: UIFont(name: "orkney-bold", size: 30)!
             ]
         UINavigationBar.appearance()
             .titleTextAttributes = [

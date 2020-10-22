@@ -57,12 +57,12 @@ struct CardDetailsView: View {
                     Spacer()
                     Image(uiImage: cardImage).resizable().frame(width: 55, height: 35)
                 }.padding()
-                BlueButton(text: "DELETE", action: deleteCard)
+                SecondaryButton(text: "DELETE", action: deleteCard)
                     .disabled(attemptDelete)
                     .padding()
                 Spacer()
             }
-            .navigationBarTitle("Card Details")
+            .navigationBarTitle("Card details")
             .alert(isPresented: $showAlert){
                 Alert(title: Text("Error"),
                       message: Text(alertMessage))

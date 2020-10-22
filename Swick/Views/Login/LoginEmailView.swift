@@ -47,7 +47,7 @@ struct LoginEmailView: View {
                 isEmail: true
             )
             .padding(.bottom, 15.0)
-            BlueButton(text: "SEND", action: sendPressed)
+            WhiteButton(text: "SEND", action: sendPressed)
             Spacer()
         }
         .padding()

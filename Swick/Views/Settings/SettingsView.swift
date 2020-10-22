@@ -10,10 +10,22 @@ import SwiftUI
 struct SettingsView: View {
     // Initial
     @EnvironmentObject var user: UserData
+    // Alerts
+    @State var showAlert = false
     
     func logout() {
         UserDefaults.standard.removeObject(forKey: "token")
         user.hasToken = false
+    }
+    
+    func createLogoutAlert() -> Alert {
+        let yesButton = Alert.Button.default(Text("Yes"), action: logout)
+        return Alert(
+            title: Text("Logout"),
+            message: Text("Are you sure?"),
+            primaryButton: yesButton,
+            secondaryButton: Alert.Button.cancel()
+        )
     }
     
     var body: some View {
@@ -37,9 +49,12 @@ struct SettingsView: View {
                     )
                 }
                 #endif
-                BlueButton(text: "LOGOUT", action: logout)
+                SecondaryButton(text: "LOGOUT", action: {showAlert = true})
             }
             .navigationBarTitle("Settings")
+            .alert(isPresented: $showAlert) {
+                createLogoutAlert()
+            }
         }
     }
 }

@@ -35,7 +35,7 @@ struct AddCardView: View {
         VStack {
             CardTextField(cardParams: $cardParams, isValid: $isValid)
                 .padding(.vertical, 15.0)
-            BlueButton(text: "Add payment method"){
+            SecondaryButton(text: "ADD"){
                 if !isValid {
                     alertMessage = "Please enter a valid card"
                     showAlert = true
@@ -51,7 +51,7 @@ struct AddCardView: View {
                 .frame(width: 0, height: 0)
             Spacer()
         }
-        .navigationBarTitle("Add Card")
+        .navigationBarTitle("Add card")
         .alert(isPresented: $showAlert) {
             Alert(title: Text("Error"),
                   message: Text(alertMessage))

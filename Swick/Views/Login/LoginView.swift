@@ -29,7 +29,7 @@ struct LoginView: View {
                 NavigationLink(
                     destination: LoginEmailView()
                 ) {
-                    BlueText(text: "GET STARTED")
+                    WhiteButtonText(text: "GET STARTED")
                 }
             }
             .padding()

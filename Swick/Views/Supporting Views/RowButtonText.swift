@@ -1,5 +1,5 @@
 //
-//  WhiteText.swift
+//  RowButtonText.swift
 //  Swick
 //
 //  Created by Sean Lu on 10/13/20.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WhiteText: View {
+struct RowButtonText: View {
     // Properties
     var text: String
     
@@ -17,15 +17,15 @@ struct WhiteText: View {
             Text(text)
                 .font(SFont.body)
                 .fontWeight(.medium)
-                .foregroundColor(Color("DarkBlue"))
+                .foregroundColor(Color("Red"))
                 .padding(.vertical, 20)
             Spacer()
         }
     }
 }
 
-struct WhiteText_Previews: PreviewProvider {
+struct RowButtonText_Previews: PreviewProvider {
     static var previews: some View {
-        WhiteText(text: "Add items to cart")
+        RowButtonText(text: "Add items to cart")
     }
 }

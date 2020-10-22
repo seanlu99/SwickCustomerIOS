@@ -82,7 +82,7 @@ struct AccountView: View {
                     .font(SFont.body)
             }
             #endif
-            BlueButton(text: "UPDATE", action: updateUserInfo)
+            SecondaryButton(text: "UPDATE", action: updateUserInfo)
             Spacer()
         }
         .padding()

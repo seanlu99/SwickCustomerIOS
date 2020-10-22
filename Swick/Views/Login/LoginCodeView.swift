@@ -41,7 +41,7 @@ struct LoginCodeView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.numberPad)
             .padding(.bottom, 15.0)
-            BlueButton(text: "ENTER", action: enterPressed)
+            WhiteButton(text: "ENTER", action: enterPressed)
             Spacer()
         }
         .padding()

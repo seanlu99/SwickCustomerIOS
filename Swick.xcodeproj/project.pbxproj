@@ -67,9 +67,6 @@
 		147F075B2537C950002FF616 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06FE2537C48D002FF616 /* ImageLoader.swift */; };
 		147F075C2537C953002FF616 /* RectangleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06FF2537C48D002FF616 /* RectangleImage.swift */; };
 		147F075D2537C955002FF616 /* ThumbnailImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F07032537C48D002FF616 /* ThumbnailImage.swift */; };
-		147F075E2537C957002FF616 /* BlueText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F07022537C48D002FF616 /* BlueText.swift */; };
-		147F075F2537C959002FF616 /* BlueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F07062537C48D002FF616 /* BlueButton.swift */; };
-		147F07602537C95B002FF616 /* WhiteText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F070A2537C48D002FF616 /* WhiteText.swift */; };
 		147F07612537C95E002FF616 /* WhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F07042537C48D002FF616 /* WhiteButton.swift */; };
 		147F07622537C960002FF616 /* RoundTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F07082537C48D002FF616 /* RoundTextField.swift */; };
 		147F07632537C962002FF616 /* CardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F07092537C48D002FF616 /* CardTextField.swift */; };
@@ -108,9 +105,7 @@
 		147F07B62537D229002FF616 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F070E2537C48D002FF616 /* API.swift */; };
 		147F07B92537D22C002FF616 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F070C2537C48D002FF616 /* Constants.swift */; };
 		147F07BC2537D231002FF616 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F070F2537C48D002FF616 /* Helper.swift */; };
-		147F07C12537D873002FF616 /* BlueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F07062537C48D002FF616 /* BlueButton.swift */; };
 		147F07C42537D87A002FF616 /* RoundTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F07082537C48D002FF616 /* RoundTextField.swift */; };
-		147F07C72537D891002FF616 /* BlueText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F07022537C48D002FF616 /* BlueText.swift */; };
 		147F07CA2537DA4A002FF616 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06DE2537C48D002FF616 /* SettingsView.swift */; };
 		147F07CD2537DA6A002FF616 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06E32537C48D002FF616 /* AccountView.swift */; };
 		147F07D02537DA6E002FF616 /* AccountRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06E12537C48D002FF616 /* AccountRow.swift */; };
@@ -128,6 +123,20 @@
 		147F08132537EC14002FF616 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F070D2537C48D002FF616 /* TestData.swift */; };
 		147F082225380AC5002FF616 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 147F07162537C4EA002FF616 /* Assets.xcassets */; };
 		147F082A25380ADB002FF616 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 147F07162537C4EA002FF616 /* Assets.xcassets */; };
+		148BAB9A2540F30F000EC690 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB932540F30F000EC690 /* PrimaryButton.swift */; };
+		148BAB9B2540F30F000EC690 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB932540F30F000EC690 /* PrimaryButton.swift */; };
+		148BAB9C2540F30F000EC690 /* RowButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB942540F30F000EC690 /* RowButtonText.swift */; };
+		148BAB9D2540F30F000EC690 /* RowButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB942540F30F000EC690 /* RowButtonText.swift */; };
+		148BAB9E2540F30F000EC690 /* SecondaryButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB952540F30F000EC690 /* SecondaryButtonText.swift */; };
+		148BAB9F2540F30F000EC690 /* SecondaryButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB952540F30F000EC690 /* SecondaryButtonText.swift */; };
+		148BABA02540F30F000EC690 /* PrimaryButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB962540F30F000EC690 /* PrimaryButtonText.swift */; };
+		148BABA12540F30F000EC690 /* PrimaryButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB962540F30F000EC690 /* PrimaryButtonText.swift */; };
+		148BABA22540F30F000EC690 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB972540F30F000EC690 /* SecondaryButton.swift */; };
+		148BABA32540F30F000EC690 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB972540F30F000EC690 /* SecondaryButton.swift */; };
+		148BABA42540F30F000EC690 /* RowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB982540F30F000EC690 /* RowButton.swift */; };
+		148BABA52540F30F000EC690 /* RowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB982540F30F000EC690 /* RowButton.swift */; };
+		148BABA62540F30F000EC690 /* WhiteButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB992540F30F000EC690 /* WhiteButtonText.swift */; };
+		148BABA72540F30F000EC690 /* WhiteButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB992540F30F000EC690 /* WhiteButtonText.swift */; };
 		14F4834E2539075E001FC039 /* ToCookRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F483432539074B001FC039 /* ToCookRow.swift */; };
 		14F4835325390761001FC039 /* ToCookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F483452539074C001FC039 /* ToCookView.swift */; };
 		14F4835825390763001FC039 /* ToSendRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F483422539074B001FC039 /* ToSendRow.swift */; };
@@ -142,7 +151,6 @@
 		F245AC49253EA38500634FC4 /* AddTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F245AC48253EA38500634FC4 /* AddTipView.swift */; };
 		F2555AEB25400D8E005A3D54 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F214C165253A506100778B97 /* TextFieldAlert.swift */; };
 		F2555AEE25400DBD005A3D54 /* WhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F07042537C48D002FF616 /* WhiteButton.swift */; };
-		F2555AF425400DE1005A3D54 /* WhiteText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F070A2537C48D002FF616 /* WhiteText.swift */; };
 		F2555B062540E134005A3D54 /* UIKitTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2555B052540E134005A3D54 /* UIKitTextField.swift */; };
 		F2555B072540E134005A3D54 /* UIKitTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2555B052540E134005A3D54 /* UIKitTextField.swift */; };
 /* End PBXBuildFile section */
@@ -214,20 +222,24 @@
 		147F06FF2537C48D002FF616 /* RectangleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleImage.swift; sourceTree = "<group>"; };
 		147F07002537C48D002FF616 /* ItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRow.swift; sourceTree = "<group>"; };
 		147F07012537C48D002FF616 /* TotalRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalRow.swift; sourceTree = "<group>"; };
-		147F07022537C48D002FF616 /* BlueText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueText.swift; sourceTree = "<group>"; };
 		147F07032537C48D002FF616 /* ThumbnailImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailImage.swift; sourceTree = "<group>"; };
 		147F07042537C48D002FF616 /* WhiteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteButton.swift; sourceTree = "<group>"; };
 		147F07052537C48D002FF616 /* TotalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalsView.swift; sourceTree = "<group>"; };
-		147F07062537C48D002FF616 /* BlueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueButton.swift; sourceTree = "<group>"; };
 		147F07072537C48D002FF616 /* CustomizationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizationsView.swift; sourceTree = "<group>"; };
 		147F07082537C48D002FF616 /* RoundTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundTextField.swift; sourceTree = "<group>"; };
 		147F07092537C48D002FF616 /* CardTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTextField.swift; sourceTree = "<group>"; };
-		147F070A2537C48D002FF616 /* WhiteText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteText.swift; sourceTree = "<group>"; };
 		147F070C2537C48D002FF616 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		147F070D2537C48D002FF616 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		147F070E2537C48D002FF616 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		147F070F2537C48D002FF616 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		147F07162537C4EA002FF616 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		148BAB932540F30F000EC690 /* PrimaryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		148BAB942540F30F000EC690 /* RowButtonText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowButtonText.swift; sourceTree = "<group>"; };
+		148BAB952540F30F000EC690 /* SecondaryButtonText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondaryButtonText.swift; sourceTree = "<group>"; };
+		148BAB962540F30F000EC690 /* PrimaryButtonText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButtonText.swift; sourceTree = "<group>"; };
+		148BAB972540F30F000EC690 /* SecondaryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
+		148BAB982540F30F000EC690 /* RowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowButton.swift; sourceTree = "<group>"; };
+		148BAB992540F30F000EC690 /* WhiteButtonText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiteButtonText.swift; sourceTree = "<group>"; };
 		14F483422539074B001FC039 /* ToSendRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToSendRow.swift; path = Swick/Views/Order/ToSendRow.swift; sourceTree = SOURCE_ROOT; };
 		14F483432539074B001FC039 /* ToCookRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToCookRow.swift; path = Swick/Views/Order/ToCookRow.swift; sourceTree = SOURCE_ROOT; };
 		14F483442539074C001FC039 /* ToSendView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToSendView.swift; path = Swick/Views/Order/ToSendView.swift; sourceTree = SOURCE_ROOT; };
@@ -437,11 +449,11 @@
 			isa = PBXGroup;
 			children = (
 				147F06F62537C48D002FF616 /* UIKitTabView.swift */,
+				F2555B052540E134005A3D54 /* UIKitTextField.swift */,
 				144E0B1F253970EB00C202C1 /* ModalHackView.swift */,
 				147F06F72537C48D002FF616 /* SetupRepresentable.swift */,
 				147F06F52537C48D002FF616 /* PaymentRepresentable.swift */,
 				147F06F42537C48D002FF616 /* StripePaymentCardTextField.swift */,
-				F2555B052540E134005A3D54 /* UIKitTextField.swift */,
 			);
 			path = "UIKit Wrappers";
 			sourceTree = "<group>";
@@ -463,9 +475,13 @@
 				147F06FF2537C48D002FF616 /* RectangleImage.swift */,
 				147F07032537C48D002FF616 /* ThumbnailImage.swift */,
 				14F48369253907A5001FC039 /* SystemImage.swift */,
-				147F07022537C48D002FF616 /* BlueText.swift */,
-				147F07062537C48D002FF616 /* BlueButton.swift */,
-				147F070A2537C48D002FF616 /* WhiteText.swift */,
+				148BAB962540F30F000EC690 /* PrimaryButtonText.swift */,
+				148BAB932540F30F000EC690 /* PrimaryButton.swift */,
+				148BAB952540F30F000EC690 /* SecondaryButtonText.swift */,
+				148BAB972540F30F000EC690 /* SecondaryButton.swift */,
+				148BAB942540F30F000EC690 /* RowButtonText.swift */,
+				148BAB982540F30F000EC690 /* RowButton.swift */,
+				148BAB992540F30F000EC690 /* WhiteButtonText.swift */,
 				147F07042537C48D002FF616 /* WhiteButton.swift */,
 				147F07082537C48D002FF616 /* RoundTextField.swift */,
 				F214C165253A506100778B97 /* TextFieldAlert.swift */,
@@ -726,12 +742,12 @@
 				147F074F2537C93A002FF616 /* SettingsView.swift in Sources */,
 				147F07332537C903002FF616 /* LoginCodeView.swift in Sources */,
 				147F075B2537C950002FF616 /* ImageLoader.swift in Sources */,
+				148BABA02540F30F000EC690 /* PrimaryButtonText.swift in Sources */,
 				147F07682537C96D002FF616 /* TotalsView.swift in Sources */,
 				147F074B2537C934002FF616 /* OrderRow.swift in Sources */,
 				147F07852537C9B1002FF616 /* Helper.swift in Sources */,
 				147F072A2537C8FA002FF616 /* RootView.swift in Sources */,
 				147F07432537C924002FF616 /* OptionRow.swift in Sources */,
-				147F075F2537C959002FF616 /* BlueButton.swift in Sources */,
 				147F07582537C94C002FF616 /* AddCardView.swift in Sources */,
 				14F4836A253907A5001FC039 /* SystemImage.swift in Sources */,
 				147F077C2537C99C002FF616 /* RequestOption.swift in Sources */,
@@ -750,12 +766,14 @@
 				147F073E2537C91D002FF616 /* MealRow.swift in Sources */,
 				147F07622537C960002FF616 /* RoundTextField.swift in Sources */,
 				14569741253E26FB000E8F17 /* SFont.swift in Sources */,
+				148BABA42540F30F000EC690 /* RowButton.swift in Sources */,
 				F245AC45253EA2F300634FC4 /* TipPicker.swift in Sources */,
 				147F076E2537C97C002FF616 /* PaymentRepresentable.swift in Sources */,
 				F245AC49253EA38500634FC4 /* AddTipView.swift in Sources */,
 				147F07532537C940002FF616 /* AccountView.swift in Sources */,
 				147F07742537C98B002FF616 /* Category.swift in Sources */,
 				147F076F2537C97E002FF616 /* StripePaymentCardTextField.swift in Sources */,
+				148BABA22540F30F000EC690 /* SecondaryButton.swift in Sources */,
 				147F07302537C8FF002FF616 /* LoginEmailView.swift in Sources */,
 				147F077E2537C9A0002FF616 /* OrderItem.swift in Sources */,
 				147F07402537C922002FF616 /* CustomizationSection.swift in Sources */,
@@ -768,25 +786,27 @@
 				147F07692537C970002FF616 /* TotalRow.swift in Sources */,
 				144E0B2E253A246100C202C1 /* OrderItemsSection.swift in Sources */,
 				147F076C2537C977002FF616 /* UIKitTabView.swift in Sources */,
-				147F07602537C95B002FF616 /* WhiteText.swift in Sources */,
 				147F07822537C9AC002FF616 /* Constants.swift in Sources */,
 				147F06A62537C305002FF616 /* SceneDelegate.swift in Sources */,
-				147F075E2537C957002FF616 /* BlueText.swift in Sources */,
 				147F07362537C915002FF616 /* HomeView.swift in Sources */,
 				144E0B29253A207B00C202C1 /* OrderItemRow.swift in Sources */,
 				147F07642537C965002FF616 /* ItemRow.swift in Sources */,
 				144E0B03253954EF00C202C1 /* RootTabView.swift in Sources */,
+				148BAB9E2540F30F000EC690 /* SecondaryButtonText.swift in Sources */,
 				147F074C2537C936002FF616 /* OrderDetailsView.swift in Sources */,
 				147F072D2537C8FD002FF616 /* LoginView.swift in Sources */,
 				147F07392537C917002FF616 /* RestaurantRow.swift in Sources */,
+				148BABA62540F30F000EC690 /* WhiteButtonText.swift in Sources */,
 				147F07872537C9B5002FF616 /* TestData.swift in Sources */,
 				147F07612537C95E002FF616 /* WhiteButton.swift in Sources */,
+				148BAB9A2540F30F000EC690 /* PrimaryButton.swift in Sources */,
 				147F073A2537C919002FF616 /* CategoriesView.swift in Sources */,
 				147F07552537C944002FF616 /* PaymentMethodsView.swift in Sources */,
 				147F07502537C93D002FF616 /* SettingsRow.swift in Sources */,
 				147F07792537C998002FF616 /* CartItem.swift in Sources */,
 				147F07292537C8F8002FF616 /* ContentView.swift in Sources */,
 				147F074A2537C931002FF616 /* OrdersView.swift in Sources */,
+				148BAB9C2540F30F000EC690 /* RowButtonText.swift in Sources */,
 				147F07652537C967002FF616 /* CustomizationsView.swift in Sources */,
 				147F07632537C962002FF616 /* CardTextField.swift in Sources */,
 				F2555B062540E134005A3D54 /* UIKitTextField.swift in Sources */,
@@ -799,13 +819,13 @@
 			files = (
 				144E0B2A253A207B00C202C1 /* OrderItemRow.swift in Sources */,
 				147F07A12537D0A0002FF616 /* UserData.swift in Sources */,
-				F2555AF425400DE1005A3D54 /* WhiteText.swift in Sources */,
 				147F07F82537EABA002FF616 /* TotalRow.swift in Sources */,
 				147F07B92537D22C002FF616 /* Constants.swift in Sources */,
 				147F07D32537DA71002FF616 /* SettingsRow.swift in Sources */,
 				147F07B32537D206002FF616 /* LoginCodeView.swift in Sources */,
 				14F48371253907CD001FC039 /* SystemImage.swift in Sources */,
 				147F07CD2537DA6A002FF616 /* AccountView.swift in Sources */,
+				148BABA52540F30F000EC690 /* RowButton.swift in Sources */,
 				144E0B2F253A246100C202C1 /* OrderItemsSection.swift in Sources */,
 				147F080A2537EB72002FF616 /* Customization.swift in Sources */,
 				147F07EB2537E9D2002FF616 /* OrderRow.swift in Sources */,
@@ -817,16 +837,19 @@
 				147F08132537EC14002FF616 /* TestData.swift in Sources */,
 				147F07F22537E9E9002FF616 /* Order.swift in Sources */,
 				14F4835825390763001FC039 /* ToSendRow.swift in Sources */,
+				148BAB9D2540F30F000EC690 /* RowButtonText.swift in Sources */,
 				F2555B072540E134005A3D54 /* UIKitTextField.swift in Sources */,
 				147F07B62537D229002FF616 /* API.swift in Sources */,
 				147F07B02537D204002FF616 /* LoginEmailView.swift in Sources */,
+				148BABA12540F30F000EC690 /* PrimaryButtonText.swift in Sources */,
 				147F07E82537E9CF002FF616 /* OrdersView.swift in Sources */,
 				147F07FB2537EABE002FF616 /* ItemRow.swift in Sources */,
 				147F07FE2537EAC1002FF616 /* CustomizationsView.swift in Sources */,
-				147F07C12537D873002FF616 /* BlueButton.swift in Sources */,
 				144E0B21253970EB00C202C1 /* ModalHackView.swift in Sources */,
 				147F07F52537EAB8002FF616 /* TotalsView.swift in Sources */,
+				148BAB9B2540F30F000EC690 /* PrimaryButton.swift in Sources */,
 				147F079B2537D01C002FF616 /* AppDelegate.swift in Sources */,
+				148BAB9F2540F30F000EC690 /* SecondaryButtonText.swift in Sources */,
 				147F07CA2537DA4A002FF616 /* SettingsView.swift in Sources */,
 				147F07EF2537E9E2002FF616 /* OrderItem.swift in Sources */,
 				144E0B04253954EF00C202C1 /* RootTabView.swift in Sources */,
@@ -835,12 +858,13 @@
 				147F07C42537D87A002FF616 /* RoundTextField.swift in Sources */,
 				147F079E2537D020002FF616 /* SceneDelegate.swift in Sources */,
 				F2555AEB25400D8E005A3D54 /* TextFieldAlert.swift in Sources */,
+				148BABA72540F30F000EC690 /* WhiteButtonText.swift in Sources */,
 				14F4836425390797001FC039 /* OrderItemOrRequest.swift in Sources */,
 				14F4834E2539075E001FC039 /* ToCookRow.swift in Sources */,
 				14569742253E26FB000E8F17 /* SFont.swift in Sources */,
-				147F07C72537D891002FF616 /* BlueText.swift in Sources */,
 				147F07A72537D1B8002FF616 /* RootView.swift in Sources */,
 				147F07EC2537E9D4002FF616 /* OrderDetailsView.swift in Sources */,
+				148BABA32540F30F000EC690 /* SecondaryButton.swift in Sources */,
 				144E0AFF2539530800C202C1 /* SetNameView.swift in Sources */,
 				14F4835325390761001FC039 /* ToCookView.swift in Sources */,
 				147F07BC2537D231002FF616 /* Helper.swift in Sources */,

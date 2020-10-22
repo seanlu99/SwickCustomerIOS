@@ -45,7 +45,6 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
                     .if(!isShowing) {
                         $0.hidden()
                     }
-                
                 VStack {
                     Text(self.title)
                         .padding(.vertical, 20)
@@ -54,7 +53,6 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
                             if isPrice {
                                 Text("$")
                             }
-                            
                             UIKitTextField("0", text: self.$text)
                                 .keyboardType(.decimalPad)
                         }
@@ -62,7 +60,7 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
                     .frame(width: deviceSize.size.width*0.4)
                     .padding(.horizontal)
                     HStack {
-                        WhiteButton(text: "Ok", action: {
+                        RowButton(text: "Ok", action: {
                             withAnimation {
                                 self.isShowing.toggle()
                             }

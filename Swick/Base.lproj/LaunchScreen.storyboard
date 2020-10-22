@@ -17,17 +17,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gradient" translatesAutoresizingMaskIntoConstraints="NO" id="EMp-Rz-R9l">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gradient" translatesAutoresizingMaskIntoConstraints="NO" id="9nh-n8-Uk1">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="EMp-Rz-R9l" secondAttribute="trailing" id="CqU-L3-rPw"/>
-                            <constraint firstItem="EMp-Rz-R9l" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="FI7-4n-9nJ"/>
-                            <constraint firstItem="EMp-Rz-R9l" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Vtq-iy-C9p"/>
-                            <constraint firstAttribute="bottom" secondItem="EMp-Rz-R9l" secondAttribute="bottom" id="ep5-Iz-b7L"/>
+                            <constraint firstItem="9nh-n8-Uk1" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="2lE-Gb-Zbg"/>
+                            <constraint firstItem="9nh-n8-Uk1" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="HsN-a0-fcE"/>
+                            <constraint firstAttribute="bottom" secondItem="9nh-n8-Uk1" secondAttribute="bottom" id="ThJ-ih-H9y"/>
+                            <constraint firstAttribute="trailing" secondItem="9nh-n8-Uk1" secondAttribute="trailing" id="hb2-KH-Z4H"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -37,7 +37,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Gradient" width="800" height="560"/>
+        <image name="Gradient" width="800" height="558"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

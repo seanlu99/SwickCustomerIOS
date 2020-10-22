@@ -138,7 +138,7 @@ struct CartView: View {
     var body: some View {
         List {
             // Add items to cart button
-            WhiteButton(
+            RowButton(
                 text: "Add items to cart",
                 action: {showMenu = true}
             )
@@ -185,13 +185,13 @@ struct CartView: View {
                 }
                 else {
                     // Select payment button
-                    WhiteButton(text: "Select payment method", action: {
+                    RowButton(text: "Select payment method", action: {
                         self.showPaymentMethods.toggle()
                     })
                 }
                 
                 // Place order button
-                BlueButton(text: "PLACE ORDER", action: placeOrder)
+                PrimaryButton(text: "PLACE ORDER", action: placeOrder)
                     .disabled(attemptOrder)
             }
         }

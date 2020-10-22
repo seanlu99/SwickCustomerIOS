@@ -87,14 +87,22 @@ struct MealDetailsView: View {
     
     var body: some View {
         List {
-            // Meal image
-            RectangleImage(url: meal.imageUrl)
-            // Meal description
-            HStack {
-                Text(meal.description)
-                    .font(SFont.body)
-                    .padding(.vertical)
-                Spacer()
+            if meal.imageUrl != nil || meal.description != nil {
+                VStack {
+                    // Meal image
+                    if let imageUrl = meal.imageUrl {
+                        RectangleImage(url: imageUrl)
+                    }
+                    // Meal description
+                    if let description = meal.description {
+                        HStack {
+                            Text(description)
+                                .font(SFont.body)
+                                .padding(.vertical)
+                            Spacer()
+                        }
+                    }
+                }
             }
             // Customizations list
             ForEach(customizations.indices, id: \.self) { i in
@@ -140,7 +148,7 @@ struct MealDetailsView: View {
                 }
                 .padding(.vertical, 22.5)
                 .frame(maxWidth: .infinity)
-                .background(Color("DarkBlue"))
+                .background(Color("Red"))
                 .cornerRadius(40)
             }
         }

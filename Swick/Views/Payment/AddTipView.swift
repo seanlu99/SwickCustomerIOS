@@ -45,8 +45,7 @@ struct AddTipView: View {
             VStack{
                 TipPicker(showCustomTip: $showCustomTip, tipState: $tipState, removeLater: true)
                     .padding()
-                
-                BlueButton(text: "Send \(Helper.formatPrice(getTip()))") {
+                SecondaryButton(text: "Send \(Helper.formatPrice(getTip()))") {
                     if getTip() < 0.50 {
                         alertMessage = "Tip must be at least $0.50"
                         showAlert = true
@@ -65,7 +64,14 @@ struct AddTipView: View {
             }
             .navigationBarTitle("Add tip")
         }
-        .textFieldAlert(isShowing: $showCustomTip, text: $tipAmount, title: "Set tip", placeholder: "0", keyboardType: .decimalPad, isPrice: true)
+        .textFieldAlert(
+            isShowing: $showCustomTip,
+            text: $tipAmount,
+            title: "Set tip",
+            placeholder: "0",
+            keyboardType: .decimalPad,
+            isPrice: true
+        )
         .alert(isPresented: $showAlert) {
             Alert(title: Text("Error"), message: Text(alertMessage))
         }

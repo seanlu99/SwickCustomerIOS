@@ -1,5 +1,5 @@
 //
-//  BlueButton.swift
+//  PrimaryButton.swift
 //  Swick
 //
 //  Created by Sean Lu on 10/7/20.
@@ -7,21 +7,21 @@
 
 import SwiftUI
 
-struct BlueButton: View {
+struct PrimaryButton: View {
     // Properties
     var text: String
     var action: () -> Void
     
     var body: some View {
         Button(action: action) {
-            BlueText(text: text)
+            PrimaryButtonText(text: text)
         }
         .buttonStyle(PlainButtonStyle())
     }
 }
 
-struct BlueButton_Previews: PreviewProvider {
+struct PrimaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        BlueButton(text: "PLACE ORDER", action: {})
+        PrimaryButton(text: "PLACE ORDER", action: {})
     }
 }

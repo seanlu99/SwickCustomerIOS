@@ -11,10 +11,10 @@ import SwiftyJSON
 struct Meal: Identifiable {
     var id: Int
     var name: String
-    var description: String
+    var description: String?
     var price: Decimal
     var tax: Decimal
-    var imageUrl: String
+    var imageUrl: String?
     
     init(
         id: Int,
@@ -37,9 +37,9 @@ struct Meal: Identifiable {
         let taxString = json["tax"].string ?? ""
         id = json["id"].int ?? 0
         name = json["name"].string ?? ""
-        description = json["description"].string ?? ""
+        description = json["description"].string
         price = Decimal(string: priceString) ?? 0
         tax = Decimal(string: taxString) ?? 0
-        imageUrl = json["image"].string ?? ""
+        imageUrl = json["image"].string
     }
 }

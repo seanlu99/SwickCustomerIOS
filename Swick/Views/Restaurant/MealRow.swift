@@ -16,14 +16,18 @@ struct MealRow: View {
             VStack(alignment: .leading, spacing: 10.0) {
                 Text(meal.name)
                     .font(SFont.header)
-                Text(meal.description)
-                    .font(SFont.body)
-                    .lineLimit(1)
+                if let description = meal.description {
+                    Text(description)
+                        .font(SFont.body)
+                        .lineLimit(1)
+                }
                 Text(Helper.formatPrice(meal.price))
                     .font(SFont.body)
             }
             Spacer()
-            ThumbnailImage(url: meal.imageUrl)
+            if let imageUrl = meal.imageUrl {
+                ThumbnailImage(url: imageUrl)
+            }
         }
         .padding(.vertical)
     }
