@@ -33,8 +33,10 @@ struct LoginView: View {
                 }
             }
             .padding()
+            .padding(.top, 50.0)
             .foregroundColor(.white)
             .background(SFont.gradient.edgesIgnoringSafeArea(.all))
+            .navigationBarHidden(true)
         }
     }
 }

@@ -10,15 +10,10 @@ import SwiftUI
 struct SetNameView: View {
     // Initial
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    // Alerts
-    @State var showAlert = false
     // Properties
     @State var name: String = ""
     
     func updateName() {
-        if name == "" {
-            showAlert = true
-        }
         API.updateUserInfo(name, "") { json in
             if (json["status"] == "success") {
                 // Dismiss sheet
@@ -28,26 +23,20 @@ struct SetNameView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 20.0) {
             Text("Enter your name")
                 .font(SFont.title)
                 .fontWeight(.bold)
-                .padding(.top, 20.0)
-            RoundTextField(
-                text: $name,
-                placeholder: ""
-            )
-            .padding(.bottom, 20.0)
-            SecondaryButton(text: "ENTER", action: updateName)
+            UIKitTextField("", text: $name)
+                .font(SFont.headerUI!)
+                .disableAutocorrection(true)
+                .autocapitalization(.words)
+                .returnKey(.done)
+                .onCommit(updateName)
             Spacer()
         }
         .padding()
-        .alert(isPresented: $showAlert, content: {
-            Alert(
-                title: Text("Error"),
-                message: Text("Please enter a name.")
-            )
-        })
+        .padding(.top, 20.0)
     }
 }
 

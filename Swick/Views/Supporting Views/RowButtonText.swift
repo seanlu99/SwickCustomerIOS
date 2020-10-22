@@ -17,7 +17,7 @@ struct RowButtonText: View {
             Text(text)
                 .font(SFont.body)
                 .fontWeight(.medium)
-                .foregroundColor(Color("Red"))
+                .foregroundColor(PRIMARY_COLOR)
                 .padding(.vertical, 20)
             Spacer()
         }

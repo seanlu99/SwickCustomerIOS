@@ -19,11 +19,12 @@ struct AccountRow: View {
             Text(fieldName)
                 .font(SFont.body)
                 .fontWeight(.bold)
-            RoundTextField(
-                text: $text,
-                placeholder: placeholder,
-                isEmail: isEmail
-            )
+            TextField(placeholder, text: $text)
+                .font(SFont.body)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .disableAutocorrection(true)
+                .autocapitalization(isEmail ? .none : .words)
+                .keyboardType(isEmail ? .emailAddress : .default)
         }
     }
 }

@@ -10,42 +10,57 @@ import SwiftUI
 struct LoginCodeView: View {
     // Initial
     @EnvironmentObject var user: UserData
+    @Environment(\.presentationMode) var presentationMode
     // Alerts
     @State var showAlert = false
     // Properties
     @State var code: String = ""
     var email: String
     
-    func enterPressed() {
-        API.getToken(email, code) { json in
-            let token = json["token"].string
-            // If token unsuccessfully retrieved
-            if token == nil {
-                showAlert = true
-            }
-            // If token successfully retrieved
-            else {
-                UserDefaults.standard.set(token, forKey: "token")
-                user.hasToken = true
+    func onChange() {
+        if code.length == 6 {
+            API.getToken(email, code) { json in
+                let token = json["token"].string
+                // If token unsuccessfully retrieved
+                if token == nil {
+                    showAlert = true
+                    code = ""
+                }
+                // If token successfully retrieved
+                else {
+                    UserDefaults.standard.set(token, forKey: "token")
+                    user.hasToken = true
+                }
             }
         }
     }
     
     var body: some View {
-        VStack(spacing: 20.0) {
-            Text("Enter verification code")
-                .font(SFont.title)
-                .foregroundColor(.white)
-            TextField("", text: $code)
-                .font(SFont.body)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.numberPad)
-            .padding(.bottom, 15.0)
-            WhiteButton(text: "ENTER", action: enterPressed)
-            Spacer()
+        VStack(alignment: .leading) {
+            BackButton(
+                color: .white,
+                dismiss: {presentationMode.wrappedValue.dismiss()}
+            )
+            VStack() {
+                Text("Enter verification code")
+                    .font(SFont.title)
+                    .foregroundColor(.white)
+                    .padding(.bottom, 20.0)
+                UIKitTextField("", text: $code)
+                    .font(SFont.titleUI!)
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .keyboardType(.numberPad)
+                    .onEditingChanged(onChange)
+                Divider()
+                    .frame(width: 130, height: 2)
+                    .background(Color.white)
+                Spacer()
+            }
+            .padding()
         }
-        .padding()
         .background(SFont.gradient.edgesIgnoringSafeArea(.all))
+        .navigationBarHidden(true)
         .alert(isPresented: $showAlert) {
             return Alert(
                 title: Text("Error"),

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LoginEmailView: View {
+    // Initial
+    @Environment(\.presentationMode) var presentationMode
     // Popups
     @State var showCodeView = false
     // Alerts
@@ -34,24 +36,38 @@ struct LoginEmailView: View {
     }
     
     var body: some View {
-        VStack(spacing: 20.0) {
-            Text("Enter your email")
-                .font(SFont.title)
-                .foregroundColor(.white)
-            Text("We'll send you a verification code")
-                .font(SFont.body)
-                .foregroundColor(.white)
-            RoundTextField(
-                text: $email,
-                placeholder: "",
-                isEmail: true
+        VStack(alignment: .leading) {
+            BackButton(
+                color: .white,
+                dismiss: {presentationMode.wrappedValue.dismiss()}
             )
-            .padding(.bottom, 15.0)
-            WhiteButton(text: "SEND", action: sendPressed)
-            Spacer()
+            VStack() {
+                Text("Enter your email")
+                    .font(SFont.title)
+                    .foregroundColor(.white)
+                    .padding(.bottom, 20.0)
+                Text("We'll send you a verification code")
+                    .font(SFont.body)
+                    .foregroundColor(.white)
+                    .padding(.bottom, 20.0)
+                UIKitTextField("", text: $email)
+                    .font(SFont.headerUI!)
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
+                    .keyboardType(.emailAddress)
+                    .returnKey(.send)
+                    .onCommit(sendPressed)
+                Divider()
+                    .frame(height: 2)
+                    .background(Color.white)
+                Spacer()
+            }
+            .padding()
         }
-        .padding()
         .background(SFont.gradient.edgesIgnoringSafeArea(.all))
+        .navigationBarHidden(true)
         .background(
             // Navigation link to login code view
             NavigationLink(

@@ -18,7 +18,7 @@ struct SystemImage: View {
             .resizable()
             .scaledToFit()
             .frame(width: width, height: height)
-            .foregroundColor(Color("Red"))
+            .foregroundColor(PRIMARY_COLOR)
     }
 }
 

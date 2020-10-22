@@ -10,13 +10,16 @@ import SwiftUI
 struct SFont {
     
     static let logo = Font.custom("forma", size: 80)
-    static let fontName = "orkney-regular"
+    static private let fontName = "orkney-regular"
     static let title = Font.custom(fontName, size: 30)
+    static let titleUI = UIFont(name: fontName, size: 30)
     static let header = Font.custom(fontName, size: 23)
+    static let headerUI = UIFont(name: fontName, size: 23)
     static let body = Font.custom(fontName, size: 17)
+    static let bodyUI = UIFont(name: fontName, size: 17)
     
     static let gradient = LinearGradient(
-        gradient: Gradient(colors: [Color("Red"), Color("Pink")]),
+        gradient: Gradient(colors: [PRIMARY_COLOR, Color("Pink")]),
         startPoint: .leading,
         endPoint: .trailing
     )

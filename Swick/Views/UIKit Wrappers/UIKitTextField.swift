@@ -221,9 +221,19 @@ extension UIKitTextField {
         var view = self
         view.whichKeyboard = keyboardType
         return view
-        
     }
 
+    func onCommit(_ action: @escaping () -> Void) -> UIKitTextField {
+        var view = self
+        view.onCommit = action
+        return view
+    }
+    
+    func onEditingChanged(_ action: @escaping () -> Void) -> UIKitTextField {
+        var view = self
+        view.onEditingChanged = action
+        return view
+    }
 }
 
 private struct SwiftUITextView: UIViewRepresentable {
@@ -420,7 +430,6 @@ private extension SwiftUITextView {
             if onCommit != nil, text == "\n" {
                 onCommit?()
                 originalText = UIKitTextField.text
-                UIKitTextField.resignFirstResponder()
                 return false
             }
             return true
