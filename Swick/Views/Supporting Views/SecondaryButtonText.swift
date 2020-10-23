@@ -15,14 +15,14 @@ struct SecondaryButtonText: View {
         Text(text)
             .font(SFont.body)
             .fontWeight(.medium)
-            .foregroundColor(PRIMARY_COLOR)
+            .foregroundColor(SColor.primary)
             .padding(.vertical, 22.5)
             .frame(maxWidth: .infinity)
             .background(Color.white)
             .cornerRadius(40)
             .overlay(
                 RoundedRectangle(cornerRadius: 40)
-                    .stroke(PRIMARY_COLOR, lineWidth: 2)
+                    .stroke(SColor.primary, lineWidth: 2)
             )
     }
 }

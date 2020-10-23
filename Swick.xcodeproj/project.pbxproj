@@ -32,6 +32,8 @@
 		145697B0253E8B1B000E8F17 /* orkney-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 145697A9253E8B1B000E8F17 /* orkney-regular.otf */; };
 		145697B1253E8B1B000E8F17 /* orkney-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 145697AA253E8B1B000E8F17 /* orkney-bold.otf */; };
 		145697B2253E8B1B000E8F17 /* orkney-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 145697AA253E8B1B000E8F17 /* orkney-bold.otf */; };
+		1457ECB725428BFC0095B29D /* SColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1457ECB625428BFC0095B29D /* SColor.swift */; };
+		1457ECB825428BFD0095B29D /* SColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1457ECB625428BFC0095B29D /* SColor.swift */; };
 		147F06A42537C305002FF616 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06A32537C305002FF616 /* AppDelegate.swift */; };
 		147F06A62537C305002FF616 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06A52537C305002FF616 /* SceneDelegate.swift */; };
 		147F06AD2537C30B002FF616 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 147F06AC2537C30B002FF616 /* Preview Assets.xcassets */; };
@@ -170,6 +172,7 @@
 		145697A8253E8B1B000E8F17 /* orkney-light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "orkney-light.otf"; sourceTree = "<group>"; };
 		145697A9253E8B1B000E8F17 /* orkney-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "orkney-regular.otf"; sourceTree = "<group>"; };
 		145697AA253E8B1B000E8F17 /* orkney-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "orkney-bold.otf"; sourceTree = "<group>"; };
+		1457ECB625428BFC0095B29D /* SColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SColor.swift; sourceTree = "<group>"; };
 		147F06A02537C305002FF616 /* Customer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Customer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		147F06A32537C305002FF616 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		147F06A52537C305002FF616 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -287,14 +290,15 @@
 			path = TabView;
 			sourceTree = "<group>";
 		};
-		14569749253E351B000E8F17 /* Font */ = {
+		14569749253E351B000E8F17 /* Colors and Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				1457ECB625428BFC0095B29D /* SColor.swift */,
 				14569740253E26FA000E8F17 /* SFont.swift */,
 				1456976E253E75AF000E8F17 /* orkney */,
 				14569780253E75BF000E8F17 /* forma.ttf */,
 			);
-			path = Font;
+			path = "Colors and Fonts";
 			sourceTree = "<group>";
 		};
 		1456976E253E75AF000E8F17 /* orkney */ = {
@@ -336,7 +340,7 @@
 				147F06D82537C48D002FF616 /* Views */,
 				147F06CB2537C48C002FF616 /* Models */,
 				147F070B2537C48D002FF616 /* Helpers */,
-				14569749253E351B000E8F17 /* Font */,
+				14569749253E351B000E8F17 /* Colors and Fonts */,
 				147F07162537C4EA002FF616 /* Assets.xcassets */,
 				147F06AE2537C30B002FF616 /* LaunchScreen.storyboard */,
 				147F06B12537C30B002FF616 /* CustomerInfo.plist */,
@@ -772,6 +776,7 @@
 				F245AC49253EA38500634FC4 /* AddTipView.swift in Sources */,
 				147F07532537C940002FF616 /* AccountView.swift in Sources */,
 				147F07742537C98B002FF616 /* Category.swift in Sources */,
+				1457ECB725428BFC0095B29D /* SColor.swift in Sources */,
 				147F076F2537C97E002FF616 /* StripePaymentCardTextField.swift in Sources */,
 				148BABA22540F30F000EC690 /* SecondaryButton.swift in Sources */,
 				147F07302537C8FF002FF616 /* LoginEmailView.swift in Sources */,
@@ -842,6 +847,7 @@
 				147F07B62537D229002FF616 /* API.swift in Sources */,
 				147F07B02537D204002FF616 /* LoginEmailView.swift in Sources */,
 				148BABBB254133D4000EC690 /* BackButton.swift in Sources */,
+				1457ECB825428BFD0095B29D /* SColor.swift in Sources */,
 				148BABA12540F30F000EC690 /* PrimaryButtonText.swift in Sources */,
 				147F07E82537E9CF002FF616 /* OrdersView.swift in Sources */,
 				147F07FB2537EABE002FF616 /* ItemRow.swift in Sources */,

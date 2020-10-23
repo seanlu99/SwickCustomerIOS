@@ -27,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = UIHostingController(rootView: contentView)
             self.window = window
             // Set tint color globally to red
-            self.window?.tintColor = PRIMARY_UI_COLOR
+            self.window?.tintColor = SColor.primaryUI
             window.makeKeyAndVisible()
         }
     }

@@ -148,7 +148,7 @@ struct MealDetailsView: View {
                 }
                 .padding(.vertical, 22.5)
                 .frame(maxWidth: .infinity)
-                .background(PRIMARY_COLOR)
+                .background(SColor.primary)
                 .cornerRadius(40)
             }
         }

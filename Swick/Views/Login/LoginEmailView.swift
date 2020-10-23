@@ -66,7 +66,7 @@ struct LoginEmailView: View {
             }
             .padding()
         }
-        .background(SFont.gradient.edgesIgnoringSafeArea(.all))
+        .background(SColor.gradient.edgesIgnoringSafeArea(.all))
         .navigationBarHidden(true)
         .background(
             // Navigation link to login code view

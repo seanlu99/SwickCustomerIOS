@@ -15,7 +15,7 @@ struct WhiteButtonText: View {
         Text(text)
             .font(SFont.body)
             .fontWeight(.bold)
-            .foregroundColor(PRIMARY_COLOR)
+            .foregroundColor(SColor.primary)
             .padding(.vertical, 22.5)
             .frame(maxWidth: .infinity)
             .background(Color.white)

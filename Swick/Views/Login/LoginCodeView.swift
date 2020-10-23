@@ -59,7 +59,7 @@ struct LoginCodeView: View {
             }
             .padding()
         }
-        .background(SFont.gradient.edgesIgnoringSafeArea(.all))
+        .background(SColor.gradient.edgesIgnoringSafeArea(.all))
         .navigationBarHidden(true)
         .alert(isPresented: $showAlert) {
             return Alert(

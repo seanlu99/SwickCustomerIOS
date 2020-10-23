@@ -17,12 +17,6 @@ struct SFont {
     static let headerUI = UIFont(name: fontName, size: 23)
     static let body = Font.custom(fontName, size: 17)
     static let bodyUI = UIFont(name: fontName, size: 17)
-    
-    static let gradient = LinearGradient(
-        gradient: Gradient(colors: [PRIMARY_COLOR, Color("Pink")]),
-        startPoint: .leading,
-        endPoint: .trailing
-    )
 }
 
 struct SFont_Previews: PreviewProvider {
