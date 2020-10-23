@@ -14,6 +14,7 @@ struct MealsView: View {
     // Properties
     @State var tableView: UITableView?
     @State var meals = [Meal]()
+    @State var searchText = ""
     var restaurantId: Int
     var category: Category
     var cameFromCart: Bool
@@ -49,7 +50,12 @@ struct MealsView: View {
     
     var body: some View {
         List {
-            ForEach(meals) { m in
+            SearchBar(text: $searchText, placeholder: "Search meals")
+            // Display searched meals
+            ForEach(meals.filter {
+                searchText.isEmpty
+                    || $0.name.lowercased().contains(searchText.lowercased())
+            }) { m in
                 // Only show meal details if came from cart
                 if cameFromCart {
                     NavigationLink(
@@ -72,6 +78,7 @@ struct MealsView: View {
             clearTableViewSelection()
         }
         .onDisappear(perform: clearTableViewSelection)
+        .resignKeyboardOnDragGesture() // for search
     }
 }
 

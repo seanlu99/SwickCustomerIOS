@@ -222,18 +222,6 @@ extension UIKitTextField {
         view.whichKeyboard = keyboardType
         return view
     }
-
-    func onCommit(_ action: @escaping () -> Void) -> UIKitTextField {
-        var view = self
-        view.onCommit = action
-        return view
-    }
-    
-    func onEditingChanged(_ action: @escaping () -> Void) -> UIKitTextField {
-        var view = self
-        view.onEditingChanged = action
-        return view
-    }
 }
 
 private struct SwiftUITextView: UIViewRepresentable {

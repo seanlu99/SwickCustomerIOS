@@ -12,6 +12,7 @@ struct HomeView: View {
     @State var viewDidLoad = false
     // Properties
     @State var restaurants = [Restaurant]()
+    @State var searchText = ""
     
     func loadRestaurants() {
         if !viewDidLoad {
@@ -31,12 +32,18 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(restaurants) { r in
+                SearchBar(text: $searchText, placeholder: "Search restaurants")
+                // Display searched restaurants
+                ForEach(restaurants.filter {
+                    searchText.isEmpty
+                        || $0.name.lowercased().contains(searchText.lowercased())
+                }) { r in
                     RestaurantRow(restaurant: r)
                 }
             }
             .navigationBarTitle(Text("Home"))
             .onAppear(perform: loadRestaurants)
+            .resignKeyboardOnDragGesture() // for search
         }
     }
 }

@@ -27,12 +27,11 @@ struct SetNameView: View {
             Text("Enter your name")
                 .font(SFont.title)
                 .fontWeight(.bold)
-            UIKitTextField("", text: $name)
+            UIKitTextField("", text: $name, onCommit: updateName)
                 .font(SFont.headerUI!)
                 .disableAutocorrection(true)
                 .autocapitalization(.words)
                 .returnKey(.done)
-                .onCommit(updateName)
             Spacer()
         }
         .padding()

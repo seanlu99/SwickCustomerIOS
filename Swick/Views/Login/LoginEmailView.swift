@@ -50,7 +50,7 @@ struct LoginEmailView: View {
                     .font(SFont.body)
                     .foregroundColor(.white)
                     .padding(.bottom, 20.0)
-                UIKitTextField("", text: $email)
+                UIKitTextField("", text: $email, onCommit: sendPressed)
                     .font(SFont.headerUI!)
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
@@ -58,7 +58,6 @@ struct LoginEmailView: View {
                     .autocapitalization(.none)
                     .keyboardType(.emailAddress)
                     .returnKey(.send)
-                    .onCommit(sendPressed)
                 Divider()
                     .frame(height: 2)
                     .background(Color.white)
@@ -67,6 +66,8 @@ struct LoginEmailView: View {
             .padding()
         }
         .background(SColor.gradient.edgesIgnoringSafeArea(.all))
+        // Needed to hide navigation bar on iOS 13
+        .navigationBarTitle("")
         .navigationBarHidden(true)
         .background(
             // Navigation link to login code view

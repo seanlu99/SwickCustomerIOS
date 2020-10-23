@@ -36,6 +36,8 @@ struct LoginView: View {
             .padding(.top, 50.0)
             .foregroundColor(.white)
             .background(SColor.gradient.edgesIgnoringSafeArea(.all))
+            // Needed to hide navigation bar on iOS 13
+            .navigationBarTitle("")
             .navigationBarHidden(true)
         }
     }

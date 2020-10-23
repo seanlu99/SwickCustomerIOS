@@ -12,6 +12,7 @@ struct CategoriesView: View {
     @State var viewDidLoad = false
     // Properties
     @State var categories = [Category]()
+    @State var searchText = ""
     var restaurant: Restaurant
     var cameFromCart = false
     
@@ -32,7 +33,13 @@ struct CategoriesView: View {
     
     var body: some View {
         List {
-            ForEach(categories) { c in
+            SearchBar(text: $searchText, placeholder: "Search categories")
+            // Display searched categories
+            ForEach(categories.filter {
+                searchText.isEmpty
+                    || $0.name.lowercased().contains(searchText.lowercased())
+            }) { c in
+                // Category row
                 NavigationLink(
                     destination: MealsView(
                         restaurantId: restaurant.id,
@@ -48,6 +55,7 @@ struct CategoriesView: View {
         }
         .navigationBarTitle(Text(restaurant.name))
         .onAppear(perform: loadCategories)
+        .resignKeyboardOnDragGesture() // for search
     }
 }
 
