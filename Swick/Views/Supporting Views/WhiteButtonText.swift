@@ -18,7 +18,6 @@ struct WhiteButtonText: View {
             .foregroundColor(SColor.primary)
             .padding(.vertical, 22.5)
             .frame(maxWidth: .infinity)
-            .background(Color.white)
             .cornerRadius(40)
     }
 }

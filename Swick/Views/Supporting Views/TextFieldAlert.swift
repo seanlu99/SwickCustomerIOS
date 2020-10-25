@@ -67,7 +67,7 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
                         })
                     }
                 }
-                .background(Color.white)
+                .background(Color(UIColor.systemGray5))
                 .cornerRadius(5.0)
                 .frame(
                     width: deviceSize.size.width * 0.4,
