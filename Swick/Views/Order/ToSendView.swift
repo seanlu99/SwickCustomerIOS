@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ToSendView: View {
+    // Initial
+    @State var isLoading = true
     // Properties
     @State var items = [OrderItemOrRequest]()
     
@@ -18,6 +20,7 @@ struct ToSendView: View {
             for itemJson in itemJsonList {
                 items.append(OrderItemOrRequest(itemJson))
             }
+            isLoading = false
         }
     }
     
@@ -28,15 +31,15 @@ struct ToSendView: View {
                     ToSendRow(reloadItems: loadItems, item: i)
                 }
             }
-            .buttonStyle(PlainButtonStyle())
             .navigationBarTitle(Text("To Send"))
             .onAppear(perform: loadItems)
+            .loadingView($isLoading)
         }
     }
 }
 
 struct ToSendView_Previews: PreviewProvider {
     static var previews: some View {
-        ToSendView(items: testOrderItemOrRequests)
+        ToSendView(isLoading: false, items: testOrderItemOrRequests)
     }
 }

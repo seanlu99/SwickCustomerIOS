@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		142B7B10254B770A00C4EFA8 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142B7B0F254B770A00C4EFA8 /* ActivityIndicator.swift */; };
+		142B7B11254B770A00C4EFA8 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142B7B0F254B770A00C4EFA8 /* ActivityIndicator.swift */; };
+		142B7B17254B779200C4EFA8 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142B7B16254B779200C4EFA8 /* WaitingView.swift */; };
+		142B7B18254B779200C4EFA8 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142B7B16254B779200C4EFA8 /* WaitingView.swift */; };
 		14308708253826A00059D6A5 /* OrderItemOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14308707253826A00059D6A5 /* OrderItemOptions.swift */; };
 		144E0AFE2539530800C202C1 /* SetNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0AFD2539530800C202C1 /* SetNameView.swift */; };
 		144E0AFF2539530800C202C1 /* SetNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0AFD2539530800C202C1 /* SetNameView.swift */; };
@@ -140,6 +144,8 @@
 		148BABA72540F30F000EC690 /* WhiteButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB992540F30F000EC690 /* WhiteButtonText.swift */; };
 		148BABBA254133D3000EC690 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BABB9254133D3000EC690 /* BackButton.swift */; };
 		148BABBB254133D4000EC690 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BABB9254133D3000EC690 /* BackButton.swift */; };
+		14C5C16425477DBD00E44974 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C5C16325477DBD00E44974 /* LoadingView.swift */; };
+		14C5C16525477DBD00E44974 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C5C16325477DBD00E44974 /* LoadingView.swift */; };
 		14F4834E2539075E001FC039 /* ToCookRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F483432539074B001FC039 /* ToCookRow.swift */; };
 		14F4835325390761001FC039 /* ToCookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F483452539074C001FC039 /* ToCookView.swift */; };
 		14F4835825390763001FC039 /* ToSendRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F483422539074B001FC039 /* ToSendRow.swift */; };
@@ -160,6 +166,8 @@
 
 /* Begin PBXFileReference section */
 		12E98DFDC54FAF43FE97FAFB /* Pods_Server.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Server.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		142B7B0F254B770A00C4EFA8 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		142B7B16254B779200C4EFA8 /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
 		14308707253826A00059D6A5 /* OrderItemOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemOptions.swift; sourceTree = "<group>"; };
 		144E0AFD2539530800C202C1 /* SetNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameView.swift; sourceTree = "<group>"; };
 		144E0B02253954EF00C202C1 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
@@ -245,6 +253,7 @@
 		148BAB982540F30F000EC690 /* RowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowButton.swift; sourceTree = "<group>"; };
 		148BAB992540F30F000EC690 /* WhiteButtonText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiteButtonText.swift; sourceTree = "<group>"; };
 		148BABB9254133D3000EC690 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		14C5C16325477DBD00E44974 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		14F483422539074B001FC039 /* ToSendRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToSendRow.swift; path = Swick/Views/Order/ToSendRow.swift; sourceTree = SOURCE_ROOT; };
 		14F483432539074B001FC039 /* ToCookRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToCookRow.swift; path = Swick/Views/Order/ToCookRow.swift; sourceTree = SOURCE_ROOT; };
 		14F483442539074C001FC039 /* ToSendView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToSendView.swift; path = Swick/Views/Order/ToSendView.swift; sourceTree = SOURCE_ROOT; };
@@ -283,6 +292,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		142B7B1B254B779E00C4EFA8 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				148BAB962540F30F000EC690 /* PrimaryButtonText.swift */,
+				148BAB932540F30F000EC690 /* PrimaryButton.swift */,
+				148BAB952540F30F000EC690 /* SecondaryButtonText.swift */,
+				148BAB972540F30F000EC690 /* SecondaryButton.swift */,
+				148BAB942540F30F000EC690 /* RowButtonText.swift */,
+				148BAB982540F30F000EC690 /* RowButton.swift */,
+				148BAB992540F30F000EC690 /* WhiteButtonText.swift */,
+				147F07042537C48D002FF616 /* WhiteButton.swift */,
+				148BABB9254133D3000EC690 /* BackButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		142B7B1C254B77D900C4EFA8 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				147F06FE2537C48D002FF616 /* ImageLoader.swift */,
+				147F06FF2537C48D002FF616 /* RectangleImage.swift */,
+				147F07032537C48D002FF616 /* ThumbnailImage.swift */,
+				14F48369253907A5001FC039 /* SystemImage.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		144E0B1025395AB100C202C1 /* TabView */ = {
 			isa = PBXGroup;
 			children = (
@@ -455,6 +491,7 @@
 		147F06F32537C48D002FF616 /* UIKit Wrappers */ = {
 			isa = PBXGroup;
 			children = (
+				142B7B0F254B770A00C4EFA8 /* ActivityIndicator.swift */,
 				147F06F62537C48D002FF616 /* UIKitTabView.swift */,
 				F2555B052540E134005A3D54 /* UIKitTextField.swift */,
 				144E0B1F253970EB00C202C1 /* ModalHackView.swift */,
@@ -478,19 +515,10 @@
 		147F06FD2537C48D002FF616 /* Supporting Views */ = {
 			isa = PBXGroup;
 			children = (
-				147F06FE2537C48D002FF616 /* ImageLoader.swift */,
-				147F06FF2537C48D002FF616 /* RectangleImage.swift */,
-				147F07032537C48D002FF616 /* ThumbnailImage.swift */,
-				14F48369253907A5001FC039 /* SystemImage.swift */,
-				148BAB962540F30F000EC690 /* PrimaryButtonText.swift */,
-				148BAB932540F30F000EC690 /* PrimaryButton.swift */,
-				148BAB952540F30F000EC690 /* SecondaryButtonText.swift */,
-				148BAB972540F30F000EC690 /* SecondaryButton.swift */,
-				148BAB942540F30F000EC690 /* RowButtonText.swift */,
-				148BAB982540F30F000EC690 /* RowButton.swift */,
-				148BAB992540F30F000EC690 /* WhiteButtonText.swift */,
-				147F07042537C48D002FF616 /* WhiteButton.swift */,
-				148BABB9254133D3000EC690 /* BackButton.swift */,
+				142B7B1B254B779E00C4EFA8 /* Buttons */,
+				142B7B1C254B77D900C4EFA8 /* Images */,
+				14C5C16325477DBD00E44974 /* LoadingView.swift */,
+				142B7B16254B779200C4EFA8 /* WaitingView.swift */,
 				1457ECCA254292250095B29D /* SearchBar.swift */,
 				F214C165253A506100778B97 /* TextFieldAlert.swift */,
 			);
@@ -743,10 +771,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				142B7B17254B779200C4EFA8 /* WaitingView.swift in Sources */,
 				147F07542537C942002FF616 /* AccountRow.swift in Sources */,
 				147F07732537C989002FF616 /* Restaurant.swift in Sources */,
 				147F075C2537C953002FF616 /* RectangleImage.swift in Sources */,
 				147F074F2537C93A002FF616 /* SettingsView.swift in Sources */,
+				142B7B10254B770A00C4EFA8 /* ActivityIndicator.swift in Sources */,
 				147F07332537C903002FF616 /* LoginCodeView.swift in Sources */,
 				147F075B2537C950002FF616 /* ImageLoader.swift in Sources */,
 				148BABA02540F30F000EC690 /* PrimaryButtonText.swift in Sources */,
@@ -760,6 +790,7 @@
 				147F077C2537C99C002FF616 /* RequestOption.swift in Sources */,
 				147F07862537C9B3002FF616 /* API.swift in Sources */,
 				147F07472537C92D002FF616 /* CartView.swift in Sources */,
+				14C5C16425477DBD00E44974 /* LoadingView.swift in Sources */,
 				144E0B20253970EB00C202C1 /* ModalHackView.swift in Sources */,
 				147F07722537C985002FF616 /* UserData.swift in Sources */,
 				147F075D2537C955002FF616 /* ThumbnailImage.swift in Sources */,
@@ -837,11 +868,13 @@
 				148BABA52540F30F000EC690 /* RowButton.swift in Sources */,
 				144E0B2F253A246100C202C1 /* OrderItemsSection.swift in Sources */,
 				147F080A2537EB72002FF616 /* Customization.swift in Sources */,
+				142B7B18254B779200C4EFA8 /* WaitingView.swift in Sources */,
 				147F07EB2537E9D2002FF616 /* OrderRow.swift in Sources */,
 				147F07AD2537D1F9002FF616 /* LoginView.swift in Sources */,
 				147F07AA2537D1DD002FF616 /* UIKitTabView.swift in Sources */,
 				F2555AEE25400DBD005A3D54 /* WhiteButton.swift in Sources */,
 				147F07D02537DA6E002FF616 /* AccountRow.swift in Sources */,
+				142B7B11254B770A00C4EFA8 /* ActivityIndicator.swift in Sources */,
 				14F4835D25390766001FC039 /* ToSendView.swift in Sources */,
 				147F08132537EC14002FF616 /* TestData.swift in Sources */,
 				147F07F22537E9E9002FF616 /* Order.swift in Sources */,
@@ -872,6 +905,7 @@
 				14F4836425390797001FC039 /* OrderItemOrRequest.swift in Sources */,
 				14F4834E2539075E001FC039 /* ToCookRow.swift in Sources */,
 				14569742253E26FB000E8F17 /* SFont.swift in Sources */,
+				14C5C16525477DBD00E44974 /* LoadingView.swift in Sources */,
 				147F07A72537D1B8002FF616 /* RootView.swift in Sources */,
 				147F07EC2537E9D4002FF616 /* OrderDetailsView.swift in Sources */,
 				148BABA32540F30F000EC690 /* SecondaryButton.swift in Sources */,

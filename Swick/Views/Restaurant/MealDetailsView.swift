@@ -12,6 +12,7 @@ struct MealDetailsView: View {
     @EnvironmentObject var user: UserData
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var viewDidLoad = false
+    @State var isLoading = true
     // Alerts
     @State var showAlert = false
     // Properties
@@ -36,6 +37,7 @@ struct MealDetailsView: View {
                         )
                     }
                 }
+                isLoading = false
             }
         }
     }
@@ -135,16 +137,12 @@ struct MealDetailsView: View {
                         .font(SFont.body)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
-                    GeometryReader { geo in
-                        // Total
-                        Text(Helper.formatPrice(getTotal()))
-                            .font(SFont.body)
-                            .foregroundColor(.white)
-                            .padding(.trailing, 15.0)
-                            .frame(width: geo.size.width, height: geo.size.height, alignment: .trailing)
-                            // onAppear moved here because price was not being initialized in iOS 13
-                            .onAppear(perform: loadMeal)
-                    }
+                    // Total
+                    Text(Helper.formatPrice(getTotal()))
+                        .font(SFont.body)
+                        .foregroundColor(.white)
+                        .padding(.trailing, 15.0)
+                        .frame(width: UIScreen.width - 40, height: 0, alignment: .trailing)
                 }
                 .padding(.vertical, 22.5)
                 .frame(maxWidth: .infinity)
@@ -154,6 +152,8 @@ struct MealDetailsView: View {
         }
         .buttonStyle(PlainButtonStyle())
         .navigationBarTitle(Text(meal.name))
+        .onAppear(perform: loadMeal)
+        .loadingView($isLoading)
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text("Error"),
@@ -166,6 +166,7 @@ struct MealDetailsView: View {
 struct MealDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         MealDetailsView(
+            isLoading: false,
             customizations: [testCustomization1],
             meal: testMeal1
         )

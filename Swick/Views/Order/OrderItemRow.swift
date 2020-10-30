@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OrderItemRow: View {
-    // Popups
+    // Navigation
     @State var showOptionsActionSheet = false
     // Properties
     var item: OrderItem

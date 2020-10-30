@@ -53,31 +53,6 @@ extension UIScreen {
 }
 
 extension View {
-    // Dismiss keyboard from any view
-    func dismissKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-    
-    // Show alert with text input
-    func textFieldAlert(
-        isShowing: Binding<Bool>,
-        text: Binding<String>,
-        title: String,
-        placeholder: String = "",
-        keyboardType: UIKeyboardType = .default,
-        isPrice: Bool = false
-    ) -> some View {
-        TextFieldAlert(
-            isShowing: isShowing,
-            text: text,
-            presenting: self,
-            title: title,
-            placeholder: placeholder,
-            keyboardType: keyboardType,
-            isPrice: isPrice
-        )
-    }
-    
     // Apply modifier conditionally
     @ViewBuilder
     func `if`<Transform: View>(_ condition: Bool, transform: (Self) -> Transform) -> some View {
@@ -86,6 +61,11 @@ extension View {
         } else {
             self
         }
+    }
+    
+    // Dismiss keyboard from any view
+    func dismissKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 

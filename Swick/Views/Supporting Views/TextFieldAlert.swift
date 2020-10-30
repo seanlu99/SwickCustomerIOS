@@ -82,3 +82,25 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
         }
     }
 }
+
+extension View {
+    // Show alert with text input
+    func textFieldAlert(
+        isShowing: Binding<Bool>,
+        text: Binding<String>,
+        title: String,
+        placeholder: String = "",
+        keyboardType: UIKeyboardType = .default,
+        isPrice: Bool = false
+    ) -> some View {
+        TextFieldAlert(
+            isShowing: isShowing,
+            text: text,
+            presenting: self,
+            title: title,
+            placeholder: placeholder,
+            keyboardType: keyboardType,
+            isPrice: isPrice
+        )
+    }
+}

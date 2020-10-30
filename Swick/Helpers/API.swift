@@ -113,11 +113,6 @@ struct API {
         request(path, completion: completion)
     }
 
-    static func getRequestOptions(_ restaurantId: Int, completion: @escaping (JSON) -> Void) {
-        let path = "api/customer/get_request_options/\(restaurantId)/"
-        request(path, completion: completion)
-    }
-
     static func makeRequest(_ requestOptionId: Int, table: Int, completion: @escaping (JSON) -> Void) {
         let path = "api/customer/make_request/"
         let params = [
@@ -202,7 +197,7 @@ struct API {
 
     static func createSetupIntent(completion: @escaping (JSON) -> Void) {
         let path = "api/customer/setup_card/"
-        authRequest(path, completion: completion)
+        authRequest(path, method: .post, completion: completion)
     }
 
     static func getUserCards(completion: @escaping (JSON) -> Void) {

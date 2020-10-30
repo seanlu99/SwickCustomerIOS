@@ -11,6 +11,7 @@ struct LoginCodeView: View {
     // Initial
     @EnvironmentObject var user: UserData
     @Environment(\.presentationMode) var presentationMode
+    @State var isWaiting = false
     // Alerts
     @State var showAlert = false
     // Properties
@@ -19,6 +20,7 @@ struct LoginCodeView: View {
     
     func onChange() {
         if code.length == 6 {
+            isWaiting = true
             API.getToken(email, code) { json in
                 let token = json["token"].string
                 // If token unsuccessfully retrieved
@@ -31,6 +33,7 @@ struct LoginCodeView: View {
                     UserDefaults.standard.set(token, forKey: "token")
                     user.hasToken = true
                 }
+                isWaiting = false
             }
         }
     }
@@ -62,6 +65,7 @@ struct LoginCodeView: View {
         // Needed to hide navigation bar on iOS 13
         .navigationBarTitle("")
         .navigationBarHidden(true)
+        .waitingView($isWaiting)
         .alert(isPresented: $showAlert) {
             return Alert(
                 title: Text("Error"),

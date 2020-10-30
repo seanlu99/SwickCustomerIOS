@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct OrdersView: View {
+    // Initial
+    @State var isLoading = true
     // Properties
     @State var orders = [Order]()
     
@@ -20,6 +22,7 @@ struct OrdersView: View {
                     orders.append(Order(orderJson))
                 }
             }
+            isLoading = false
         }
     }
     
@@ -36,12 +39,13 @@ struct OrdersView: View {
             }
             .navigationBarTitle("Orders")
             .onAppear(perform: loadOrders)
+            .loadingView($isLoading)
         }
     }
 }
 
 struct OrdersView_Previews: PreviewProvider {
     static var previews: some View {
-        OrdersView(orders: testOrders)
+        OrdersView(isLoading: false, orders: testOrders)
     }
 }

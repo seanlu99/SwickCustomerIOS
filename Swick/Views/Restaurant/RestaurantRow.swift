@@ -10,7 +10,7 @@ import SwiftUI
 struct RestaurantRow: View {
     // Properties
     var restaurant: Restaurant
-    // Popups
+    // Navigation
     @State var showCategories = false
     
     var body: some View {

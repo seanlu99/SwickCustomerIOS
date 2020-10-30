@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ToCookRow: View {
-    // Popups
+    // Navigation
     @State var showOptionsActionSheet = false
     @State var showOrderDetails: Bool = false
     // Properties

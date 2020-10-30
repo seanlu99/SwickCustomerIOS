@@ -72,8 +72,6 @@ struct CardDetailsView: View {
 
 struct CardDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            CardDetailsView(card: testCard1)
-        }
+        CardDetailsView(card: testCard1)
     }
 }

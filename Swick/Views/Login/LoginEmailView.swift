@@ -10,7 +10,8 @@ import SwiftUI
 struct LoginEmailView: View {
     // Initial
     @Environment(\.presentationMode) var presentationMode
-    // Popups
+    @State var isWaiting = false
+    // Navigation
     @State var showCodeView = false
     // Alerts
     @State var showAlert = false
@@ -24,14 +25,17 @@ struct LoginEmailView: View {
             showAlert = true
             return
         }
-        showCodeView = true
+        isWaiting = true
         API.getVerificationCode(email) { json in
             let detail = json["detail"].string ?? ""
-            if detail != "A login token has been sent to your email." {
+            if detail == "A login token has been sent to your email." {
+                showCodeView = true
+            }
+            else {
                 alertMessage = "Email could not be sent. Please try again."
                 showAlert = true
-                return
             }
+            isWaiting = false
         }
     }
     
@@ -69,6 +73,7 @@ struct LoginEmailView: View {
         // Needed to hide navigation bar on iOS 13
         .navigationBarTitle("")
         .navigationBarHidden(true)
+        .waitingView($isWaiting)
         .background(
             // Navigation link to login code view
             NavigationLink(

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ToCookView: View {
+    // Initial
+    @State var isLoading = true
     // Properties
     @State var items = [OrderItem]()
     
@@ -20,6 +22,7 @@ struct ToCookView: View {
                     items.append(OrderItem(itemJson))
                 }
             }
+            isLoading = false
         }
     }
     
@@ -30,15 +33,15 @@ struct ToCookView: View {
                     ToCookRow(reloadOrderItems: loadOrderItems, item: i)
                 }
             }
-            //.buttonStyle(PlainButtonStyle())
             .navigationBarTitle(Text("To Cook"))
             .onAppear(perform: loadOrderItems)
+            .loadingView($isLoading)
         }
     }
 }
 
 struct ToCookView_Previews: PreviewProvider {
     static var previews: some View {
-        ToCookView(items: testOrderItems)
+        ToCookView(isLoading: false, items: testOrderItems)
     }
 }

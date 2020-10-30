@@ -14,51 +14,44 @@ struct CartView: View {
     @EnvironmentObject var user: UserData
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var viewDidLoad = false
+    @State var isWaiting = false
     @Binding var tabIndex: Int
     // Popups
     @State var showRequestActionSheet = false
     @State var showMenu = false
     @State var showPaymentMethods = false
     // Alerts
-    enum AlertState { case success, error, leave }
+    enum AlertState { case error, success, orderSuccess, leave }
     @State var alertState = AlertState.error
     @State var showAlert = false
     @State var alertMessage = ""
     @State var showCustomTip = false
     // Properties
-    @State var requestOptions = [RequestOption]()
     @State var card: Card? = nil
     @State var attemptOrder = false
     @State var paramsWrapper: PaymentParamsWrapper?
     @State var tipAmount = ""
     @State var tipState: TipState = .later
     var restaurant: Restaurant
+    var requestOptions: [RequestOption]
     var table: Int
-    
-    func loadRequestOptions() {
-        if !viewDidLoad {
-            viewDidLoad = true
-            API.getRequestOptions(restaurant.id) { json in
-                if (json["status"] == "success") {
-                    self.requestOptions = []
-                    let optionJsonList = json["request_options"].array ?? []
-                    for optionJson in optionJsonList {
-                        self.requestOptions.append(RequestOption(optionJson))
-                    }
-                }
-            }
-        }
-    }
     
     func createRequestActionSheet() -> ActionSheet {
         let buttons = requestOptions.map { option in
             Alert.Button.default(Text(option.name)) {
+                isWaiting = true
                 API.makeRequest(option.id, table: table) { json in
-                    if (json["status"] == "request_in_progress") {
+                    if json["status"] == "success" {
+                        alertMessage = "Request sent"
+                        alertState = .success
+                        showAlert = true
+                    }
+                    else if json["status"] == "request_in_progress" {
                         alertMessage = "Request already sent"
                         alertState = .error
                         showAlert = true
                     }
+                    isWaiting = false
                 }
             }
         }
@@ -126,7 +119,7 @@ struct CartView: View {
             user.cart.removeAll()
             tipState = .later
             tipAmount = ""
-            alertState = .success
+            alertState = .orderSuccess
         }
         else {
             alertMessage = message
@@ -197,7 +190,7 @@ struct CartView: View {
         }
         .navigationBarTitle(Text("Cart"))
         .navigationBarBackButtonHidden(true)
-        .onAppear(perform: loadRequestOptions)
+        .waitingView($isWaiting)
         // Request button
         .navigationBarItems(
             leading: Button("Leave restaurant") {
@@ -235,23 +228,28 @@ struct CartView: View {
                     }
                 }
         )
-        // Error alert
+        // Alerts
         .alert(isPresented: $showAlert) {
             switch alertState {
-            case .success:
-                return Alert(
-                    title: Text("Success"),
-                    message: Text("Your order has been placed"),
-                    dismissButton: Alert.Button.default (
-                        Text("Go to orders"), action: { tabIndex = 2}
-                    )
-                )
             case .error:
                 return Alert(
                     title: Text("Error"),
                     message: Text(alertMessage)
                 )
-                
+            case .success:
+                return Alert(
+                    title: Text("Success"),
+                    message: Text(alertMessage)
+                )
+            case .orderSuccess:
+                return Alert(
+                    title: Text("Success"),
+                    message: Text("Your order has been placed"),
+                    dismissButton: Alert.Button.default (
+                        Text("Go to orders"), action: { tabIndex = 2 }
+                    )
+                )
+            
             case .leave:
                 return Alert(
                     title: Text("Leave restaurant?"),
@@ -282,7 +280,12 @@ struct CartView: View {
 
 struct CartView_Previews: PreviewProvider {
     static var previews: some View {
-        CartView(tabIndex: .constant(1), restaurant: testRestaurant1, table: 1)
+        CartView(
+            tabIndex: .constant(1),
+            restaurant: testRestaurant1,
+            requestOptions: [],
+            table: 1
+        )
             .environmentObject(UserData())
     }
 }

@@ -12,27 +12,39 @@ import AVFoundation
 struct ScanView: View {
     // Initial
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State var isWaiting = false
     @Binding var tabIndex: Int
-    // Popups
+    // Navigation
     @State var showCartView = false
     // Alerts
     @State var showAlert = false
     // Properties
     @State var isScanning = true
     @State var scannedRestaurant = Restaurant()
+    @State var scannedRequestOptions = [RequestOption]()
     @State var scannedTable: Int = 0
    
     func loadRestaurant(_ restaurantId: Int, _ table: Int) {
+        isWaiting = true
         API.getRestaurant(restaurantId) { json in
             if (json["status"] == "success") {
+                // Get restaurant
                 let restJson = json["restaurant"]
+                // Get request options
+                var requestOptions = [RequestOption]()
+                let optionJsonList = json["request_options"].array ?? []
+                for optionJson in optionJsonList {
+                    requestOptions.append(RequestOption(optionJson))
+                }
                 scannedRestaurant = Restaurant(restJson)
+                scannedRequestOptions = requestOptions
                 scannedTable = table
                 showCartView = true
             }
             else if (json["status"] == "restaurant_does_not_exist") {
                 showAlert = true
             }
+            isWaiting = false
         }
     }
     
@@ -69,12 +81,14 @@ struct ScanView: View {
             }
             .navigationBarTitle(Text("Scan"))
             .onAppear(perform: {isScanning = true})
+            .waitingView($isWaiting)
             .background(
                 // Navigation link to cart view
                 NavigationLink(
                     destination: CartView(
                         tabIndex: $tabIndex,
                         restaurant: scannedRestaurant,
+                        requestOptions: scannedRequestOptions,
                         table: scannedTable
                     ),
                     isActive: $showCartView

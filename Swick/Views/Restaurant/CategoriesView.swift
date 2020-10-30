@@ -10,6 +10,7 @@ import SwiftUI
 struct CategoriesView: View {
     // Initial
     @State var viewDidLoad = false
+    @State var isLoading = true
     // Properties
     @State var categories = [Category]()
     @State var searchText = ""
@@ -27,6 +28,7 @@ struct CategoriesView: View {
                         categories.append(Category(categoryJson))
                     }
                 }
+                isLoading = false
             }
         }
     }
@@ -55,6 +57,7 @@ struct CategoriesView: View {
         }
         .navigationBarTitle(Text(restaurant.name))
         .onAppear(perform: loadCategories)
+        .loadingView($isLoading)
         .resignKeyboardOnDragGesture() // for search
     }
 }
@@ -62,6 +65,7 @@ struct CategoriesView: View {
 struct CategoriesView_Previews: PreviewProvider {
     static var previews: some View {
         CategoriesView(
+            isLoading: false,
             categories: testCategories,
             restaurant: testRestaurant1
         )

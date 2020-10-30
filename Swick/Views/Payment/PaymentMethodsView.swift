@@ -10,6 +10,7 @@ struct PaymentMethodsView: View {
     // Initial
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var viewDidLoad = false
+    @State var isLoading = true
     // Properties
     @State var cards = [Card]()
     @Binding var selectedCard: Card?
@@ -26,6 +27,7 @@ struct PaymentMethodsView: View {
                         cards.append(Card(cardJson))
                     }
                 }
+                isLoading = false
             }
         }
     }
@@ -65,14 +67,16 @@ struct PaymentMethodsView: View {
                 RowButtonText(text: "Add card")
             }
         }
-        .onAppear(perform: loadCards)
         .navigationBarTitle("Payment methods")
+        .onAppear(perform: loadCards)
+        .loadingView($isLoading)
     }
 }
 
 struct PaymentMethodsView_Previews: PreviewProvider {
     static var previews: some View {
         PaymentMethodsView(
+            isLoading: false,
             cards: testCards,
             selectedCard: .constant(nil)
         )

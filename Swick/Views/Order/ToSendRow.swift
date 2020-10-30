@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ToSendRow: View {
-    // Popups
+    // Navigation
     @State var showOrderItemOptionsActionSheet = false
     @State var showRequestOptionsActionSheet = false
     @State var showOrderDetails: Bool = false
@@ -44,7 +44,7 @@ struct ToSendRow: View {
     }
     
     func createRequestOptionsActionSheet() -> ActionSheet {
-        let deleteButton = Alert.Button.default(Text("Delete request")) {
+        let deleteButton = Alert.Button.default(Text("Finish sending")) {
             deleteRequest(getItemId())
         }
         return ActionSheet(

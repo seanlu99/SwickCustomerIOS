@@ -10,8 +10,11 @@ import SwiftUI
 struct AccountView: View {
     // Initial
     @State var viewDidLoad = false
+    @State var isLoading = true
+    @State var isWaiting = false
     // Alerts
     @State var showAlert = false
+    @State var alertTitle = ""
     @State var alertMessage = ""
     // Properties
     @State var name = ""
@@ -31,6 +34,7 @@ struct AccountView: View {
                     restaurantName = json["restaurant_name"].string ?? ""
                     #endif
                 }
+                isLoading = false
             }
         }
     }
@@ -38,24 +42,31 @@ struct AccountView: View {
     func updateUserInfo() {
         // Check if name is valid
         if name == "" {
+            alertTitle = "Error"
             alertMessage = "Name cannot be empty. Please try again."
             showAlert = true
             return
         }
         // Check if email is valid
         if !Helper.isValidEmail(email) {
+            alertTitle = "Error"
             alertMessage = "Invalid email. Please try again."
             showAlert = true
             return
         }
+        isWaiting = true
         API.updateUserInfo(name, email) { json in
             if json["status"] == "success" {
-                self.dismissKeyboard()
+                alertTitle = "Success"
+                alertMessage = "Info successfully updated"
+                showAlert = true
             }
             else if json["status"] == "email_already_taken" {
+                alertTitle = "Error"
                 alertMessage = "Email already taken. Please try a different email."
                 showAlert = true
             }
+            isWaiting = false
         }
     }
     
@@ -88,9 +99,11 @@ struct AccountView: View {
         .padding()
         .navigationBarTitle(Text("Account"))
         .onAppear(perform: loadUserInfo)
+        .loadingView($isLoading)
+        .waitingView($isWaiting)
         .alert(isPresented: $showAlert) {
             Alert(
-                title: Text("Error"),
+                title: Text(alertTitle),
                 message: Text(alertMessage)
             )
         }
@@ -101,11 +114,13 @@ struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
         #if CUSTOMER
         AccountView(
+            isLoading: false,
             name: "John Smith",
             email: "john@gmail.com"
         )
         #else
         AccountView(
+            isLoading: false,
             name: "John Smith",
             email: "john@gmail.com",
             restaurantName: "The Cozy Diner"

@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     // Initial
     @State var viewDidLoad = false
+    @State var isLoading = true
     // Properties
     @State var restaurants = [Restaurant]()
     @State var searchText = ""
@@ -17,7 +18,7 @@ struct HomeView: View {
     func loadRestaurants() {
         if !viewDidLoad {
             viewDidLoad = true
-            API.getRestaurants{ json in
+            API.getRestaurants { json in
                 if (json["status"] == "success") {
                     restaurants = []
                     let restJsonList = json["restaurants"].array ?? []
@@ -25,6 +26,7 @@ struct HomeView: View {
                         restaurants.append(Restaurant(restJson))
                     }
                 }
+                isLoading = false
             }
         }
     }
@@ -43,6 +45,7 @@ struct HomeView: View {
             }
             .navigationBarTitle(Text("Home"))
             .onAppear(perform: loadRestaurants)
+            .loadingView($isLoading)
             .resignKeyboardOnDragGesture() // for search
         }
     }
@@ -50,6 +53,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(restaurants: testRestaurants)
+        HomeView(isLoading: false, restaurants: testRestaurants)
     }
 }

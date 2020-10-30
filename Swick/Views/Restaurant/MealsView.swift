@@ -11,6 +11,7 @@ import Introspect
 struct MealsView: View {
     // Initial
     @State var viewDidLoad = false
+    @State var isLoading = true
     // Properties
     @State var tableView: UITableView?
     @State var meals = [Meal]()
@@ -30,6 +31,7 @@ struct MealsView: View {
                         meals.append(Meal(mealJson))
                     }
                 }
+                isLoading = false
             }
         }
     }
@@ -69,14 +71,15 @@ struct MealsView: View {
                 }
             }
         }
-        .navigationBarTitle(Text(category.name))
         .introspectTableView { tableView in
             self.tableView = tableView
         }
+        .navigationBarTitle(Text(category.name))
         .onAppear {
             loadMeals()
             clearTableViewSelection()
         }
+        .loadingView($isLoading)
         .onDisappear(perform: clearTableViewSelection)
         .resignKeyboardOnDragGesture() // for search
     }
@@ -85,6 +88,7 @@ struct MealsView: View {
 struct MealsView_Previews: PreviewProvider {
     static var previews: some View {
         MealsView(
+            isLoading: false,
             meals: testMeals,
             restaurantId: 1,
             category: testCategory1,

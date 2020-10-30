@@ -10,7 +10,7 @@ import SwiftUI
 struct RootView: View {
     // Initial
     @EnvironmentObject var user: UserData
-    // Popups
+    // Navigation
     @State var showSetNameSheet = false
     
     func login() {

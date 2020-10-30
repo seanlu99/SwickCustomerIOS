@@ -9,7 +9,9 @@ import SwiftUI
 import SwiftyJSON
 
 struct OrderDetailsView: View {
-    // Popups
+    // Initial
+    @State var isLoading = true
+    // Navigation
     @State var showAddTip = false
     // Properties
     @State var cookingOrderItems = [OrderItem]()
@@ -32,6 +34,7 @@ struct OrderDetailsView: View {
                 let completeItemsJson = details["complete_order_items"].array ?? []
                 completeOrderItems = completeItemsJson.map { OrderItem($0) }
             }
+            isLoading = false
         }
     }
     
@@ -99,6 +102,7 @@ struct OrderDetailsView: View {
         }
         .navigationBarTitle(getNavigationBarTitle())
         .onAppear(perform: loadOrderDetails)
+        .loadingView($isLoading)
         .sheet(isPresented: $showAddTip) {
             #if CUSTOMER
             AddTipView(order: $order, subtotal: order.subtotal)
@@ -111,6 +115,7 @@ struct OrderDetailsView: View {
 struct OrderDetails_Previews: PreviewProvider {
     static var previews: some View {
         OrderDetailsView(
+            isLoading: false,
             cookingOrderItems: testOrderItems,
             sendingOrderItems: testOrderItems,
             completeOrderItems: [],

@@ -18,12 +18,12 @@ struct SecondaryButtonText: View {
             .foregroundColor(SColor.primary)
             .padding(.vertical, 22.5)
             .frame(maxWidth: .infinity)
-            
-            .cornerRadius(40)
             .overlay(
                 RoundedRectangle(cornerRadius: 40)
                     .stroke(SColor.primary, lineWidth: 2)
             )
+            // Needed to make button clickable everywhere
+            .contentShape(RoundedRectangle(cornerRadius: 40))
     }
 }
 
