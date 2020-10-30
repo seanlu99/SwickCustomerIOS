@@ -11,6 +11,8 @@ struct ToCookRow: View {
     // Navigation
     @State var showOptionsActionSheet = false
     @State var showOrderDetails: Bool = false
+    // Alerts
+    @State var showAlert = false
     // Properties
     var reloadOrderItems: () -> ()
     var item: OrderItem
@@ -50,6 +52,7 @@ struct ToCookRow: View {
         // Order item options action sheet
         .actionSheet(isPresented: $showOptionsActionSheet) {
             OrderItemOptions(
+                showAlert: $showAlert,
                 showOrderDetails: $showOrderDetails,
                 seeFullOrder: true,
                 orderItemId: item.id,
@@ -58,13 +61,18 @@ struct ToCookRow: View {
             )
             .createActionSheet()
         }
+        .alert(isPresented: $showAlert) {
+            return Alert(
+                title: Text("Error"),
+                message: Text("Failed to update order. Please try again.")
+            )
+        }
         .background(
             // Navigation link to order details
             NavigationLink(
                 destination: OrderDetailsView(orderId: item.orderId),
                 isActive: $showOrderDetails
             ) { }
-            
         )
     }
 }

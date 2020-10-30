@@ -42,13 +42,18 @@ struct CartView: View {
                 isWaiting = true
                 API.makeRequest(option.id, table: table) { json in
                     if json["status"] == "success" {
-                        alertMessage = "Request sent"
                         alertState = .success
+                        alertMessage = "Request sent"
                         showAlert = true
                     }
                     else if json["status"] == "request_in_progress" {
-                        alertMessage = "Request already sent"
                         alertState = .error
+                        alertMessage = "Request already sent"
+                        showAlert = true
+                    }
+                    else {
+                        alertState = .error
+                        alertMessage = "Failed to send request. Please try again."
                         showAlert = true
                     }
                     isWaiting = false
@@ -122,8 +127,8 @@ struct CartView: View {
             alertState = .orderSuccess
         }
         else {
-            alertMessage = message
             alertState = .error
+            alertMessage = message
         }
         showAlert = true
     }

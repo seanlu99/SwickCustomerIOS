@@ -18,6 +18,7 @@ struct ScanView: View {
     @State var showCartView = false
     // Alerts
     @State var showAlert = false
+    @State var alertMessage = ""
     // Properties
     @State var isScanning = true
     @State var scannedRestaurant = Restaurant()
@@ -42,6 +43,11 @@ struct ScanView: View {
                 showCartView = true
             }
             else if (json["status"] == "restaurant_does_not_exist") {
+                alertMessage = "Invalid QR code. Please try again."
+                showAlert = true
+            }
+            else {
+                alertMessage = "Failed to load restaurant. Please try again."
                 showAlert = true
             }
             isWaiting = false
@@ -63,6 +69,7 @@ struct ScanView: View {
                         let scannedString = $0.value
                         let scannedArray = scannedString.components(separatedBy: "-")
                         if scannedArray.count != 3 {
+                            alertMessage = "Invalid QR code. Please try again."
                             showAlert = true
                             return
                         }
@@ -72,6 +79,7 @@ struct ScanView: View {
                         if swickString != "swick"
                             || restaurantId == nil
                             || table == nil {
+                            alertMessage = "Invalid QR code. Please try again."
                             showAlert = true
                             return
                         }
@@ -100,7 +108,7 @@ struct ScanView: View {
                 }
                 return Alert(
                     title: Text("Error"),
-                    message: Text("Invalid QR code. Please try again."),
+                    message: Text(alertMessage),
                     dismissButton: okButton
                 )
             }

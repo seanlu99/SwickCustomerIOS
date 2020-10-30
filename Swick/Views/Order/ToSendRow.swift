@@ -12,6 +12,8 @@ struct ToSendRow: View {
     @State var showOrderItemOptionsActionSheet = false
     @State var showRequestOptionsActionSheet = false
     @State var showOrderDetails: Bool = false
+    // Alerts
+    @State var showAlert = false
     // Properties
     var reloadItems: () -> ()
     var item: OrderItemOrRequest
@@ -86,6 +88,7 @@ struct ToSendRow: View {
         // Order item options action sheet
         .actionSheet(isPresented: $showOrderItemOptionsActionSheet) {            
             OrderItemOptions(
+                showAlert: $showAlert,
                 showOrderDetails: $showOrderDetails,
                 seeFullOrder: true,
                 orderItemId: getItemId(),
@@ -93,6 +96,12 @@ struct ToSendRow: View {
                 reloadItems: reloadItems
             )
             .createActionSheet()
+        }
+        .alert(isPresented: $showAlert) {
+            return Alert(
+                title: Text("Error"),
+                message: Text("Failed to update. Please try again.")
+            )
         }
         .background(
             // Navigation link to order details

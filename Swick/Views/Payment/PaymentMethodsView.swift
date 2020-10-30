@@ -11,6 +11,8 @@ struct PaymentMethodsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var viewDidLoad = false
     @State var isLoading = true
+    // Alerts
+    @State var showAlert = false
     // Properties
     @State var cards = [Card]()
     @Binding var selectedCard: Card?
@@ -26,6 +28,9 @@ struct PaymentMethodsView: View {
                     for cardJson in cardJsonList {
                         cards.append(Card(cardJson))
                     }
+                }
+                else {
+                    showAlert = true
                 }
                 isLoading = false
             }
@@ -70,6 +75,12 @@ struct PaymentMethodsView: View {
         .navigationBarTitle("Payment methods")
         .onAppear(perform: loadCards)
         .loadingView($isLoading)
+        .alert(isPresented: $showAlert) {
+            return Alert(
+                title: Text("Error"),
+                message: Text("Failed to load orders. Please try again.")
+            )
+        }
     }
 }
 

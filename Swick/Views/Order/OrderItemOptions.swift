@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct OrderItemOptions {
+    // Alerts
+    @Binding var showAlert: Bool
+    // Properties
     // showOrderDetails is only used if seeFullOrder is set to true
     @Binding var showOrderDetails: Bool
     var seeFullOrder: Bool = false

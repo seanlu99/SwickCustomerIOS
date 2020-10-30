@@ -10,15 +10,21 @@ import SwiftUI
 struct ToSendView: View {
     // Initial
     @State var isLoading = true
+    // Alerts
+    @State var showAlert = false
     // Properties
     @State var items = [OrderItemOrRequest]()
     
     func loadItems() {
         API.getItemsToSend { json in
             items = []
-            let itemJsonList = json.array ?? []
-            for itemJson in itemJsonList {
-                items.append(OrderItemOrRequest(itemJson))
+            if let itemJsonList = json.array {
+                for itemJson in itemJsonList {
+                    items.append(OrderItemOrRequest(itemJson))
+                }
+            }
+            else {
+                showAlert = true
             }
             isLoading = false
         }
@@ -34,6 +40,12 @@ struct ToSendView: View {
             .navigationBarTitle(Text("To Send"))
             .onAppear(perform: loadItems)
             .loadingView($isLoading)
+            .alert(isPresented: $showAlert) {
+                return Alert(
+                    title: Text("Error"),
+                    message: Text("Failed to load orders. Please try again.")
+                )
+            }
         }
     }
 }

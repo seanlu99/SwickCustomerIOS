@@ -10,6 +10,8 @@ import SwiftUI
 struct OrderItemRow: View {
     // Navigation
     @State var showOptionsActionSheet = false
+    // Alerts
+    @State var showAlert = false
     // Properties
     var item: OrderItem
     var reloadItems: () -> ()
@@ -31,6 +33,7 @@ struct OrderItemRow: View {
         .actionSheet(isPresented: $showOptionsActionSheet) {
             #if SERVER
             return OrderItemOptions(
+                showAlert: $showAlert,
                 showOrderDetails: .constant(false),
                 orderItemId: item.id,
                 status: item.status,
@@ -41,6 +44,12 @@ struct OrderItemRow: View {
             // Unused dummy action sheet for customer
             return ActionSheet(title: Text(""))
             #endif
+        }
+        .alert(isPresented: $showAlert) {
+            return Alert(
+                title: Text("Error"),
+                message: Text("Failed to update order. Please try again.")
+            )
         }
     }
 }

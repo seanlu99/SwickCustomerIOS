@@ -10,6 +10,8 @@ import SwiftUI
 struct ToCookView: View {
     // Initial
     @State var isLoading = true
+    // Alerts
+    @State var showAlert = false
     // Properties
     @State var items = [OrderItem]()
     
@@ -21,6 +23,9 @@ struct ToCookView: View {
                 for itemJson in itemJsonList {
                     items.append(OrderItem(itemJson))
                 }
+            }
+            else {
+                showAlert = true
             }
             isLoading = false
         }
@@ -36,6 +41,12 @@ struct ToCookView: View {
             .navigationBarTitle(Text("To Cook"))
             .onAppear(perform: loadOrderItems)
             .loadingView($isLoading)
+            .alert(isPresented: $showAlert) {
+                return Alert(
+                    title: Text("Error"),
+                    message: Text("Failed to load orders. Please try again.")
+                )
+            }
         }
     }
 }

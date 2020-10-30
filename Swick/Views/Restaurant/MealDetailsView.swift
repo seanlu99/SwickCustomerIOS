@@ -15,6 +15,7 @@ struct MealDetailsView: View {
     @State var isLoading = true
     // Alerts
     @State var showAlert = false
+    @State var alertMessage = ""
     // Properties
     @State var customizations = [Customization]()
     @State var price: Decimal = 0 // including price additions
@@ -36,6 +37,10 @@ struct MealDetailsView: View {
                             Customization(customizationJson, isCheckable: true)
                         )
                     }
+                }
+                else {
+                    alertMessage = "Failed to laod meal. Please try again."
+                    showAlert = true
                 }
                 isLoading = false
             }
@@ -83,6 +88,7 @@ struct MealDetailsView: View {
         
         // If minimum customizations not selected
         else {
+            alertMessage = "Please select minimum number of options for each customization"
             showAlert = true
         }
     }
@@ -157,7 +163,7 @@ struct MealDetailsView: View {
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text("Error"),
-                message: Text("Please select minimum number of options for each customization")
+                message: Text(alertMessage)
             )
         }
     }

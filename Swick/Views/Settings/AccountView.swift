@@ -34,6 +34,11 @@ struct AccountView: View {
                     restaurantName = json["restaurant_name"].string ?? ""
                     #endif
                 }
+                else {
+                    alertTitle = "Error"
+                    alertMessage = "Failed to load account information. Please try again."
+                    showAlert = true
+                }
                 isLoading = false
             }
         }
@@ -64,6 +69,11 @@ struct AccountView: View {
             else if json["status"] == "email_already_taken" {
                 alertTitle = "Error"
                 alertMessage = "Email already taken. Please try a different email."
+                showAlert = true
+            }
+            else {
+                alertTitle = "Error"
+                alertMessage = "Failed to update information. Please try again."
                 showAlert = true
             }
             isWaiting = false

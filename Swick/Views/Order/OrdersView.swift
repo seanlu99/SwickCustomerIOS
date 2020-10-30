@@ -10,6 +10,8 @@ import SwiftUI
 struct OrdersView: View {
     // Initial
     @State var isLoading = true
+    // Alerts
+    @State var showAlert = false
     // Properties
     @State var orders = [Order]()
     
@@ -21,6 +23,9 @@ struct OrdersView: View {
                 for orderJson in orderJsonList {
                     orders.append(Order(orderJson))
                 }
+            }
+            else {
+                showAlert = true
             }
             isLoading = false
         }
@@ -40,6 +45,12 @@ struct OrdersView: View {
             .navigationBarTitle("Orders")
             .onAppear(perform: loadOrders)
             .loadingView($isLoading)
+            .alert(isPresented: $showAlert) {
+                return Alert(
+                    title: Text("Error"),
+                    message: Text("Failed to load orders. Please try again.")
+                )
+            }
         }
     }
 }

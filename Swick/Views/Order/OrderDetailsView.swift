@@ -13,6 +13,8 @@ struct OrderDetailsView: View {
     @State var isLoading = true
     // Navigation
     @State var showAddTip = false
+    // Alerts
+    @State var showAlert = false
     // Properties
     @State var cookingOrderItems = [OrderItem]()
     @State var sendingOrderItems = [OrderItem]()
@@ -33,6 +35,9 @@ struct OrderDetailsView: View {
                 sendingOrderItems = sendingItemsJson.map { OrderItem($0) }
                 let completeItemsJson = details["complete_order_items"].array ?? []
                 completeOrderItems = completeItemsJson.map { OrderItem($0) }
+            }
+            else {
+                showAlert = true
             }
             isLoading = false
         }
@@ -108,6 +113,12 @@ struct OrderDetailsView: View {
             AddTipView(order: $order, subtotal: order.subtotal)
                 .onDisappear(perform: loadOrderDetails)
             #endif
+        }
+        .alert(isPresented: $showAlert) {
+            return Alert(
+                title: Text("Error"),
+                message: Text("Failed to load order. Please try again.")
+            )
         }
     }
 }

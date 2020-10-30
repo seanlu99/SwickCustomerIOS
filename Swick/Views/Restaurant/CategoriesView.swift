@@ -16,6 +16,8 @@ struct CategoriesView: View {
     @State var searchText = ""
     var restaurant: Restaurant
     var cameFromCart = false
+    // Alerts
+    @State var showAlert = false
     
     func loadCategories() {
         if !viewDidLoad {
@@ -27,6 +29,9 @@ struct CategoriesView: View {
                     for categoryJson in categoryJsonList {
                         categories.append(Category(categoryJson))
                     }
+                }
+                else {
+                    showAlert = true
                 }
                 isLoading = false
             }
@@ -59,6 +64,12 @@ struct CategoriesView: View {
         .onAppear(perform: loadCategories)
         .loadingView($isLoading)
         .resignKeyboardOnDragGesture() // for search
+        .alert(isPresented: $showAlert) {
+            return Alert(
+                title: Text("Error"),
+                message: Text("Failed to load categories. Please try again.")
+            )
+        }
     }
 }
 

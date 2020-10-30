@@ -19,6 +19,8 @@ struct MealsView: View {
     var restaurantId: Int
     var category: Category
     var cameFromCart: Bool
+    // Alerts
+    @State var showAlert = false
     
     func loadMeals() {
         if !viewDidLoad {
@@ -30,6 +32,9 @@ struct MealsView: View {
                     for mealJson in mealJsonList {
                         meals.append(Meal(mealJson))
                     }
+                }
+                else {
+                    showAlert = true
                 }
                 isLoading = false
             }
@@ -82,6 +87,12 @@ struct MealsView: View {
         .loadingView($isLoading)
         .onDisappear(perform: clearTableViewSelection)
         .resignKeyboardOnDragGesture() // for search
+        .alert(isPresented: $showAlert) {
+            return Alert(
+                title: Text("Error"),
+                message: Text("Failed to load meals. Please try again.")
+            )
+        }
     }
 }
 

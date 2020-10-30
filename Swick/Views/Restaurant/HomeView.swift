@@ -11,6 +11,8 @@ struct HomeView: View {
     // Initial
     @State var viewDidLoad = false
     @State var isLoading = true
+    // Alerts
+    @State var showAlert = false
     // Properties
     @State var restaurants = [Restaurant]()
     @State var searchText = ""
@@ -25,6 +27,9 @@ struct HomeView: View {
                     for restJson in restJsonList {
                         restaurants.append(Restaurant(restJson))
                     }
+                }
+                else {
+                    showAlert = true
                 }
                 isLoading = false
             }
@@ -47,6 +52,12 @@ struct HomeView: View {
             .onAppear(perform: loadRestaurants)
             .loadingView($isLoading)
             .resignKeyboardOnDragGesture() // for search
+            .alert(isPresented: $showAlert) {
+                return Alert(
+                    title: Text("Error"),
+                    message: Text("Failed to load restaurants. Please try again.")
+                )
+            }
         }
     }
 }
