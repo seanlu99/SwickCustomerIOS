@@ -10,6 +10,7 @@ import SwiftUI
 struct AddTipView: View {
     // Initial
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State var isWaiting = false
     // Alerts
     @State var showAlert = false
     @State var alertMessage = ""
@@ -35,9 +36,11 @@ struct AddTipView: View {
             presentationMode.wrappedValue.dismiss()
         }
         else {
+            attemptTip = false
             alertMessage = message
             showAlert = true
         }
+        isWaiting = false
     }
     
     var body: some View {
@@ -52,10 +55,10 @@ struct AddTipView: View {
                     }
                     else {
                         paramsWrapper = PaymentParamsWrapper(AddTipParams(order.id, getTip()))
+                        isWaiting = true
                         attemptTip = true
                     }
                 }
-                .disabled(attemptTip)
                 .padding(.horizontal)
                 Spacer()
                 // Wrapper view around payment caller view controller
@@ -63,17 +66,18 @@ struct AddTipView: View {
                     .frame(width: 0, height: 0)
             }
             .navigationBarTitle("Add tip")
-        }
-        .textFieldAlert(
-            isShowing: $showCustomTip,
-            text: $tipAmount,
-            title: "Set tip",
-            placeholder: "0",
-            keyboardType: .decimalPad,
-            isPrice: true
-        )
-        .alert(isPresented: $showAlert) {
-            Alert(title: Text("Error"), message: Text(alertMessage))
+            .waitingView($isWaiting)
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Error"), message: Text(alertMessage))
+            }
+            .textFieldAlert(
+                isShowing: $showCustomTip,
+                text: $tipAmount,
+                title: "Set tip",
+                placeholder: "0",
+                keyboardType: .decimalPad,
+                isPrice: true
+            )
         }
     }
 }

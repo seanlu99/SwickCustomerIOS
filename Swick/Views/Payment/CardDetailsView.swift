@@ -11,6 +11,7 @@ import Stripe.STPImageLibrary
 struct CardDetailsView: View {
     // Initial
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State var isWaiting = false
     // Alerts
     @State var showAlert = false
     @State var alertMessage = ""
@@ -24,7 +25,8 @@ struct CardDetailsView: View {
         self.cardImage = STPImageLibrary.brandImage(for: STPCard.brand(from: card.brand))
     }
     
-    func deleteCard(){
+    func deleteCard() {
+        isWaiting = true
         attemptDelete = true
         API.removeUserCard(card.id) { json in
             if json["status"] == "success" {
@@ -35,6 +37,7 @@ struct CardDetailsView: View {
                 attemptDelete = false
                 showAlert = true
             }
+            isWaiting = false
         }
     }
     
@@ -58,11 +61,11 @@ struct CardDetailsView: View {
                     Image(uiImage: cardImage).resizable().frame(width: 55, height: 35)
                 }.padding()
                 SecondaryButton(text: "DELETE", action: deleteCard)
-                    .disabled(attemptDelete)
                     .padding()
                 Spacer()
             }
             .navigationBarTitle("Card details")
+            .waitingView($isWaiting)
             .alert(isPresented: $showAlert){
                 Alert(title: Text("Error"),
                       message: Text(alertMessage))

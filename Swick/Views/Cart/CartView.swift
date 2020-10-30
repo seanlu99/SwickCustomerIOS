@@ -109,8 +109,9 @@ struct CartView: View {
             showAlert = true
         }
         else if let c = card {
-            paramsWrapper = PaymentParamsWrapper(PlaceOrderParams(restaurant.id, table, user.cart, getTip(), c.id))
+            isWaiting = true
             attemptOrder = true
+            paramsWrapper = PaymentParamsWrapper(PlaceOrderParams(restaurant.id, table, user.cart, getTip(), c.id))
         }
         else {
             alertMessage = "Please select a card"
@@ -130,6 +131,7 @@ struct CartView: View {
             alertState = .error
             alertMessage = message
         }
+        isWaiting = false
         showAlert = true
     }
     
@@ -190,7 +192,6 @@ struct CartView: View {
                 
                 // Place order button
                 PrimaryButton(text: "PLACE ORDER", action: placeOrder)
-                    .disabled(attemptOrder)
             }
         }
         .navigationBarTitle(Text("Cart"))

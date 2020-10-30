@@ -12,6 +12,7 @@ import UIKit
 struct AddCardView: View {
     // Initial
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State var isWaiting = false
     // Alerts
     @State var showAlert = false
     // Properties
@@ -29,6 +30,7 @@ struct AddCardView: View {
             alertMessage = message
             showAlert = true
         }
+        isWaiting = false
     }
     
     var body: some View {
@@ -41,17 +43,22 @@ struct AddCardView: View {
                     showAlert = true
                 }
                 else {
-                    params = CardParamsWrapper(cardParams)
+                    isWaiting = true
                     attemptSetup = true
+                    params = CardParamsWrapper(cardParams)
                 }
             }
-            .disabled(attemptSetup)
             .padding()
-            CardSetupCaller(attemptSetup: $attemptSetup, cardParamsWrapper: $params, onStripeResponse: handleResponse)
+            CardSetupCaller(
+                attemptSetup: $attemptSetup,
+                cardParamsWrapper: $params,
+                onStripeResponse: handleResponse
+            )
                 .frame(width: 0, height: 0)
             Spacer()
         }
         .navigationBarTitle("Add card")
+        .waitingView($isWaiting)
         .alert(isPresented: $showAlert) {
             Alert(title: Text("Error"),
                   message: Text(alertMessage))

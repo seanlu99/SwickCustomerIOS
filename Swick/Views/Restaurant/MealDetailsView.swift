@@ -137,23 +137,14 @@ struct MealDetailsView: View {
             }
             .padding()
             // Add to cart button
-            Button(action: addToCart) {
-                ZStack(alignment: .center) {
-                    Text("ADD TO CART")
-                        .font(SFont.body)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                    // Total
-                    Text(Helper.formatPrice(getTotal()))
-                        .font(SFont.body)
-                        .foregroundColor(.white)
-                        .padding(.trailing, 15.0)
-                        .frame(width: UIScreen.width - 40, height: 0, alignment: .trailing)
-                }
-                .padding(.vertical, 22.5)
-                .frame(maxWidth: .infinity)
-                .background(SColor.primary)
-                .cornerRadius(40)
+            ZStack(alignment: .center) {
+                PrimaryButton(text: "ADD TO CART", action: addToCart)
+                // Total
+                Text(Helper.formatPrice(getTotal()))
+                    .font(SFont.body)
+                    .foregroundColor(.white)
+                    .padding(.trailing, 15.0)
+                    .frame(width: UIScreen.width - 40, height: 0, alignment: .trailing)
             }
         }
         .buttonStyle(PlainButtonStyle())

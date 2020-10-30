@@ -99,7 +99,7 @@ struct OrderDetailsView: View {
             // Add tip to order
             // 72 hour grace period
             if order.tip == nil && order.time.addingTimeInterval(259200) > Date() {
-                WhiteButton(text: "Add tip") {
+                RowButton(text: "Add tip") {
                     showAddTip = true
                 }
             }
