@@ -13,6 +13,7 @@ target 'Customer' do
 
   # Pods for Customer
   pod 'Introspect'
+  pod 'Kingfisher/SwiftUI'
   pod 'Stripe'
 end
 

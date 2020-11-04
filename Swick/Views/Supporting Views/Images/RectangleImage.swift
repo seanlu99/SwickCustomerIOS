@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import struct Kingfisher.KFImage
 
 struct RectangleImage: View {
     // Properties
@@ -13,9 +14,11 @@ struct RectangleImage: View {
     var width = UIScreen.width - 40
     
     var body: some View {
-        AsyncImage(url: url)
+        KFImage(URL(string: url))
+            .cancelOnDisappear(true)
+            .resizable()
             .scaledToFill()
-            .frame(width: width, height: width * 2 / 3)
+            .frame(width: width, height: width * 3 / 5)
             .cornerRadius(10.0)
     }
 }

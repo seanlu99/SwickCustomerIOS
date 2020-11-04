@@ -1,12 +1,16 @@
 PODS:
   - Alamofire (5.2.2)
   - Introspect (0.1.0)
+  - Kingfisher/Core (5.15.7)
+  - Kingfisher/SwiftUI (5.15.7):
+    - Kingfisher/Core
   - Stripe (20.0.0)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - Alamofire
   - Introspect
+  - Kingfisher/SwiftUI
   - Stripe
   - SwiftyJSON
 
@@ -14,15 +18,17 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - Introspect
+    - Kingfisher
     - Stripe
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   Introspect: ad32f2b7b9e7ac2c008b9dfec3d5325fbd3660fa
+  Kingfisher: 6e1a13523fcb1c86924ce53affe4ac957e544d59
   Stripe: 339e8c50d3a27dcbe9a4f35b98c260fb9715d962
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: f22b352ce726eef31d24dd8bae054f3e2b13791d
+PODFILE CHECKSUM: 9deec9e5e2826c0d41589a83c4ce252a9a1655d2
 
 COCOAPODS: 1.9.3

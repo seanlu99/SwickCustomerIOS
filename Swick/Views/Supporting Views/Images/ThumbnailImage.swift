@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
+import struct Kingfisher.KFImage
 
 struct ThumbnailImage: View {
     // Properties
     var url: String
     
     var body: some View {
-        AsyncImage(url: url)
+        KFImage(URL(string: url))
+            .cancelOnDisappear(true)
+            .resizable()
             .scaledToFill()
             .frame(width: 100, height: 100)
             .cornerRadius(10.0)
