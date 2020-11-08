@@ -16,7 +16,9 @@ struct PaymentMethodsView: View {
     // Properties
     @State var cards = [Card]()
     @Binding var selectedCard: Card?
+    // Cart specific properties
     var cameFromCart: Bool = false
+    @Binding var showPaymentMethods: Bool
     
     func loadCards() {
         if !viewDidLoad {
@@ -55,7 +57,7 @@ struct PaymentMethodsView: View {
                     Button(
                         action: {
                             selectedCard = c
-                            presentationMode.wrappedValue.dismiss()
+                            showPaymentMethods.toggle()
                         }
                     ) {
                         CardRow(c)
@@ -63,7 +65,10 @@ struct PaymentMethodsView: View {
                 }
             }
             NavigationLink (
-                destination: AddCardView()
+                destination: AddCardView(
+                    cameFromCart: true,
+                    showPaymentMethods: $showPaymentMethods
+                )
                     .onDisappear{
                         viewDidLoad = false
                         loadCards()
@@ -89,7 +94,8 @@ struct PaymentMethodsView_Previews: PreviewProvider {
         PaymentMethodsView(
             isLoading: false,
             cards: testCards,
-            selectedCard: .constant(nil)
+            selectedCard: .constant(nil),
+            showPaymentMethods: .constant(false)
         )
     }
 }

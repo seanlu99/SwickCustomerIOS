@@ -12,15 +12,17 @@ struct MealsView: View {
     // Initial
     @State var viewDidLoad = false
     @State var isLoading = true
+    // Alerts
+    @State var showAlert = false
     // Properties
     @State var tableView: UITableView?
     @State var meals = [Meal]()
     @State var searchText = ""
     var restaurantId: Int
     var category: Category
+    // Cart specific properties
     var cameFromCart: Bool
-    // Alerts
-    @State var showAlert = false
+    @Binding var showMenu: Bool
     
     func loadMeals() {
         if !viewDidLoad {
@@ -66,7 +68,10 @@ struct MealsView: View {
                 // Only show meal details if came from cart
                 if cameFromCart {
                     NavigationLink(
-                        destination: MealDetailsView(meal: m)
+                        destination: MealDetailsView(
+                            showMenu: $showMenu,
+                            meal: m
+                        )
                     ) {
                         MealRow(meal: m)
                     }
@@ -80,6 +85,9 @@ struct MealsView: View {
             self.tableView = tableView
         }
         .navigationBarTitle(Text(category.name))
+        .if(cameFromCart) {
+            $0.closeButton($showMenu)
+        }
         .onAppear {
             loadMeals()
             clearTableViewSelection()
@@ -103,7 +111,8 @@ struct MealsView_Previews: PreviewProvider {
             meals: testMeals,
             restaurantId: 1,
             category: testCategory1,
-            cameFromCart: false
+            cameFromCart: false,
+            showMenu: .constant(false)
         )
     }
 }

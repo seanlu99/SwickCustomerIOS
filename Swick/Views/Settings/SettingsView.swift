@@ -40,7 +40,8 @@ struct SettingsView: View {
                 #if CUSTOMER
                 NavigationLink(
                     destination: PaymentMethodsView(
-                        selectedCard: .constant(nil)
+                        selectedCard: .constant(nil),
+                        showPaymentMethods: .constant(false)
                     )
                 ) {
                     SettingsRow(

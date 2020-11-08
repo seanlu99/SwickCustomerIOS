@@ -11,13 +11,15 @@ struct CategoriesView: View {
     // Initial
     @State var viewDidLoad = false
     @State var isLoading = true
+    // Alerts
+    @State var showAlert = false
     // Properties
     @State var categories = [Category]()
     @State var searchText = ""
     var restaurant: Restaurant
+    // Cart specific properties
     var cameFromCart = false
-    // Alerts
-    @State var showAlert = false
+    @Binding var showMenu: Bool
     
     func loadCategories() {
         if !viewDidLoad {
@@ -51,7 +53,8 @@ struct CategoriesView: View {
                     destination: MealsView(
                         restaurantId: restaurant.id,
                         category: c,
-                        cameFromCart: cameFromCart
+                        cameFromCart: cameFromCart,
+                        showMenu: $showMenu
                     )
                 ) {
                     Text(c.name)
@@ -78,7 +81,8 @@ struct CategoriesView_Previews: PreviewProvider {
         CategoriesView(
             isLoading: false,
             categories: testCategories,
-            restaurant: testRestaurant1
+            restaurant: testRestaurant1,
+            showMenu: .constant(false)
         )
     }
 }

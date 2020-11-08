@@ -21,6 +21,9 @@ struct AddCardView: View {
     @State var attemptSetup = false
     @State var params: CardParamsWrapper?
     @State var alertMessage = ""
+    // Cart specific properties
+    var cameFromCart: Bool = false
+    @Binding var showPaymentMethods: Bool
     
     func handleResponse(_ successful: Bool,_ message: String){
         if successful {
@@ -37,7 +40,7 @@ struct AddCardView: View {
         VStack {
             CardTextField(cardParams: $cardParams, isValid: $isValid)
                 .padding(.vertical, 15.0)
-            SecondaryButton(text: "ADD"){
+            SecondaryButton(text: "ADD") {
                 if !isValid {
                     alertMessage = "Please enter a valid card"
                     showAlert = true
@@ -58,6 +61,9 @@ struct AddCardView: View {
             Spacer()
         }
         .navigationBarTitle("Add card")
+        .if(cameFromCart) {
+            $0.closeButton($showPaymentMethods)
+        }
         .waitingView($isWaiting)
         .alert(isPresented: $showAlert) {
             Alert(title: Text("Error"),
@@ -68,6 +74,10 @@ struct AddCardView: View {
 
 struct AddCardView_Previews: PreviewProvider {
     static var previews: some View {
-        AddCardView(cardParams: STPPaymentMethodCardParams() ,isValid: false)
+        AddCardView(
+            cardParams: STPPaymentMethodCardParams(),
+            isValid: false,
+            showPaymentMethods: .constant(false)
+        )
     }
 }

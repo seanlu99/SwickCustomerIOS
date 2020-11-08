@@ -19,7 +19,12 @@ struct RestaurantRow: View {
                 .padding(.bottom, 10.0)
             // Moved navigation link to here because navigation link
             // around image causes list cell to have extra bottom padding
-            NavigationLink(destination: CategoriesView(restaurant: restaurant)) {
+            NavigationLink(
+                destination: CategoriesView(
+                    restaurant: restaurant,
+                    showMenu: .constant(false)
+                )
+            ) {
                 Text(restaurant.name)
                     .font(SFont.title)
                     .padding(.bottom, 2.0)

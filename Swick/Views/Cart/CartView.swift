@@ -216,8 +216,10 @@ struct CartView: View {
             NavigationView {
                 CategoriesView(
                     restaurant: restaurant,
-                    cameFromCart: true
+                    cameFromCart: true,
+                    showMenu: $showMenu
                 )
+                .closeButton($showMenu)
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .environmentObject(user)
@@ -229,8 +231,10 @@ struct CartView: View {
                     NavigationView {
                         PaymentMethodsView(
                             selectedCard: $card,
-                            cameFromCart: true
+                            cameFromCart: true,
+                            showPaymentMethods: $showPaymentMethods
                         )
+                        .closeButton($showPaymentMethods)
                     }
                 }
         )
@@ -255,7 +259,7 @@ struct CartView: View {
                         Text("Go to orders"), action: { tabIndex = 2 }
                     )
                 )
-            
+                
             case .leave:
                 return Alert(
                     title: Text("Leave restaurant?"),
@@ -292,6 +296,6 @@ struct CartView_Previews: PreviewProvider {
             requestOptions: [],
             table: 1
         )
-            .environmentObject(UserData())
+        .environmentObject(UserData())
     }
 }

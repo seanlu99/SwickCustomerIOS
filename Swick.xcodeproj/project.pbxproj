@@ -12,6 +12,8 @@
 		142B7B17254B779200C4EFA8 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142B7B16254B779200C4EFA8 /* WaitingView.swift */; };
 		142B7B18254B779200C4EFA8 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142B7B16254B779200C4EFA8 /* WaitingView.swift */; };
 		14308708253826A00059D6A5 /* OrderItemOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14308707253826A00059D6A5 /* OrderItemOptions.swift */; };
+		144963F0255769B100E028CF /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144963EF255769B000E028CF /* CloseButton.swift */; };
+		144963F1255769B100E028CF /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144963EF255769B000E028CF /* CloseButton.swift */; };
 		144E0AFE2539530800C202C1 /* SetNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0AFD2539530800C202C1 /* SetNameView.swift */; };
 		144E0AFF2539530800C202C1 /* SetNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0AFD2539530800C202C1 /* SetNameView.swift */; };
 		144E0B03253954EF00C202C1 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0B02253954EF00C202C1 /* RootTabView.swift */; };
@@ -166,6 +168,7 @@
 		142B7B0F254B770A00C4EFA8 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		142B7B16254B779200C4EFA8 /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
 		14308707253826A00059D6A5 /* OrderItemOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemOptions.swift; sourceTree = "<group>"; };
+		144963EF255769B000E028CF /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		144E0AFD2539530800C202C1 /* SetNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameView.swift; sourceTree = "<group>"; };
 		144E0B02253954EF00C202C1 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
 		144E0B1F253970EB00C202C1 /* ModalHackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalHackView.swift; sourceTree = "<group>"; };
@@ -299,6 +302,7 @@
 				148BAB992540F30F000EC690 /* WhiteButtonText.swift */,
 				147F07042537C48D002FF616 /* WhiteButton.swift */,
 				148BABB9254133D3000EC690 /* BackButton.swift */,
+				144963EF255769B000E028CF /* CloseButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -770,6 +774,7 @@
 				147F075C2537C953002FF616 /* RectangleImage.swift in Sources */,
 				147F074F2537C93A002FF616 /* SettingsView.swift in Sources */,
 				142B7B10254B770A00C4EFA8 /* ActivityIndicator.swift in Sources */,
+				144963F0255769B100E028CF /* CloseButton.swift in Sources */,
 				147F07332537C903002FF616 /* LoginCodeView.swift in Sources */,
 				148BABA02540F30F000EC690 /* PrimaryButtonText.swift in Sources */,
 				147F07682537C96D002FF616 /* TotalsView.swift in Sources */,
@@ -863,6 +868,7 @@
 				147F07EB2537E9D2002FF616 /* OrderRow.swift in Sources */,
 				147F07AD2537D1F9002FF616 /* LoginView.swift in Sources */,
 				147F07AA2537D1DD002FF616 /* UIKitTabView.swift in Sources */,
+				144963F1255769B100E028CF /* CloseButton.swift in Sources */,
 				F2555AEE25400DBD005A3D54 /* WhiteButton.swift in Sources */,
 				147F07D02537DA6E002FF616 /* AccountRow.swift in Sources */,
 				142B7B11254B770A00C4EFA8 /* ActivityIndicator.swift in Sources */,

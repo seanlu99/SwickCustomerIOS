@@ -20,6 +20,7 @@ struct MealDetailsView: View {
     @State var customizations = [Customization]()
     @State var price: Decimal = 0 // including price additions
     @State var quantity = 1
+    @Binding var showMenu: Bool
     var meal: Meal
     
     func loadMeal() {
@@ -149,6 +150,7 @@ struct MealDetailsView: View {
         }
         .buttonStyle(PlainButtonStyle())
         .navigationBarTitle(Text(meal.name))
+        .closeButton($showMenu)
         .onAppear(perform: loadMeal)
         .loadingView($isLoading)
         .alert(isPresented: $showAlert) {
@@ -165,6 +167,7 @@ struct MealDetailsView_Previews: PreviewProvider {
         MealDetailsView(
             isLoading: false,
             customizations: [testCustomization1],
+            showMenu: .constant(false),
             meal: testMeal1
         )
         .environmentObject(UserData())
