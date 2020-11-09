@@ -48,7 +48,7 @@ struct HomeView: View {
                     RestaurantRow(restaurant: r)
                 }
             }
-            .navigationBarTitle(Text("Home"))
+            .navigationBarTitle(Text("Browse"))
             .onAppear(perform: loadRestaurants)
             .loadingView($isLoading)
             .resignKeyboardOnDragGesture() // for search

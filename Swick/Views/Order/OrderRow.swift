@@ -13,18 +13,25 @@ struct OrderRow: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10.0) {
+            #if CUSTOMER
             HStack {
-                #if CUSTOMER
                 Text(order.restaurantName)
                     .font(SFont.header)
-                #else
-                Text(order.customerName)
-                    .font(SFont.header)
-                #endif
                 Spacer()
                 Text(order.status)
                     .font(SFont.body)
             }
+            #else
+            HStack {
+            Text("Order #" + String(order.id))
+                .font(SFont.header)
+                Spacer()
+                Text(order.status)
+                    .font(SFont.body)
+            }
+            Text(String(order.customerName))
+                .font(SFont.body)
+            #endif
             Text(Helper.convertDateToString(order.time))
                 .font(SFont.body)
         }

@@ -21,6 +21,7 @@ struct OrderDetailsView: View {
     @State var completeOrderItems = [OrderItem]()
     @State var order: Order = Order()
     var orderId: Int
+    var restaurantName = ""
     
     func loadOrderDetails() {
         API.getOrderDetails(orderId) { json in
@@ -45,23 +46,25 @@ struct OrderDetailsView: View {
     
     func getNavigationBarTitle() -> Text {
         #if CUSTOMER
-        return Text(order.restaurantName)
+        return Text(restaurantName)
         #else
-        return Text(order.customerName)
+        return Text("Order #" + String(orderId))
         #endif
     }
     
     var body: some View {
         List {
             VStack(alignment: .leading, spacing: 10.0) {
-                #if SERVER
-                // Order table
-                Text("Table #" + (order.table))
-                    .font(SFont.body)
-                #endif
-                // Order time
-                Text("Order placed at " +  Helper.convertDateToString(order.time))
-                    .font(SFont.body)
+                Group {
+                    #if CUSTOMER
+                    Text("Order #" + String(order.id))
+                    #else
+                    Text("Table #" + order.table)
+                    Text(order.customerName)
+                    #endif
+                    Text(Helper.convertDateToString(order.time))
+                }
+                .font(SFont.body)
             }
             .padding(.vertical, 10.0)
             // Cooking order items list

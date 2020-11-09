@@ -59,11 +59,24 @@ struct ToSendRow: View {
         VStack {
             HStack {
                 VStack(alignment: .leading, spacing: 10.0) {
+                    Group {
+                    // If item is order item
+                    if item.id[0] == "O" {
+                        Text("Order #" + String(item.orderId ?? 0))
+                    }
+                    // If item is request
+                    else {
+                        Text("Request")
+                    }
+                    }
+                    .font(SFont.header)
+                    Group {
                     Text("Table #" + item.table)
                     Text(item.customerName)
                     Text(item.name)
+                    }
+                    .font(SFont.body)
                 }
-                .font(SFont.header)
                 Spacer()
                 SystemImage(
                     name: "arrowshape.turn.up.right.fill"

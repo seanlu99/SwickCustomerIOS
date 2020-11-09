@@ -16,7 +16,6 @@ struct OrderItem: Identifiable {
     var status: String
     var customizations = [Customization]()
     #if SERVER
-    // Order fields for to cook view
     var orderId: Int
     var table: String
     #endif

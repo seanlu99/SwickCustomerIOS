@@ -36,7 +36,10 @@ struct OrdersView: View {
             List {
                 ForEach(orders) { o in
                     NavigationLink(
-                        destination: OrderDetailsView(orderId: o.id)
+                        destination: OrderDetailsView(
+                            orderId: o.id,
+                            restaurantName: o.restaurantName
+                        )
                     ) {
                         OrderRow(order: o)
                     }

@@ -28,7 +28,7 @@ struct ToCookRow: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 10.0) {
-                Text("Table #" + (item.table))
+                Text("Order #" + String(item.orderId))
                     .font(SFont.header)
                 ItemRow(
                     quantity: item.quantity,

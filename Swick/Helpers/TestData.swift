@@ -42,6 +42,28 @@ let testCustomization2 = Customization(
 )
 let testCustomizations = [testCustomization1, testCustomization2]
 
+// Order
+let testOrder1 = Order(
+    id: 1,
+    restaurantName: "The Cozy Diner",
+    customerName: "John Smith",
+    table: "6",
+    time: Helper.convertStringToDate("2020-01-01T9:00Z"),
+    status: "Active",
+    subtotal: 16.50,
+    tax: 0.50,
+    tip: 15,
+    total: 17
+)
+let testOrder2 = Order(
+    id: 2,
+    restaurantName: "Ice Cream Shop",
+    customerName: "Bob Builder",
+    time: Helper.convertStringToDate("2020-01-02T9:00Z"),
+    status: "Complete"
+)
+let testOrders = [testOrder1, testOrder2]
+
 // ##### CUSTOMER TEST DATA #####
 #if CUSTOMER
 
@@ -102,25 +124,6 @@ let testCartItem1 = CartItem(
     customizations: testCustomizations
 )
 
-// Order
-let testOrder1 = Order(
-    id: 1,
-    time: Helper.convertStringToDate("2020-01-01T9:00Z"),
-    status: "Active",
-    subtotal: 16.50,
-    tax: 0.50,
-    tip: 15,
-    total: 17,
-    restaurantName: "The Cozy Diner"
-)
-let testOrder2 = Order(
-    id: 2,
-    time: Helper.convertStringToDate("2020-01-02T9:00Z"),
-    status: "Complete",
-    restaurantName: "Ice Cream Shop"
-)
-let testOrders = [testOrder1, testOrder2]
-
 // Order item
 let testOrderItem1 = OrderItem(
     id: 1,
@@ -162,24 +165,6 @@ let testCards = [testCard1, testCard1, testCard1, testCard1]
 // ##### SERVER TEST DATA #####
 #else
 
-// Order
-let testOrder1 = Order(
-    id: 1,
-    time: Helper.convertStringToDate("2020-01-01T9:00Z"),
-    status: "Active",
-    subtotal: 16.50,
-    tax: 0.50,
-    total: 17,
-    customerName: "John Smith"
-)
-let testOrder2 = Order(
-    id: 2,
-    time: Helper.convertStringToDate("2020-01-02T9:00Z"),
-    status: "Complete",
-    customerName: "Bob Builder"
-)
-let testOrders = [testOrder1, testOrder2]
-
 // Order item
 let testOrderItem1 = OrderItem(
     id: 1,
@@ -188,6 +173,7 @@ let testOrderItem1 = OrderItem(
     total: 13.00,
     status: "Cooking",
     customizations: testCustomizations,
+    orderId: 7,
     table: "1"
 )
 let testOrderItem2 = OrderItem(
@@ -197,6 +183,7 @@ let testOrderItem2 = OrderItem(
     total: 3.50,
     status: "Cooking",
     customizations: testCustomizations,
+    orderId: 7,
     table: "2"
 )
 let testOrderItems = [testOrderItem1, testOrderItem2]
