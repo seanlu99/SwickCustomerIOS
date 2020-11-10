@@ -14,6 +14,8 @@
 		14308708253826A00059D6A5 /* OrderItemOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14308707253826A00059D6A5 /* OrderItemOptions.swift */; };
 		144963F0255769B100E028CF /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144963EF255769B000E028CF /* CloseButton.swift */; };
 		144963F1255769B100E028CF /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144963EF255769B000E028CF /* CloseButton.swift */; };
+		14496424255A4E6C00E028CF /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14496423255A4E6C00E028CF /* GradientView.swift */; };
+		14496425255A4E6C00E028CF /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14496423255A4E6C00E028CF /* GradientView.swift */; };
 		144E0AFE2539530800C202C1 /* SetNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0AFD2539530800C202C1 /* SetNameView.swift */; };
 		144E0AFF2539530800C202C1 /* SetNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0AFD2539530800C202C1 /* SetNameView.swift */; };
 		144E0B03253954EF00C202C1 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0B02253954EF00C202C1 /* RootTabView.swift */; };
@@ -169,6 +171,7 @@
 		142B7B16254B779200C4EFA8 /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
 		14308707253826A00059D6A5 /* OrderItemOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemOptions.swift; sourceTree = "<group>"; };
 		144963EF255769B000E028CF /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
+		14496423255A4E6C00E028CF /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		144E0AFD2539530800C202C1 /* SetNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameView.swift; sourceTree = "<group>"; };
 		144E0B02253954EF00C202C1 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
 		144E0B1F253970EB00C202C1 /* ModalHackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalHackView.swift; sourceTree = "<group>"; };
@@ -416,6 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				147F06F82537C48D002FF616 /* ContentView.swift */,
+				14496423255A4E6C00E028CF /* GradientView.swift */,
 				144E0B1025395AB100C202C1 /* TabView */,
 				147F06F92537C48D002FF616 /* Login */,
 				147F06E62537C48D002FF616 /* Restaurant */,
@@ -806,6 +810,7 @@
 				F245AC49253EA38500634FC4 /* AddTipView.swift in Sources */,
 				147F07532537C940002FF616 /* AccountView.swift in Sources */,
 				147F07742537C98B002FF616 /* Category.swift in Sources */,
+				14496424255A4E6C00E028CF /* GradientView.swift in Sources */,
 				1457ECB725428BFC0095B29D /* SColor.swift in Sources */,
 				147F076F2537C97E002FF616 /* StripePaymentCardTextField.swift in Sources */,
 				148BABA22540F30F000EC690 /* SecondaryButton.swift in Sources */,
@@ -889,6 +894,7 @@
 				144E0B21253970EB00C202C1 /* ModalHackView.swift in Sources */,
 				147F07F52537EAB8002FF616 /* TotalsView.swift in Sources */,
 				148BAB9B2540F30F000EC690 /* PrimaryButton.swift in Sources */,
+				14496425255A4E6C00E028CF /* GradientView.swift in Sources */,
 				147F079B2537D01C002FF616 /* AppDelegate.swift in Sources */,
 				148BAB9F2540F30F000EC690 /* SecondaryButtonText.swift in Sources */,
 				147F07CA2537DA4A002FF616 /* SettingsView.swift in Sources */,

@@ -11,7 +11,6 @@ import UIKit
 
 struct AddCardView: View {
     // Initial
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var isWaiting = false
     // Alerts
     @State var showAlert = false
@@ -27,7 +26,7 @@ struct AddCardView: View {
     
     func handleResponse(_ successful: Bool,_ message: String){
         if successful {
-            presentationMode.wrappedValue.dismiss()
+            showPaymentMethods.toggle()
         }
         else {
             alertMessage = message

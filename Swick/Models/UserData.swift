@@ -8,7 +8,9 @@
 import SwiftUI
 
 final class UserData: ObservableObject {
-    @Published var hasToken = false
+    enum ScreenState { case loadingScreen, loginView, tabView }
+    @Published var screenState = ScreenState.loadingScreen
+    @Published var showSetNameSheet = false
     #if CUSTOMER
     @Published var cart = [CartItem]()
     // Used for assigning cart item IDs to ensure no duplicate IDs

@@ -15,7 +15,7 @@ struct SettingsView: View {
     
     func logout() {
         UserDefaults.standard.removeObject(forKey: "token")
-        user.hasToken = false
+        user.screenState = .loginView
     }
     
     func createLogoutAlert() -> Alert {

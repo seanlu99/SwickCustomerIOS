@@ -10,8 +10,6 @@ import SwiftUI
 struct ContentView: View {
     // Initial
     @EnvironmentObject var user: UserData
-    // Popups
-    @State var showSetNameSheet = false
     
     init() {
         // Set navigation bar font globally
@@ -25,40 +23,48 @@ struct ContentView: View {
             ]
     }
     
-    func checkIfTokenSet() {
-        user.hasToken = UserDefaults.standard.string(forKey: "token") != nil
-    }
-    
     func login() {
-        API.login() { json in
-            if json["status"] == "name_not_set" {
-                showSetNameSheet = true
-            }
-            // If token invalid, remove token
-            else if json["status"] != "success" {
-                UserDefaults.standard.removeObject(forKey: "token")
-                user.hasToken = false
+        // If no token
+        if UserDefaults.standard.string(forKey: "token") == nil {
+            user.screenState = .loginView
+        }
+        else {
+            API.login() { json in
+                if json["status"] == "success" {
+                    user.screenState = .tabView
+                }
+                // If name not set
+                else if !(json["name_set"].bool ?? true) {
+                    user.showSetNameSheet = true
+                }
+                // If token invalid, remove token
+                else {
+                    UserDefaults.standard.removeObject(forKey: "token")
+                    user.screenState = .loginView
+                }
             }
         }
     }
     
     var body: some View {
         Group {
-            if user.hasToken {
+            if user.screenState == .loadingScreen {
+                GradientView()
+            }
+            else if user.screenState == .loginView {
+                LoginView()
+                    .accentColor(.white)
+            }
+            else {
                 RootTabView()
-                    .onAppear(perform: login)
                     // Show undismissable set name sheet if name not set
-                    .sheet(isPresented: $showSetNameSheet) {
+                    .sheet(isPresented: $user.showSetNameSheet) {
                         SetNameView()
                             .allowAutoDismiss { false }
                     }
             }
-            else {
-                LoginView()
-                    .accentColor(.white)
-            }
         }
-        .onAppear(perform: checkIfTokenSet)
+        .onAppear(perform: login)
     }
 }
 

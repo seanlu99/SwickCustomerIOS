@@ -69,7 +69,7 @@ struct LoginEmailView: View {
             }
             .padding()
         }
-        .background(SColor.gradient.edgesIgnoringSafeArea(.all))
+        .background(GradientView())
         // Needed to hide navigation bar on iOS 13
         .navigationBarTitle("")
         .navigationBarHidden(true)

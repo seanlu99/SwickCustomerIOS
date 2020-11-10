@@ -31,7 +31,16 @@ struct LoginCodeView: View {
                 // If token successfully retrieved
                 else {
                     UserDefaults.standard.set(token, forKey: "token")
-                    user.hasToken = true
+                    user.screenState = .tabView
+                    API.login() { json in
+                        if json["status"] == "success" {
+                            user.screenState = .tabView
+                        }
+                        // If name not set
+                        else if !(json["name_set"].bool ?? true) {
+                            user.showSetNameSheet = true
+                        }
+                    }
                 }
                 isWaiting = false
             }
@@ -61,7 +70,7 @@ struct LoginCodeView: View {
             }
             .padding()
         }
-        .background(SColor.gradient.edgesIgnoringSafeArea(.all))
+        .background(GradientView())
         // Needed to hide navigation bar on iOS 13
         .navigationBarTitle("")
         .navigationBarHidden(true)
