@@ -12,9 +12,14 @@ let DEVELOPMENT = true
 
 let BACKEND_URL = DEVELOPMENT ? "http://localhost:8000" : "https://swickapp.herokuapp.com"
 
+let PUSHER_KEY = DEVELOPMENT ? "3ceb32ba705e55a518b8" : "5e2d3e1693872ac3bf09"
+
+// AWS cluster location for Pusher server (dev and prod cluster currently the same)
+let PUSHER_CLUSTER = "us2"
+
 #if CUSTOMER
 // Mock scanned string for QR code scanner while using simulator
-let MOCK_SCANNED_STRING = "swick-26-1"
+let MOCK_SCANNED_STRING = "swick-6-1"
 
 let STRIPE_PUBLIC_KEY = "pk_test_YoEmowu4ykyrOgUO8dfmShpQ00ck79Hp8Q"
 #endif

@@ -15,7 +15,6 @@ struct ToSendRow: View {
     // Alerts
     @State var showAlert = false
     // Properties
-    var reloadItems: () -> ()
     var item: OrderItemOrRequest
     
     func getItemId() -> Int {
@@ -25,11 +24,7 @@ struct ToSendRow: View {
     func sendButtonPressed() {
         // If item is order item
         if item.id[0] == "O" {
-            API.updateOrderItemStatus(getItemId(), "COMPLETE") { json in
-                if (json["status"] == "success") {
-                    reloadItems()
-                }
-            }
+            API.updateOrderItemStatus(getItemId(), "COMPLETE") { _ in }
         }
         // If item is request
         else {
@@ -38,11 +33,7 @@ struct ToSendRow: View {
     }
     
     func deleteRequest(_ requestId: Int) {
-        API.deleteRequest(requestId) { json in
-            if (json["status"] == "success") {
-                reloadItems()
-            }
-        }
+        API.deleteRequest(requestId) { _ in }
     }
     
     func createRequestOptionsActionSheet() -> ActionSheet {
@@ -105,8 +96,7 @@ struct ToSendRow: View {
                 showOrderDetails: $showOrderDetails,
                 seeFullOrder: true,
                 orderItemId: getItemId(),
-                status: "Sending",
-                reloadItems: reloadItems
+                status: "Sending"
             )
             .createActionSheet()
         }
@@ -132,6 +122,6 @@ struct ToSendRow: View {
 
 struct ToSendRow_Previews: PreviewProvider {
     static var previews: some View {
-        ToSendRow(reloadItems: {}, item: testOrderItemOrRequest1)
+        ToSendRow(item: testOrderItemOrRequest1)
     }
 }

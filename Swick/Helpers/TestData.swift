@@ -193,13 +193,15 @@ let testOrderItemOrRequest1 = OrderItemOrRequest(
     id: "R1",
     table: "1",
     name: "Water",
-    customerName: "John Smith"
+    customerName: "John Smith",
+    time: Date()
 )
 let testOrderItemOrRequest2 = OrderItemOrRequest(
     id: "O1",
     table: "1",
     name: "Cheeseburger",
-    customerName: "John Smith"
+    customerName: "John Smith",
+    time: Date()
 )
 let testOrderItemOrRequests = [testOrderItemOrRequest1, testOrderItemOrRequest2]
 

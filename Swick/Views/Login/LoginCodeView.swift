@@ -17,6 +17,7 @@ struct LoginCodeView: View {
     // Properties
     @State var code: String = ""
     var email: String
+    var login: () -> ()
     
     func onChange() {
         if code.length == 6 {
@@ -31,16 +32,7 @@ struct LoginCodeView: View {
                 // If token successfully retrieved
                 else {
                     UserDefaults.standard.set(token, forKey: "token")
-                    user.screenState = .tabView
-                    API.login() { json in
-                        if json["status"] == "success" {
-                            user.screenState = .tabView
-                        }
-                        // If name not set
-                        else if !(json["name_set"].bool ?? true) {
-                            user.showSetNameSheet = true
-                        }
-                    }
+                    login()
                 }
                 isWaiting = false
             }
@@ -86,6 +78,9 @@ struct LoginCodeView: View {
 
 struct LoginCodeView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginCodeView(email: "")
+        LoginCodeView(
+            email: "",
+            login: {}
+        )
     }
 }

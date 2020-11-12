@@ -25,7 +25,7 @@ struct Helper {
     // Convert string to date
     static func convertStringToDate(_ str: String) -> Date {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mmZ"
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         formatter.locale = Locale(identifier: "en_US_POSIX")
         return formatter.date(from: str) ?? Date()
     }
@@ -43,6 +43,23 @@ struct Helper {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
+    }
+    
+    static func findUpperBound<T: Comparable>(_ item: T, _ items: [T]) -> Int {
+        var len = items.count
+        var index = 0
+        while len > 0 {
+            let half = len/2
+            let middle = index.advanced(by: half)
+            if item >= items[middle] {
+                index = middle.advanced(by: 1)
+                len -= half + 1
+            }
+            else {
+                len = half
+            }
+        }
+        return index
     }
 }
 

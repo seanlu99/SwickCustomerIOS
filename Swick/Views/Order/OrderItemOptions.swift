@@ -16,7 +16,6 @@ struct OrderItemOptions {
     var seeFullOrder: Bool = false
     var orderItemId: Int
     var status: String
-    var reloadItems: () -> ()
     
     // Create action sheet based on status
     func createActionSheet() -> ActionSheet {
@@ -92,11 +91,7 @@ struct OrderItemOptions {
     private func createUpdateButton(_ newStatus: String,
                                    _ label: String) -> Alert.Button {
         return Alert.Button.default(Text(label)) {
-            API.updateOrderItemStatus(orderItemId, newStatus) { json in
-                if (json["status"] == "success") {
-                    reloadItems()
-                }
-            }
+            API.updateOrderItemStatus(orderItemId, newStatus) { _ in }
         }
     }
     

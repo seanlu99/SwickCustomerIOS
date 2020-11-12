@@ -11,7 +11,6 @@ struct OrderItemsSection: View {
     // Properties
     var header: String
     var items: [OrderItem]
-    var reloadItems: () -> ()
     
     var body: some View {
         Section(
@@ -21,8 +20,7 @@ struct OrderItemsSection: View {
         ) {
             ForEach(items) { item in
                 OrderItemRow(
-                    item: item,
-                    reloadItems: reloadItems
+                    item: item
                 )
             }
         }
@@ -33,8 +31,7 @@ struct OrderItemsSection_Previews: PreviewProvider {
     static var previews: some View {
         OrderItemsSection(
             header: "COOKING",
-            items: testOrderItems,
-            reloadItems: {}
+            items: testOrderItems
         )
     }
 }

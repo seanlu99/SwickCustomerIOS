@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    var login: () -> ()
     
     var body: some View {
         NavigationView {
@@ -27,7 +28,7 @@ struct LoginView: View {
                     .font(SFont.body)
                 Spacer()
                 NavigationLink(
-                    destination: LoginEmailView()
+                    destination: LoginEmailView(login: login)
                 ) {
                     WhiteButtonText(text: "GET STARTED")
                 }
@@ -45,6 +46,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(login: {})
     }
 }

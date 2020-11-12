@@ -9,7 +9,10 @@ import SwiftUI
 
 struct RootTabView: View {
     // Initial
+    @EnvironmentObject var user: UserData
     @State var tabIndex = 0
+    @Binding var hasRestaurant: Bool
+    let noRestaurantMsg = "Restaurant needs to add you as a server"
     
     var body: some View {
         #if CUSTOMER
@@ -23,16 +26,30 @@ struct RootTabView: View {
             SettingsView()
                 .tab(title: "Settings", image: "gear")
         }
-        #else
-        UIKitTabView {
-            ToCookView()
-                .tab(title: "To cook", image: "flame.fill")
-            ToSendView()
-                .tab(title: "To send", image: "arrowshape.turn.up.right.fill")
-            OrdersView()
-                .tab(title: "All", image: "tray.full.fill")
-            SettingsView()
-                .tab(title: "Settings", image: "gear")
+        #elseif SERVER
+        if hasRestaurant {
+            UIKitTabView {
+                ToCookView()
+                    .tab(title: "To cook", image: "flame.fill")
+                ToSendView()
+                    .tab(title: "To send", image: "arrowshape.turn.up.right.fill")
+                OrdersView()
+                    .tab(title: "All", image: "tray.full.fill")
+                SettingsView()
+                    .tab(title: "Settings", image: "gear")
+            }
+        }
+        else {
+            UIKitTabView {
+                Text(noRestaurantMsg)
+                    .tab(title: "To cook", image: "flame.fill")
+                Text(noRestaurantMsg)
+                    .tab(title: "To send", image: "arrowshape.turn.up.right.fill")
+                Text(noRestaurantMsg)
+                    .tab(title: "All", image: "tray.full.fill")
+                SettingsView()
+                    .tab(title: "Settings", image: "gear")
+            }
         }
         #endif
     }
@@ -40,6 +57,6 @@ struct RootTabView: View {
 
 struct RootTabView_Previews: PreviewProvider {
     static var previews: some View {
-        RootTabView()
+        RootTabView(hasRestaurant: .constant(true))
     }
 }

@@ -18,6 +18,7 @@ struct LoginEmailView: View {
     @State var alertMessage = ""
     // Properties
     @State var email: String = ""
+    var login: () -> ()
     
     func sendPressed() {
         if !Helper.isValidEmail(email) {
@@ -77,7 +78,10 @@ struct LoginEmailView: View {
         .background(
             // Navigation link to login code view
             NavigationLink(
-                destination: LoginCodeView(email: email),
+                destination: LoginCodeView(
+                    email: email,
+                    login: login
+                ),
                 isActive: $showCodeView
             ) { }
         )
@@ -92,6 +96,6 @@ struct LoginEmailView: View {
 
 struct LoginEmailView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginEmailView()
+        LoginEmailView(login: {})
     }
 }

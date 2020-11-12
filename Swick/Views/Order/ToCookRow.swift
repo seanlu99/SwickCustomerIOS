@@ -10,19 +10,14 @@ import SwiftUI
 struct ToCookRow: View {
     // Navigation
     @State var showOptionsActionSheet = false
-    @State var showOrderDetails: Bool = false
+    @State var showOrderDetails = false
     // Alerts
     @State var showAlert = false
     // Properties
-    var reloadOrderItems: () -> ()
     var item: OrderItem
     
     func cookButtonPressed() {
-        API.updateOrderItemStatus(item.id, "SENDING") { json in
-            if (json["status"] == "success") {
-                reloadOrderItems()
-            }
-        }
+        API.updateOrderItemStatus(item.id, "SENDING") { _ in }
     }
     
     var body: some View {
@@ -56,8 +51,7 @@ struct ToCookRow: View {
                 showOrderDetails: $showOrderDetails,
                 seeFullOrder: true,
                 orderItemId: item.id,
-                status: "Cooking",
-                reloadItems: reloadOrderItems
+                status: "Cooking"
             )
             .createActionSheet()
         }
@@ -79,6 +73,6 @@ struct ToCookRow: View {
 
 struct ToCookRow_Previews: PreviewProvider {
     static var previews: some View {
-        ToCookRow(reloadOrderItems: {}, item: testOrderItem1)
+        ToCookRow(item: testOrderItem1)
     }
 }

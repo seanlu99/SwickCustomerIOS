@@ -14,9 +14,10 @@ struct OrderItemRow: View {
     @State var showAlert = false
     // Properties
     var item: OrderItem
-    var reloadItems: () -> ()
     
     var body: some View {
+        // Need to force reference item.status due to iOS 13 bug
+        if false { Text("\(item.status)")}
         ItemRow(
             quantity: item.quantity,
             mealName: item.mealName,
@@ -36,8 +37,7 @@ struct OrderItemRow: View {
                 showAlert: $showAlert,
                 showOrderDetails: .constant(false),
                 orderItemId: item.id,
-                status: item.status,
-                reloadItems: reloadItems
+                status: item.status
             )
             .createActionSheet()
             #else
@@ -56,6 +56,6 @@ struct OrderItemRow: View {
 
 struct OrderItemRow_Previews: PreviewProvider {
     static var previews: some View {
-        OrderItemRow(item: testOrderItem1, reloadItems: {})
+        OrderItemRow(item: testOrderItem1)
     }
 }

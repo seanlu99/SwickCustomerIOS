@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftyJSON
+import PusherSwift
 
 struct OrderDetailsView: View {
     // Initial
@@ -22,6 +23,68 @@ struct OrderDetailsView: View {
     @State var order: Order = Order()
     var orderId: Int
     var restaurantName = ""
+    
+    func findItem(_ id: Int,_ items: inout [OrderItem]) -> OrderItem? {
+        if let indexRemove = items.firstIndex(where: { $0.id == id }) {
+            return items.remove(at: indexRemove)
+        }
+        return nil
+    }
+    
+    // Update lists by popping from old list and appending to new lists
+    func updateItemLists(_ itemId: Int,_ status: String) {
+        switch(status) {
+        case "COOKING":
+            if var updatedItem = findItem(itemId, &sendingOrderItems) ?? findItem(itemId, &completeOrderItems) {
+                updatedItem.status = "Cooking"
+                cookingOrderItems.insert(updatedItem, at: Helper.findUpperBound(updatedItem, cookingOrderItems))
+            }
+        case "SENDING":
+            if var updatedItem = findItem(itemId, &cookingOrderItems) ?? findItem(itemId, &completeOrderItems) {
+                updatedItem.status = "Sending"
+                sendingOrderItems.insert(updatedItem, at: Helper.findUpperBound(updatedItem, sendingOrderItems))
+            }
+        case "COMPLETE":
+            if var updatedItem = findItem(itemId, &cookingOrderItems) ?? findItem(itemId, &sendingOrderItems) {
+                updatedItem.status = "Complete"
+                completeOrderItems.insert(updatedItem, at: Helper.findUpperBound(updatedItem, completeOrderItems))
+            }
+        default:
+            break
+        }
+    }
+
+    func bindListeners() {
+        PusherObj.shared.channelBind(eventName: "item-status-updated") { (event: PusherEvent) -> Void in
+            if let eventData = event.data {
+                let json = JSON(eventData.data(using: .utf8) ?? "")
+                if let status = json["status"].string,
+                   let itemId = json["id"].int {
+                    updateItemLists(itemId, status)
+                }
+            }
+        }
+        PusherObj.shared.channelBind(eventName: "tip-added-order-\(orderId)") { (event: PusherEvent) -> Void in
+            if let eventData = event.data {
+                let json = JSON(eventData.data(using: .utf8) ?? "")
+                if let subtotal = json["updated_subtotal"].string,
+                   let tax = json["updated_tax"].string,
+                   let tip = json["updated_tip"].string,
+                   let total = json["updated_total"].string {
+                    order.subtotal = Decimal(string: subtotal)!
+                    order.tax = Decimal(string: tax)!
+                    order.tip = Decimal(string: tip)
+                    order.total = Decimal(string: total)!
+                }
+            }
+        }
+        PusherObj.shared.reload = loadOrderDetails
+    }
+    
+    func unbindListeners() {
+        PusherObj.shared.unbindRecentEvents(2)
+        PusherObj.shared.reload = nil
+    }
     
     func loadOrderDetails() {
         API.getOrderDetails(orderId) { json in
@@ -71,24 +134,21 @@ struct OrderDetailsView: View {
             if !cookingOrderItems.isEmpty {
                 OrderItemsSection(
                     header: "COOKING",
-                    items: cookingOrderItems,
-                    reloadItems: loadOrderDetails
+                    items: cookingOrderItems
                 )
             }
             // Sending order items list
             if !sendingOrderItems.isEmpty {
                 OrderItemsSection (
                     header: "SENDING",
-                    items: sendingOrderItems,
-                    reloadItems: loadOrderDetails
+                    items: sendingOrderItems
                 )
             }
             // Complete order items list
             if !completeOrderItems.isEmpty {
                 OrderItemsSection (
                     header: "COMPLETE",
-                    items: completeOrderItems,
-                    reloadItems: loadOrderDetails
+                    items: completeOrderItems
                 )
             }
             // Totals
@@ -109,7 +169,13 @@ struct OrderDetailsView: View {
             #endif
         }
         .navigationBarTitle(getNavigationBarTitle())
-        .onAppear(perform: loadOrderDetails)
+        .onAppear {
+            loadOrderDetails()
+            bindListeners()
+        }
+        .onDisappear {
+            unbindListeners()
+        }
         .loadingView($isLoading)
         .sheet(isPresented: $showAddTip) {
             #if CUSTOMER

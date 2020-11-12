@@ -4,6 +4,7 @@ platform :ios, '13.1'
 def shared_pods
   # Pods for all targets
   pod 'Alamofire'
+  pod 'PusherSwift'
   pod 'SwiftyJSON'
 end
 

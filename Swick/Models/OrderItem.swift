@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyJSON
 
-struct OrderItem: Identifiable {
+struct OrderItem: Identifiable, Comparable {
     var id: Int
     var mealName: String
     var quantity: Int
@@ -57,5 +57,13 @@ struct OrderItem: Identifiable {
         orderId = json["order_id"].int ?? 0
         table = String(describing: json["table"].int ?? 0)
         #endif
+    }
+    
+    static func < (lhs: OrderItem, rhs: OrderItem) -> Bool {
+        return lhs.id < rhs.id
+    }
+    
+    static func == (lhs: OrderItem, rhs: OrderItem) -> Bool {
+        return lhs.id == rhs.id
     }
 }
