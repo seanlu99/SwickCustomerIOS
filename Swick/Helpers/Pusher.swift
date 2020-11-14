@@ -14,16 +14,14 @@ final class PusherObj: PusherDelegate {
     var pusher: Pusher!
     var channel: PusherChannel!
     var currView: Int = 0
-    var reload: (() -> ())?
-    var events:[( event: String, callbackId: String?)] = []
+    var reload: (() -> ())? = nil
+    // Did the user attempt to connect (by logging in)
     var didConnect = false
+    // Is there a sustained connection
+    var isPusherConnected = false
     
     class AuthRequestBuilder: AuthRequestBuilderProtocol {
-        var token: String
-        
-        init(_ token: String) {
-            self.token = token
-        }
+        let token = UserDefaults.standard.string(forKey: "token") ?? ""
         
         func requestFor(socketID: String, channelName: String) -> URLRequest? {
             #if CUSTOMER
@@ -39,22 +37,35 @@ final class PusherObj: PusherDelegate {
         }
     }
     
-    func createPusher(_ token: String) {
-        let clientOptions = PusherClientOptions(authMethod: .authRequestBuilder(authRequestBuilder: AuthRequestBuilder(token)),
-                                                host: .cluster(PUSHER_CLUSTER))
+    func createPusher() {
+        let clientOptions = PusherClientOptions(
+            authMethod: .authRequestBuilder(authRequestBuilder: AuthRequestBuilder()),
+            host: .cluster(PUSHER_CLUSTER)
+        )
         pusher = Pusher(key: PUSHER_KEY, options: clientOptions)
         pusher.connection.delegate = self
     }
-
+    
     func connect() {
         if !didConnect {
             pusher.connect()
+            didConnect = true
         }
     }
     
     func disconenct() {
-        pusher.disconnect()
-        didConnect = false
+        if didConnect {
+            pusher.disconnect()
+            didConnect = false
+        }
+    }
+    
+    // Checks if network is available and forces Pusher reconnection
+    func overrideReconnectGap() {
+        if didConnect && !isPusherConnected {
+            self.disconenct()
+            self.connect()
+        }
     }
     
     func subscribe(_ channelName: String) {
@@ -67,22 +78,14 @@ final class PusherObj: PusherDelegate {
         }
     }
     
-    func channelBind(eventName: String, callback: @escaping (Any?) -> Void) {
-        events.append((eventName, channel?.bind(eventName: eventName, callback: callback)))
+    func channelBind(eventName: String, callback: @escaping (Any?) -> Void) -> String? {
+        return channel?.bind(eventName: eventName, callback: callback)
     }
     
-    func channelBind(eventName: String, eventCallback: @escaping (PusherEvent) -> Void) {
-        events.append((eventName, channel?.bind(eventName: eventName, eventCallback: eventCallback)))
+    func channelBind(eventName: String, eventCallback: @escaping (PusherEvent) -> Void) -> String? {
+        return channel?.bind(eventName: eventName, eventCallback: eventCallback)
     }
     
-    func unbindRecentEvents(_ numEvents: Int) {
-        for _ in 1...numEvents {
-            let event = events.removeFirst()
-            guard let callbackId = event.1 else { continue }
-            channel?.unbind(eventName: event.0, callbackId: callbackId)
-        }
-        
-    }
     func channelUnbind(eventName: String, callbackId: String) {
         channel?.unbind(eventName: eventName, callbackId: callbackId)
     }
@@ -96,10 +99,17 @@ final class PusherObj: PusherDelegate {
     }
     
     func changedConnectionState(from old: ConnectionState, to new: ConnectionState) {
-        if old == .reconnecting && new == .connected {
+        // reload view data in case of missed messages after reconnection
+        if old == .connecting && new == .connected {
             if let reload = reload {
                 reload()
             }
+        }
+        switch(new) {
+        case .connected:
+            isPusherConnected = true
+        default:
+            isPusherConnected = false
         }
     }
 }

@@ -9,6 +9,7 @@ import Alamofire
 import SwiftyJSON
 
 struct API {
+    static var isNetworkAvailable = true
     
     // ##### SHARED API #####
     
@@ -21,6 +22,10 @@ struct API {
         let backendURL = NSURL(string: BACKEND_URL)
         guard let url = backendURL?.appendingPathComponent(path) else {
             print("Error: server URL not set\n")
+            return
+        }
+        if !API.isNetworkAvailable {
+            print("Error: client not connected to a network")
             return
         }
         AF.request(url,

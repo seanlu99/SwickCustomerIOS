@@ -1,42 +1,51 @@
 PODS:
   - Alamofire (5.2.2)
+  - ExytePopupView (0.0.10)
   - Introspect (0.1.0)
   - Kingfisher/Core (5.15.7)
   - Kingfisher/SwiftUI (5.15.7):
     - Kingfisher/Core
-  - PusherSwift (9.0.0):
+  - PusherSwift (8.0.0):
     - ReachabilitySwift (~> 5.0)
+    - Starscream (~> 3.1)
   - ReachabilitySwift (5.0.0)
+  - Starscream (3.1.1)
   - Stripe (20.0.0)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - Alamofire
+  - ExytePopupView
   - Introspect
   - Kingfisher/SwiftUI
-  - PusherSwift
+  - PusherSwift (= 8.0.0)
+  - ReachabilitySwift
   - Stripe
   - SwiftyJSON
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - ExytePopupView
     - Introspect
     - Kingfisher
     - PusherSwift
     - ReachabilitySwift
+    - Starscream
     - Stripe
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  ExytePopupView: 14a98f924a7201bc5492e2a961da11045b17eca8
   Introspect: ad32f2b7b9e7ac2c008b9dfec3d5325fbd3660fa
   Kingfisher: 6e1a13523fcb1c86924ce53affe4ac957e544d59
-  PusherSwift: e96cb309780695bdfe93de54f610ba40beae97aa
+  PusherSwift: 8f18b7beaf383e0475607ab6a3f89f477637fb21
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   Stripe: 339e8c50d3a27dcbe9a4f35b98c260fb9715d962
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 0c9b579c2f62f661114e29318c4bdc9e636d3d19
+PODFILE CHECKSUM: fa4598447ee735ce9b03dc079bc97ab447d77aca
 
 COCOAPODS: 1.9.3

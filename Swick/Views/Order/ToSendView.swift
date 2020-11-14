@@ -12,6 +12,9 @@ import PusherSwift
 struct ToSendView: View {
     // Initial
     @State var isLoading = true
+    // Events
+    @State var viewDidBind = false
+    @State var events = [(String, String?)]()
     // Alerts
     @State var showAlert = false
     // Properties
@@ -33,46 +36,57 @@ struct ToSendView: View {
     }
     
     func bindListeners() {
-        PusherObj.shared.channelBind(eventName: "item-status-updated") { (event: PusherEvent) -> Void in
-            if let eventData = event.data {
-                let json = JSON(eventData.data(using: .utf8) ?? "")
-                if let status = json["status"].string,
-                   let idInt = json["id"].int{
-                    let id = "O" + String(idInt)
-                    if status == "SENDING" {
-                        let updatedItem = OrderItemOrRequest(json["order_item"])
-                        items.insert(updatedItem, at: Helper.findUpperBound(updatedItem, items))
-                    }
-                    else if let indexRemove = items.firstIndex(where: { $0.id == id}) {
-                        items.remove(at: indexRemove)
-                    }
-                }
-            }
-        }
-        PusherObj.shared.channelBind(eventName: "request-made") { (event: PusherEvent) -> Void in
-            if let eventData = event.data {
-                let json = JSON(eventData.data(using: .utf8) ?? "")
-                let newRequest = OrderItemOrRequest(json["request"])
-                items.insert(newRequest, at: Helper.findUpperBound(newRequest, items))
-            }
-        }
-        PusherObj.shared.channelBind(eventName: "request-deleted") { (event: PusherEvent) -> Void in
-            if let eventData = event.data {
-                let json = JSON(eventData.data(using: .utf8) ?? "")
-                if let requestId = json["request_id"].int {
-                    let id = "R" + String(requestId)
-                    if let indexRemove = items.firstIndex(where: { $0.id == id}) {
-                        items.remove(at: indexRemove)
+        if !viewDidBind {
+            viewDidBind = true
+            var callbackId = PusherObj.shared.channelBind(eventName: "item-status-updated") { (event: PusherEvent) -> Void in
+                if let eventData = event.data {
+                    let json = JSON(eventData.data(using: .utf8) ?? "")
+                    if let status = json["status"].string,
+                       let idInt = json["id"].int{
+                        let id = "O" + String(idInt)
+                        if status == "SENDING" {
+                            let updatedItem = OrderItemOrRequest(json["order_item"])
+                            items.insert(updatedItem, at: Helper.findUpperBound(updatedItem, items))
+                        }
+                        else if let indexRemove = items.firstIndex(where: { $0.id == id}) {
+                            items.remove(at: indexRemove)
+                        }
                     }
                 }
             }
+            events.append(("item-status-updated", callbackId))
+            callbackId = PusherObj.shared.channelBind(eventName: "request-made") { (event: PusherEvent) -> Void in
+                if let eventData = event.data {
+                    let json = JSON(eventData.data(using: .utf8) ?? "")
+                    let newRequest = OrderItemOrRequest(json["request"])
+                    items.insert(newRequest, at: Helper.findUpperBound(newRequest, items))
+                }
+            }
+            events.append(("request-made", callbackId))
+            callbackId = PusherObj.shared.channelBind(eventName: "request-deleted") { (event: PusherEvent) -> Void in
+                if let eventData = event.data {
+                    let json = JSON(eventData.data(using: .utf8) ?? "")
+                    if let requestId = json["request_id"].int {
+                        let id = "R" + String(requestId)
+                        if let indexRemove = items.firstIndex(where: { $0.id == id}) {
+                            items.remove(at: indexRemove)
+                        }
+                    }
+                }
+            }
+            events.append(("request-deleted", callbackId))
+            PusherObj.shared.reload = loadItems
         }
-        PusherObj.shared.reload = loadItems
     }
     
     func unbindListeners() {
-        PusherObj.shared.unbindRecentEvents(3)
-        PusherObj.shared.reload = nil
+        for event in events {
+            if let callbackId = event.1 {
+                PusherObj.shared.channelUnbind(eventName: event.0, callbackId: callbackId)
+            }
+        }
+        events.removeAll()
+        viewDidBind = false
     }
     
     var body: some View {

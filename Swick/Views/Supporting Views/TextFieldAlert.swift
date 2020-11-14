@@ -57,13 +57,12 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
                                 .keyboardType(.decimalPad)
                         }
                     }
+                    .animation(nil)
                     .frame(width: deviceSize.size.width*0.4)
                     .padding(.horizontal)
                     HStack {
                         RowButton(text: "Ok", action: {
-                            withAnimation {
-                                self.isShowing.toggle()
-                            }
+                            self.isShowing.toggle()
                         })
                     }
                 }
@@ -75,9 +74,11 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
                     alignment: .center
                 )
                 .shadow(radius: 1)
-                .opacity(self.isShowing ? 1 : 0)
                 .animation(.easeInOut(duration: 0.20))
                 .position(x: deviceSize.size.width / 2, y: deviceSize.size.height * 0.4)
+                .if(!isShowing) {
+                    $0.hidden()
+                }
             }
         }
     }

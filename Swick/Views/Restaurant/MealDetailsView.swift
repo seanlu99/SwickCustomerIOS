@@ -40,7 +40,7 @@ struct MealDetailsView: View {
                     }
                 }
                 else {
-                    alertMessage = "Failed to laod meal. Please try again."
+                    alertMessage = "Failed to load meal. Please try again."
                     showAlert = true
                 }
                 isLoading = false
