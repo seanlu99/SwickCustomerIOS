@@ -16,6 +16,7 @@ struct SettingsView: View {
     func logout() {
         UserDefaults.standard.removeObject(forKey: "token")
         user.screenState = .loginView
+        PusherObj.shared.channelUnbindAll()
         PusherObj.shared.disconenct()
     }
     

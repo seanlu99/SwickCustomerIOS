@@ -12,6 +12,9 @@ import SwiftyJSON
 struct ToCookView: View {
     // Initial
     @State var isLoading = true
+    // Events
+    @State var viewDidBind = false
+    @State var events = [(String, String?)]()
     // Alerts
     @State var showAlert = false
     // Properties
@@ -34,36 +37,47 @@ struct ToCookView: View {
     }
     
     func bindListeners() {
-        PusherObj.shared.channelBind(eventName: "order-placed") { (event: PusherEvent) -> Void in
-            if let eventData = event.data {
-                let json = JSON(eventData.data(using: .utf8) ?? "")
-                let itemJsonList = json["order_items"].array ?? []
-                for itemJson in itemJsonList {
-                    items.insert(OrderItem(itemJson), at: 0)
-                }
-            }
-        }
-        PusherObj.shared.channelBind(eventName: "item-status-updated") { (event: PusherEvent) -> Void in
-            if let eventData = event.data {
-                let json = JSON(eventData.data(using: .utf8) ?? "")
-                if let status = json["status"].string,
-                   let id = json["id"].int {
-                    if status == "COOKING" {
-                        let updatedItem = OrderItem(json["order_item"])
-                        items.insert(updatedItem, at: Helper.findUpperBound(updatedItem, items))
-                    }
-                    else if let indexRemove = items.firstIndex(where: { $0.id == id}) {
-                        items.remove(at: indexRemove)
+        if !viewDidBind {
+            viewDidBind = true
+            var callbackId = PusherObj.shared.channelBind(eventName: "order-placed") { (event: PusherEvent) -> Void in
+                if let eventData = event.data {
+                    let json = JSON(eventData.data(using: .utf8) ?? "")
+                    let itemJsonList = json["order_items"].array ?? []
+                    for itemJson in itemJsonList {
+                        let newItem = OrderItem(itemJson)
+                        items.insert(newItem, at: Helper.findUpperBound(newItem, items))
                     }
                 }
             }
+            events.append(("order-placed", callbackId))
+            callbackId = PusherObj.shared.channelBind(eventName: "item-status-updated") { (event: PusherEvent) -> Void in
+                if let eventData = event.data {
+                    let json = JSON(eventData.data(using: .utf8) ?? "")
+                    if let status = json["status"].string,
+                       let id = json["id"].int {
+                        if status == "COOKING" {
+                            let updatedItem = OrderItem(json["order_item"])
+                            items.insert(updatedItem, at: Helper.findUpperBound(updatedItem, items))
+                        }
+                        else if let indexRemove = items.firstIndex(where: { $0.id == id}) {
+                            items.remove(at: indexRemove)
+                        }
+                    }
+                }
+            }
+            events.append(("item-status-updated", callbackId))
+            PusherObj.shared.reload = loadOrderItems
         }
-        PusherObj.shared.reload = loadOrderItems
     }
     
     func unbindListeners() {
-        PusherObj.shared.unbindRecentEvents(2)
-        PusherObj.shared.reload = nil
+        for event in events {
+            if let callbackId = event.1 {
+                PusherObj.shared.channelUnbind(eventName: event.0, callbackId: callbackId)
+            }
+        }
+        events.removeAll()
+        viewDidBind = false
     }
     
     var body: some View {

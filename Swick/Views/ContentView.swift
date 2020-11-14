@@ -8,11 +8,16 @@
 import SwiftUI
 import SwiftyJSON
 import PusherSwift
+import Reachability
+import ExytePopupView
 
 struct ContentView: View {
     // Initial
     @EnvironmentObject var user: UserData
+    // Properties
     @State var hasRestaurant = true
+    @State var showNetworkError = false
+    let reachability = try! Reachability()
     
     init() {
         // Set navigation bar font globally
@@ -54,7 +59,7 @@ struct ContentView: View {
     func connectToPusher(_ uid: Int?, _ restaurantId: Int? = nil) {
         if let id = uid {
             user.id = id
-            PusherObj.shared.createPusher(UserDefaults.standard.string(forKey: "token")!)
+            PusherObj.shared.createPusher()
             
             #if CUSTOMER
             let channelName = "private-customer-\(user.id!)"
@@ -86,28 +91,75 @@ struct ContentView: View {
         }
     }
     
+    func listenNetworkChanges() {
+        reachability.whenReachable = { reachability in
+            // If network was previously unavailable, force reconnect to Pusher
+            if !API.isNetworkAvailable {
+                PusherObj.shared.overrideReconnectGap()
+            }
+            API.isNetworkAvailable = true
+            showNetworkError = false
+        }
+        reachability.whenUnreachable = { _ in
+            API.isNetworkAvailable = false
+            showNetworkError = true
+        }
+        
+        do {
+            try reachability.startNotifier()
+        }
+        catch {
+            print("Unable to start notifier")
+        }
+    }
+    
     var body: some View {
-        Group {
-            if user.screenState == .loadingScreen {
-                GradientView()
-            }
-            else if user.screenState == .loginView {
-                LoginView(login: login)
-                    .accentColor(.white)
-                    .onAppear {
-                        hasRestaurant = true
-                    }
-            }
-            else {
-                RootTabView(hasRestaurant: $hasRestaurant)
-                    // Show undismissable set name sheet if name not set
-                    .sheet(isPresented: $user.showSetNameSheet) {
-                        SetNameView()
-                            .allowAutoDismiss { false }
-                    }
+        ZStack {
+            Group {
+                if user.screenState == .loadingScreen {
+                    GradientView()
+                }
+                else if user.screenState == .loginView {
+                    LoginView(login: login)
+                        .accentColor(.white)
+                        .onAppear {
+                            hasRestaurant = true
+                        }
+                }
+                else {
+                    RootTabView(hasRestaurant: $hasRestaurant)
+                        // Show undismissable set name sheet if name not set
+                        .sheet(isPresented: $user.showSetNameSheet) {
+                            SetNameView()
+                                .allowAutoDismiss { false }
+                        }
+                }
             }
         }
-        .onAppear(perform: login)
+        .onAppear {
+            listenNetworkChanges()
+            login()
+        }
+        .popup(
+            isPresented: $showNetworkError,
+            type: .floater(verticalPadding: UIApplication.shared.windows.first?.safeAreaInsets.top ?? 40),
+            position: .top,
+            closeOnTap: false,
+            closeOnTapOutside: false
+        ) {
+            HStack {
+                Text("No internet connection")
+                    .foregroundColor(.white)
+                    .padding()
+            }
+            .frame(height: 40)
+            .background(Color(.systemGray).opacity(0.75))
+            .cornerRadius(15.0)
+            // Work around for "no internet" popup showing after post-tip popup view bug
+            .if(!showNetworkError) {
+                $0.hidden()
+            }
+        }
     }
 }
 

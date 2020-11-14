@@ -12,6 +12,9 @@ import PusherSwift
 struct OrderDetailsView: View {
     // Initial
     @State var isLoading = true
+    // Events
+    @State var viewDidBind = false
+    @State var events = [(String, String?)]()
     // Navigation
     @State var showAddTip = false
     // Alerts
@@ -55,35 +58,45 @@ struct OrderDetailsView: View {
     }
 
     func bindListeners() {
-        PusherObj.shared.channelBind(eventName: "item-status-updated") { (event: PusherEvent) -> Void in
-            if let eventData = event.data {
-                let json = JSON(eventData.data(using: .utf8) ?? "")
-                if let status = json["status"].string,
-                   let itemId = json["id"].int {
-                    updateItemLists(itemId, status)
+        if !viewDidBind {
+            viewDidBind = true
+            var callbackId = PusherObj.shared.channelBind(eventName: "item-status-updated") { (event: PusherEvent) -> Void in
+                if let eventData = event.data {
+                    let json = JSON(eventData.data(using: .utf8) ?? "")
+                    if let status = json["status"].string,
+                       let itemId = json["id"].int {
+                        updateItemLists(itemId, status)
+                    }
                 }
             }
-        }
-        PusherObj.shared.channelBind(eventName: "tip-added-order-\(orderId)") { (event: PusherEvent) -> Void in
-            if let eventData = event.data {
-                let json = JSON(eventData.data(using: .utf8) ?? "")
-                if let subtotal = json["updated_subtotal"].string,
-                   let tax = json["updated_tax"].string,
-                   let tip = json["updated_tip"].string,
-                   let total = json["updated_total"].string {
-                    order.subtotal = Decimal(string: subtotal)!
-                    order.tax = Decimal(string: tax)!
-                    order.tip = Decimal(string: tip)
-                    order.total = Decimal(string: total)!
+            events.append(("item-status-updated", callbackId))
+            callbackId = PusherObj.shared.channelBind(eventName: "tip-added-order-\(orderId)") { (event: PusherEvent) -> Void in
+                if let eventData = event.data {
+                    let json = JSON(eventData.data(using: .utf8) ?? "")
+                    if let subtotal = json["updated_subtotal"].string,
+                       let tax = json["updated_tax"].string,
+                       let tip = json["updated_tip"].string,
+                       let total = json["updated_total"].string {
+                        order.subtotal = Decimal(string: subtotal)!
+                        order.tax = Decimal(string: tax)!
+                        order.tip = Decimal(string: tip)
+                        order.total = Decimal(string: total)!
+                    }
                 }
             }
+            events.append(("tip-added-order-\(orderId)", callbackId))
+            PusherObj.shared.reload = loadOrderDetails
         }
-        PusherObj.shared.reload = loadOrderDetails
     }
     
     func unbindListeners() {
-        PusherObj.shared.unbindRecentEvents(2)
-        PusherObj.shared.reload = nil
+        for event in events {
+            if let callbackId = event.1 {
+                PusherObj.shared.channelUnbind(eventName: event.0, callbackId: callbackId)
+            }
+        }
+        events.removeAll()
+        viewDidBind = false
     }
     
     func loadOrderDetails() {
