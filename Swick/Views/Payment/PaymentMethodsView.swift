@@ -66,7 +66,7 @@ struct PaymentMethodsView: View {
             }
             NavigationLink (
                 destination: AddCardView(
-                    cameFromCart: true,
+                    cameFromCart: cameFromCart,
                     showPaymentMethods: $showPaymentMethods
                 )
                     .onDisappear{
