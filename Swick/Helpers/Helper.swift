@@ -13,13 +13,17 @@ struct Helper {
     
     // Format decimal as price
     static func formatPrice(_ price: Decimal) -> String {
-        var rounded = Decimal()
-        var price = price 
-        NSDecimalRound(&rounded, &price, 2, .plain)
-        
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         return "\(formatter.string(from: price as NSDecimalNumber) ?? "")"
+    }
+    
+    // Round decimal to hundredths place
+    static func roundDecimal(_ number: Decimal) -> Decimal {
+        var copy = number
+        var rounded = Decimal()
+        NSDecimalRound(&rounded, &copy, 2, .plain)
+        return rounded
     }
     
     // Convert string to date

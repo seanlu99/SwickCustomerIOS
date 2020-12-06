@@ -217,10 +217,10 @@ struct API {
         authRequest(path, method: .post, parameters: params, completion: completion)
     }
 
-    static func retryOrder(_ paymentIntentId: String, completion: @escaping (JSON) -> Void) {
+    static func retryOrder(_ paymentIntentId: String,_ restaurantId: Int, completion: @escaping (JSON) -> Void) {
         let path = "api/customer/retry_order_payment/"
-        let params =
-            ["payment_intent_id": paymentIntentId]
+        let params: [String: Any] =
+            ["payment_intent_id": paymentIntentId, "restaurant_id": restaurantId]
         authRequest(path, method: .post, parameters: params, completion: completion)
     }
     
@@ -231,10 +231,10 @@ struct API {
         authRequest(path, method: .post, parameters: params, completion: completion)
     }
     
-    static func retryTip(_ paymentIntentId: String, completion: @escaping (JSON) -> Void) {
+    static func retryTip(_ paymentIntentId: String,_ restaurantId: Int, completion: @escaping (JSON) -> Void) {
         let path = "api/customer/retry_tip_payment/"
-        let params =
-            ["payment_intent_id": paymentIntentId]
+        let params: [String: Any] =
+            ["payment_intent_id": paymentIntentId, "restaurant_id": restaurantId]
         authRequest(path, method: .post, parameters: params, completion: completion)
     }
     

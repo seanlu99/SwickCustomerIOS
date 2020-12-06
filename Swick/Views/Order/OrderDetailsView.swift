@@ -25,6 +25,7 @@ struct OrderDetailsView: View {
     @State var completeOrderItems = [OrderItem]()
     @State var order: Order = Order()
     var orderId: Int
+    var restaurantId: Int
     var restaurantName = ""
     
     func findItem(_ id: Int,_ items: inout [OrderItem]) -> OrderItem? {
@@ -192,7 +193,7 @@ struct OrderDetailsView: View {
         .loadingView($isLoading)
         .sheet(isPresented: $showAddTip) {
             #if CUSTOMER
-            AddTipView(order: $order, subtotal: order.subtotal)
+            AddTipView(order: $order, subtotal: order.subtotal, restaurantId: restaurantId)
                 .onDisappear(perform: loadOrderDetails)
             #endif
         }
@@ -213,7 +214,8 @@ struct OrderDetails_Previews: PreviewProvider {
             sendingOrderItems: testOrderItems,
             completeOrderItems: [],
             order: testOrder1,
-            orderId: 1
+            orderId: 1,
+            restaurantId: 1
         )
     }
 }

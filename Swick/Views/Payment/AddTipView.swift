@@ -22,13 +22,15 @@ struct AddTipView: View {
     @State var tipAmount = ""
     @Binding var order: Order
     var subtotal: Decimal
+    var restaurantId: Int
     
     func getTip() -> Decimal {
         // if non-zero custom tip
         if tipState == .custom {
             return Decimal(string: tipAmount) ?? 0
         }
-        return Decimal(tipState.percent!) / 100 * subtotal
+        let tip = Decimal(tipState.percent!) / 100 * subtotal
+        return Helper.roundDecimal(tip)
     }
     
     func handleResponse(successful: Bool, message: String) {
@@ -54,7 +56,7 @@ struct AddTipView: View {
                         showAlert = true
                     }
                     else {
-                        paramsWrapper = PaymentParamsWrapper(AddTipParams(order.id, getTip()))
+                        paramsWrapper = PaymentParamsWrapper(AddTipParams(restaurantId, order.id, getTip()))
                         isWaiting = true
                         attemptTip = true
                     }
@@ -85,6 +87,6 @@ struct AddTipView: View {
 struct AddTipView_Previews: PreviewProvider {
     
     static var previews: some View {
-        AddTipView(order: .constant(testOrder1), subtotal: Decimal(1))
+        AddTipView(order: .constant(testOrder1), subtotal: Decimal(1), restaurantId: 1)
     }
 }

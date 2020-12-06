@@ -4,14 +4,14 @@
 //
 //  Taken from https://github.com/stripe/stripe-ios/issues/1204#issuecomment-686473756
 //
-
 import SwiftUI
 import UIKit
 import Stripe
 import SwiftyJSON
 
 protocol PaymentParams {
-    var cardMethodId: String { get set}
+    var restaurantId: Int { get set }
+    var cardMethodId: String { get set }
 }
 
 enum PaymentType { case order, tip}
@@ -23,7 +23,7 @@ struct PlaceOrderParams : PaymentParams{
     var tip: Decimal?
     var cardMethodId: String
     
-    init(_ restaurantId: Int, _ table: Int,  _ cart: [CartItem],_ tip: Decimal?, _ cardMethodId: String) {
+    init(_ restaurantId: Int, _ table: Int,  _ cart: [CartItem],_ tip: Decimal?,_ cardMethodId: String) {
         self.restaurantId = restaurantId
         self.table = table
         self.cart = cart
@@ -33,11 +33,13 @@ struct PlaceOrderParams : PaymentParams{
 }
 
 struct AddTipParams : PaymentParams{
+    var restaurantId: Int
     var orderId: Int
     var tip: Decimal
     var cardMethodId: String
 
-    init(_ orderId: Int, _ tip: Decimal, _ cardMethodId: String? = nil) {
+    init(_ restaurantId: Int, _ orderId: Int, _ tip: Decimal, _ cardMethodId: String? = nil) {
+        self.restaurantId = restaurantId
         self.orderId = orderId
         self.tip = tip
         self.cardMethodId = cardMethodId ?? ""
@@ -114,7 +116,7 @@ class PaymentCallerViewController: UIViewController {
         blockPayment = true
         API.placeOrder(params.restaurantId, params.table, params.cart, params.tip, params.cardMethodId) { [self] json in
             if json["status"] == "success" {
-                handleResponse(json, clientSuccessMessage: "Your order has been placed.", .order)
+                handleResponse(json, params, clientSuccessMessage: "Your order has been placed.", .order)
             }
             // Check if any of selected meals have been disabled
             else if (json["status"] == "meal_disabled") {
@@ -137,12 +139,12 @@ class PaymentCallerViewController: UIViewController {
         blockPayment = true
         API.addTip(params.orderId, tip: params.tip) { json in
             if json["status"] == "success" {
-                self.handleResponse(json, clientSuccessMessage: "You tip has been sent.", .tip)
+                self.handleResponse(json, params, clientSuccessMessage: "You tip has been sent.", .tip)
             }
         }
     }
 
-    func handleResponse (_ json: JSON, clientSuccessMessage: String,_ type: PaymentType) {
+    func handleResponse (_ json: JSON, _ params: PaymentParams, clientSuccessMessage: String,_ type: PaymentType) {
         let intentStatus = json["intent_status"].string ?? ""
         
         if intentStatus == "card_error" || intentStatus == "requires_payment_method" {
@@ -157,44 +159,46 @@ class PaymentCallerViewController: UIViewController {
         else if intentStatus == "requires_action" || intentStatus == "requires_source_action" {
             let clientSecret = json["client_secret"].string ?? ""
             let paymentHandler = STPPaymentHandler.shared()
-            
-            paymentHandler.handleNextAction(forPayment: clientSecret, authenticationContext: self, returnURL: nil) { status, paymentIntent, handleActionError in
-                switch (status) {
-                case .failed:
-                    self.blockPayment = false
-                    self.delegate?.didFinishStripeCall(false , handleActionError?.localizedDescription ?? "")
-                    break
-                case .canceled:
-                    self.blockPayment = false
-                    self.delegate?.didFinishStripeCall(false , handleActionError?.localizedDescription ?? "")
-                    break
-                case .succeeded:
-                    if let paymentIntent = paymentIntent, paymentIntent.status == STPPaymentIntentStatus.requiresConfirmation {
-                        
-                        self.retryPayment(paymentIntent, clientSuccessMessage: clientSuccessMessage, type)
+            if let stripeAcctId = json["connected_acct_id"].string {
+                Stripe.setConnectedAccountId(stripeAcctId)
+                paymentHandler.handleNextAction(forPayment: clientSecret, authenticationContext: self, returnURL: nil) { status, paymentIntent, handleActionError in
+                    Stripe.setConnectedAccountId(nil)
+                    switch (status) {
+                    case .failed:
+                        self.blockPayment = false
+                        self.delegate?.didFinishStripeCall(false , handleActionError?.localizedDescription ?? "")
+                        break
+                    case .canceled:
+                        self.blockPayment = false
+                        self.delegate?.didFinishStripeCall(false , handleActionError?.localizedDescription ?? "")
+                        break
+                    case .succeeded:
+                        if let paymentIntent = paymentIntent, paymentIntent.status == STPPaymentIntentStatus.requiresConfirmation {
+                            self.retryPayment(paymentIntent, params.restaurantId, clientSuccessMessage: clientSuccessMessage, type)
+                        }
+                        break
+                    @unknown default:
+                        fatalError()
+                        break
                     }
-                    break
-                @unknown default:
-                    fatalError()
-                    break
                 }
             }
         }
     }
     
-
-    func retryPayment(_ paymentIntent: STPPaymentIntent, clientSuccessMessage: String,_ type: PaymentType) {
+    func retryPayment(_ paymentIntent: STPPaymentIntent, _ restaurantId: Int, clientSuccessMessage: String,_ type: PaymentType) {
         if type == .order {
-            API.retryOrder(paymentIntent.stripeId){ json in
+            API.retryOrder(paymentIntent.stripeId, restaurantId){ json in
                 self.handleRetryResponse(json, clientSuccessMessage)
             }
         }
         else if type == .tip {
-            API.retryTip(paymentIntent.stripeId){ json in
+            API.retryTip(paymentIntent.stripeId, restaurantId){ json in
                 self.handleRetryResponse(json, clientSuccessMessage)
             }
         }
     }
+    
     func handleRetryResponse(_ json: JSON,_ clientSuccessMessage: String) {
         if json["status"] == "success" {
             let intentStatus = json["intent_status"].string ?? ""
@@ -220,4 +224,11 @@ extension PaymentCallerViewController: STPAuthenticationContext {
 
 protocol PaymentCallerDelegate {
     func didFinishStripeCall(_ successful: Bool, _ message: String)
+}
+
+extension Stripe {
+    static func setConnectedAccountId(_ id: String?) {
+        STPAPIClient.shared().stripeAccount = id
+        STPPaymentConfiguration.shared().stripeAccount = id
+    }
 }

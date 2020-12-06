@@ -79,6 +79,7 @@ struct OrdersView: View {
                     NavigationLink(
                         destination: OrderDetailsView(
                             orderId: o.id,
+                            restaurantId: o.restaurantId,
                             restaurantName: o.restaurantName
                         )
                     ) {

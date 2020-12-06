@@ -10,6 +10,7 @@ import SwiftyJSON
 
 struct Order: Identifiable {
     var id: Int
+    var restaurantId: Int
     var restaurantName: String
     var customerName: String
     var table: String
@@ -21,6 +22,7 @@ struct Order: Identifiable {
     var total: Decimal
     
     init() {
+        restaurantId = 0
         restaurantName = ""
         customerName = ""
         table = ""
@@ -35,6 +37,7 @@ struct Order: Identifiable {
     
     init(
         id: Int,
+        restaurantId: Int = 0,
         restaurantName: String = "",
         customerName: String = "",
         table: String = "",
@@ -46,6 +49,7 @@ struct Order: Identifiable {
         total: Decimal = 0
     ) {
         self.id = id
+        self.restaurantId = restaurantId
         self.restaurantName = restaurantName
         self.customerName = customerName
         self.table = table
@@ -59,6 +63,7 @@ struct Order: Identifiable {
     
     init(_ json: JSON) {
         id = json["id"].int ?? 0
+        restaurantId = json["restaurant_id"].int ?? 0
         restaurantName = json["restaurant_name"].string ?? ""
         customerName = json["customer_name"].string ?? ""
         table = String(describing: json["table"].int ?? 0)

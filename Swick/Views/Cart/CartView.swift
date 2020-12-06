@@ -81,9 +81,9 @@ struct CartView: View {
     func getTax() -> Decimal {
         var tax: Decimal = 0
         for item in user.cart {
-            tax += item.total * item.meal.tax / 100
+            tax += item.total * (item.meal.tax / 100)
         }
-        return tax
+        return Helper.roundDecimal(tax)
     }
     
     func getTip() -> Decimal? {
@@ -93,7 +93,8 @@ struct CartView: View {
         }
         // if pre-selected tip type
         if tipState != .later && tipState != .custom {
-            return Decimal(tipState.percent!) / 100 * getSubtotal()
+            let tip = Decimal(tipState.percent!) / 100 * getSubtotal()
+            return Helper.roundDecimal(tip)
         }
         // if .later or 0 custom tip value
         return nil
