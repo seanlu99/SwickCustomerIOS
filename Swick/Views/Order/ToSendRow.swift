@@ -109,7 +109,10 @@ struct ToSendRow: View {
         .background(
             // Navigation link to order details
             NavigationLink(
-                destination: OrderDetailsView(orderId: item.orderId ?? 0),
+                destination: OrderDetailsView(
+                    orderId: item.orderId ?? 0,
+                    restaurantId: 0
+                ),
                 isActive: $showOrderDetails
             ) { }
             // Request options action sheet

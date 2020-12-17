@@ -1059,9 +1059,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = CustomerAppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Swick/Preview Content\"";
-				DEVELOPMENT_TEAM = 78G3K9TQHP;
+				DEVELOPMENT_TEAM = MN2W9K338Z;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Swick/CustomerInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -1070,8 +1071,9 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D CUSTOMER";
-				PRODUCT_BUNDLE_IDENTIFIER = Swick.Customer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.swick.customer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1083,9 +1085,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = CustomerAppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Swick/Preview Content\"";
-				DEVELOPMENT_TEAM = 78G3K9TQHP;
+				DEVELOPMENT_TEAM = MN2W9K338Z;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Swick/CustomerInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -1094,8 +1097,9 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D CUSTOMER";
-				PRODUCT_BUNDLE_IDENTIFIER = Swick.Customer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.swick.customer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1109,7 +1113,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Swick/Preview Content\"";
-				DEVELOPMENT_TEAM = 78G3K9TQHP;
+				DEVELOPMENT_TEAM = MN2W9K338Z;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Swick/ServerInfo.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -1118,7 +1122,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D SERVER";
-				PRODUCT_BUNDLE_IDENTIFIER = Swick.Server;
+				PRODUCT_BUNDLE_IDENTIFIER = com.swick.server;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1133,7 +1137,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Swick/Preview Content\"";
-				DEVELOPMENT_TEAM = 78G3K9TQHP;
+				DEVELOPMENT_TEAM = MN2W9K338Z;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Swick/ServerInfo.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -1142,7 +1146,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D SERVER";
-				PRODUCT_BUNDLE_IDENTIFIER = Swick.Server;
+				PRODUCT_BUNDLE_IDENTIFIER = com.swick.server;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

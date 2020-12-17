@@ -64,7 +64,10 @@ struct ToCookRow: View {
         .background(
             // Navigation link to order details
             NavigationLink(
-                destination: OrderDetailsView(orderId: item.orderId),
+                destination: OrderDetailsView(
+                    orderId: item.orderId,
+                    restaurantId: 0
+                ),
                 isActive: $showOrderDetails
             ) { }
         )
