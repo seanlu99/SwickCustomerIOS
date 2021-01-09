@@ -18,6 +18,7 @@ struct LoginCodeView: View {
     @State var code: String = ""
     var email: String
     var login: () -> ()
+    var presentInSheet = false
     
     func onChange() {
         if code.length == 6 {
@@ -50,7 +51,7 @@ struct LoginCodeView: View {
                     .font(SFont.title)
                     .foregroundColor(.white)
                     .padding(.bottom, 20.0)
-                UIKitTextField("", text: $code, onEditingChanged: onChange)
+                UIKitTextField("", text: $code, onEditingChanged: onChange, presentInSheet: presentInSheet)
                     .font(SFont.titleUI!)
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)

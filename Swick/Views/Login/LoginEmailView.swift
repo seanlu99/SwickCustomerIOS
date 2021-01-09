@@ -19,6 +19,7 @@ struct LoginEmailView: View {
     // Properties
     @State var email: String = ""
     var login: () -> ()
+    var presentInSheet = false
     
     func sendPressed() {
         if !Helper.isValidEmail(email) {
@@ -46,6 +47,9 @@ struct LoginEmailView: View {
                 color: .white,
                 dismiss: {presentationMode.wrappedValue.dismiss()}
             )
+            .if(presentInSheet) {
+                $0.hidden()
+            }
             VStack() {
                 Text("Enter your email")
                     .font(SFont.title)
@@ -55,7 +59,7 @@ struct LoginEmailView: View {
                     .font(SFont.body)
                     .foregroundColor(.white)
                     .padding(.bottom, 20.0)
-                UIKitTextField("", text: $email, onCommit: sendPressed)
+                UIKitTextField("", text: $email, onCommit: sendPressed, presentInSheet: presentInSheet)
                     .font(SFont.headerUI!)
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
@@ -80,7 +84,8 @@ struct LoginEmailView: View {
             NavigationLink(
                 destination: LoginCodeView(
                     email: email,
-                    login: login
+                    login: login,
+                    presentInSheet: presentInSheet
                 ),
                 isActive: $showCodeView
             ) { }
@@ -99,3 +104,4 @@ struct LoginEmailView_Previews: PreviewProvider {
         LoginEmailView(login: {})
     }
 }
+

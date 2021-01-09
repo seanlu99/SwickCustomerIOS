@@ -34,22 +34,34 @@ struct ContentView: View {
     func login() {
         // If no token
         if UserDefaults.standard.string(forKey: "token") == nil {
+            #if CUSTOMER
+            user.screenState = .tabView
+            #else
             user.screenState = .loginView
+            #endif
         }
         else {
             API.login() { json in
                 if json["status"] == "success" {
+                    user.loggedIn = true
                     user.screenState = .tabView
                     connectToPusher(json["id"].int, json["restaurant_id"].int)
                     // If name not set
                     if !(json["name_set"].bool ?? true) {
-                        user.showSetNameSheet = true
+                        user.contentViewSheet = .setName
+                        user.showContentViewSheet = true
+                    }
+                    else if user.showContentViewSheet {
+                        user.showContentViewSheet = false
                     }
                 }
                 
                 // If token invalid, remove token
                 else {
                     UserDefaults.standard.removeObject(forKey: "token")
+                    #if CUSTOMER
+                    user.screenState = .tabView
+                    #endif
                     user.screenState = .loginView
                 }
             }
@@ -129,9 +141,23 @@ struct ContentView: View {
                 else {
                     RootTabView(hasRestaurant: $hasRestaurant)
                         // Show undismissable set name sheet if name not set
-                        .sheet(isPresented: $user.showSetNameSheet) {
-                            SetNameView()
-                                .allowAutoDismiss { false }
+                        .sheet(isPresented: $user.showContentViewSheet) {
+                            switch user.contentViewSheet {
+                            case .setName:
+                                SetNameView()
+                                    .allowAutoDismiss { false }
+                            case .loginEmail:
+                                NavigationView {
+                                    LoginEmailView(login: login, presentInSheet: true)
+                                }
+                                .accentColor(.white)
+                                .padding()
+                                .foregroundColor(.white)
+                                .background(GradientView())
+                                // Needed to hide navigation bar on iOS 13
+                                .navigationBarTitle("")
+                                .navigationBarHidden(true)
+                            }
                         }
                 }
             }

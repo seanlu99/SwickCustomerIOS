@@ -12,6 +12,7 @@ struct SetNameView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     // Properties
     @State var name: String = ""
+    var presentInSheet = true
     
     func updateName() {
         API.updateUserInfo(name, "") { json in
@@ -27,7 +28,7 @@ struct SetNameView: View {
             Text("Enter your name")
                 .font(SFont.title)
                 .fontWeight(.bold)
-            UIKitTextField("", text: $name, onCommit: updateName)
+            UIKitTextField("", text: $name, onCommit: updateName, presentInSheet: presentInSheet)
                 .font(SFont.headerUI!)
                 .disableAutocorrection(true)
                 .autocapitalization(.words)

@@ -27,7 +27,6 @@ struct CartView: View {
     @State var alertMessage = ""
     @State var showCustomTip = false
     // Properties
-    @State var card: Card? = nil
     @State var attemptOrder = false
     @State var paramsWrapper: PaymentParamsWrapper?
     @State var tipAmount = ""
@@ -109,7 +108,7 @@ struct CartView: View {
             alertMessage = "Order total must be at least $0.50"
             showAlert = true
         }
-        else if let c = card {
+        else if let c = user.card {
             isWaiting = true
             attemptOrder = true
             paramsWrapper = PaymentParamsWrapper(PlaceOrderParams(restaurant.id, table, user.cart, getTip(), c.id))
@@ -177,22 +176,30 @@ struct CartView: View {
                 }
                 
                 // Either show 'card' or 'select payment' button
-                if let selectedCard = card {
-                    Button(action: {
-                        self.showPaymentMethods.toggle()
-                    }) {
-                        CardRow(selectedCard)
+                if user.loggedIn {
+                    if let selectedCard = user.card {
+                        Button(action: {
+                            self.showPaymentMethods.toggle()
+                        }) {
+                            CardRow(selectedCard)
+                        }
                     }
+                    else {
+                        // Select payment button
+                        RowButton(text: "Select payment method", action: {
+                            self.showPaymentMethods.toggle()
+                        })
+                    }
+
+                    // Place order button
+                    PrimaryButton(text: "PLACE ORDER", action: placeOrder)
                 }
                 else {
-                    // Select payment button
-                    RowButton(text: "Select payment method", action: {
-                        self.showPaymentMethods.toggle()
+                    PrimaryButton(text: "Login to continue", action: {
+                        user.contentViewSheet = .loginEmail
+                        user.showContentViewSheet = true
                     })
                 }
-                
-                // Place order button
-                PrimaryButton(text: "PLACE ORDER", action: placeOrder)
             }
         }
         .navigationBarTitle(Text("Cart"))
@@ -204,9 +211,9 @@ struct CartView: View {
                 alertState = .leave
                 showAlert = true
             },
-            trailing: Button("Request") {
+            trailing: user.loggedIn ? Button("Request") {
                 showRequestActionSheet = true
-            }
+            } : nil
         )
         // Request action sheet
         .actionSheet(isPresented: $showRequestActionSheet) {
@@ -231,7 +238,7 @@ struct CartView: View {
                 .sheet(isPresented: $showPaymentMethods) {
                     NavigationView {
                         PaymentMethodsView(
-                            selectedCard: $card,
+                            selectedCard: $user.card,
                             cameFromCart: true,
                             showPaymentMethods: $showPaymentMethods
                         )

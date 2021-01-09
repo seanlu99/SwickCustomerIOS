@@ -22,8 +22,10 @@ struct RootTabView: View {
             ScanView(tabIndex: $tabIndex)
                 .tab(title: "Cart", image: "cart.fill")
             OrdersView()
+                .environmentObject(user)
                 .tab(title: "Orders", image: "tray.full.fill")
             SettingsView()
+                .environmentObject(user)
                 .tab(title: "Settings", image: "gear")
         }
         #elseif SERVER
@@ -34,8 +36,10 @@ struct RootTabView: View {
                 ToSendView()
                     .tab(title: "To send", image: "arrowshape.turn.up.right.fill")
                 OrdersView()
+                    .environmentObject(user)
                     .tab(title: "All", image: "tray.full.fill")
                 SettingsView()
+                    .environmentObject(user)
                     .tab(title: "Settings", image: "gear")
             }
         }

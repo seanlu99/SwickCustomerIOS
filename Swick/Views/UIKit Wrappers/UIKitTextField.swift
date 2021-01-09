@@ -30,6 +30,7 @@ struct UIKitTextField: View {
     private var onEditingChanged: (() -> Void)?
     private var shouldEditInRange: ((Range<String.Index>, String) -> Bool)?
     private var onCommit: (() -> Void)?
+    private var presentInSheet: Bool
 
     private var placeholderFont: Font = .body
     private var placeholderAlignment: TextAlignment = .leading
@@ -60,8 +61,10 @@ struct UIKitTextField: View {
          text: Binding<String>,
          shouldEditInRange: ((Range<String.Index>, String) -> Bool)? = nil,
          onEditingChanged: (() -> Void)? = nil,
-         onCommit: (() -> Void)? = nil) {
+         onCommit: (() -> Void)? = nil,
+         presentInSheet: Bool = false) {
         self.title = title
+        self.presentInSheet = presentInSheet
 
         _text = text
         _isEmpty = State(initialValue: self.text.isEmpty)
@@ -91,11 +94,12 @@ struct UIKitTextField: View {
                         shouldEditInRange: shouldEditInRange,
                         onEditingChanged: onEditingChanged,
                         onCommit: onCommit,
-                        whichKeyboard: whichKeyboard)
+                        whichKeyboard: whichKeyboard,
+                        presentInSheet: presentInSheet)
             .frame(
                 minHeight: isScrollingEnabled ? 0 : calculatedHeight,
                 maxHeight: isScrollingEnabled ? .infinity : calculatedHeight
-        )
+            )
             .background(placeholderView, alignment: .leading)
     }
 
@@ -248,6 +252,7 @@ private struct SwiftUITextView: UIViewRepresentable {
     private let enablesReturnKeyAutomatically: Bool?
     private var autoDetectionTypes: UIDataDetectorTypes = []
     private var whichKeyboard: UIKeyboardType
+    private var presentInSheet: Bool
 
     init(_ text: Binding<String>,
          foregroundColor: UIColor,
@@ -268,7 +273,8 @@ private struct SwiftUITextView: UIViewRepresentable {
          shouldEditInRange: ((Range<String.Index>, String) -> Bool)?,
          onEditingChanged: (() -> Void)?,
          onCommit: (() -> Void)?,
-         whichKeyboard: UIKeyboardType) {
+         whichKeyboard: UIKeyboardType,
+         presentInSheet: Bool) {
         _text = text
         _calculatedHeight = calculatedHeight
 
@@ -291,6 +297,7 @@ private struct SwiftUITextView: UIViewRepresentable {
         self.enablesReturnKeyAutomatically = enablesReturnKeyAutomatically
         self.autoDetectionTypes = autoDetectionTypes
         self.whichKeyboard = whichKeyboard
+        self.presentInSheet = presentInSheet
 
         makeCoordinator()
     }
@@ -318,7 +325,7 @@ private struct SwiftUITextView: UIViewRepresentable {
         view.isScrollEnabled = isScrollingEnabled
         view.dataDetectorTypes = autoDetectionTypes
         view.keyboardType = whichKeyboard
-
+        
         if let value = enablesReturnKeyAutomatically {
             view.enablesReturnKeyAutomatically = value
         } else {
@@ -332,8 +339,17 @@ private struct SwiftUITextView: UIViewRepresentable {
         }
         
         if !context.coordinator.didBecomeFirstResponder  {
-            view.becomeFirstResponder()
-            context.coordinator.didBecomeFirstResponder = true
+            if presentInSheet {
+                // Need to call async in sheet due to iOS 13 bug
+                DispatchQueue.main.async {
+                    view.becomeFirstResponder()
+                    context.coordinator.didBecomeFirstResponder = true
+                }
+            }
+            else {
+                view.becomeFirstResponder()
+                context.coordinator.didBecomeFirstResponder = true
+            }
         }
 
         SwiftUITextView.recalculateHeight(view: view, result: $calculatedHeight)
