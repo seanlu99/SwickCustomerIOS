@@ -175,8 +175,8 @@ struct CartView: View {
                     )
                 }
                 
-                // Either show 'card' or 'select payment' button
-                if user.loggedIn {
+                if user.loginState == .loggedIn {
+                    // Either show 'card' or 'select payment' button
                     if let selectedCard = user.card {
                         Button(action: {
                             self.showPaymentMethods.toggle()
@@ -196,7 +196,7 @@ struct CartView: View {
                 }
                 else {
                     PrimaryButton(text: "Login to continue", action: {
-                        user.contentViewSheet = .loginEmail
+                        user.contentViewSheet = .login
                         user.showContentViewSheet = true
                     })
                 }
@@ -211,7 +211,7 @@ struct CartView: View {
                 alertState = .leave
                 showAlert = true
             },
-            trailing: user.loggedIn ? Button("Request") {
+            trailing: user.loginState == .loggedIn ? Button("Request") {
                 showRequestActionSheet = true
             } : nil
         )

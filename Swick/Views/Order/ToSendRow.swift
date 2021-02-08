@@ -15,20 +15,25 @@ struct ToSendRow: View {
     // Alerts
     @State var showAlert = false
     // Properties
+    @State var sendButtonPressed = false
     var item: OrderItemOrRequest
     
     func getItemId() -> Int {
         return Int(item.id.substring(fromIndex: 1)) ?? 0
     }
     
-    func sendButtonPressed() {
-        // If item is order item
-        if item.id[0] == "O" {
-            API.updateOrderItemStatus(getItemId(), "COMPLETE") { _ in }
-        }
-        // If item is request
-        else {
-            deleteRequest(getItemId())
+    func sendItem() {
+        if !sendButtonPressed {
+            sendButtonPressed = true
+        
+            // If item is order item
+            if item.id[0] == "O" {
+                API.updateOrderItemStatus(getItemId(), "COMPLETE") { _ in }
+            }
+            // If item is request
+            else {
+                deleteRequest(getItemId())
+            }
         }
     }
     
@@ -72,7 +77,7 @@ struct ToSendRow: View {
                 SystemImage(
                     name: "arrowshape.turn.up.right.fill"
                 )
-                .onTapGesture(perform: sendButtonPressed)
+                .onTapGesture(perform: sendItem)
             }
         }
         .padding(.vertical)

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct LoginEmailView: View {
     // Initial
-    @Environment(\.presentationMode) var presentationMode
     @State var isWaiting = false
     // Navigation
     @State var showCodeView = false
@@ -19,7 +18,6 @@ struct LoginEmailView: View {
     // Properties
     @State var email: String = ""
     var login: () -> ()
-    var presentInSheet = false
     
     func sendPressed() {
         if !Helper.isValidEmail(email) {
@@ -43,13 +41,6 @@ struct LoginEmailView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            BackButton(
-                color: .white,
-                dismiss: {presentationMode.wrappedValue.dismiss()}
-            )
-            .if(presentInSheet) {
-                $0.hidden()
-            }
             VStack() {
                 Text("Enter your email")
                     .font(SFont.title)
@@ -59,7 +50,7 @@ struct LoginEmailView: View {
                     .font(SFont.body)
                     .foregroundColor(.white)
                     .padding(.bottom, 20.0)
-                UIKitTextField("", text: $email, onCommit: sendPressed, presentInSheet: presentInSheet)
+                UIKitTextField("", text: $email, onCommit: sendPressed)
                     .font(SFont.headerUI!)
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
@@ -74,6 +65,7 @@ struct LoginEmailView: View {
             }
             .padding()
         }
+        .padding(.top, 35)
         .background(GradientView())
         // Needed to hide navigation bar on iOS 13
         .navigationBarTitle("")
@@ -84,8 +76,7 @@ struct LoginEmailView: View {
             NavigationLink(
                 destination: LoginCodeView(
                     email: email,
-                    login: login,
-                    presentInSheet: presentInSheet
+                    login: login
                 ),
                 isActive: $showCodeView
             ) { }

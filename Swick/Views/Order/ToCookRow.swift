@@ -14,11 +14,14 @@ struct ToCookRow: View {
     // Alerts
     @State var showAlert = false
     // Properties
-    @State var itemToSend = false
+    @State var cookButtonPressed = false
     var item: OrderItem
     
-    func cookButtonPressed() {
-        API.updateOrderItemStatus(item.id, "SENDING") { _ in }
+    func cookItem() {
+        if !cookButtonPressed {
+            cookButtonPressed = true
+            API.updateOrderItemStatus(item.id, "SENDING") { _ in }
+        }
     }
     
     var body: some View {
@@ -36,12 +39,7 @@ struct ToCookRow: View {
             SystemImage(
                 name: "flame.fill"
             )
-            .onTapGesture {
-                if !itemToSend {
-                    itemToSend = true
-                    cookButtonPressed()
-                }
-            }
+            .onTapGesture(perform: cookItem)
         }
         .padding(.vertical)
         .contentShape(Rectangle())

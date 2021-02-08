@@ -76,7 +76,7 @@ struct OrdersView: View {
     var body: some View {
         NavigationView {
             Group {
-                if !user.loggedIn || (!isLoading && orders.isEmpty) {
+                if user.loginState == .notLoggedIn || (!isLoading && orders.isEmpty) {
                     Text("No orders yet")
                         .font(SFont.header)
                         .navigationBarTitle("Orders")
@@ -109,7 +109,7 @@ struct OrdersView: View {
             }
             .navigationBarTitle("Orders")
             .onAppear {
-                if user.loggedIn {
+                if user.loginState == .loggedIn {
                     loadOrders()
                     bindListeners()
                 }
@@ -118,7 +118,7 @@ struct OrdersView: View {
                 }
             }
             .onDisappear{
-                if user.loggedIn {
+                if user.loginState == .loggedIn {
                     unbindListeners()
                 }
             }

@@ -50,7 +50,6 @@
 		147F06BF2537C34C002FF616 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 147F06AE2537C30B002FF616 /* LaunchScreen.storyboard */; };
 		147F06C02537C34C002FF616 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 147F06AC2537C30B002FF616 /* Preview Assets.xcassets */; };
 		147F07292537C8F8002FF616 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06F82537C48D002FF616 /* ContentView.swift */; };
-		147F072D2537C8FD002FF616 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06FA2537C48D002FF616 /* LoginView.swift */; };
 		147F07302537C8FF002FF616 /* LoginEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06FB2537C48D002FF616 /* LoginEmailView.swift */; };
 		147F07332537C903002FF616 /* LoginCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06FC2537C48D002FF616 /* LoginCodeView.swift */; };
 		147F07362537C915002FF616 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06EB2537C48D002FF616 /* HomeView.swift */; };
@@ -76,7 +75,6 @@
 		147F07582537C94C002FF616 /* AddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06E42537C48D002FF616 /* AddCardView.swift */; };
 		147F075C2537C953002FF616 /* RectangleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06FF2537C48D002FF616 /* RectangleImage.swift */; };
 		147F075D2537C955002FF616 /* ThumbnailImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F07032537C48D002FF616 /* ThumbnailImage.swift */; };
-		147F07612537C95E002FF616 /* WhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F07042537C48D002FF616 /* WhiteButton.swift */; };
 		147F07632537C962002FF616 /* CardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F07092537C48D002FF616 /* CardTextField.swift */; };
 		147F07642537C965002FF616 /* ItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F07002537C48D002FF616 /* ItemRow.swift */; };
 		147F07652537C967002FF616 /* CustomizationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F07072537C48D002FF616 /* CustomizationsView.swift */; };
@@ -106,7 +104,6 @@
 		147F07A12537D0A0002FF616 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06D02537C48C002FF616 /* UserData.swift */; };
 		147F07A42537D1B2002FF616 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06F82537C48D002FF616 /* ContentView.swift */; };
 		147F07AA2537D1DD002FF616 /* UIKitTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06F62537C48D002FF616 /* UIKitTabView.swift */; };
-		147F07AD2537D1F9002FF616 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06FA2537C48D002FF616 /* LoginView.swift */; };
 		147F07B02537D204002FF616 /* LoginEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06FB2537C48D002FF616 /* LoginEmailView.swift */; };
 		147F07B32537D206002FF616 /* LoginCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F06FC2537C48D002FF616 /* LoginCodeView.swift */; };
 		147F07B62537D229002FF616 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F070E2537C48D002FF616 /* API.swift */; };
@@ -141,8 +138,6 @@
 		148BABA32540F30F000EC690 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB972540F30F000EC690 /* SecondaryButton.swift */; };
 		148BABA42540F30F000EC690 /* RowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB982540F30F000EC690 /* RowButton.swift */; };
 		148BABA52540F30F000EC690 /* RowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB982540F30F000EC690 /* RowButton.swift */; };
-		148BABA62540F30F000EC690 /* WhiteButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB992540F30F000EC690 /* WhiteButtonText.swift */; };
-		148BABA72540F30F000EC690 /* WhiteButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BAB992540F30F000EC690 /* WhiteButtonText.swift */; };
 		148BABBA254133D3000EC690 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BABB9254133D3000EC690 /* BackButton.swift */; };
 		148BABBB254133D4000EC690 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148BABB9254133D3000EC690 /* BackButton.swift */; };
 		14C5C16425477DBD00E44974 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C5C16325477DBD00E44974 /* LoadingView.swift */; };
@@ -160,7 +155,6 @@
 		F245AC45253EA2F300634FC4 /* TipPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F245AC44253EA2F300634FC4 /* TipPicker.swift */; };
 		F245AC49253EA38500634FC4 /* AddTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F245AC48253EA38500634FC4 /* AddTipView.swift */; };
 		F2555AEB25400D8E005A3D54 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F214C165253A506100778B97 /* TextFieldAlert.swift */; };
-		F2555AEE25400DBD005A3D54 /* WhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F07042537C48D002FF616 /* WhiteButton.swift */; };
 		F2555B062540E134005A3D54 /* UIKitTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2555B052540E134005A3D54 /* UIKitTextField.swift */; };
 		F2555B072540E134005A3D54 /* UIKitTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2555B052540E134005A3D54 /* UIKitTextField.swift */; };
 		F2C591C22555D7D1007EFB01 /* Pusher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C591C12555D7D1007EFB01 /* Pusher.swift */; };
@@ -232,14 +226,12 @@
 		147F06F62537C48D002FF616 /* UIKitTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitTabView.swift; sourceTree = "<group>"; };
 		147F06F72537C48D002FF616 /* SetupRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupRepresentable.swift; sourceTree = "<group>"; };
 		147F06F82537C48D002FF616 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		147F06FA2537C48D002FF616 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		147F06FB2537C48D002FF616 /* LoginEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEmailView.swift; sourceTree = "<group>"; };
 		147F06FC2537C48D002FF616 /* LoginCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCodeView.swift; sourceTree = "<group>"; };
 		147F06FF2537C48D002FF616 /* RectangleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleImage.swift; sourceTree = "<group>"; };
 		147F07002537C48D002FF616 /* ItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRow.swift; sourceTree = "<group>"; };
 		147F07012537C48D002FF616 /* TotalRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalRow.swift; sourceTree = "<group>"; };
 		147F07032537C48D002FF616 /* ThumbnailImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailImage.swift; sourceTree = "<group>"; };
-		147F07042537C48D002FF616 /* WhiteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteButton.swift; sourceTree = "<group>"; };
 		147F07052537C48D002FF616 /* TotalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalsView.swift; sourceTree = "<group>"; };
 		147F07072537C48D002FF616 /* CustomizationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizationsView.swift; sourceTree = "<group>"; };
 		147F07092537C48D002FF616 /* CardTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTextField.swift; sourceTree = "<group>"; };
@@ -254,7 +246,6 @@
 		148BAB962540F30F000EC690 /* PrimaryButtonText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButtonText.swift; sourceTree = "<group>"; };
 		148BAB972540F30F000EC690 /* SecondaryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		148BAB982540F30F000EC690 /* RowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowButton.swift; sourceTree = "<group>"; };
-		148BAB992540F30F000EC690 /* WhiteButtonText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiteButtonText.swift; sourceTree = "<group>"; };
 		148BABB9254133D3000EC690 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		14C5C16325477DBD00E44974 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		14F483422539074B001FC039 /* ToSendRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToSendRow.swift; path = Swick/Views/Order/ToSendRow.swift; sourceTree = SOURCE_ROOT; };
@@ -305,8 +296,6 @@
 				148BAB972540F30F000EC690 /* SecondaryButton.swift */,
 				148BAB942540F30F000EC690 /* RowButtonText.swift */,
 				148BAB982540F30F000EC690 /* RowButton.swift */,
-				148BAB992540F30F000EC690 /* WhiteButtonText.swift */,
-				147F07042537C48D002FF616 /* WhiteButton.swift */,
 				148BABB9254133D3000EC690 /* BackButton.swift */,
 				144963EF255769B000E028CF /* CloseButton.swift */,
 			);
@@ -509,7 +498,6 @@
 		147F06F92537C48D002FF616 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				147F06FA2537C48D002FF616 /* LoginView.swift */,
 				147F06FB2537C48D002FF616 /* LoginEmailView.swift */,
 				147F06FC2537C48D002FF616 /* LoginCodeView.swift */,
 			);
@@ -840,11 +828,8 @@
 				144E0B03253954EF00C202C1 /* RootTabView.swift in Sources */,
 				148BAB9E2540F30F000EC690 /* SecondaryButtonText.swift in Sources */,
 				147F074C2537C936002FF616 /* OrderDetailsView.swift in Sources */,
-				147F072D2537C8FD002FF616 /* LoginView.swift in Sources */,
 				147F07392537C917002FF616 /* RestaurantRow.swift in Sources */,
-				148BABA62540F30F000EC690 /* WhiteButtonText.swift in Sources */,
 				147F07872537C9B5002FF616 /* TestData.swift in Sources */,
-				147F07612537C95E002FF616 /* WhiteButton.swift in Sources */,
 				148BAB9A2540F30F000EC690 /* PrimaryButton.swift in Sources */,
 				147F073A2537C919002FF616 /* CategoriesView.swift in Sources */,
 				147F07552537C944002FF616 /* PaymentMethodsView.swift in Sources */,
@@ -877,10 +862,8 @@
 				147F080A2537EB72002FF616 /* Customization.swift in Sources */,
 				142B7B18254B779200C4EFA8 /* WaitingView.swift in Sources */,
 				147F07EB2537E9D2002FF616 /* OrderRow.swift in Sources */,
-				147F07AD2537D1F9002FF616 /* LoginView.swift in Sources */,
 				147F07AA2537D1DD002FF616 /* UIKitTabView.swift in Sources */,
 				144963F1255769B100E028CF /* CloseButton.swift in Sources */,
-				F2555AEE25400DBD005A3D54 /* WhiteButton.swift in Sources */,
 				147F07D02537DA6E002FF616 /* AccountRow.swift in Sources */,
 				142B7B11254B770A00C4EFA8 /* ActivityIndicator.swift in Sources */,
 				147F08132537EC14002FF616 /* TestData.swift in Sources */,
@@ -910,7 +893,6 @@
 				14308708253826A00059D6A5 /* OrderItemOptions.swift in Sources */,
 				147F079E2537D020002FF616 /* SceneDelegate.swift in Sources */,
 				F2555AEB25400D8E005A3D54 /* TextFieldAlert.swift in Sources */,
-				148BABA72540F30F000EC690 /* WhiteButtonText.swift in Sources */,
 				14F4836425390797001FC039 /* OrderItemOrRequest.swift in Sources */,
 				14F4834E2539075E001FC039 /* ToCookRow.swift in Sources */,
 				14569742253E26FB000E8F17 /* SFont.swift in Sources */,
@@ -1065,7 +1047,7 @@
 				DEVELOPMENT_TEAM = MN2W9K338Z;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Swick/CustomerInfo.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1091,7 +1073,7 @@
 				DEVELOPMENT_TEAM = MN2W9K338Z;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Swick/CustomerInfo.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1116,7 +1098,7 @@
 				DEVELOPMENT_TEAM = MN2W9K338Z;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Swick/ServerInfo.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1140,7 +1122,7 @@
 				DEVELOPMENT_TEAM = MN2W9K338Z;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Swick/ServerInfo.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

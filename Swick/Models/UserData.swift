@@ -8,11 +8,9 @@
 import SwiftUI
 
 final class UserData: ObservableObject {
-    enum ScreenState { case loadingScreen, loginView, tabView }
-    @Published var screenState = ScreenState.loadingScreen
-    @Published var showSetNameSheet = false
-    @Published var loggedIn = false
-    enum ContentViewSheet { case setName, loginEmail }
+    enum LoginState { case loading, notLoggedIn, loggedIn}
+    @Published var loginState = LoginState.loading
+    enum ContentViewSheet { case setName, login }
     @Published var contentViewSheet = ContentViewSheet.setName
     @Published var showContentViewSheet = false
     // Either customer or server id

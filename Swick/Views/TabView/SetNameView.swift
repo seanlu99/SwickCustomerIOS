@@ -12,7 +12,6 @@ struct SetNameView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     // Properties
     @State var name: String = ""
-    var presentInSheet = true
     
     func updateName() {
         API.updateUserInfo(name, "") { json in
@@ -28,7 +27,9 @@ struct SetNameView: View {
             Text("Enter your name")
                 .font(SFont.title)
                 .fontWeight(.bold)
-            UIKitTextField("", text: $name, onCommit: updateName, presentInSheet: presentInSheet)
+            // presentInSheet set to true to fix iOS 13 bug
+            // See UIKitTextField for more info
+            UIKitTextField("", text: $name, onCommit: updateName, presentInSheet: true)
                 .font(SFont.headerUI!)
                 .disableAutocorrection(true)
                 .autocapitalization(.words)

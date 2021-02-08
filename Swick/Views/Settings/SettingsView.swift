@@ -17,14 +17,12 @@ struct SettingsView: View {
     
     func logout() {
         UserDefaults.standard.removeObject(forKey: "token")
-        #if SERVER
-        user.screenState = .loginView
-        #else
+        user.loginState = .notLoggedIn
+        #if CUSTOMER
         user.card = nil
         #endif
         PusherObj.shared.channelUnbindAll()
         PusherObj.shared.disconenct()
-        user.loggedIn = false
     }
     
     func createLogoutAlert() -> Alert {
@@ -40,9 +38,9 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             List {
-                if !user.loggedIn {
-                    PrimaryButton(text: "Sign Up / Log in", action: {
-                        user.contentViewSheet = .loginEmail
+                if user.loginState == .notLoggedIn {
+                    PrimaryButton(text: "Login / Sign up", action: {
+                        user.contentViewSheet = .login
                         user.showContentViewSheet = true
                     })
                     .onAppear{ viewDidLoad = true }

@@ -19,7 +19,7 @@ let PUSHER_CLUSTER = "us2"
 
 #if CUSTOMER
 // Mock scanned string for QR code scanner while using simulator
-let MOCK_SCANNED_STRING = "swick-2-6"
+let MOCK_SCANNED_STRING = "swick-11-6"
 
 let STRIPE_PUBLIC_KEY = DEVELOPMENT ? "pk_test_YoEmowu4ykyrOgUO8dfmShpQ00ck79Hp8Q" : "pk_live_KAaBNmQFb8gxOEbqBWrCy7yu00WWwJySvp"
 #endif

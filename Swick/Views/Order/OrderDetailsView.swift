@@ -185,7 +185,7 @@ struct OrderDetailsView: View {
         }
         .navigationBarTitle(getNavigationBarTitle())
         .onAppear {
-            if user.loggedIn {
+            if user.loginState == .loggedIn {
                 loadOrderDetails()
                 bindListeners()
             }
@@ -194,7 +194,7 @@ struct OrderDetailsView: View {
             }
         }
         .onDisappear {
-            if user.loggedIn {
+            if user.loginState == .loggedIn {
                 unbindListeners()
             }
         }

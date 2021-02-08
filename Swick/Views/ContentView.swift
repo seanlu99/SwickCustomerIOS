@@ -34,22 +34,16 @@ struct ContentView: View {
     func login() {
         // If no token
         if UserDefaults.standard.string(forKey: "token") == nil {
-            #if CUSTOMER
-            user.screenState = .tabView
-            #else
-            user.screenState = .loginView
-            #endif
+            user.loginState = .notLoggedIn
         }
         else {
             API.login() { json in
                 if json["status"] == "success" {
-                    user.loggedIn = true
-                    user.screenState = .tabView
+                    user.loginState = .loggedIn
                     connectToPusher(json["id"].int, json["restaurant_id"].int)
                     // If name not set
                     if !(json["name_set"].bool ?? true) {
                         user.contentViewSheet = .setName
-                        user.showContentViewSheet = true
                     }
                     else if user.showContentViewSheet {
                         user.showContentViewSheet = false
@@ -59,10 +53,7 @@ struct ContentView: View {
                 // If token invalid, remove token
                 else {
                     UserDefaults.standard.removeObject(forKey: "token")
-                    #if CUSTOMER
-                    user.screenState = .tabView
-                    #endif
-                    user.screenState = .loginView
+                    user.loginState = .notLoggedIn
                 }
             }
         }
@@ -128,15 +119,8 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             Group {
-                if user.screenState == .loadingScreen {
+                if user.loginState == .loading {
                     GradientView()
-                }
-                else if user.screenState == .loginView {
-                    LoginView(login: login)
-                        .accentColor(.white)
-                        .onAppear {
-                            hasRestaurant = true
-                        }
                 }
                 else {
                     RootTabView(hasRestaurant: $hasRestaurant)
@@ -146,17 +130,11 @@ struct ContentView: View {
                             case .setName:
                                 SetNameView()
                                     .allowAutoDismiss { false }
-                            case .loginEmail:
+                            case .login:
                                 NavigationView {
-                                    LoginEmailView(login: login, presentInSheet: true)
+                                    LoginEmailView(login: login)
                                 }
                                 .accentColor(.white)
-                                .padding()
-                                .foregroundColor(.white)
-                                .background(GradientView())
-                                // Needed to hide navigation bar on iOS 13
-                                .navigationBarTitle("")
-                                .navigationBarHidden(true)
                             }
                         }
                 }
