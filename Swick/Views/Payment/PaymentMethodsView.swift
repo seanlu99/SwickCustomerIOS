@@ -83,7 +83,7 @@ struct PaymentMethodsView: View {
         .alert(isPresented: $showAlert) {
             return Alert(
                 title: Text("Error"),
-                message: Text("Failed to load orders. Please try again.")
+                message: Text("Failed to load cards. Please try again.")
             )
         }
     }

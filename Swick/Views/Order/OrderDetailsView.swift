@@ -11,6 +11,7 @@ import PusherSwift
 
 struct OrderDetailsView: View {
     // Initial
+    @EnvironmentObject var user: UserData
     @State var isLoading = true
     // Events
     @State var viewDidBind = false
@@ -184,11 +185,18 @@ struct OrderDetailsView: View {
         }
         .navigationBarTitle(getNavigationBarTitle())
         .onAppear {
-            loadOrderDetails()
-            bindListeners()
+            if user.loginState == .loggedIn {
+                loadOrderDetails()
+                bindListeners()
+            }
+            else {
+                isLoading = false
+            }
         }
         .onDisappear {
-            unbindListeners()
+            if user.loginState == .loggedIn {
+                unbindListeners()
+            }
         }
         .loadingView($isLoading)
         .sheet(isPresented: $showAddTip) {

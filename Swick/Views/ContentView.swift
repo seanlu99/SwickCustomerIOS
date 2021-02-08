@@ -34,23 +34,26 @@ struct ContentView: View {
     func login() {
         // If no token
         if UserDefaults.standard.string(forKey: "token") == nil {
-            user.screenState = .loginView
+            user.loginState = .notLoggedIn
         }
         else {
             API.login() { json in
                 if json["status"] == "success" {
-                    user.screenState = .tabView
+                    user.loginState = .loggedIn
                     connectToPusher(json["id"].int, json["restaurant_id"].int)
                     // If name not set
                     if !(json["name_set"].bool ?? true) {
-                        user.showSetNameSheet = true
+                        user.contentViewSheet = .setName
+                    }
+                    else if user.showContentViewSheet {
+                        user.showContentViewSheet = false
                     }
                 }
                 
                 // If token invalid, remove token
                 else {
                     UserDefaults.standard.removeObject(forKey: "token")
-                    user.screenState = .loginView
+                    user.loginState = .notLoggedIn
                 }
             }
         }
@@ -116,22 +119,23 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             Group {
-                if user.screenState == .loadingScreen {
+                if user.loginState == .loading {
                     GradientView()
-                }
-                else if user.screenState == .loginView {
-                    LoginView(login: login)
-                        .accentColor(.white)
-                        .onAppear {
-                            hasRestaurant = true
-                        }
                 }
                 else {
                     RootTabView(hasRestaurant: $hasRestaurant)
                         // Show undismissable set name sheet if name not set
-                        .sheet(isPresented: $user.showSetNameSheet) {
-                            SetNameView()
-                                .allowAutoDismiss { false }
+                        .sheet(isPresented: $user.showContentViewSheet) {
+                            switch user.contentViewSheet {
+                            case .setName:
+                                SetNameView()
+                                    .allowAutoDismiss { false }
+                            case .login:
+                                NavigationView {
+                                    LoginEmailView(login: login)
+                                }
+                                .accentColor(.white)
+                            }
                         }
                 }
             }

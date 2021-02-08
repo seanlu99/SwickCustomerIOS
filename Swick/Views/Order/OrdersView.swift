@@ -11,6 +11,7 @@ import PusherSwift
 
 struct OrdersView: View {
     // Initial
+    @EnvironmentObject var user: UserData
     @State var isLoading = true
     // Events
     @State var viewDidBind = false
@@ -74,36 +75,52 @@ struct OrdersView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(orders) { o in
-                    NavigationLink(
-                        destination: OrderDetailsView(
-                            orderId: o.id,
-                            restaurantId: o.restaurantId,
-                            restaurantName: o.restaurantName
+            Group {
+                if user.loginState == .notLoggedIn || (!isLoading && orders.isEmpty) {
+                    Text("No orders yet")
+                        .font(SFont.header)
+                        .navigationBarTitle("Orders")
+                }
+                else {
+                    List {
+                        ForEach(orders) { o in
+                            NavigationLink(
+                                destination: OrderDetailsView(
+                                    orderId: o.id,
+                                    restaurantId: o.restaurantId,
+                                    restaurantName: o.restaurantName
+                                )
+                            ) {
+                                OrderRow(order: o)
+                            }
+                        }
+                    }
+                    .if(orders.count > 0) {
+                        $0.animation(.default)
+                    }
+                    .loadingView($isLoading)
+                    .alert(isPresented: $showAlert) {
+                        return Alert(
+                            title: Text("Error"),
+                            message: Text("Failed to load orders. Please try again.")
                         )
-                    ) {
-                        OrderRow(order: o)
                     }
                 }
             }
-            .if(orders.count > 0) {
-                $0.animation(.default)
-            }
             .navigationBarTitle("Orders")
             .onAppear {
-                loadOrders()
-                bindListeners()
+                if user.loginState == .loggedIn {
+                    loadOrders()
+                    bindListeners()
+                }
+                else {
+                    isLoading = false
+                }
             }
             .onDisappear{
-                unbindListeners()
-            }
-            .loadingView($isLoading)
-            .alert(isPresented: $showAlert) {
-                return Alert(
-                    title: Text("Error"),
-                    message: Text("Failed to load orders. Please try again.")
-                )
+                if user.loginState == .loggedIn {
+                    unbindListeners()
+                }
             }
         }
     }

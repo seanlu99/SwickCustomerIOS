@@ -50,7 +50,7 @@ struct LoginCodeView: View {
                     .font(SFont.title)
                     .foregroundColor(.white)
                     .padding(.bottom, 20.0)
-                UIKitTextField("", text: $code, onEditingChanged: onChange)
+                UIKitTextField("", text: $code, onEditingChanged: onChange, presentInSheet: true)
                     .font(SFont.titleUI!)
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)

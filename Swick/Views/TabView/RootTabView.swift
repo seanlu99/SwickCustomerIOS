@@ -13,6 +13,7 @@ struct RootTabView: View {
     @State var tabIndex = 0
     @Binding var hasRestaurant: Bool
     let noRestaurantMsg = "Restaurant needs to add you as a server"
+    let notLoggedInMsg = "Please login to view"
     
     var body: some View {
         #if CUSTOMER
@@ -22,18 +23,34 @@ struct RootTabView: View {
             ScanView(tabIndex: $tabIndex)
                 .tab(title: "Cart", image: "cart.fill")
             OrdersView()
+                .environmentObject(user)
                 .tab(title: "Orders", image: "tray.full.fill")
             SettingsView()
+                .environmentObject(user)
                 .tab(title: "Settings", image: "gear")
         }
         #elseif SERVER
-        if hasRestaurant {
+        if hasRestaurant && user.loginState == .loggedIn {
             UIKitTabView {
                 ToCookView()
                     .tab(title: "To cook", image: "flame.fill")
                 ToSendView()
                     .tab(title: "To send", image: "arrowshape.turn.up.right.fill")
                 OrdersView()
+                    .environmentObject(user)
+                    .tab(title: "All", image: "tray.full.fill")
+                SettingsView()
+                    .environmentObject(user)
+                    .tab(title: "Settings", image: "gear")
+            }
+        }
+        else if user.loginState == .notLoggedIn {
+            UIKitTabView {
+                Text(notLoggedInMsg)
+                    .tab(title: "To cook", image: "flame.fill")
+                Text(notLoggedInMsg)
+                    .tab(title: "To send", image: "arrowshape.turn.up.right.fill")
+                Text(notLoggedInMsg)
                     .tab(title: "All", image: "tray.full.fill")
                 SettingsView()
                     .tab(title: "Settings", image: "gear")

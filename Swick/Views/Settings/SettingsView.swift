@@ -12,10 +12,15 @@ struct SettingsView: View {
     @EnvironmentObject var user: UserData
     // Alerts
     @State var showAlert = false
+    // Properties
+    @State var viewDidLoad = false
     
     func logout() {
         UserDefaults.standard.removeObject(forKey: "token")
-        user.screenState = .loginView
+        user.loginState = .notLoggedIn
+        #if CUSTOMER
+        user.card = nil
+        #endif
         PusherObj.shared.channelUnbindAll()
         PusherObj.shared.disconenct()
     }
@@ -29,31 +34,43 @@ struct SettingsView: View {
             secondaryButton: Alert.Button.cancel()
         )
     }
-    
+     
     var body: some View {
         NavigationView {
             List {
-                NavigationLink(destination: AccountView()) {
-                    SettingsRow(
-                        imageName: "person.circle.fill",
-                        text: "Account"
-                    )
+                if user.loginState == .notLoggedIn {
+                    PrimaryButton(text: "Login / Sign up", action: {
+                        user.contentViewSheet = .login
+                        user.showContentViewSheet = true
+                    })
+                    .onAppear{ viewDidLoad = true }
                 }
-                #if CUSTOMER
-                NavigationLink(
-                    destination: PaymentMethodsView(
-                        selectedCard: .constant(nil),
-                        showPaymentMethods: .constant(false)
-                    )
-                ) {
-                    SettingsRow(
-                        imageName: "creditcard.fill",
-                        text: "Payment methods"
-                    )
+                else {
+                    NavigationLink(destination: AccountView()) {
+                        SettingsRow(
+                            imageName: "person.circle.fill",
+                            text: "Account"
+                        )
+                        .onAppear{ viewDidLoad = true }
+                    }
+                    #if CUSTOMER
+                    NavigationLink(
+                        destination: PaymentMethodsView(
+                            selectedCard: .constant(nil),
+                            showPaymentMethods: .constant(false)
+                        )
+                    ) {
+                        SettingsRow(
+                            imageName: "creditcard.fill",
+                            text: "Payment methods"
+                        )
+                    }
+                    #endif
+                    SecondaryButton(text: "LOGOUT", action: {showAlert = true})
                 }
-                #endif
-                SecondaryButton(text: "LOGOUT", action: {showAlert = true})
             }
+            .transition(.move(edge: .bottom))
+            .animation(viewDidLoad ? .default : nil)
             .navigationBarTitle("Settings")
             .alert(isPresented: $showAlert) {
                 createLogoutAlert()

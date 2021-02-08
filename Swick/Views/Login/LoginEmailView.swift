@@ -9,7 +9,6 @@ import SwiftUI
 
 struct LoginEmailView: View {
     // Initial
-    @Environment(\.presentationMode) var presentationMode
     @State var isWaiting = false
     // Navigation
     @State var showCodeView = false
@@ -42,10 +41,6 @@ struct LoginEmailView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            BackButton(
-                color: .white,
-                dismiss: {presentationMode.wrappedValue.dismiss()}
-            )
             VStack() {
                 Text("Enter your email")
                     .font(SFont.title)
@@ -70,6 +65,7 @@ struct LoginEmailView: View {
             }
             .padding()
         }
+        .padding(.top, 35)
         .background(GradientView())
         // Needed to hide navigation bar on iOS 13
         .navigationBarTitle("")
@@ -99,3 +95,4 @@ struct LoginEmailView_Previews: PreviewProvider {
         LoginEmailView(login: {})
     }
 }
+

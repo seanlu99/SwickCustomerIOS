@@ -27,7 +27,9 @@ struct SetNameView: View {
             Text("Enter your name")
                 .font(SFont.title)
                 .fontWeight(.bold)
-            UIKitTextField("", text: $name, onCommit: updateName)
+            // presentInSheet set to true to fix iOS 13 bug
+            // See UIKitTextField for more info
+            UIKitTextField("", text: $name, onCommit: updateName, presentInSheet: true)
                 .font(SFont.headerUI!)
                 .disableAutocorrection(true)
                 .autocapitalization(.words)
