@@ -19,8 +19,10 @@ struct RootTabView: View {
         #if CUSTOMER
         UIKitTabView(selectedIndex: $tabIndex) {
             HomeView()
+                .environmentObject(user)
                 .tab(title: "Home", image: "house.fill")
             ScanView(tabIndex: $tabIndex)
+                .environmentObject(user)
                 .tab(title: "Cart", image: "cart.fill")
             OrdersView()
                 .environmentObject(user)
@@ -33,8 +35,10 @@ struct RootTabView: View {
         if hasRestaurant && user.loginState == .loggedIn {
             UIKitTabView {
                 ToCookView()
+                    .environmentObject(user)
                     .tab(title: "To cook", image: "flame.fill")
                 ToSendView()
+                    .environmentObject(user)
                     .tab(title: "To send", image: "arrowshape.turn.up.right.fill")
                 OrdersView()
                     .environmentObject(user)
@@ -47,24 +51,32 @@ struct RootTabView: View {
         else if user.loginState == .notLoggedIn {
             UIKitTabView {
                 Text(notLoggedInMsg)
+                    .environmentObject(user)
                     .tab(title: "To cook", image: "flame.fill")
                 Text(notLoggedInMsg)
+                    .environmentObject(user)
                     .tab(title: "To send", image: "arrowshape.turn.up.right.fill")
                 Text(notLoggedInMsg)
+                    .environmentObject(user)
                     .tab(title: "All", image: "tray.full.fill")
                 SettingsView()
+                    .environmentObject(user)
                     .tab(title: "Settings", image: "gear")
             }
         }
         else {
             UIKitTabView {
                 Text(noRestaurantMsg)
+                    .environmentObject(user)
                     .tab(title: "To cook", image: "flame.fill")
                 Text(noRestaurantMsg)
+                    .environmentObject(user)
                     .tab(title: "To send", image: "arrowshape.turn.up.right.fill")
                 Text(noRestaurantMsg)
+                    .environmentObject(user)
                     .tab(title: "All", image: "tray.full.fill")
                 SettingsView()
+                    .environmentObject(user)
                     .tab(title: "Settings", image: "gear")
             }
         }
