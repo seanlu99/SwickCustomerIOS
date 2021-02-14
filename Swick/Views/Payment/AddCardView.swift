@@ -64,7 +64,7 @@ struct AddCardView: View {
         .if(cameFromCart) {
             $0.closeButton($showPaymentMethods)
         }
-        .waitingView($isWaiting)
+        .overlay(ActivityIndicator(isAnimating: $isWaiting))
         .alert(isPresented: $showAlert) {
             Alert(title: Text("Error"),
                   message: Text(alertMessage))

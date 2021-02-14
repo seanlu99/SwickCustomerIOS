@@ -12,6 +12,7 @@ import AVFoundation
 struct ScanView: View {
     // Initial
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var user: UserData
     @State var isWaiting = false
     @Binding var tabIndex: Int
     // Navigation
@@ -98,7 +99,8 @@ struct ScanView: View {
                         restaurant: scannedRestaurant,
                         requestOptions: scannedRequestOptions,
                         table: scannedTable
-                    ),
+                    )
+                    .environmentObject(user),
                     isActive: $showCartView
                 ) { }
             )

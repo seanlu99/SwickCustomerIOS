@@ -56,7 +56,6 @@ struct SettingsView: View {
                     #if CUSTOMER
                     NavigationLink(
                         destination: PaymentMethodsView(
-                            selectedCard: .constant(nil),
                             showPaymentMethods: .constant(false)
                         )
                     ) {

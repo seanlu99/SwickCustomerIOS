@@ -18,8 +18,9 @@ struct CartView: View {
     @Binding var tabIndex: Int
     // Popups
     @State var showRequestActionSheet = false
-    @State var showMenu = false
-    @State var showPaymentMethods = false
+    enum CartSheet { case menu, paymentMethods }
+    @State var cartSheet = CartSheet.menu
+    @State var showSheet = false
     // Alerts
     enum AlertState { case error, success, orderSuccess, leave }
     @State var alertState = AlertState.error
@@ -140,7 +141,10 @@ struct CartView: View {
             // Add items to cart button
             RowButton(
                 text: "Add items to cart",
-                action: {showMenu = true}
+                action: {
+                    cartSheet = .menu
+                    showSheet = true
+                }
             )
             
             // Only show totals and payment if cart is not empty
@@ -179,7 +183,8 @@ struct CartView: View {
                     // Either show 'card' or 'select payment' button
                     if let selectedCard = user.card {
                         Button(action: {
-                            self.showPaymentMethods.toggle()
+                            self.cartSheet = .paymentMethods
+                            self.showSheet.toggle()
                         }) {
                             CardRow(selectedCard)
                         }
@@ -187,7 +192,8 @@ struct CartView: View {
                     else {
                         // Select payment button
                         RowButton(text: "Select payment method", action: {
-                            self.showPaymentMethods.toggle()
+                            self.cartSheet = .paymentMethods
+                            self.showSheet.toggle()
                         })
                     }
 
@@ -219,33 +225,30 @@ struct CartView: View {
         .actionSheet(isPresented: $showRequestActionSheet) {
             createRequestActionSheet()
         }
-        // Menu popup
-        .sheet(isPresented: $showMenu) {
-            NavigationView {
-                CategoriesView(
-                    restaurant: restaurant,
-                    cameFromCart: true,
-                    showMenu: $showMenu
-                )
-                .closeButton($showMenu)
-            }
-            .navigationViewStyle(StackNavigationViewStyle())
-            .environmentObject(user)
-        }
-        // Payment methods popup
-        .background(
-            EmptyView()
-                .sheet(isPresented: $showPaymentMethods) {
-                    NavigationView {
-                        PaymentMethodsView(
-                            selectedCard: $user.card,
-                            cameFromCart: true,
-                            showPaymentMethods: $showPaymentMethods
-                        )
-                        .closeButton($showPaymentMethods)
-                    }
+        .sheet(isPresented: $showSheet) {
+            switch cartSheet {
+            case .menu:
+                NavigationView {
+                    CategoriesView(
+                        restaurant: restaurant,
+                        cameFromCart: true,
+                        showMenu: $showSheet
+                    )
+                    .closeButton($showSheet)
                 }
-        )
+                .navigationViewStyle(StackNavigationViewStyle())
+                .environmentObject(user)
+            case .paymentMethods:
+                NavigationView {
+                    PaymentMethodsView(
+                        cameFromCart: true,
+                        showPaymentMethods: $showSheet
+                    )
+                    .closeButton($showSheet)
+                }
+                .environmentObject(user)
+            }
+        }
         // Alerts
         .alert(isPresented: $showAlert) {
             switch alertState {

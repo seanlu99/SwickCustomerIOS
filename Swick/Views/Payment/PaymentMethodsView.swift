@@ -9,13 +9,13 @@ import SwiftUI
 struct PaymentMethodsView: View {
     // Initial
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var user: UserData
     @State var viewDidLoad = false
     @State var isLoading = true
     // Alerts
     @State var showAlert = false
     // Properties
     @State var cards = [Card]()
-    @Binding var selectedCard: Card?
     // Cart specific properties
     var cameFromCart: Bool = false
     @Binding var showPaymentMethods: Bool
@@ -56,7 +56,7 @@ struct PaymentMethodsView: View {
                 else {
                     Button(
                         action: {
-                            selectedCard = c
+                            user.card = c
                             showPaymentMethods.toggle()
                         }
                     ) {
@@ -94,7 +94,6 @@ struct PaymentMethodsView_Previews: PreviewProvider {
         PaymentMethodsView(
             isLoading: false,
             cards: testCards,
-            selectedCard: .constant(nil),
             showPaymentMethods: .constant(false)
         )
     }
